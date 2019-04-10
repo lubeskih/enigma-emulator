@@ -5,6 +5,9 @@ import { observer } from "mobx-react";
 // Store
 import { Store } from "../store/Store";
 
+// Components
+import { Keyboard } from "./Keyboard";
+
 interface IProps {
   store: Store;
 }
@@ -18,6 +21,10 @@ export class EnigmaSettings extends Component<IProps, {}> {
   render() {
     let store = this.props.store;
 
-    return <div className="preview" />;
+    return (
+      <div className="preview">
+        <Keyboard store={store} />
+      </div>
+    );
   }
 }
