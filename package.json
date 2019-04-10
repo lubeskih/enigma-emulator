@@ -6,11 +6,13 @@
     "@types/jest": "24.0.11",
     "@types/node": "11.13.0",
     "@types/react": "16.8.12",
+    "@types/react-bootstrap": "^0.32.17",
     "@types/react-dom": "16.8.3",
     "bootstrap": "^4.3.1",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
     "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
     "typescript": "3.4.1"
@@ -31,6 +33,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/bootstrap": "^4.3.0",
     "prettier": "^1.16.4"
   }
 }
