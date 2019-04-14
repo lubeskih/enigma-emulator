@@ -1,15 +1,15 @@
 // Libraries
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Style
-import './Layout.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import "./Layout.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 // Components
-import { EnigmaSettings } from './components/EnigmaSettings';
+import { EnigmaSettings } from "./components/EnigmaSettings";
 
 // Store
-import { Store } from './store/Store'
+import { Store } from "./store/Store";
 const store = new Store();
 
 class App extends Component {
@@ -17,13 +17,11 @@ class App extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col mt-5">
+          <div className="col-8 mt-5">
             1 of 2
             <EnigmaSettings store={store} />
           </div>
-          <div className="col mt-5">
-            2 of 2
-          </div>
+          <div className="col-4 mt-5">2 of 2</div>
         </div>
       </div>
     );

@@ -12,3 +12,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.keyboard {
+  background-color: #333;
+}
+
+.first-row {
+  margin: 0 auto;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.col-4 {
+  background-color: #777;
+}
+
+.keyboard button {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+}
+
+.second-row {
+  margin: auto;
+  width: 65%;
+  margin-bottom: 10px;
+}
+
+.third-row {
+  margin: auto;
+  width: 70%;
+}
