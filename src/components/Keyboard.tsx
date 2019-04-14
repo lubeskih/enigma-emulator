@@ -17,7 +17,7 @@ export class Keyboard extends Component<IProps, {}> {
   }
 
   private handleClick = (e: any) => {
-    console.log("Pressed key:", e.target.name);
+    console.log(this.props.store.plugboard.getLetter(e.target.name));
   };
 
   private firstRow() {
@@ -57,6 +57,7 @@ export class Keyboard extends Component<IProps, {}> {
         variant="primary"
         key={el}
         name={el}
+        className="button"
       >
         {" "}
         {el}
