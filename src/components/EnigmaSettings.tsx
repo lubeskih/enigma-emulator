@@ -7,6 +7,7 @@ import { Store } from "../store/Store";
 
 // Components
 import { Keyboard } from "./Keyboard";
+import { Plugboard } from "./Plugboard";
 
 interface IProps {
   store: Store;
@@ -23,6 +24,8 @@ export class EnigmaSettings extends Component<IProps, {}> {
 
     return (
       <div className="preview">
+        <Plugboard store={store} />
+        <hr />
         <Keyboard store={store} />
       </div>
     );

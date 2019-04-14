@@ -1,6 +1,35 @@
 // Libraries
 // import { observable } from 'mobx';
 
+export const alphabet = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z"
+];
+
 // Store
 export class Store {
   // Keyboard
@@ -14,41 +43,13 @@ export class Store {
 
 export class Plugboard {
   private pb = new Map();
-  private alphabet = [
-    "Q",
-    "W",
-    "E",
-    "R",
-    "T",
-    "Z",
-    "U",
-    "I",
-    "O",
-    "A",
-    "S",
-    "D",
-    "F",
-    "G",
-    "H",
-    "J",
-    "K",
-    "P",
-    "Y",
-    "X",
-    "C",
-    "V",
-    "B",
-    "N",
-    "M",
-    "L"
-  ];
 
   constructor() {
-    this.alphabet.forEach(letter => this.pb.set(letter, null));
+    alphabet.forEach(letter => this.pb.set(letter, letter));
   }
 
-  setLetter(letter: string, replace: string) {
-    this.pb.set(letter, replace);
+  replaceLetter(letter: string, newLetter: string) {
+    this.pb.set(letter, newLetter);
     return this.pb.get(letter);
   }
 

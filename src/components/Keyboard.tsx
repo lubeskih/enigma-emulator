@@ -14,6 +14,8 @@ interface IProps {
 export class Keyboard extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
+
+    this.props.store.plugboard.replaceLetter("A", "B");
   }
 
   private handleClick = (e: any) => {
@@ -66,8 +68,6 @@ export class Keyboard extends Component<IProps, {}> {
   }
 
   render() {
-    let store = this.props.store;
-
     return (
       <div className="keyboard">
         <div className="first-row">{this.firstRow()}</div>

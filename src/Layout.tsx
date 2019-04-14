@@ -18,7 +18,6 @@ class App extends Component {
       <div className="container">
         <div className="row">
           <div className="col-8 mt-5">
-            1 of 2
             <EnigmaSettings store={store} />
           </div>
           <div className="col-4 mt-5">2 of 2</div>
