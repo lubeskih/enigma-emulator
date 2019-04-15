@@ -15,7 +15,7 @@ export class Keyboard extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
 
-    this.props.store.plugboard.replaceLetter("A", "B");
+    // this.props.store.plugboard.replaceLetter("A", "B");
   }
 
   private handleClick = (e: any) => {

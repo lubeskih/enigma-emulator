@@ -24,9 +24,16 @@ export class EnigmaSettings extends Component<IProps, {}> {
 
     return (
       <div className="preview">
-        <Plugboard store={store} />
+        <hr />
+        <span>Keyboard</span>
         <hr />
         <Keyboard store={store} />
+        <hr />
+        <span>Steckerbrett</span>
+        <hr />
+        <Plugboard store={store} />
+        <hr />
+        <hr />
       </div>
     );
   }
