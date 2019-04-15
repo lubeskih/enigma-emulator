@@ -1,5 +1,5 @@
 // Libraries
-// import { observable } from 'mobx';
+import { observable } from "mobx";
 
 export const alphabet = [
   "A",
@@ -39,6 +39,8 @@ export class Store {
 
   // Plugboard
   public plugboard = new Plugboard();
+
+  @observable selectedLetter: string | null = null;
 }
 
 export class Plugboard {
