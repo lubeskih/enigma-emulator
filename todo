@@ -2,6 +2,7 @@
 - [X] Every clicked button should print the letter it's assigned to.
 
 # Plugboard
+- [ ] Refactor the plugboard, smarter API
 - [ ] Letters should be on top of the circle
 - [ ] Every clicked plug, should be logged as "last clicked plug",
 if another plug is clicked, they should swap places (point to eachother)
