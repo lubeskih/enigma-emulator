@@ -13,38 +13,54 @@ code {
     monospace;
 }
 
-.keyboard {
-  background-color: #fff;
-}
-
-.first-row {
-  margin: 0 auto;
-  width: 70%;
-  margin-bottom: 10px;
+.btn-primary {
+  background-color: black;
 }
 
 .col-4 {
   background-color: #777;
 }
 
+/* KEYBOARD */
+.keyboard {
+  margin-bottom: 3em;
+}
+
 .keyboard button {
   width: 50px;
   height: 50px;
   margin-right: 5px;
+  background-color: #fff;
+  color: black;
+  border: solid black;
 }
 
-.second-row {
+.keyboard button:hover {
+  border: solid black;
+  background-color: rgb(235, 235, 235);
+  color: black;
+}
+
+.first-row-letters {
+  margin: 0 auto;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.second-row-letters {
   margin: auto;
   width: 65%;
   margin-bottom: 10px;
 }
 
-.third-row {
+.third-row-letters {
   margin: auto;
   width: 70%;
 }
 
-div.circle {
+/* PLUGBOARD */
+
+div.oval {
   -moz-border-radius: 50px/50px;
   -webkit-border-radius: 50px 50px;
   border-radius: 50px/50px;
@@ -57,6 +73,25 @@ div.circle {
   display: inline-block;
   margin: 1.2em;
   text-align: center;
+}
+
+/* LAMPS */
+.lamps {
+  margin-bottom: 3em;
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 33px;
+  text-align: center;
+  /* background: #000; */
+  border: solid 2px #333;
+  color: black;
+  display: inline-block;
+  margin: 0.7em;
 }
 
 .noselect {
