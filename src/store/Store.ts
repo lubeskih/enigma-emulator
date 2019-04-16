@@ -1,5 +1,5 @@
 // Libraries
-import { observable } from "mobx";
+// import { observable } from "mobx";
 
 export const alphabet = [
   "A",
@@ -39,8 +39,7 @@ export class Store {
 
   // Plugboard
   public plugboard = new Plugboard();
-
-  @observable selectedLetter: string | null = null;
+  public selectedLetter: string | null = null;
 }
 
 export class Plugboard {
@@ -50,12 +49,22 @@ export class Plugboard {
     alphabet.forEach(letter => this.pb.set(letter, letter));
   }
 
-  replaceLetter(letter: string, newLetter: string) {
+  swapLetter(letter: string, newLetter: string) {
     this.pb.set(letter, newLetter);
+
     return this.pb.get(letter);
   }
 
   getLetter(letter: string) {
     return this.pb.get(letter);
+  }
+
+  resetLetter(letter: string) {
+    const currentLetter = this.getLetter(letter);
+
+    this.swapLetter(currentLetter, currentLetter);
+    this.swapLetter(letter, letter);
+
+    return null;
   }
 }
