@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 // Style
-import "./Layout.css";
+import "./app.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // Components
