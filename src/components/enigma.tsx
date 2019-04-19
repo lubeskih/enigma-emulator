@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store } from "../store/Store";
+import { Store } from "../store/store";
 
 // Components
-import { Keyboard } from "./Keyboard";
-import { Plugboard } from "./Plugboard";
-import { Lamps } from "./Lamps";
+import { Keyboard } from "./enigma-parts/keyboard";
+import { Plugboard } from "./enigma-parts/plugboard";
+import { Lamps } from "./enigma-parts/lamps";
 
 interface IProps {
   store: Store;

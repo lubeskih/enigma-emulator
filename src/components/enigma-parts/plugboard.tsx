@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store, alphabet } from "../store/Store";
+import { Store, alphabet } from "../../store/store";
 
 // Components
-import { Plug } from "./Plug";
+import { Plug } from "./plug";
 
 interface IProps {
   store: Store;

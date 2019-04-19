@@ -6,10 +6,10 @@ import "./app.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // Components
-import { EnigmaSettings } from "./components/EnigmaSettings";
+import { EnigmaSettings } from "./components/enigma";
 
 // Store
-import { Store } from "./store/Store";
+import { Store } from "./store/store";
 const store = new Store();
 
 class App extends Component {
