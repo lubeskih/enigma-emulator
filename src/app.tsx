@@ -6,7 +6,7 @@ import "./app.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // Components
-import { EnigmaSettings } from "./components/enigma";
+import { Enigma } from "./components/enigma";
 
 // Store
 import { Store } from "./store/store";
@@ -17,10 +17,10 @@ class App extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-8 mt-5">
-            <EnigmaSettings store={store} />
+          <div className="col-md-8 mt-5">
+            <Enigma store={store} />
           </div>
-          <div className="col-4 mt-5">2 of 2</div>
+          <div className="col-md-4 mt-5">CURRENT FLOW GUI</div>
         </div>
       </div>
     );

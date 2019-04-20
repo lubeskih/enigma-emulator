@@ -17,60 +17,60 @@ export class Keyboard extends Component<IProps, {}> {
   }
 
   private handleClick = (e: any) => {
-    console.log(this.props.store.plugboard.getLetter(e.target.name));
+    console.log(
+      "Keyboard clicked: ",
+      this.props.store.plugboard.getPlug(e.target.name)
+    );
   };
-
-  private firstRow() {
-    return this.props.store.firstRowLetters.map(el => (
-      <Button
-        onClick={(e: any) => this.handleClick(e)}
-        variant="primary"
-        key={el}
-        name={el}
-      >
-        {" "}
-        {el}
-      </Button>
-    ));
-  }
-
-  private secondRow() {
-    return this.props.store.secondRowLetters.map(el => (
-      <Button
-        id={el}
-        onClick={(e: any) => this.handleClick(e)}
-        variant="primary"
-        key={el}
-        name={el}
-      >
-        {" "}
-        {el}
-      </Button>
-    ));
-  }
-
-  private thirdRow() {
-    return this.props.store.thirdRowLetters.map(el => (
-      <Button
-        id={el}
-        onClick={(e: any) => this.handleClick(e)}
-        variant="primary"
-        key={el}
-        name={el}
-        className="button"
-      >
-        {" "}
-        {el}
-      </Button>
-    ));
-  }
 
   render() {
     return (
-      <div className="keyboard">
-        <div className="first-row-letters">{this.firstRow()}</div>
-        <div className="second-row-letters">{this.secondRow()}</div>
-        <div className="third-row-letters">{this.thirdRow()}</div>
+      <div className="keyboard noselect">
+        <div className="first-row-letters">
+          {this.props.store.firstRowLetters.map(letter => (
+            <Button
+              onClick={(e: any) => this.handleClick(e)}
+              variant="link"
+              key={letter}
+              name={letter}
+              disabled={this.props.store.plugboard.orphanPlug ? true : false}
+            >
+              {" "}
+              {letter}
+            </Button>
+          ))}
+        </div>
+        <div className="second-row-letters">
+          {this.props.store.secondRowLetters.map(letter => (
+            <Button
+              id={letter}
+              onClick={(e: any) => this.handleClick(e)}
+              variant="link"
+              key={letter}
+              name={letter}
+              disabled={this.props.store.plugboard.orphanPlug ? true : false}
+            >
+              {" "}
+              {letter}
+            </Button>
+          ))}
+        </div>
+        <div className="third-row-letters">
+          {this.props.store.thirdRowLetters.map(letter => (
+            <Button
+              id={letter}
+              onClick={(e: any) => this.handleClick(e)}
+              variant="link"
+              key={letter}
+              name={letter}
+              className="button"
+              disabled={this.props.store.plugboard.orphanPlug ? true : false}
+            >
+              {" "}
+              {letter}
+            </Button>
+          ))}
+        </div>
       </div>
     );
   }

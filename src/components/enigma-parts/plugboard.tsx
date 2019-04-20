@@ -18,15 +18,13 @@ export class Plugboard extends Component<IProps, {}> {
     super(props);
   }
 
-  private plugs() {
-    return alphabet.map(letter => (
-      <Plug key={letter} store={this.props.store} letter={letter}>
-        {" "}
-      </Plug>
-    ));
-  }
-
   render() {
-    return <div className="plugboard noselect">{this.plugs()}</div>;
+    return (
+      <div className="plugboard noselect">
+        {alphabet.map(letter => (
+          <Plug key={letter} store={this.props.store} letter={letter} />
+        ))}
+      </div>
+    );
   }
 }

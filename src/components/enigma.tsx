@@ -15,7 +15,7 @@ interface IProps {
 }
 
 @observer
-export class EnigmaSettings extends Component<IProps, {}> {
+export class Enigma extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
@@ -30,7 +30,18 @@ export class EnigmaSettings extends Component<IProps, {}> {
         <span>Keyboard</span>
         <hr />
         <Keyboard store={store} />
-        <span>Steckerbrett</span>
+        <p>
+          Steckerbrett{" "}
+          <span>
+            {" "}
+            {this.props.store.plugboard.orphanPlug ? (
+              <code className="note">
+                A plug is wired but does not point to other plug. Keyboard
+                disabled.
+              </code>
+            ) : null}
+          </span>
+        </p>
         <hr />
         <Plugboard store={store} />
       </div>

@@ -17,8 +17,8 @@ code {
   background-color: black;
 }
 
-.col-4 {
-  background-color: #777;
+.col-md-4 {
+  background-color: rgba(214, 190, 214, 0.067);
 }
 
 /* KEYBOARD */
@@ -33,6 +33,7 @@ code {
   background-color: #fff;
   color: black;
   border: solid black;
+  margin-bottom: 5px;
 }
 
 .keyboard button:hover {
@@ -60,6 +61,17 @@ code {
 
 /* PLUGBOARD */
 
+.arrow {
+  stroke: rgb(0, 0, 0);
+  stroke-width: 2;
+  marker-end: url(#markerArrow);
+}
+
+.note {
+  color: darkred;
+  margin-left: 10px;
+}
+
 div.oval {
   -moz-border-radius: 50px/50px;
   -webkit-border-radius: 50px 50px;
@@ -67,6 +79,10 @@ div.oval {
   border: solid 2px black;
   width: 15px;
   height: 35px;
+}
+
+div.clicked {
+  background-color: #333;
 }
 
 .plug {
