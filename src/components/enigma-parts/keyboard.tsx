@@ -29,6 +29,7 @@ export class Keyboard extends Component<IProps, {}> {
         <div className="first-row-letters">
           {this.props.store.firstRowLetters.map(letter => (
             <Button
+              id={"keyboard-" + letter}
               onClick={(e: any) => this.handleClick(e)}
               variant="link"
               key={letter}
@@ -43,7 +44,7 @@ export class Keyboard extends Component<IProps, {}> {
         <div className="second-row-letters">
           {this.props.store.secondRowLetters.map(letter => (
             <Button
-              id={letter}
+              id={"keyboard-" + letter}
               onClick={(e: any) => this.handleClick(e)}
               variant="link"
               key={letter}
@@ -58,7 +59,7 @@ export class Keyboard extends Component<IProps, {}> {
         <div className="third-row-letters">
           {this.props.store.thirdRowLetters.map(letter => (
             <Button
-              id={letter}
+              id={"keyboard-" + letter}
               onClick={(e: any) => this.handleClick(e)}
               variant="link"
               key={letter}

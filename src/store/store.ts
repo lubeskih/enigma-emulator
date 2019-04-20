@@ -62,43 +62,31 @@ export class Plugboard {
     return this.pb.get(plug);
   }
 
-  public flow(plug: string, cx1: number, cy1: number) {
+  /**
+   *
+   * @param plug the letter that the plug was assigned to
+   *
+   * To fully understand this function, please
+   * check out the flowchart in the 'misc' directory.
+   */
+  public flow(plug: string) {
     if (this.plugWasSwapped(plug)) {
-      console.log("The plug", plug, "is already swapped.");
       if (this.anOrphanPlug()) {
-        console.log("There is an orphan plug: ", this.orphanPlug);
-        console.log("Storing the value ", this.pb.get(plug), "for later use.");
         const storedValue = this.pb.get(plug);
-        console.log("Swapping plugs:", plug, "and", this.orphanPlug);
         this.swapPlugs(plug);
-        console.log("Registering 1 ", storedValue, "as an orphan!");
         this.registerAsOrphan(storedValue);
       } else {
-        console.log("resetting the plug", plug);
-        console.log("Registering 2 ", this.pb.get(plug), "as an orphan plug");
         this.registerAsOrphan(this.pb.get(plug));
         this.resetPlug(plug);
       }
     } else {
-      console.log("The plug", plug, "is NOT swapped.");
       if (this.anOrphanPlug()) {
-        console.log("There is an orphan plug: ", this.orphanPlug);
         if (this.plugEqualsOrphanPlug(plug)) {
-          console.log(
-            "The orphan plug equals the actual clicked plug, setting orphan plug to null"
-          );
           this.orphanPlug = null;
-          console.log(this.pb.get(plug));
         } else {
-          console.log("Swapping plugs:", plug, "and", this.orphanPlug);
           this.swapPlugs(plug);
         }
       } else {
-        console.log(
-          "There is no orphan plug, registering",
-          plug,
-          "as an orphan plug"
-        );
         this.registerAsOrphan(plug);
       }
     }

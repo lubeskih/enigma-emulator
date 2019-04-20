@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 
 // Store
 import { Store } from "../../store/store";
+import { element } from "prop-types";
 
 interface IProps {
   letter: string;
@@ -27,11 +28,7 @@ export class Plug extends Component<IProps, IState> {
   }
 
   onClick = (event: any) => {
-    this.props.store.plugboard.flow(
-      event.target.id,
-      event.clientX,
-      event.clientY
-    );
+    this.props.store.plugboard.flow(event.target.id);
 
     if (
       this.state.clicked &&
@@ -42,9 +39,6 @@ export class Plug extends Component<IProps, IState> {
     }
 
     this.setState({ clicked: true });
-
-    console.log("COORDINATES X1:", event.clientX);
-    console.log("COORDINATES Y1:", event.clientY);
   };
 
   render() {
@@ -53,12 +47,16 @@ export class Plug extends Component<IProps, IState> {
         {" "}
         <span>{this.letter}</span>
         <div
+          title={"plug-" + this.letter}
           id={this.letter}
           onClick={this.onClick}
           className={
             this.state.clicked ? "oval noselect clicked" : "oval noselect"
           }
         />
+        {/* <svg width="500" height="500">
+          <line x1="50" y1="50" x2="350" y2="50" stroke="red" />
+        </svg> */}
       </div>
     );
   }
