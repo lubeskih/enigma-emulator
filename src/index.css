@@ -119,3 +119,18 @@ div.clicked {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+
+/* Settings */
+.enigma-select {
+  margin-left: 10px;
+  display: inline-block;
+  width: 10%;
+  height: calc(1.4em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}

@@ -15,15 +15,15 @@ export class Lamps extends Component<IProps, {}> {
     super(props);
   }
 
-  private lamps() {
-    return alphabet.map(letter => (
-      <div key={letter} id="letter" className="circle noselect">
-        {letter}
-      </div>
-    ));
-  }
-
   render() {
-    return <div className="lamps">{this.lamps()}</div>;
+    return (
+      <div className="lamps">
+        {alphabet.map(letter => (
+          <div key={letter} id="letter" className="circle noselect">
+            {letter}
+          </div>
+        ))}
+      </div>
+    );
   }
 }

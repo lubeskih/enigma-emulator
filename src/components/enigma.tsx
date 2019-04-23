@@ -9,6 +9,7 @@ import { Store } from "../store/store";
 import { Keyboard } from "./enigma-parts/keyboard";
 import { Plugboard } from "./enigma-parts/plugboard";
 import { Lamps } from "./enigma-parts/lamps";
+import { Settings } from "./enigma-parts/settings";
 
 interface IProps {
   store: Store;
@@ -24,6 +25,9 @@ export class Enigma extends Component<IProps, {}> {
     const store = this.props.store;
     return (
       <div className="preview">
+        <span>Settings</span>
+        <hr />
+        <Settings store={store} />
         <span>Lamps</span>
         <hr />
         <Lamps store={store} />

@@ -1,6 +1,8 @@
 // Libraries
 import { observable } from "mobx";
 
+type Rotor = "I" | "II" | "III" | "IV" | "V" | "VI" | "VII" | "VIII";
+
 /**
  * Store
  */
@@ -13,6 +15,23 @@ export class Store {
   // Plugboard
   public plugboard = new Plugboard();
   public selectedLetter: string | null = null;
+
+  // Settings
+  @observable enigmaType: "M3" | "M4" = "M3";
+  @observable rotorOne: Rotor = "I";
+  @observable rotorTwo: Rotor = "II";
+  @observable rotorThree: Rotor = "III";
+  @observable rotorFour: Rotor = "IV";
+
+  @observable option1: boolean = true;
+  @observable option2: boolean = false;
+  @observable option3: boolean = false;
+  @observable option4: boolean = false;
+
+  @observable option5: boolean = false;
+  @observable option6: boolean = false;
+  @observable option7: boolean = false;
+  @observable option8: boolean = false;
 }
 
 /**
