@@ -90,3 +90,12 @@ M3 vs Enigma I
 - Lock in top lid of wooden case rather than in the flap at the front
 - Two grips at the sides (for pulling the machine out of a bay)
 - 6V circular power socket (M1, M2), or two sockets for 4V and 220V (M3)
+
+## Terminology
+
+- Stator / Entrittswalze (ETW) = Static Wheel
+- Umkehrwalze (UKW) = Reflector Wheel
+- Walzenlage = Wheel Order
+- Ringstellung = Ring Setting
+- Grundstellung = Ground Setting (start position)
+- Steckerbrett = Plugboard
