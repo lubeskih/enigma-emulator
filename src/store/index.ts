@@ -1,7 +1,7 @@
 // Libraries
 import { observable } from "mobx";
 
-import { Plugboard } from "../enigma/plugboard";
+import { Plugboard } from "../enigma-parts/plugboard";
 
 /**
  * Store

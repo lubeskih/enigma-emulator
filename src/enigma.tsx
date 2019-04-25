@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 // Style
-import "./app.css";
+import "./enigma.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // Components
@@ -15,7 +15,7 @@ import { Settings } from "./components/settings";
 import { Store } from "./store";
 const store = new Store();
 
-class App extends Component {
+class Enigma extends Component {
   render() {
     return (
       <div className="container">
@@ -52,4 +52,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Enigma;
