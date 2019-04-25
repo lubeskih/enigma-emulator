@@ -3,26 +3,25 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store, alphabet } from "../../store/store";
-
-// Components
-import { Plug } from "./plug";
+import { Store, alphabet } from "../store";
 
 interface IProps {
   store: Store;
 }
 
 @observer
-export class Plugboard extends Component<IProps, {}> {
+export class Lamps extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
 
   render() {
     return (
-      <div className="plugboard noselect">
+      <div className="lamps">
         {alphabet.map(letter => (
-          <Plug key={letter} store={this.props.store} letter={letter} />
+          <div key={letter} id="letter" className="circle noselect">
+            {letter}
+          </div>
         ))}
       </div>
     );

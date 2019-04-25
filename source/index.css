@@ -134,3 +134,13 @@ div.clicked {
   border-radius: 0.25rem;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+
+.enigma-type {
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 2rem;
+}
+
+.enigma-rotor-type {
+  margin-bottom: 0.5rem;
+  font-family: "Courier New", Courier, monospace;
+}

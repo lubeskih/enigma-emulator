@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store } from "../../store/store";
+import { Store } from "../store";
 import { element } from "prop-types";
 
 interface IProps {

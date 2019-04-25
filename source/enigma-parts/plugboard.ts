@@ -1,38 +1,7 @@
 // Libraries
 import { observable } from "mobx";
 
-type Rotor = "I" | "II" | "III" | "IV" | "V" | "VI" | "VII" | "VIII";
-
-/**
- * Store
- */
-export class Store {
-  // Keyboard
-  public firstRowLetters = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O"];
-  public secondRowLetters = ["A", "S", "D", "F", "G", "H", "J", "K"];
-  public thirdRowLetters = ["P", "Y", "X", "C", "V", "B", "N", "M", "L"];
-
-  // Plugboard
-  public plugboard = new Plugboard();
-  public selectedLetter: string | null = null;
-
-  // Settings
-  @observable enigmaType: "M3" | "M4" = "M3";
-  @observable rotorOne: Rotor = "I";
-  @observable rotorTwo: Rotor = "II";
-  @observable rotorThree: Rotor = "III";
-  @observable rotorFour: Rotor = "IV";
-
-  @observable option1: boolean = true;
-  @observable option2: boolean = false;
-  @observable option3: boolean = false;
-  @observable option4: boolean = false;
-
-  @observable option5: boolean = false;
-  @observable option6: boolean = false;
-  @observable option7: boolean = false;
-  @observable option8: boolean = false;
-}
+import { alphabet } from "../store";
 
 /**
  * Plugboard
@@ -113,32 +82,3 @@ export class Plugboard {
     return null;
   }
 }
-
-export const alphabet = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z"
-];
