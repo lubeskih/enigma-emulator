@@ -4,5 +4,5 @@ export interface IRotor {
 }
 
 export interface IWheel {
-  wiring: string[];
+  wiring: string;
 }

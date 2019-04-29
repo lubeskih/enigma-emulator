@@ -65,6 +65,8 @@ UKW-C | FVPJIAOYEDRZXWGCTKUQSBNMHL
 
 ## Wiring
 
+In the column Notch the position is given of the turnover notch on the circumference of the wheel, whilst the column Turnover shows which letter (or number) is visible in the window at that time.
+
 Wheel | ABCDEFGHIJKLMNOPQRSTUVWXYZ | Notch | Turnover
 ETW | ABCDEFGHIJKLMNOPQRSTUVWXYZ
 I | EKMFLGDQVZNTOWYHXUSPAIBRCJ | Y | Q |
