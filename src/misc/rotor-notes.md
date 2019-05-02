@@ -99,5 +99,9 @@ M3 vs Enigma I
 - Umkehrwalze (UKW) = Reflector Wheel
 - Walzenlage = Wheel Order
 - Ringstellung = Ring Setting
-- Grundstellung = Ground Setting (start position)
+- Grundstellung = Ground Setting (start position / indicator settings)
 - Steckerbrett = Plugboard
+
+The operator would then think of three letters at random, say RNF,
+for the Grundstellung or indicator-setting. He would then manually rotate the
+left rotor until it had R uppermost, the middle rotor until it had N uppermost and the right rotor until it had F uppermost.
