@@ -12,6 +12,7 @@ export class Wheel implements IWheel {
 export class Rotor extends Wheel implements IRotor {
   private _rotorWiring = new Map<number, number>();
   private _invertedRotorWiring = new Map<number, number>();
+  private _topLetter: string = "A";
 
   private indexInAlphabet(letter: string) {
     return alphabet.indexOf(letter);
@@ -23,22 +24,31 @@ export class Rotor extends Wheel implements IRotor {
 
     return i;
   }
+
   constructor(wiring: string, public notch: string, public turnover: string) {
     super(wiring);
 
-    [...Array<number>(25).keys()].forEach(key =>
+    [...Array<number>(26).keys()].forEach(key =>
       this._rotorWiring.set(key, this.indexInAlphabet(wiring[key]))
     );
 
     this._invertedRotorWiring = this.invertMap(this._rotorWiring);
   }
 
-  public rotorWiring(index: number) {
+  public getRotorWiring(index: number) {
     return this._rotorWiring.get(index);
   }
 
-  public invertedRotorWiring(index: number) {
+  public getInvertedRotorWiring(index: number) {
     return this._invertedRotorWiring.get(index);
+  }
+
+  public setTopLetter(letter: string) {
+    this._topLetter = letter;
+  }
+
+  public getTopLetter() {
+    return this._topLetter;
   }
 }
 
