@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store, alphabet } from "../store";
+import { Store } from "../store";
+
+// CONSTANTS
+import { ALPHABET } from "../constants";
 
 interface IProps {
   store: Store;
@@ -18,7 +21,9 @@ export class Lamps extends Component<IProps, {}> {
   render() {
     return (
       <div className="lamps">
-        {alphabet.map(letter => (
+        <p>Lamps</p>
+        <hr />
+        {ALPHABET.map(letter => (
           <div key={letter} id="letter" className="circle noselect">
             {letter}
           </div>

@@ -4,12 +4,10 @@ import { observer } from "mobx-react";
 
 // Store
 import { Store } from "../store";
-import { element } from "prop-types";
 
 interface IProps {
   letter: string;
   store: Store;
-  // clicked: false;
 }
 
 interface IState {
@@ -54,9 +52,6 @@ export class Plug extends Component<IProps, IState> {
             this.state.clicked ? "oval noselect clicked" : "oval noselect"
           }
         />
-        {/* <svg width="500" height="500">
-          <line x1="50" y1="50" x2="350" y2="50" stroke="red" />
-        </svg> */}
       </div>
     );
   }

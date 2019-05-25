@@ -34,6 +34,8 @@ export class Settings extends Component<IProps, {}> {
   render() {
     return (
       <div className="settings">
+        <p>Settings</p>
+        <hr />
         <p>Enigma Type:</p>
         <Select
           onChange={this.onEnigmaTypeSelect}

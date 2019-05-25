@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store, alphabet } from "../store";
+import { Store } from "../store";
+
+// CONSTANTS
+import { ALPHABET } from "../constants";
 
 // Components
 import { Plug } from "./plug";
@@ -21,7 +24,9 @@ export class Plugboard extends Component<IProps, {}> {
   render() {
     return (
       <div className="plugboard noselect">
-        {alphabet.map(letter => (
+        <p>Steckerbrett</p>
+        <hr />
+        {ALPHABET.map(letter => (
           <Plug key={letter} store={this.props.store} letter={letter} />
         ))}
       </div>

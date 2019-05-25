@@ -1,45 +1,46 @@
 // Libraries
 import { observable } from "mobx";
 
-import { alphabet } from "../store";
+// CONSTANTS
+import { ALPHABET } from "../constants";
 
 /**
  * Plugboard
  */
 export class Plugboard {
   @observable public pb = new Map();
-  @observable public orphanPlug: string | null = null;
+  @observable public excessPlug: string | null = null;
 
   constructor() {
-    alphabet.forEach(letter => this.pb.set(letter, letter));
+    ALPHABET.forEach(letter => this.pb.set(letter, letter));
   }
 
   public resetAll() {
-    alphabet.forEach(letter => this.pb.set(letter, letter));
+    ALPHABET.forEach(letter => this.pb.set(letter, letter));
   }
 
   private plugWasSwapped(plug: string): boolean {
     return !!this.pb.get(plug) && this.pb.get(plug) !== plug;
   }
 
-  private anOrphanPlug(): boolean {
-    return !!this.orphanPlug;
+  private anExcessPlug(): boolean {
+    return !!this.excessPlug;
   }
 
-  private plugEqualsOrphanPlug(plug: string): boolean {
-    return !!(this.orphanPlug === plug);
+  private plugEqualsExcessPlug(plug: string): boolean {
+    return !!(this.excessPlug === plug);
   }
 
-  private registerAsOrphan(plug: string) {
+  private registerAsExcess(plug: string) {
     this.pb.set(plug, plug);
-    this.orphanPlug = plug;
+    this.excessPlug = plug;
   }
 
   private swapPlugs(plug: string) {
-    this.pb.set(plug, this.orphanPlug);
-    this.pb.set(this.orphanPlug, plug);
+    this.pb.set(plug, this.excessPlug);
+    this.pb.set(this.excessPlug, plug);
 
-    this.orphanPlug = null;
+    this.excessPlug = null;
   }
 
   private resetPlug(plug: string) {
@@ -59,23 +60,23 @@ export class Plugboard {
    */
   public flow(plug: string) {
     if (this.plugWasSwapped(plug)) {
-      if (this.anOrphanPlug()) {
+      if (this.anExcessPlug()) {
         const storedValue = this.pb.get(plug);
         this.swapPlugs(plug);
-        this.registerAsOrphan(storedValue);
+        this.registerAsExcess(storedValue);
       } else {
-        this.registerAsOrphan(this.pb.get(plug));
+        this.registerAsExcess(this.pb.get(plug));
         this.resetPlug(plug);
       }
     } else {
-      if (this.anOrphanPlug()) {
-        if (this.plugEqualsOrphanPlug(plug)) {
-          this.orphanPlug = null;
+      if (this.anExcessPlug()) {
+        if (this.plugEqualsExcessPlug(plug)) {
+          this.excessPlug = null;
         } else {
           this.swapPlugs(plug);
         }
       } else {
-        this.registerAsOrphan(plug);
+        this.registerAsExcess(plug);
       }
     }
 
