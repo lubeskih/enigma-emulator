@@ -53,8 +53,16 @@ export class Rotor extends Wheel implements IRotor {
   //////////////////////////////
   //     PUBLIC FUNCTIONS     //
   //////////////////////////////
-  public step() {
+  public step(entryLetter: number) {
     this._offset === 25 ? (this._offset = 0) : (this._offset += 1);
+
+    let contact = entryLetter + this._offset;
+
+    if (contact > 25) {
+      return contact - 26;
+    }
+
+    return contact;
   }
 
   public getRotorWiring(index: number) {

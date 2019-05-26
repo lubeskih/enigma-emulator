@@ -24,7 +24,6 @@ interface IProps {
 
 const ew = new Wheel(EN_ETW);
 const r1 = new Rotor(EN_R1_W, EN_R1_N, EN_R1_T);
-// r1.offset = 0;
 
 @observer
 export class Keyboard extends Component<IProps, {}> {
@@ -47,13 +46,8 @@ export class Keyboard extends Component<IProps, {}> {
 
     console.log("CURRENT OFFSET IS:", r1.offset);
     console.log(">>>> STEPPING <<<<");
-    r1.step();
+    const contact = r1.step(entryLetter);
     console.log("NEW OFFSET:", r1.offset);
-
-    let contact = entryLetter + r1.offset;
-    if (contact > 25) {
-      contact = contact - 26;
-    }
 
     console.log(
       "CURRENT FROM POSITION",
@@ -64,7 +58,7 @@ export class Keyboard extends Component<IProps, {}> {
 
     console.log(
       "CONTACT",
-      `>> ${entryLetter} <<`,
+      `>> ${contact} <<`,
       "EXITS THE ROTOR AS:",
       `>> ${r1.getRotorWiring(contact)} <<`
     );
