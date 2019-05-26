@@ -11,12 +11,20 @@ import { Button } from "react-bootstrap";
 import {
   FIRST_ROW_LETTERS,
   SECOND_ROW_LETTERS,
-  THIRD_ROW_LETTERS
+  THIRD_ROW_LETTERS,
+  EN_ETW,
+  EN_R1_W,
+  EN_R1_N,
+  EN_R1_T
 } from "../constants";
 
 interface IProps {
   store: Store;
 }
+
+const ew = new Wheel(EN_ETW);
+const r1 = new Rotor(EN_R1_W, EN_R1_N, EN_R1_T);
+// r1.offset = 0;
 
 @observer
 export class Keyboard extends Component<IProps, {}> {
@@ -25,44 +33,42 @@ export class Keyboard extends Component<IProps, {}> {
   }
 
   private handleClick = (e: any) => {
-    // console.log(
-    //   "Keyboard clicked: ",
-    //   this.props.store.plugboard.getPlug(e.target.name)
-    // );
+    const plugboardLetter = this.props.store.plugboard.getPlug(e.target.name); // after plugboard
+    const entryLetter = ew.wiringIndexOf(plugboardLetter);
 
-    const phase1 = this.props.store.plugboard.getPlug(e.target.name);
-
-    const ew = new Wheel("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-
-    const currentEntersAtPosition = ew.wiringIndexOf(phase1);
+    console.log(`\n`);
+    console.log("##############################");
     console.log(
-      "Current enters the ENTRY WHEEL and exits from position:",
-      currentEntersAtPosition,
-      ew.wiring[currentEntersAtPosition]
+      "YOU PRESSED:",
+      `>> ${plugboardLetter} <<`,
+      "WHICH MAPS TO POSITION",
+      `>> ${entryLetter} <<`
     );
 
-    const r1 = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Y", "Q");
+    console.log("CURRENT OFFSET IS:", r1.offset);
+    console.log(">>>> STEPPING <<<<");
+    r1.step();
+    console.log("NEW OFFSET:", r1.offset);
+
+    let contact = entryLetter + r1.offset;
+    if (contact > 25) {
+      contact = contact - 26;
+    }
 
     console.log(
-      "Current enters ROTOR 1 at position:",
-      r1.getRotorWiring(currentEntersAtPosition)
+      "CURRENT FROM POSITION",
+      `>> ${entryLetter} <<`,
+      "ENTERS CONTACT",
+      `>> ${contact} <<`
     );
+
     console.log(
-      "Current exits ROTOR 1 at position:",
-      r1.wiring[currentEntersAtPosition]
+      "CONTACT",
+      `>> ${entryLetter} <<`,
+      "EXITS THE ROTOR AS:",
+      `>> ${r1.getRotorWiring(contact)} <<`
     );
-
-    // console.log(
-    //   "Enters rotor 1 at: ",
-    //   r1.getRotorWiring(currentEntersAtPosition),
-    //   "Exits rotor 1 at:",
-    //   r1.wiring[currentEntersAtPosition]
-    // );
-
-    let p = r1.wiring[currentEntersAtPosition];
-
-    // const r2 = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", "M", "E");
-    // const r3 = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", "D", "V");
+    console.log("##############################");
   };
 
   render() {

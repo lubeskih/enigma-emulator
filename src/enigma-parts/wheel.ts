@@ -4,7 +4,11 @@ import { IWheel, IRotor } from "../types";
 import { ALPHABET } from "../constants";
 
 export class Wheel implements IWheel {
-  constructor(public wiring: string) {}
+  readonly wiring: string;
+
+  constructor(wiring: string) {
+    this.wiring = wiring;
+  }
 
   public wiringIndexOf(letter: string): number {
     return this.wiring.indexOf(letter);
@@ -23,20 +27,68 @@ export class Wheel implements IWheel {
  * 3. Notch: The letter(s) that causes the next rotor to step
  */
 export class Rotor extends Wheel implements IRotor {
-  private rotorWiring = new Map<number, number>();
-  private invertedRotorWiring = new Map<number, number>();
+  readonly notch: number;
+  readonly turnover: number;
 
-  public groundSetting: string = "A";
-  public ringSetting: string = "A";
+  private _groundSettings: number = 1;
+  private _ringSettings: number = 1;
+  private _offset: number = 0;
 
-  constructor(wiring: string, public notch: string, public turnover: string) {
+  private _rotorWiring = new Map<number, number>();
+  private _invertedRotorWiring = new Map<number, number>();
+
+  constructor(wiring: string, notch: string, turnover: string) {
     super(wiring);
 
-    [...Array<number>(26).keys()].forEach(key =>
-      this.rotorWiring.set(key, this.indexInAlphabet(wiring[key]))
-    );
+    this.notch = this.wiringIndexOf(notch);
+    this.turnover = this.wiringIndexOf(turnover);
 
-    this.invertedRotorWiring = this.invertMap(this.rotorWiring);
+    [...Array<number>(26).keys()].forEach(key => {
+      this._rotorWiring.set(key, this.indexInAlphabet(wiring[key]));
+    });
+
+    this._invertedRotorWiring = this.invertMap(this._rotorWiring);
+  }
+
+  //////////////////////////////
+  //     PUBLIC FUNCTIONS     //
+  //////////////////////////////
+  public step() {
+    this._offset === 25 ? (this._offset = 0) : (this._offset += 1);
+  }
+
+  public getRotorWiring(index: number) {
+    return this._rotorWiring.get(index);
+  }
+
+  public getInvertedRotorWiring(index: number) {
+    return this._invertedRotorWiring.get(index);
+  }
+
+  get groundSettings() {
+    return this._groundSettings;
+  }
+
+  set groundSettings(position: number) {
+    this._groundSettings = position;
+    // this._offset = Math.abs(this._ringSettings - this._groundSettings);
+  }
+
+  get ringSettings() {
+    return this._ringSettings;
+  }
+
+  set ringSettings(position: number) {
+    this._ringSettings = position;
+    // this._offset = Math.abs(this._ringSettings - this._groundSettings);
+  }
+
+  get offset() {
+    return this._offset;
+  }
+
+  set offset(offset: number) {
+    this._offset = offset;
   }
 
   //////////////////////////////
@@ -53,24 +105,4 @@ export class Rotor extends Wheel implements IRotor {
 
     return i;
   }
-
-  //////////////////////////////
-  //     PUBLIC FUNCTIONS     //
-  //////////////////////////////
-
-  public getRotorWiring(index: number) {
-    return this.rotorWiring.get(index);
-  }
-
-  public getInvertedRotorWiring(index: number) {
-    return this.invertedRotorWiring.get(index);
-  }
 }
-
-// But current entering at position i does not necessarily
-// connect with contact i on the rotor, because rotors turn around the spindle.
-
-// That rotation causes an offset between the positions and the contacts.
-
-// So the offset of the rotor can be can be determined by looking at the
-// letter that is showing. We call that the top letter of the rotor

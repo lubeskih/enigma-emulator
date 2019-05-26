@@ -1,6 +1,6 @@
 export interface IRotor {
-  notch: string;
-  turnover: string;
+  notch: number;
+  turnover: number;
 }
 
 export interface IWheel {

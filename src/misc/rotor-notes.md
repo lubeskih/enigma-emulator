@@ -1,3 +1,5 @@
+USEFUL: http://www.ellsbury.com/enigma3.htm
+
 # Enigma I
 
 - Reichswehr / Wehrmacht
