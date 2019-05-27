@@ -36,7 +36,7 @@ export class Keyboard extends Component<IProps, {}> {
     const entryLetter = ew.wiringIndexOf(plugboardLetter);
 
     console.log(`\n`);
-    console.log("##############################");
+    console.log("##########################################");
     console.log(
       "YOU PRESSED:",
       `>> ${plugboardLetter} <<`,
@@ -45,7 +45,7 @@ export class Keyboard extends Component<IProps, {}> {
     );
 
     console.log("CURRENT OFFSET IS:", r1.offset);
-    console.log(">>>> STEPPING <<<<");
+    console.log(">>>>>>>>>>>>>>>> STEPPING <<<<<<<<<<<<<<<<");
     const contact = r1.step(entryLetter);
     console.log("NEW OFFSET:", r1.offset);
 
@@ -62,7 +62,7 @@ export class Keyboard extends Component<IProps, {}> {
       "EXITS THE ROTOR AS:",
       `>> ${r1.getRotorWiring(contact)} <<`
     );
-    console.log("##############################");
+    console.log("##########################################");
   };
 
   render() {

@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
+import { ALPHABET } from "../constants";
+
 // Store
 import { Store } from "../store";
 
@@ -22,6 +24,8 @@ const rotorOptions = [
 
 @observer
 export class Settings extends Component<IProps, {}> {
+  letterSettings = ALPHABET.map(letter => ({ value: letter, label: letter }));
+
   constructor(props: IProps) {
     super(props);
   }
@@ -36,32 +40,101 @@ export class Settings extends Component<IProps, {}> {
       <div className="settings">
         <p>Settings</p>
         <hr />
-        <p>Enigma Type:</p>
+        <div className="row mb-3">
+          <div className="col-md-12 mb-3">
+            <Select
+              onChange={this.onEnigmaTypeSelect}
+              className="enigma-type"
+              options={options}
+              placeholder="Choose Enigma model ..."
+            />
+          </div>
+        </div>
+        <div className="row mb-4">
+          <div className="col-md-12 mb-3">
+            <Select
+              className="enigma-type"
+              placeholder="Choose rotor ..."
+              options={rotorOptions}
+            />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+        </div>
+        <div className="row mb-4">
+          <div className="col-md-12 mb-3">
+            <Select
+              placeholder="Choose rotor ..."
+              className="enigma-type"
+              options={rotorOptions}
+            />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+        </div>
+        <div className="row mb-4">
+          <div className="col-md-12 mb-3">
+            <Select
+              placeholder="Choose rotor ..."
+              className="enigma-type"
+              options={rotorOptions}
+            />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+        </div>
+        <div className="row mb-4">
+          <div placeholder="Choose rotor ..." className="col-md-12 mb-3">
+            <Select className="enigma-type" options={rotorOptions} />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+          <div className="col-md-6">
+            <Select className="enigma-type" options={this.letterSettings} />
+          </div>
+        </div>
         <Select
           onChange={this.onEnigmaTypeSelect}
           className="enigma-type"
           options={options}
-        />
-        <p>Rotors: </p>
-        <Select
-          isDisabled={this.props.store.enigmaType ? false : true}
-          className="enigma-rotor-type"
-          options={rotorOptions}
-          defaultValue={rotorOptions[0]}
-        />
-        <Select
-          isDisabled={this.props.store.enigmaType ? false : true}
-          className="enigma-rotor-type"
-          options={rotorOptions}
-          defaultValue={rotorOptions[1]}
-        />
-        <Select
-          isDisabled={this.props.store.enigmaType ? false : true}
-          className="enigma-rotor-type"
-          options={rotorOptions}
-          defaultValue={rotorOptions[2]}
+          placeholder="
+          Umkerwalze ..."
         />
       </div>
     );
   }
+}
+
+{
+  /* <Select
+isDisabled={this.props.store.enigmaType ? false : true}
+className="enigma-rotor-type"
+options={rotorOptions}
+defaultValue={rotorOptions[0]}
+/>
+<Select
+isDisabled={this.props.store.enigmaType ? false : true}
+className="enigma-rotor-type"
+options={rotorOptions}
+defaultValue={rotorOptions[1]}
+/>
+<Select
+isDisabled={this.props.store.enigmaType ? false : true}
+className="enigma-rotor-type"
+options={rotorOptions}
+defaultValue={rotorOptions[2]}
+/> */
 }

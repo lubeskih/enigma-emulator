@@ -18,7 +18,8 @@ code {
 }
 
 .col-md-4 {
-  background-color: rgb(252, 252, 252);
+  background-color: rgb(250, 250, 250);
+  border-radius: 1%;
 }
 
 /* KEYBOARD */
@@ -120,27 +121,6 @@ div.clicked {
                                   supported by Chrome and Opera */
 }
 
-/* Settings */
-.enigma-select {
-  margin-left: 10px;
-  display: inline-block;
-  width: 10%;
-  height: calc(1.4em + 0.75rem + 2px);
-  padding: 0.375rem 0.75rem;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-}
-
 .enigma-type {
-  font-family: "Courier New", Courier, monospace;
-  margin-bottom: 2rem;
-}
-
-.enigma-rotor-type {
-  margin-bottom: 0.5rem;
   font-family: "Courier New", Courier, monospace;
 }
