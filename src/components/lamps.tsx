@@ -21,8 +21,7 @@ export class Lamps extends Component<IProps, {}> {
   render() {
     return (
       <div className="lamps">
-        <p>Lamps</p>
-        <hr />
+        <span className="codeInfo">Lamps</span> <hr />
         {ALPHABET.map(letter => (
           <div key={letter} id="letter" className="circle noselect">
             {letter}

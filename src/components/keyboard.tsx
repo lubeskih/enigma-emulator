@@ -69,7 +69,7 @@ export class Keyboard extends Component<IProps, {}> {
     return (
       <div className="keyboard noselect">
         <p>
-          Keyboard{" "}
+          <span className="codeInfo">Keyboard</span>{" "}
           <span>
             {this.props.store.plugboard.excessPlug ? (
               <code className="note">

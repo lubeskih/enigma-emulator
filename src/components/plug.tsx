@@ -25,6 +25,10 @@ export class Plug extends Component<IProps, IState> {
     this.state = { clicked: false };
   }
 
+  wiredWith = (letter: string) => {
+    return this.props.store.plugboard.getPlug(letter);
+  };
+
   onClick = (event: any) => {
     this.props.store.plugboard.flow(event.target.id);
 
@@ -52,6 +56,9 @@ export class Plug extends Component<IProps, IState> {
             this.state.clicked ? "oval noselect clicked" : "oval noselect"
           }
         />
+        <small>
+          <code className="codeInfo">{this.wiredWith(this.letter)}</code>
+        </small>
       </div>
     );
   }

@@ -24,8 +24,7 @@ export class Plugboard extends Component<IProps, {}> {
   render() {
     return (
       <div className="plugboard noselect">
-        <p>Steckerbrett</p>
-        <hr />
+        <span className="codeInfo">Steckerbrett</span> <hr />
         {ALPHABET.map(letter => (
           <Plug key={letter} store={this.props.store} letter={letter} />
         ))}

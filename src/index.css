@@ -8,9 +8,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+.codeInfo {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  color: #666;
+}
+
+.settingsHead {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  color: #666;
+}
+
+hr {
+  margin-top: 10px !important;
 }
 
 .btn-primary {
@@ -83,7 +94,8 @@ div.oval {
 }
 
 div.clicked {
-  background-color: #333;
+  /* background-color: #333; */
+  background-color: #222;
 }
 
 .plug {
@@ -123,4 +135,6 @@ div.clicked {
 
 .enigma-type {
   font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+  margin-top: 6px;
 }
