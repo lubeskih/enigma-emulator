@@ -12,4 +12,5 @@ export class Store {
 
   // Settings
   @observable enigmaType: "I" | "M3" | "M4" | null = null;
+  @observable lockSettings: boolean = false;
 }

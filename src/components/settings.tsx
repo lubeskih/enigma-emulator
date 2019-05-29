@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
-import { ALPHABET, NUMBERS } from "../constants";
+import { Form } from "react-bootstrap";
+
+import { /** ALPHABET */ NUMBERS } from "../constants";
 
 // Store
 import { Store } from "../store";
@@ -41,6 +43,10 @@ export class Settings extends Component<IProps, {}> {
     this.props.store.enigmaType = event.value;
   };
 
+  onSettingsLock = (event: any) => {
+    this.props.store.lockSettings = !this.props.store.lockSettings;
+  };
+
   render() {
     return (
       <div className="settings">
@@ -52,6 +58,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">Enigma model</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               onChange={this.onEnigmaTypeSelect}
               defaultValue={options[0]}
               className="enigma-type"
@@ -66,6 +73,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">FAST ROTOR (right-hand wheel)</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={rotorOptions[2]}
               options={rotorOptions}
@@ -76,6 +84,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">Ringstellung</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={this.letterSettings[0]}
               options={this.letterSettings}
@@ -86,6 +95,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">Grundstellung</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={this.letterSettings[0]}
               options={this.letterSettings}
@@ -101,6 +111,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">MIDDLE ROTOR</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={rotorOptions[1]}
               options={rotorOptions}
@@ -111,6 +122,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">Ringstellung</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={this.letterSettings[0]}
               options={this.letterSettings}
@@ -121,6 +133,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">Grundstellung</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={this.letterSettings[0]}
               options={this.letterSettings}
@@ -136,6 +149,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">SLOW ROTOR (left-hand wheel)</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={rotorOptions[0]}
               options={rotorOptions}
@@ -146,6 +160,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">Ringstellung</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={this.letterSettings[0]}
               options={this.letterSettings}
@@ -156,6 +171,7 @@ export class Settings extends Component<IProps, {}> {
               <code className="codeInfo">Grundstellung</code>
             </small>
             <Select
+              isDisabled={this.props.store.lockSettings}
               className="enigma-type"
               defaultValue={this.letterSettings[0]}
               options={this.letterSettings}
@@ -168,33 +184,26 @@ export class Settings extends Component<IProps, {}> {
           <code className="codeInfo">Umkerwalze</code>
         </small>
         <Select
+          isDisabled={this.props.store.lockSettings}
           onChange={this.onEnigmaTypeSelect}
           className="enigma-type"
           defaultValue={UKWOptions[0]}
           options={UKWOptions}
         />
+        <hr />
+        <Form>
+          <div key="custom-checkbox" className="lockSettings mb-3">
+            <Form.Check
+              custom
+              checked={this.props.store.lockSettings}
+              type="checkbox"
+              id="custom-checkbox"
+              label="Lock settings"
+              onChange={this.onSettingsLock}
+            />
+          </div>
+        </Form>
       </div>
     );
   }
-}
-
-{
-  /* <Select
-isDisabled={this.props.store.enigmaType ? false : true}
-className="enigma-rotor-type"
-options={rotorOptions}
-defaultValue={rotorOptions[0]}
-/>
-<Select
-isDisabled={this.props.store.enigmaType ? false : true}
-className="enigma-rotor-type"
-options={rotorOptions}
-defaultValue={rotorOptions[1]}
-/>
-<Select
-isDisabled={this.props.store.enigmaType ? false : true}
-className="enigma-rotor-type"
-options={rotorOptions}
-defaultValue={rotorOptions[2]}
-/> */
 }

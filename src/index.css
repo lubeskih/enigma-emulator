@@ -8,6 +8,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lockSettings {
+  /* font-size: 1em; */
+  font-family: monospace;
+  color: #666;
+  text-align: center;
+  font-weight: 600;
+}
+
 .codeInfo {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
