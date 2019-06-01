@@ -17,14 +17,6 @@ interface IProps {
 
 const options = [{ value: "I", label: "Enigma I (Reichswehr / Wehrmacht)" }];
 
-const rotorOptions = [
-  { value: "I", label: "Rotor I" },
-  { value: "II", label: "Rotor II" },
-  { value: "III", label: "Rotor III" },
-  { value: "IV", label: "Rotor IV" },
-  { value: "V", label: "Rotor V" }
-];
-
 const UKWOptions = [
   { value: "UKW-B", label: "UKW-B" },
   { value: "UKW-C", label: "UKW-C" }
@@ -43,7 +35,7 @@ export class Settings extends Component<IProps, {}> {
     this.props.store.enigmaType = event.value;
   };
 
-  onSettingsLock = (event: any) => {
+  onSettingsLock = (_e: any) => {
     this.props.store.lockSettings = !this.props.store.lockSettings;
   };
 

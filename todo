@@ -3,11 +3,11 @@ ENIGMA TODO
 
 - [X] Remove the hardcoded rotors in settings.tsx and make a rotor component
 - [X] Rotor stacking logic
-- [ ] Ring setting and ground setting on rotors 
+- [ ] Ring setting and ground setting on rotors
 - [ ] Reflector
+- [ ] Double stepping
 - [ ] Current flowing from R1, R2, R3, REFLECTOR, R3, R2, R1 and finally light up lamp
 - [ ] Notches / Turnovers
-- [ ] Double stepping
 
 - [ ] Improvement: Translate everything to german
 - [ ] rotor selected becomes disabled in other selects

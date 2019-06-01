@@ -1,4 +1,5 @@
 import { IWheel, IRotor } from "../types";
+import { observable } from "mobx";
 
 // CONSTANTS
 import { ALPHABET } from "../constants";
@@ -30,8 +31,9 @@ export class Rotor extends Wheel implements IRotor {
   readonly notch: number;
   readonly turnover: number;
 
-  private _groundSettings: number = 1;
-  private _ringSettings: number = 1;
+  @observable groundSettings: number = 1;
+  @observable ringSettings: number = 1;
+
   private _offset: number = 0;
 
   private _rotorWiring = new Map<number, number>();
@@ -54,11 +56,18 @@ export class Rotor extends Wheel implements IRotor {
   //     PUBLIC FUNCTIONS     //
   //////////////////////////////
   public step(entryLetter: number) {
-    this._offset === 25 ? (this._offset = 0) : (this._offset += 1);
+    this.rotateGroundSettings();
+    this.checkOffset();
 
+    let contact = this.findNewContact(entryLetter);
+
+    return contact;
+  }
+
+  private findNewContact(entryLetter: number) {
     let contact = entryLetter + this._offset;
 
-    if (contact > 25) {
+    if (contact >= 26) {
       return contact - 26;
     }
 
@@ -73,24 +82,6 @@ export class Rotor extends Wheel implements IRotor {
     return this._invertedRotorWiring.get(index);
   }
 
-  get groundSettings() {
-    return this._groundSettings;
-  }
-
-  set groundSettings(position: number) {
-    this._groundSettings = position;
-    // this._offset = Math.abs(this._ringSettings - this._groundSettings);
-  }
-
-  get ringSettings() {
-    return this._ringSettings;
-  }
-
-  set ringSettings(position: number) {
-    this._ringSettings = position;
-    // this._offset = Math.abs(this._ringSettings - this._groundSettings);
-  }
-
   get offset() {
     return this._offset;
   }
@@ -102,6 +93,25 @@ export class Rotor extends Wheel implements IRotor {
   //////////////////////////////
   //     PRIVATE FUNCTIONS    //
   //////////////////////////////
+  private checkOffset() {
+    if (this._offset === 25) {
+      this._offset = 0;
+    } else {
+      this._offset += 1;
+    }
+
+    return null;
+  }
+
+  private rotateGroundSettings() {
+    if (this.groundSettings === 26) {
+      this.groundSettings = 1;
+    } else {
+      this.groundSettings += 1;
+    }
+
+    return null;
+  }
 
   private indexInAlphabet(letter: string) {
     return ALPHABET.indexOf(letter);

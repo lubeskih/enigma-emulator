@@ -18,6 +18,8 @@ interface IProps {
 interface IState {
   rotorId: number; // Can be 1, 2, 3 or 4 - used for stacked rotors
   rotorType: string; // Can be from I to VIII
+  ringSetting: number;
+  groundSetting: number;
 }
 
 const rotorOptions = [
@@ -60,7 +62,11 @@ export class RotorSetting extends Component<IProps, IState> {
 
     this.state = {
       rotorId: this.props.rotorId,
-      rotorType: this.props.rotorType
+      rotorType: this.props.rotorType,
+      ringSetting: this.props.store.stackedRotors[this.props.rotorId]
+        .ringSettings,
+      groundSetting: this.props.store.stackedRotors[this.props.rotorId]
+        .groundSettings
     };
   }
 
@@ -74,6 +80,19 @@ export class RotorSetting extends Component<IProps, IState> {
         `Rotor at position: ${this.state.rotorId}`,
         this.props.store.stackedRotors[this.state.rotorId]
       );
+    });
+  };
+
+  onGroundSettingChange = (e: any) => {
+    this.setState({ groundSetting: e.value }, () => {
+      this.props.store.stackedRotors[this.state.rotorId].groundSettings =
+        e.value;
+    });
+  };
+
+  onRingSettingChange = (e: any) => {
+    this.setState({ ringSetting: e.value }, () => {
+      this.props.store.stackedRotors[this.state.rotorId].ringSettings = e.value;
     });
   };
 
@@ -101,8 +120,16 @@ export class RotorSetting extends Component<IProps, IState> {
           <Select
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
-            defaultValue={this.letterSettings[0]}
+            defaultValue={[
+              {
+                value: this.props.store.stackedRotors[this.state.rotorId]
+                  .ringSettings,
+                label: this.props.store.stackedRotors[this.state.rotorId]
+                  .ringSettings
+              }
+            ]}
             options={this.letterSettings}
+            onChange={this.onRingSettingChange}
           />
         </div>
         <div className="col-md-6">
@@ -112,7 +139,23 @@ export class RotorSetting extends Component<IProps, IState> {
           <Select
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
-            defaultValue={this.letterSettings[0]}
+            defaultValue={[
+              {
+                value: this.props.store.stackedRotors[this.state.rotorId]
+                  .groundSettings,
+                label: this.props.store.stackedRotors[this.state.rotorId]
+                  .groundSettings
+              }
+            ]}
+            value={[
+              {
+                value: this.props.store.stackedRotors[this.state.rotorId]
+                  .groundSettings,
+                label: this.props.store.stackedRotors[this.state.rotorId]
+                  .groundSettings
+              }
+            ]}
+            onChange={this.onGroundSettingChange}
             options={this.letterSettings}
           />
         </div>

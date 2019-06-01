@@ -12,10 +12,7 @@ import {
   FIRST_ROW_LETTERS,
   SECOND_ROW_LETTERS,
   THIRD_ROW_LETTERS,
-  EN_ETW,
-  EN_R1_W,
-  EN_R1_N,
-  EN_R1_T
+  EN_ETW
 } from "../constants";
 
 interface IProps {
@@ -23,13 +20,14 @@ interface IProps {
 }
 
 const ew = new Wheel(EN_ETW);
-const r1 = new Rotor(EN_R1_W, EN_R1_N, EN_R1_T);
 
 @observer
 export class Keyboard extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
+
+  r1 = this.props.store.stackedRotors[0];
 
   private handleClick = (e: any) => {
     const plugboardLetter = this.props.store.plugboard.getPlug(e.target.name); // after plugboard
@@ -44,10 +42,10 @@ export class Keyboard extends Component<IProps, {}> {
       `>> ${entryLetter} <<`
     );
 
-    console.log("CURRENT OFFSET IS:", r1.offset);
+    console.log("CURRENT OFFSET IS:", this.r1.offset);
     console.log(">>>>>>>>>>>>>>>> STEPPING <<<<<<<<<<<<<<<<");
-    const contact = r1.step(entryLetter);
-    console.log("NEW OFFSET:", r1.offset);
+    const contact = this.r1.step(entryLetter);
+    console.log("NEW OFFSET:", this.r1.offset);
 
     console.log(
       "CURRENT FROM POSITION",
@@ -60,9 +58,10 @@ export class Keyboard extends Component<IProps, {}> {
       "CONTACT",
       `>> ${contact} <<`,
       "EXITS THE ROTOR AS:",
-      `>> ${r1.getRotorWiring(contact)} <<`
+      `>> ${this.r1.getRotorWiring(contact)} <<`
     );
     console.log("##########################################");
+    console.log("NEW", this.props.store.stackedRotors[0].groundSettings);
   };
 
   render() {
