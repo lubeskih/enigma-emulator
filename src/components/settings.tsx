@@ -6,6 +6,7 @@ import Select from "react-select";
 import { Form } from "react-bootstrap";
 
 import { /** ALPHABET */ NUMBERS } from "../constants";
+import { RotorSetting } from "./rotor-settings";
 
 // Store
 import { Store } from "../store";
@@ -31,7 +32,6 @@ const UKWOptions = [
 
 @observer
 export class Settings extends Component<IProps, {}> {
-  // letterSettings = ALPHABET.map(letter => ({ value: letter, label: letter }));
   letterSettings = NUMBERS.map(letter => ({ value: letter, label: letter }));
 
   constructor(props: IProps) {
@@ -66,120 +66,32 @@ export class Settings extends Component<IProps, {}> {
             />
           </div>
         </div>
-        {/* ############# FAST ROTOR START ############# */}
-        <div className="row mb-4">
-          <div className="col-md-12 mb-3">
-            <small>
-              <code className="codeInfo">FAST ROTOR (right-hand wheel)</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={rotorOptions[2]}
-              options={rotorOptions}
-            />
-          </div>
-          <div className="col-md-6">
-            <small>
-              <code className="codeInfo">Ringstellung</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={this.letterSettings[0]}
-              options={this.letterSettings}
-            />
-          </div>
-          <div className="col-md-6">
-            <small>
-              <code className="codeInfo">Grundstellung</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={this.letterSettings[0]}
-              options={this.letterSettings}
-            />
-          </div>
-        </div>
-        {/* ############# FAST ROTOR END ############# */}
-        {/* ########################################## */}
-        {/* ############# MIDDLE ROTOR START ######### */}
-        <div className="row mb-4">
-          <div className="col-md-12 mb-3">
-            <small>
-              <code className="codeInfo">MIDDLE ROTOR</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={rotorOptions[1]}
-              options={rotorOptions}
-            />
-          </div>
-          <div className="col-md-6">
-            <small>
-              <code className="codeInfo">Ringstellung</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={this.letterSettings[0]}
-              options={this.letterSettings}
-            />
-          </div>
-          <div className="col-md-6">
-            <small>
-              <code className="codeInfo">Grundstellung</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={this.letterSettings[0]}
-              options={this.letterSettings}
-            />
-          </div>
-        </div>
-        {/* ############# MIDDLE ROTOR END ########### */}
-        {/* ########################################## */}
-        {/* ############# SLOW ROTOR START ########### */}
-        <div className="row mb-4">
-          <div className="col-md-12 mb-3">
-            <small>
-              <code className="codeInfo">SLOW ROTOR (left-hand wheel)</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={rotorOptions[0]}
-              options={rotorOptions}
-            />
-          </div>
-          <div className="col-md-6">
-            <small>
-              <code className="codeInfo">Ringstellung</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={this.letterSettings[0]}
-              options={this.letterSettings}
-            />
-          </div>
-          <div className="col-md-6">
-            <small>
-              <code className="codeInfo">Grundstellung</code>
-            </small>
-            <Select
-              isDisabled={this.props.store.lockSettings}
-              className="enigma-type"
-              defaultValue={this.letterSettings[0]}
-              options={this.letterSettings}
-            />
-          </div>
-        </div>
-        {/* ############# SLOW ROTOR END ############# */}
-        {/* ########################################## */}
+        <RotorSetting
+          rotorId={0} // FIRST ROTOR FROM RIGHT TO LEFT
+          rotorType="I"
+          rotorInfo="FAST ROTOR (right-hand wheel)"
+          store={this.props.store}
+        />
+        <RotorSetting
+          rotorId={1} // SECOND ROTOR FROM RIGHT TO LEFT
+          rotorType="II"
+          rotorInfo="MIDDLE ROTOR"
+          store={this.props.store}
+        />
+        <RotorSetting
+          rotorId={2} // THIRD ROTOR FROM RIGHT TO LEFT
+          rotorType="III"
+          rotorInfo="SLOW ROTOR (left-hand wheel)"
+          store={this.props.store}
+        />
+        {this.props.store.enigmaType === "M4" ? (
+          <RotorSetting
+            rotorId={3} // FORTH ROTOR FROM RIGHT TO LEFT
+            rotorType="IV"
+            rotorInfo="FORTH ROTOR (STATIC)"
+            store={this.props.store}
+          />
+        ) : null}
         <small>
           <code className="codeInfo">Umkerwalze</code>
         </small>

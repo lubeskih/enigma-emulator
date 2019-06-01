@@ -1,0 +1,19 @@
+ENIGMA TODO
+===========
+
+- [X] Remove the hardcoded rotors in settings.tsx and make a rotor component
+- [X] Rotor stacking logic
+- [ ] Ring setting and ground setting on rotors 
+- [ ] Reflector
+- [ ] Current flowing from R1, R2, R3, REFLECTOR, R3, R2, R1 and finally light up lamp
+- [ ] Notches / Turnovers
+- [ ] Double stepping
+
+- [ ] Improvement: Translate everything to german
+- [ ] rotor selected becomes disabled in other selects
+- [ ] should I draw on the plugboard?
+- [ ] should I fold the rotor settings so there is a space for forth rotor?
+- [ ] Improvement: Tooltip for English translation and little info
+- [ ] Improvement: Rotor text should be 55% from top, instead of 50%.
+- [ ] Refactor: Comment the code, write a good README, write the docs
+- [ ] Improvement: Change lock settings to grey
