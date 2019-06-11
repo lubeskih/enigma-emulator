@@ -11,8 +11,35 @@ export class Wheel implements IWheel {
     this.wiring = wiring;
   }
 
-  public wiringIndexOf(letter: string): number {
+  public getIndexOfLetterInWiring(letter: string): number {
     return this.wiring.indexOf(letter);
+  }
+
+  public convertIndexToLetter(index: number): string {
+    return this.wiring[index];
+  }
+}
+
+export class Reflector extends Wheel {
+  private _reflectedMap = new Map<number, number>();
+
+  constructor(wiring: string) {
+    super(wiring);
+
+    [...Array<number>(26).keys()].forEach(key => {
+      this._reflectedMap.set(key, getLetterIndexInAlphabet(wiring[key]));
+      this._reflectedMap.set(getLetterIndexInAlphabet(wiring[key]), key);
+    });
+  }
+
+  public getReflectedEndpoint(index: number) {
+    let letter = this._reflectedMap.get(index);
+
+    if (letter) {
+      return letter;
+    } else {
+      return -1;
+    }
   }
 }
 
@@ -34,88 +61,53 @@ export class Rotor extends Wheel implements IRotor {
   @observable groundSettings: number = 1;
   @observable ringSettings: number = 1;
 
-  private _offset: number = 0;
+  public offset: number = 0;
+  public rotorPositionFromRightToLeft: number = 0;
 
-  private _rotorWiring = new Map<number, number>();
-  private _invertedRotorWiring = new Map<number, number>();
+  private _rightToLeftRW = new Map<number, number>();
+  private _leftToRightRW = new Map<number, number>();
 
   constructor(wiring: string, notch: string, turnover: string) {
     super(wiring);
 
-    this.notch = this.wiringIndexOf(notch);
-    this.turnover = this.wiringIndexOf(turnover);
+    this.notch = getLetterIndexInAlphabet(notch);
+    this.turnover = getLetterIndexInAlphabet(turnover);
 
     [...Array<number>(26).keys()].forEach(key => {
-      this._rotorWiring.set(key, this.indexInAlphabet(wiring[key]));
+      this._rightToLeftRW.set(key, getLetterIndexInAlphabet(wiring[key]));
     });
 
-    this._invertedRotorWiring = this.invertMap(this._rotorWiring);
+    this._leftToRightRW = this.invertMap(this._rightToLeftRW);
   }
 
-  //////////////////////////////
-  //     PUBLIC FUNCTIONS     //
-  //////////////////////////////
-  public step(entryLetter: number) {
-    this.rotateGroundSettings();
-    this.checkOffset();
-
-    let contact = this.findNewContact(entryLetter);
-
-    return contact;
+  public returnMap() {
+    console.log("RIGHT TO LEFT", this._rightToLeftRW);
+    console.log("LEFT TO RIGHT", this._leftToRightRW);
   }
 
-  private findNewContact(entryLetter: number) {
-    let contact = entryLetter + this._offset;
+  public rightToLeftEndpoint(index: number) {
+    let letter = this._rightToLeftRW.get(index);
 
-    if (contact >= 26) {
-      return contact - 26;
+    if (letter || letter === 0) {
+      return letter;
+    } else {
+      return -1;
     }
-
-    return contact;
   }
 
-  public getRotorWiring(index: number) {
-    return this._rotorWiring.get(index);
-  }
+  public leftToRightEndpoint(index: number) {
+    let letter = this._leftToRightRW.get(index);
 
-  public getInvertedRotorWiring(index: number) {
-    return this._invertedRotorWiring.get(index);
-  }
-
-  get offset() {
-    return this._offset;
-  }
-
-  set offset(offset: number) {
-    this._offset = offset;
+    if (letter || letter === 0) {
+      return letter;
+    } else {
+      return -1;
+    }
   }
 
   //////////////////////////////
   //     PRIVATE FUNCTIONS    //
   //////////////////////////////
-  private checkOffset() {
-    if (this._offset === 25) {
-      this._offset = 0;
-    } else {
-      this._offset += 1;
-    }
-
-    return null;
-  }
-
-  private rotateGroundSettings() {
-    if (this.groundSettings === 26) {
-      this.groundSettings = 1;
-    } else {
-      this.groundSettings += 1;
-    }
-
-    return null;
-  }
-
-  private indexInAlphabet(letter: string) {
-    return ALPHABET.indexOf(letter);
-  }
 
   private invertMap<K, V>(m: Map<K, V>): Map<V, K> {
     let i = new Map<V, K>();
@@ -123,4 +115,12 @@ export class Rotor extends Wheel implements IRotor {
 
     return i;
   }
+}
+
+/////////////////////////
+//   HELPER FUNCTIONS  //
+/////////////////////////
+
+function getLetterIndexInAlphabet(letter: string) {
+  return ALPHABET.indexOf(letter);
 }

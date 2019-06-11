@@ -9,14 +9,14 @@ import { /** ALPHABET */ NUMBERS } from "../constants";
 import { Store } from "../store";
 
 interface IProps {
-  rotorId: number;
+  rotorPositionFromRightToLeft: number;
   rotorType: string;
   rotorInfo: string;
   store: Store;
 }
 
 interface IState {
-  rotorId: number; // Can be 1, 2, 3 or 4 - used for stacked rotors
+  rotorPositionFromRightToLeft: number; // Can be 1, 2, 3 or 4 - used for stacked rotors
   rotorType: string; // Can be from I to VIII
   ringSetting: number;
   groundSetting: number;
@@ -61,38 +61,47 @@ export class RotorSetting extends Component<IProps, IState> {
     super(props);
 
     this.state = {
-      rotorId: this.props.rotorId,
+      rotorPositionFromRightToLeft: this.props.rotorPositionFromRightToLeft,
       rotorType: this.props.rotorType,
-      ringSetting: this.props.store.stackedRotors[this.props.rotorId]
-        .ringSettings,
-      groundSetting: this.props.store.stackedRotors[this.props.rotorId]
-        .groundSettings
+      ringSetting: this.props.store.stackedRotors[
+        this.props.rotorPositionFromRightToLeft
+      ].ringSettings,
+      groundSetting: this.props.store.stackedRotors[
+        this.props.rotorPositionFromRightToLeft
+      ].groundSettings
     };
+
+    this.props.store.stackedRotors[
+      this.state.rotorPositionFromRightToLeft
+    ].rotorPositionFromRightToLeft = this.state.rotorPositionFromRightToLeft;
   }
 
   onRotorTypeChange = (e: any) => {
     this.setState({ rotorType: e.value }, () => {
-      this.props.store.stackAndReplaceRotor(
-        this.state.rotorId,
+      this.props.store.changeStackedRotor(
+        this.state.rotorPositionFromRightToLeft,
         this.state.rotorType
       );
-      console.log(
-        `Rotor at position: ${this.state.rotorId}`,
-        this.props.store.stackedRotors[this.state.rotorId]
-      );
+
+      this.props.store.stackedRotors[
+        this.state.rotorPositionFromRightToLeft
+      ].rotorPositionFromRightToLeft = this.state.rotorPositionFromRightToLeft;
     });
   };
 
   onGroundSettingChange = (e: any) => {
     this.setState({ groundSetting: e.value }, () => {
-      this.props.store.stackedRotors[this.state.rotorId].groundSettings =
-        e.value;
+      this.props.store.stackedRotors[
+        this.state.rotorPositionFromRightToLeft
+      ].groundSettings = e.value;
     });
   };
 
   onRingSettingChange = (e: any) => {
     this.setState({ ringSetting: e.value }, () => {
-      this.props.store.stackedRotors[this.state.rotorId].ringSettings = e.value;
+      this.props.store.stackedRotors[
+        this.state.rotorPositionFromRightToLeft
+      ].ringSettings = e.value;
     });
   };
 
@@ -122,10 +131,12 @@ export class RotorSetting extends Component<IProps, IState> {
             className="enigma-type"
             defaultValue={[
               {
-                value: this.props.store.stackedRotors[this.state.rotorId]
-                  .ringSettings,
-                label: this.props.store.stackedRotors[this.state.rotorId]
-                  .ringSettings
+                value: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].ringSettings,
+                label: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].ringSettings
               }
             ]}
             options={this.letterSettings}
@@ -141,18 +152,22 @@ export class RotorSetting extends Component<IProps, IState> {
             className="enigma-type"
             defaultValue={[
               {
-                value: this.props.store.stackedRotors[this.state.rotorId]
-                  .groundSettings,
-                label: this.props.store.stackedRotors[this.state.rotorId]
-                  .groundSettings
+                value: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].groundSettings,
+                label: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].groundSettings
               }
             ]}
             value={[
               {
-                value: this.props.store.stackedRotors[this.state.rotorId]
-                  .groundSettings,
-                label: this.props.store.stackedRotors[this.state.rotorId]
-                  .groundSettings
+                value: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].groundSettings,
+                label: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].groundSettings
               }
             ]}
             onChange={this.onGroundSettingChange}

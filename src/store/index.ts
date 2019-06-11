@@ -4,7 +4,7 @@ import { Plugboard } from "../enigma-parts/plugboard";
 
 import * as c from "../constants";
 
-import { Rotor } from "../enigma-parts/wheel";
+import { Rotor, Wheel, Reflector } from "../enigma-parts/wheel";
 
 /**
  * Store
@@ -18,6 +18,9 @@ export class Store {
   @observable enigmaType: "I" | "M3" | "M4" | null = null;
   @observable lockSettings: boolean = false;
 
+  // Rotors / Reflectors / Entry Wheel
+  EW = new Wheel(c.EN_ETW);
+
   R1 = new Rotor(c.EN_R1_W, c.EN_R1_N, c.EN_R1_T);
   R2 = new Rotor(c.EN_R2_W, c.EN_R2_N, c.EN_R2_T);
   R3 = new Rotor(c.EN_R3_W, c.EN_R3_N, c.EN_R3_T);
@@ -27,13 +30,75 @@ export class Store {
   R7 = new Rotor(c.EN_R7_W, c.EN_R7_N, c.EN_R7_T);
   R8 = new Rotor(c.EN_R8_W, c.EN_R8_N, c.EN_R8_T);
 
+  UKW_B = new Reflector(c.EN_UKW_B);
+
+  // Stacked Rotors
   stackedRotors: Rotor[] = [this.R1, this.R2, this.R3];
 
-  stackAndReplaceRotor(rotorId: number, rotorType: string) {
-    this.stackedRotors[rotorId] = this.returnRotorByType(rotorType);
+  changeStackedRotor(rotorPositionFromRightToLeft: number, rotorType: string) {
+    this.stackedRotors[
+      rotorPositionFromRightToLeft
+    ] = this.getRotorObjectByRotorType(rotorType);
   }
 
-  returnRotorByType(rotorType: string) {
+  offset = 0;
+
+  cipher(letter: string) {
+    // this.offset = this.offset + 1;
+    letter = this.plugboard.getPlug(letter);
+    console.log("Plugboard letter:", letter);
+
+    let entryLetter = this.EW.getIndexOfLetterInWiring(letter);
+    console.log("After EW:", entryLetter);
+
+    entryLetter = entryLetter + this.offset;
+
+    console.log("Enters R1 as:", entryLetter, c.ALPHABET[entryLetter]);
+    entryLetter = this.stackedRotors[0].rightToLeftEndpoint(entryLetter);
+    console.log("Exits R1 as:", entryLetter, c.ALPHABET[entryLetter]);
+
+    console.log("Enters R2 as:", entryLetter, c.ALPHABET[entryLetter]);
+    entryLetter = this.stackedRotors[1].rightToLeftEndpoint(entryLetter);
+    console.log("Exits R2 as:", entryLetter, c.ALPHABET[entryLetter]);
+
+    console.log("Enters R3 as:", entryLetter, c.ALPHABET[entryLetter]);
+    console.log(this.stackedRotors[2].returnMap());
+    entryLetter = this.stackedRotors[2].rightToLeftEndpoint(entryLetter);
+    console.log("Exits R3 as:", entryLetter, c.ALPHABET[entryLetter]);
+
+    console.log("------------ REFLECTING ------------");
+    entryLetter = this.UKW_B.getReflectedEndpoint(entryLetter);
+    console.log("REFLECTED AS:", entryLetter, c.ALPHABET[entryLetter]);
+
+    console.log("Enters R3 as:", entryLetter, c.ALPHABET[entryLetter]);
+    entryLetter = this.stackedRotors[2].leftToRightEndpoint(entryLetter);
+    console.log("Exits R3 as:", entryLetter, c.ALPHABET[entryLetter]);
+
+    console.log("Enters R2 as:", entryLetter, c.ALPHABET[entryLetter]);
+    entryLetter = this.stackedRotors[1].leftToRightEndpoint(entryLetter);
+    console.log("Exits R2 as:", entryLetter, c.ALPHABET[entryLetter]);
+
+    entryLetter = entryLetter + this.offset;
+
+    console.log("Enters R1 as:", entryLetter, c.ALPHABET[entryLetter]);
+    entryLetter = this.stackedRotors[0].leftToRightEndpoint(entryLetter);
+    console.log("Exits R1 as:", entryLetter, c.ALPHABET[entryLetter]);
+
+    entryLetter = entryLetter + this.offset;
+
+    if (entryLetter === 26) {
+      entryLetter = 0;
+    }
+
+    console.log("FINAL:", this.EW.convertIndexToLetter(entryLetter));
+    console.log("------------------------------------");
+  }
+
+  /////////////////////////
+  //   HELPER FUNCTIONS  //
+  /////////////////////////
+
+  getRotorObjectByRotorType(rotorType: string) {
     switch (rotorType) {
       case "I":
         return this.R1;

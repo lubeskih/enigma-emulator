@@ -59,26 +59,26 @@ export class Settings extends Component<IProps, {}> {
           </div>
         </div>
         <RotorSetting
-          rotorId={0} // FIRST ROTOR FROM RIGHT TO LEFT
+          rotorPositionFromRightToLeft={0} // FIRST ROTOR FROM RIGHT TO LEFT
           rotorType="I"
           rotorInfo="FAST ROTOR (right-hand wheel)"
           store={this.props.store}
         />
         <RotorSetting
-          rotorId={1} // SECOND ROTOR FROM RIGHT TO LEFT
+          rotorPositionFromRightToLeft={1} // SECOND ROTOR FROM RIGHT TO LEFT
           rotorType="II"
           rotorInfo="MIDDLE ROTOR"
           store={this.props.store}
         />
         <RotorSetting
-          rotorId={2} // THIRD ROTOR FROM RIGHT TO LEFT
+          rotorPositionFromRightToLeft={2} // THIRD ROTOR FROM RIGHT TO LEFT
           rotorType="III"
           rotorInfo="SLOW ROTOR (left-hand wheel)"
           store={this.props.store}
         />
         {this.props.store.enigmaType === "M4" ? (
           <RotorSetting
-            rotorId={3} // FORTH ROTOR FROM RIGHT TO LEFT
+            rotorPositionFromRightToLeft={3} // FORTH ROTOR FROM RIGHT TO LEFT
             rotorType="IV"
             rotorInfo="FORTH ROTOR (STATIC)"
             store={this.props.store}

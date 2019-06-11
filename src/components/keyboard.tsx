@@ -27,41 +27,8 @@ export class Keyboard extends Component<IProps, {}> {
     super(props);
   }
 
-  r1 = this.props.store.stackedRotors[0];
-
   private handleClick = (e: any) => {
-    const plugboardLetter = this.props.store.plugboard.getPlug(e.target.name); // after plugboard
-    const entryLetter = ew.wiringIndexOf(plugboardLetter);
-
-    console.log(`\n`);
-    console.log("##########################################");
-    console.log(
-      "YOU PRESSED:",
-      `>> ${plugboardLetter} <<`,
-      "WHICH MAPS TO POSITION",
-      `>> ${entryLetter} <<`
-    );
-
-    console.log("CURRENT OFFSET IS:", this.r1.offset);
-    console.log(">>>>>>>>>>>>>>>> STEPPING <<<<<<<<<<<<<<<<");
-    const contact = this.r1.step(entryLetter);
-    console.log("NEW OFFSET:", this.r1.offset);
-
-    console.log(
-      "CURRENT FROM POSITION",
-      `>> ${entryLetter} <<`,
-      "ENTERS CONTACT",
-      `>> ${contact} <<`
-    );
-
-    console.log(
-      "CONTACT",
-      `>> ${contact} <<`,
-      "EXITS THE ROTOR AS:",
-      `>> ${this.r1.getRotorWiring(contact)} <<`
-    );
-    console.log("##########################################");
-    console.log("NEW", this.props.store.stackedRotors[0].groundSettings);
+    this.props.store.cipher(e.target.name);
   };
 
   render() {
