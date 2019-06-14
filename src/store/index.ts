@@ -51,32 +51,20 @@ export class Store {
 
     for (let i = 0; i <= 2; i++) {
       if (this.stackedRotors[i].rotorPositionFromRightToLeft === 0) {
-        this.stackedRotors[i].offset = 3;
+        this.stackedRotors[i].step();
       }
 
-      console.log(`R${i}: Enters contact at:`, entryLetter);
-      console.log(`R${i}: Offset is ${this.stackedRotors[i].offset}`);
-      console.log(`R${i}: Entering at position entryLetter + offset: ${entryLetter + this.stackedRotors[i].offset}`)
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
-      console.log(`R${i}: Confirming position: ${entryLetter}`);
-
-      this.stackedRotors[i].returnMap()
 
       entryLetter = this.stackedRotors[i].calcRightToLeftExitContact(
         entryLetter
       );
-      console.log(`R${i}: Final: ${entryLetter} (${c.ALPHABET[entryLetter]})`)
     }
 
-    console.log(`REFLECTOR: reflecting ${entryLetter} (${c.ALPHABET[entryLetter]}) as ${this.UKW_B.getReflectedEndpoint(entryLetter)
-      }`)
     entryLetter = this.UKW_B.getReflectedEndpoint(entryLetter);
-
-    c
 
     for (let i = 2; i >= 0; i--) {
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
-
 
       entryLetter = this.stackedRotors[i].calcLeftToRightExitContact(
         entryLetter
