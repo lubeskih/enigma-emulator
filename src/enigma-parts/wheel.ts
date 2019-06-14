@@ -41,6 +41,10 @@ export class Reflector extends Wheel {
       return -1;
     }
   }
+
+  public returnMap() {
+    console.log("REFLECTOR MAP", this._reflectedMap);
+  }
 }
 
 /**
