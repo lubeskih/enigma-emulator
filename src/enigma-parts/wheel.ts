@@ -35,15 +35,11 @@ export class Reflector extends Wheel {
   public getReflectedEndpoint(index: number) {
     let letter = this._reflectedMap.get(index);
 
-    if (letter) {
+    if (letter || letter === 0) {
       return letter;
     } else {
       return -1;
     }
-  }
-
-  public returnMap() {
-    console.log("REFLECTOR MAP", this._reflectedMap);
   }
 }
 
@@ -84,6 +80,11 @@ export class Rotor extends Wheel implements IRotor {
     this._leftToRightRW = this.invertMap(this._rightToLeftRW);
   }
 
+  public returnMap() {
+    console.log("RTL", this._rightToLeftRW);
+    console.log("LTR", this._leftToRightRW)
+  }
+
   public step() {
     if (this.offset === 25) {
       this.offset = 0;
@@ -101,19 +102,23 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public calcRightToLeftExitContact(entryLetter: number) {
-    if (this.rightToLeftEndpoint(entryLetter) - this.offset < 0) {
-      return 26 + this.rightToLeftEndpoint(entryLetter) - this.offset;
+    console.log("OVA=> ", this.rightToLeftEndpoint(entryLetter))
+    let calc = this.rightToLeftEndpoint(entryLetter) - this.offset;
+
+    if (calc < 0) {
+      console.log("true")
+      return calc + 26;
     } else {
       return this.rightToLeftEndpoint(entryLetter) - this.offset;
     }
   }
 
   public calcLeftToRightExitContact(entryLetter: number) {
-    if (this.leftToRightEndpoint(entryLetter) - this.offset < 0) {
-      return 26 - Math.abs(this.leftToRightEndpoint(entryLetter) - this.offset);
-    } else {
-      return Math.abs(this.leftToRightEndpoint(entryLetter) - this.offset);
-    }
+    // if (this.leftToRightEndpoint(entryLetter) - this.offset < 0) {
+    //   return 26 - Math.abs(this.leftToRightEndpoint(entryLetter) - this.offset);
+    // } else {
+    return this.leftToRightEndpoint(entryLetter) - this.offset;
+    // }
   }
 
   public rightToLeftEndpoint(index: number) {
