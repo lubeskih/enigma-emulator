@@ -41,360 +41,67 @@ export class Store {
     ] = this.getRotorObjectByRotorType(rotorType);
   }
 
-  offset = 0;
+  first: string = "";
 
   cipher(letter: string) {
     letter = this.plugboard.getPlug(letter);
-    console.log("Plugboard letter:", letter);
-
     let entryLetter = this.EW.getIndexOfLetterInWiring(letter);
-    console.log("After EW:", entryLetter);
 
-    ////////////////////////////////////
-    // ROTOR 1
-    ////////////////////////////////////
-    this.offset = 4;
+    this.first = c.ALPHABET[entryLetter];
 
-    console.log(
-      `R1: Enters contact: ${entryLetter} (${c.ALPHABET[entryLetter]})`
-    );
-    console.log("R1: Offset is", this.offset);
+    for (let i = 0; i < 3; i++) {
+      if (this.stackedRotors[i].rotorPositionFromRightToLeft === 0) {
+        this.stackedRotors[i].offset = 3;
+      }
 
-    console.log(
-      `R1: Entering at position: ${entryLetter} (contact ${
-        c.ALPHABET[entryLetter]
-      }) + ${this.offset} (offset) = ${entryLetter + this.offset} (${
-        c.ALPHABET[entryLetter + this.offset]
-      })`
-    );
+      entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
+      // console.log(
+      //   `R${i}: ${this.stackedRotors[i].calcEntryContact(entryLetter)} (${
+      //     c.ALPHABET[this.stackedRotors[i].calcEntryContact(entryLetter)]
+      //   })`
+      // );
 
-    if (entryLetter + this.offset > 25) {
-      entryLetter = entryLetter + this.offset - 26;
-    } else {
-      entryLetter = entryLetter + this.offset;
+      entryLetter = this.stackedRotors[i].calcRightToLeftExitContact(
+        entryLetter
+      );
+
+      // console.log(
+      //   `R${i}: ${this.stackedRotors[i].calcRightToLeftExitContact(
+      //     entryLetter
+      //   )} (${
+      //     c.ALPHABET[
+      //       this.stackedRotors[i].calcRightToLeftExitContact(entryLetter)
+      //     ]
+      //   })`
+      // );
     }
-
-    console.log(
-      `R1: Position ${entryLetter} (${c.ALPHABET[entryLetter]})`,
-      `maps to position ${this.stackedRotors[0].rightToLeftEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[0].rightToLeftEndpoint(entryLetter)]
-      })`
-    );
-
-    console.log(
-      `R1: Position: ${this.stackedRotors[0].rightToLeftEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[0].rightToLeftEndpoint(entryLetter)]
-      })`,
-      `exits R1 at contact: ${Math.abs(
-        this.stackedRotors[0].rightToLeftEndpoint(entryLetter) - this.offset
-      )} (${
-        c.ALPHABET[
-          Math.abs(
-            this.stackedRotors[0].rightToLeftEndpoint(entryLetter) - this.offset
-          )
-        ]
-      })`
-    );
-
-    entryLetter = Math.abs(
-      this.stackedRotors[0].rightToLeftEndpoint(entryLetter) - this.offset
-    );
-
-    console.log("FINAL:", entryLetter, c.ALPHABET[entryLetter]);
-
-    ////////////////////////////////////
-    // ROTOR 2
-    ////////////////////////////////////
-    this.offset = 0;
-
-    console.log(
-      `R2: Enters contact: ${entryLetter} (${c.ALPHABET[entryLetter]})`
-    );
-    console.log("R2: Offset is", this.offset);
-
-    console.log(
-      `R2: Entering at position: ${entryLetter} (contact ${
-        c.ALPHABET[entryLetter]
-      }) + ${this.offset} (offset) = ${entryLetter + this.offset} (${
-        c.ALPHABET[entryLetter + this.offset]
-      })`
-    );
-
-    entryLetter = entryLetter + this.offset;
-
-    console.log(
-      `R2: Position ${entryLetter} (${c.ALPHABET[entryLetter]})`,
-      `maps to position ${this.stackedRotors[1].rightToLeftEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[1].rightToLeftEndpoint(entryLetter)]
-      })`
-    );
-
-    console.log(
-      `R2: Position: ${this.stackedRotors[1].rightToLeftEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[1].rightToLeftEndpoint(entryLetter)]
-      })`,
-      `exits R2 at contact: ${Math.abs(
-        this.stackedRotors[1].rightToLeftEndpoint(entryLetter) - this.offset
-      )} (${
-        c.ALPHABET[
-          Math.abs(
-            this.stackedRotors[1].rightToLeftEndpoint(entryLetter) - this.offset
-          )
-        ]
-      })`
-    );
-
-    entryLetter = Math.abs(
-      this.stackedRotors[1].rightToLeftEndpoint(entryLetter) - this.offset
-    );
-
-    console.log("FINAL:", entryLetter, c.ALPHABET[entryLetter]);
-
-    ////////////////////////////////////
-    // ROTOR 3
-    ////////////////////////////////////
-
-    this.offset = 0;
-
-    console.log(
-      `R3: Enters contact: ${entryLetter} (${c.ALPHABET[entryLetter]})`
-    );
-    console.log("R3: Offset is", this.offset);
-
-    console.log(
-      `R3: Entering at position: ${entryLetter} (contact ${
-        c.ALPHABET[entryLetter]
-      }) + ${this.offset} (offset) = ${entryLetter + this.offset} (${
-        c.ALPHABET[entryLetter + this.offset]
-      })`
-    );
-
-    entryLetter = entryLetter + this.offset;
-
-    console.log(
-      `R3: Position ${entryLetter} (${c.ALPHABET[entryLetter]})`,
-      `maps to position ${this.stackedRotors[2].rightToLeftEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[2].rightToLeftEndpoint(entryLetter)]
-      })`
-    );
-
-    console.log(
-      `R3: Position: ${this.stackedRotors[2].rightToLeftEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[2].rightToLeftEndpoint(entryLetter)]
-      })`,
-      `exits R3 at contact: ${Math.abs(
-        this.stackedRotors[2].rightToLeftEndpoint(entryLetter) - this.offset
-      )} (${
-        c.ALPHABET[
-          Math.abs(
-            this.stackedRotors[2].rightToLeftEndpoint(entryLetter) - this.offset
-          )
-        ]
-      })`
-    );
-
-    entryLetter = Math.abs(
-      this.stackedRotors[2].rightToLeftEndpoint(entryLetter) - this.offset
-    );
-
-    console.log("FINAL:", entryLetter, c.ALPHABET[entryLetter]);
-
-    ////////////////////////////////////
-    // REFLECTOR
-    ////////////////////////////////////
-    console.log(
-      `REFLECTOR: reflecting ${entryLetter} (${
-        c.ALPHABET[entryLetter]
-      }) as ${this.UKW_B.getReflectedEndpoint(entryLetter)} (${
-        c.ALPHABET[this.UKW_B.getReflectedEndpoint(entryLetter)]
-      })`
-    );
 
     entryLetter = this.UKW_B.getReflectedEndpoint(entryLetter);
 
-    console.log(
-      `REFLECTOR: Touching contact ${entryLetter} (${c.ALPHABET[entryLetter]})`
-    );
+    for (let i = 2; i >= 0; i--) {
+      entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
+      // console.log(
+      //   `R${i}: ${this.stackedRotors[i].calcEntryContact(entryLetter)} (${
+      //     c.ALPHABET[this.stackedRotors[i].calcEntryContact(entryLetter)]
+      //   })`
+      // );
 
-    ////////////////////////////////////
-    // ROTOR 3
-    ////////////////////////////////////
-
-    this.offset = 0;
-
-    console.log(
-      `R3: Enters contact: ${entryLetter} (${c.ALPHABET[entryLetter]})`
-    );
-    console.log("R3: Offset is", this.offset);
-
-    console.log(
-      `R3: Entering at position: ${entryLetter} (contact ${
-        c.ALPHABET[entryLetter]
-      }) + ${this.offset} (offset) = ${entryLetter + this.offset} (${
-        c.ALPHABET[entryLetter + this.offset]
-      })`
-    );
-
-    entryLetter = entryLetter + this.offset;
-
-    console.log(
-      `R3: Position ${entryLetter} (${c.ALPHABET[entryLetter]})`,
-      `maps to position ${this.stackedRotors[2].leftToRightEndpoint(
+      entryLetter = this.stackedRotors[i].calcLeftToRightExitContact(
         entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[2].leftToRightEndpoint(entryLetter)]
-      })`
-    );
-
-    console.log(
-      `R3: Position: ${this.stackedRotors[2].leftToRightEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[2].leftToRightEndpoint(entryLetter)]
-      })`,
-      `exits R3 at contact: ${Math.abs(
-        this.stackedRotors[2].leftToRightEndpoint(entryLetter) - this.offset
-      )} (${
-        c.ALPHABET[
-          Math.abs(
-            this.stackedRotors[2].leftToRightEndpoint(entryLetter) - this.offset
-          )
-        ]
-      })`
-    );
-
-    entryLetter = Math.abs(
-      this.stackedRotors[2].leftToRightEndpoint(entryLetter) - this.offset
-    );
-
-    console.log("FINAL:", entryLetter, c.ALPHABET[entryLetter]);
-
-    ////////////////////////////////////
-    // ROTOR 2
-    ////////////////////////////////////
-    this.offset = 0;
-
-    console.log(
-      `R2: Enters contact: ${entryLetter} (${c.ALPHABET[entryLetter]})`
-    );
-    console.log("R2: Offset is", this.offset);
-
-    console.log(
-      `R2: Entering at position: ${entryLetter} (contact ${
-        c.ALPHABET[entryLetter]
-      }) + ${this.offset} (offset) = ${entryLetter + this.offset} (${
-        c.ALPHABET[entryLetter + this.offset]
-      })`
-    );
-
-    entryLetter = entryLetter + this.offset;
-
-    console.log(
-      `R2: Position ${entryLetter} (${c.ALPHABET[entryLetter]})`,
-      `maps to position ${this.stackedRotors[1].leftToRightEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[1].leftToRightEndpoint(entryLetter)]
-      })`
-    );
-
-    console.log(
-      `R2: Position: ${this.stackedRotors[1].leftToRightEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[1].leftToRightEndpoint(entryLetter)]
-      })`,
-      `exits R2 at contact: ${Math.abs(
-        this.stackedRotors[1].leftToRightEndpoint(entryLetter) - this.offset
-      )} (${
-        c.ALPHABET[
-          Math.abs(
-            this.stackedRotors[1].leftToRightEndpoint(entryLetter) - this.offset
-          )
-        ]
-      })`
-    );
-
-    entryLetter = Math.abs(
-      this.stackedRotors[1].leftToRightEndpoint(entryLetter) - this.offset
-    );
-
-    console.log("FINAL:", entryLetter, c.ALPHABET[entryLetter]);
-
-    //////////////////////////////////////////////////////
-    // ROTOR 1
-    //////////////////////////////////////////////////////
-    this.offset = 4;
-
-    console.log(
-      `R1: Enters contact: ${entryLetter} (${c.ALPHABET[entryLetter]})`
-    );
-    console.log("R1: Offset is", this.offset);
-
-    console.log(
-      `R1: Entering at position: ${entryLetter} (contact ${
-        c.ALPHABET[entryLetter]
-      }) + ${this.offset} (offset) = ${entryLetter + this.offset} (${
-        c.ALPHABET[entryLetter + this.offset]
-      })`
-    );
-
-    entryLetter = entryLetter + this.offset;
-
-    console.log(
-      `R1: Position ${entryLetter} (${c.ALPHABET[entryLetter]})`,
-      `maps to position ${this.stackedRotors[0].leftToRightEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[0].leftToRightEndpoint(entryLetter)]
-      })`
-    );
-
-    console.log(
-      `R1: Position: ${this.stackedRotors[0].leftToRightEndpoint(
-        entryLetter
-      )} (${
-        c.ALPHABET[this.stackedRotors[0].leftToRightEndpoint(entryLetter)]
-      })`,
-      `exits R1 at contact: ${Math.abs(
-        this.stackedRotors[0].leftToRightEndpoint(entryLetter) - this.offset
-      )} (${
-        c.ALPHABET[
-          Math.abs(
-            this.stackedRotors[0].leftToRightEndpoint(entryLetter) - this.offset
-          )
-        ]
-      })`
-    );
-
-    if (
-      this.stackedRotors[0].leftToRightEndpoint(entryLetter) - this.offset <
-      0
-    ) {
-      entryLetter =
-        26 -
-        Math.abs(
-          this.stackedRotors[0].leftToRightEndpoint(entryLetter) - this.offset
-        );
-    } else {
-      entryLetter = Math.abs(
-        this.stackedRotors[0].leftToRightEndpoint(entryLetter) - this.offset
       );
+
+      // console.log(
+      //   `R${i}: ${this.stackedRotors[i].calcLeftToRightExitContact(
+      //     entryLetter
+      //   )} (${
+      //     c.ALPHABET[
+      //       this.stackedRotors[i].calcLeftToRightExitContact(entryLetter)
+      //     ]
+      //   })`
+      // );
     }
 
-    console.log("FINAL:", entryLetter, c.ALPHABET[entryLetter]);
+    console.log(`${this.first} => ${c.ALPHABET[entryLetter]}`);
   }
 
   /////////////////////////

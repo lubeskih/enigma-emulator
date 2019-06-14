@@ -84,9 +84,36 @@ export class Rotor extends Wheel implements IRotor {
     this._leftToRightRW = this.invertMap(this._rightToLeftRW);
   }
 
-  public returnMap() {
-    console.log("RIGHT TO LEFT", this._rightToLeftRW);
-    console.log("LEFT TO RIGHT", this._leftToRightRW);
+  public step() {
+    if (this.offset === 25) {
+      this.offset = 0;
+    } else {
+      this.offset += 1;
+    }
+  }
+
+  public calcEntryContact(entryLetter: number) {
+    if (entryLetter + this.offset > 25) {
+      return entryLetter + this.offset - 26;
+    } else {
+      return entryLetter + this.offset;
+    }
+  }
+
+  public calcRightToLeftExitContact(entryLetter: number) {
+    if (this.rightToLeftEndpoint(entryLetter) - this.offset < 0) {
+      return 26 + this.rightToLeftEndpoint(entryLetter) - this.offset;
+    } else {
+      return this.rightToLeftEndpoint(entryLetter) - this.offset;
+    }
+  }
+
+  public calcLeftToRightExitContact(entryLetter: number) {
+    if (this.leftToRightEndpoint(entryLetter) - this.offset < 0) {
+      return 26 - Math.abs(this.leftToRightEndpoint(entryLetter) - this.offset);
+    } else {
+      return Math.abs(this.leftToRightEndpoint(entryLetter) - this.offset);
+    }
   }
 
   public rightToLeftEndpoint(index: number) {
