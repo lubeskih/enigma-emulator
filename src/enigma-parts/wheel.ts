@@ -62,6 +62,7 @@ export class Rotor extends Wheel implements IRotor {
   @observable ringSettings: number = 1;
 
   public offset: number = 0;
+  public turnoverLetterOnTop: boolean = false;
   public rotorPositionFromRightToLeft: number = 0;
 
   private _rightToLeftRW = new Map<number, number>();
@@ -81,10 +82,18 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public step() {
+    if (this.offset === this.turnover) {
+      this.turnoverLetterOnTop = true;
+    } else {
+      this.turnoverLetterOnTop = false;
+    }
+
     if (this.offset === 25) {
       this.offset = 0;
+      this.groundSettings = 1;
     } else {
       this.offset += 1;
+      this.groundSettings += 1;
     }
   }
 
@@ -134,6 +143,18 @@ export class Rotor extends Wheel implements IRotor {
     } else {
       return -1;
     }
+  }
+
+  public setGroundSettings(setting: number) {
+    console.log(
+      `Changing ground settings to ${setting} and offset to ${setting - 1}`
+    );
+    this.groundSettings = setting;
+    this.offset = setting - 1;
+  }
+
+  public setRingSettings(setting: number) {
+    this.ringSettings = setting;
   }
 
   //////////////////////////////

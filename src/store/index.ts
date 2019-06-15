@@ -50,8 +50,12 @@ export class Store {
     this.first = c.ALPHABET[entryLetter];
 
     for (let i = 0; i <= 2; i++) {
-      if (this.stackedRotors[i].rotorPositionFromRightToLeft === 0) {
+      if (i === 0) {
         this.stackedRotors[i].step();
+      }
+
+      if (this.stackedRotors[i].turnoverLetterOnTop) {
+        this.stackedRotors[i + 1].step();
       }
 
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
@@ -71,7 +75,9 @@ export class Store {
       );
     }
 
-    console.log(`${this.first} => ${c.ALPHABET[entryLetter]} `);
+    letter = this.plugboard.getPlug(c.ALPHABET[entryLetter]);
+
+    console.log(`${this.first} => ${letter} `);
   }
 
   /////////////////////////

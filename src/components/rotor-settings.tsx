@@ -93,7 +93,7 @@ export class RotorSetting extends Component<IProps, IState> {
     this.setState({ groundSetting: e.value }, () => {
       this.props.store.stackedRotors[
         this.state.rotorPositionFromRightToLeft
-      ].groundSettings = e.value;
+      ].setGroundSettings(e.value);
     });
   };
 
@@ -101,7 +101,7 @@ export class RotorSetting extends Component<IProps, IState> {
     this.setState({ ringSetting: e.value }, () => {
       this.props.store.stackedRotors[
         this.state.rotorPositionFromRightToLeft
-      ].ringSettings = e.value;
+      ].setRingSettings(e.value);
     });
   };
 

@@ -28,6 +28,7 @@ export class Keyboard extends Component<IProps, {}> {
   }
 
   private handleClick = (e: any) => {
+    // console.log(e.target.name);
     this.props.store.cipher(e.target.name);
   };
 
