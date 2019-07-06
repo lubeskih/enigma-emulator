@@ -10,6 +10,7 @@ import { Keyboard } from "./components/keyboard";
 import { Plugboard } from "./components/plugboard";
 import { Lamps } from "./components/lamps";
 import { Settings } from "./components/settings";
+import { CipherLog } from "./components/cipher-log";
 
 // Store
 import { Store } from "./store";
@@ -28,6 +29,9 @@ class Enigma extends Component {
           <div className="col-md-4 mt-5">
             <Settings store={store} />
           </div>
+        </div>
+        <div className="row">
+          <CipherLog store={store} />
         </div>
       </div>
     );

@@ -82,7 +82,7 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public step() {
-    if (this.offset === this.turnover) {
+    if (this.groundSettings === this.turnover) {
       this.turnoverLetterOnTop = true;
     } else {
       this.turnoverLetterOnTop = false;
@@ -90,10 +90,13 @@ export class Rotor extends Wheel implements IRotor {
 
     if (this.offset === 25) {
       this.offset = 0;
-      this.groundSettings = 1;
     } else {
       this.offset += 1;
       this.groundSettings += 1;
+    }
+
+    if (this.groundSettings > 25) {
+      this.groundSettings = 1;
     }
   }
 
@@ -146,15 +149,21 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public setGroundSettings(setting: number) {
-    console.log(
-      `Changing ground settings to ${setting} and offset to ${setting - 1}`
-    );
     this.groundSettings = setting;
-    this.offset = setting - 1;
+    this.offset = this.groundSettings - this.ringSettings;
+
+    if (this.offset < 0) {
+      this.offset = 26 - Math.abs(this.offset);
+    }
   }
 
   public setRingSettings(setting: number) {
     this.ringSettings = setting;
+    this.offset = this.groundSettings - this.ringSettings;
+
+    if (this.offset < 0) {
+      this.offset = 26 - Math.abs(this.offset);
+    }
   }
 
   //////////////////////////////

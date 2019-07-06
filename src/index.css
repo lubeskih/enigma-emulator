@@ -146,3 +146,7 @@ div.clicked {
   font-size: 15px;
   margin-top: 6px;
 }
+
+.log {
+  background-color: grey;
+}

@@ -54,7 +54,7 @@ export class Store {
         this.stackedRotors[i].step();
       }
 
-      if (this.stackedRotors[i].turnoverLetterOnTop) {
+      if (this.stackedRotors[i].turnoverLetterOnTop && this.stackedRotors[i +  1]) {
         this.stackedRotors[i + 1].step();
       }
 
@@ -77,7 +77,7 @@ export class Store {
 
     letter = this.plugboard.getPlug(c.ALPHABET[entryLetter]);
 
-    console.log(`${this.first} => ${letter} `);
+    console.log(`${this.first} => ${letter}`);
   }
 
   /////////////////////////

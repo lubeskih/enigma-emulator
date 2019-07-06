@@ -1,7 +1,6 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import { Wheel, Rotor } from "../enigma-parts/wheel";
 
 // Store
 import { Store } from "../store";
@@ -11,15 +10,12 @@ import { Button } from "react-bootstrap";
 import {
   FIRST_ROW_LETTERS,
   SECOND_ROW_LETTERS,
-  THIRD_ROW_LETTERS,
-  EN_ETW
+  THIRD_ROW_LETTERS
 } from "../constants";
 
 interface IProps {
   store: Store;
 }
-
-const ew = new Wheel(EN_ETW);
 
 @observer
 export class Keyboard extends Component<IProps, {}> {
