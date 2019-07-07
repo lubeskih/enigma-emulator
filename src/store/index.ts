@@ -14,6 +14,9 @@ export class Store {
   public plugboard = new Plugboard();
   public selectedLetter: string | null = null;
 
+  @observable INPUT: string = "";
+  @observable OUTPUT: string = "";
+
   // Settings
   @observable enigmaType: "I" | "M3" | "M4" | null = null;
   @observable lockSettings: boolean = false;
@@ -49,15 +52,20 @@ export class Store {
 
     this.first = c.ALPHABET[entryLetter];
 
+    this.stackedRotors[0].step();
+
+    if (this.stackedRotors[0].turnoverLetterOnTop) {
+      this.stackedRotors[1].step();
+
+      if (
+        this.stackedRotors[1].groundSettings === this.stackedRotors[1].turnover
+      ) {
+        this.stackedRotors[1].step();
+        this.stackedRotors[2].step();
+      }
+    }
+
     for (let i = 0; i <= 2; i++) {
-      if (i === 0) {
-        this.stackedRotors[i].step();
-      }
-
-      if (this.stackedRotors[i].turnoverLetterOnTop && this.stackedRotors[i +  1]) {
-        this.stackedRotors[i + 1].step();
-      }
-
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
 
       entryLetter = this.stackedRotors[i].calcRightToLeftExitContact(
@@ -77,7 +85,17 @@ export class Store {
 
     letter = this.plugboard.getPlug(c.ALPHABET[entryLetter]);
 
-    console.log(`${this.first} => ${letter}`);
+    if (this.INPUT && this.INPUT.replace(/\s/g, "").length % 4 === 0) {
+      this.INPUT += " " + this.first;
+    } else {
+      this.INPUT += this.first;
+    }
+
+    if (this.OUTPUT && this.OUTPUT.replace(/\s/g, "").length % 4 === 0) {
+      this.OUTPUT += " " + letter;
+    } else {
+      this.OUTPUT += letter;
+    }
   }
 
   /////////////////////////

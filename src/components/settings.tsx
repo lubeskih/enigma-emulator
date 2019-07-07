@@ -36,18 +36,20 @@ export class Settings extends Component<IProps, {}> {
   };
 
   onSettingsLock = (_e: any) => {
+    this.props.store.INPUT = "";
+    this.props.store.OUTPUT = "";
     this.props.store.lockSettings = !this.props.store.lockSettings;
   };
 
   render() {
     return (
       <div className="settings">
-        <span className="codeInfo">Settings</span>
+        <span>Settings</span>
         <hr />
         <div className="row mb-3">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="codeInfo">Enigma model</code>
+              <code className="info">Enigma model</code>
             </small>
             <Select
               isDisabled={this.props.store.lockSettings}
@@ -85,7 +87,7 @@ export class Settings extends Component<IProps, {}> {
           />
         ) : null}
         <small>
-          <code className="codeInfo">Umkerwalze</code>
+          <code className="info">Umkerwalze</code>
         </small>
         <Select
           isDisabled={this.props.store.lockSettings}

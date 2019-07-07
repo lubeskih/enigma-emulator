@@ -28,28 +28,22 @@ export class CipherLog extends Component<IProps, IState> {
     return (
       <>
         <Collapse in={this.props.store.lockSettings}>
-          <div className="row mt-3 mb-5">
-            <div className="col">
+          <div className="row mt-3">
+            <div className="col-md-6">
               <h5>Input</h5>
               <hr />
               <div>
-                <div className="card card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life
-                  accusamus terry richardson ad squid. Nihil anim keffiyeh
-                  helvetica, craft beer labore wes anderson cred nesciunt
-                  sapiente ea proident.
+                <div className="card card-body mb-5">
+                  {this.props.store.INPUT}
                 </div>
               </div>
             </div>
-            <div className="col">
+            <div className="col-md-6">
               <h5>Output</h5>
               <hr />
               <div>
-                <div className="card card-body log">
-                  {/* Anim pariatur cliche reprehenderit, enim eiusmod high life
-                  accusamus terry richardson ad squid. Nihil anim keffiyeh
-                  helvetica, craft beer labore wes anderson cred nesciunt
-                  sapiente ea proident. */}
+                <div className="card card-body mb-5 ">
+                  {this.props.store.OUTPUT}
                 </div>
               </div>
             </div>

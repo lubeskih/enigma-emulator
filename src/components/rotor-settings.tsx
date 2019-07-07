@@ -110,7 +110,7 @@ export class RotorSetting extends Component<IProps, IState> {
       <div className="row mb-4">
         <div className="col-md-12 mb-3">
           <small>
-            <code className="codeInfo">{this.props.rotorInfo}</code>
+            <code className="info">{this.props.rotorInfo}</code>
           </small>
           <Select
             isDisabled={this.props.store.lockSettings}
@@ -124,7 +124,7 @@ export class RotorSetting extends Component<IProps, IState> {
         </div>
         <div className="col-md-6">
           <small>
-            <code className="codeInfo">Ringstellung</code>
+            <code className="info">Ringstellung</code>
           </small>
           <Select
             isDisabled={this.props.store.lockSettings}
@@ -145,7 +145,7 @@ export class RotorSetting extends Component<IProps, IState> {
         </div>
         <div className="col-md-6">
           <small>
-            <code className="codeInfo">Grundstellung</code>
+            <code className="info">Grundstellung</code>
           </small>
           <Select
             isDisabled={this.props.store.lockSettings}

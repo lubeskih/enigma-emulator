@@ -72,7 +72,7 @@ export class Rotor extends Wheel implements IRotor {
     super(wiring);
 
     this.notch = getLetterIndexInAlphabet(notch);
-    this.turnover = getLetterIndexInAlphabet(turnover);
+    this.turnover = getLetterIndexInAlphabet(turnover) + 1;
 
     [...Array<number>(26).keys()].forEach(key => {
       this._rightToLeftRW.set(key, getLetterIndexInAlphabet(wiring[key]));
@@ -86,6 +86,8 @@ export class Rotor extends Wheel implements IRotor {
       this.turnoverLetterOnTop = true;
     } else {
       this.turnoverLetterOnTop = false;
+
+      console.log(this.groundSettings, this.turnover);
     }
 
     if (this.offset === 25) {
@@ -154,6 +156,10 @@ export class Rotor extends Wheel implements IRotor {
 
     if (this.offset < 0) {
       this.offset = 26 - Math.abs(this.offset);
+    }
+
+    if (this.groundSettings === this.turnover) {
+      this.turnoverLetterOnTop = true;
     }
   }
 

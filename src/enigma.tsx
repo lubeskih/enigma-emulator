@@ -21,7 +21,7 @@ class Enigma extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-8 mt-5">
+          <div className="col-md-8 mt-5 enigma">
             <Lamps store={store} />
             <Keyboard store={store} />
             <Plugboard store={store} />
@@ -30,7 +30,7 @@ class Enigma extends Component {
             <Settings store={store} />
           </div>
         </div>
-        <div className="row">
+        <div>
           <CipherLog store={store} />
         </div>
       </div>
