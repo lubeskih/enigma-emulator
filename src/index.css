@@ -114,8 +114,8 @@ div.oval {
 }
 
 div.clicked {
-  /* background-color: #333; */
-  background-color: #222;
+  background-color: #333;
+  border: none;
 }
 
 .plug {
@@ -158,11 +158,13 @@ div.clicked {
   margin-top: 6px;
 }
 
-.log {
-  width: 100%;
+.info-modal {
+  margin: auto;
+  text-align: center;
 }
 
-.enigma[disabled] {
-  pointer-events: none;
-  opacity: 0.7;
+.info-modal a {
+  font-family: "Ubuntu Mono";
+  text-decoration: underline;
+  color: #333;
 }

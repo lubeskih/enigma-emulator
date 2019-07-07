@@ -1,5 +1,6 @@
 // Libraries
 import React, { Component } from "react";
+import { observer } from "mobx-react";
 
 // Style
 import "./enigma.css";
@@ -16,6 +17,7 @@ import { CipherLog } from "./components/cipher-log";
 import { Store } from "./store";
 const store = new Store();
 
+@observer
 class Enigma extends Component {
   render() {
     return (
@@ -33,6 +35,12 @@ class Enigma extends Component {
         <div>
           <CipherLog store={store} />
         </div>
+
+        {store.lockSettings === false ? (
+          <div className="col-12 info-modal mt-3">
+            <a href="#">What am I looking at?</a>
+          </div>
+        ) : null}
       </div>
     );
   }
