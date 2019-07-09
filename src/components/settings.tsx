@@ -90,6 +90,7 @@ export class Settings extends Component<IProps, {}> {
           <code className="info">Umkerwalze</code>
         </small>
         <Select
+          style={{ borderRadius: "0" }}
           isDisabled={this.props.store.lockSettings}
           onChange={this.onEnigmaTypeSelect}
           className="enigma-type"
