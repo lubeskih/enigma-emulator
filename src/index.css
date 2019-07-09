@@ -23,14 +23,34 @@ body {
 }
 
 .lockSettings {
-  /* font-size: 1em; */
   font-family: "Ubuntu Mono", monospace;
   color: #666;
   text-align: center;
   font-weight: 600;
 }
 
+.resetSettings {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-family: "Ubuntu Mono";
+  font-size: 14px;
+}
+
+.resetSettings a {
+  color: #999;
+  text-decoration: underline;
+}
+
+.resetSettings a:hover {
+  color: #777;
+}
+
+.react-select__control {
+  border-radius: 0;
+}
+
 .lockSettings .custom-checkbox .custom-control-label::before {
+  box-shadow: none;
   border-radius: 0;
 }
 

@@ -36,9 +36,12 @@ export class Settings extends Component<IProps, {}> {
   };
 
   onSettingsLock = (_e: any) => {
-    this.props.store.INPUT = "";
-    this.props.store.OUTPUT = "";
     this.props.store.lockSettings = !this.props.store.lockSettings;
+    this.props.store.lastLamp = "";
+  };
+
+  onResetSettingsClick = (_e: any) => {
+    this.props.store.resetSettings();
   };
 
   render() {
@@ -52,6 +55,15 @@ export class Settings extends Component<IProps, {}> {
               <code className="info">Enigma model</code>
             </small>
             <Select
+              theme={theme => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: "lightgray",
+                  primary: "black"
+                }
+              })}
               isDisabled={this.props.store.lockSettings}
               onChange={this.onEnigmaTypeSelect}
               defaultValue={options[0]}
@@ -90,6 +102,15 @@ export class Settings extends Component<IProps, {}> {
           <code className="info">Umkerwalze</code>
         </small>
         <Select
+          theme={theme => ({
+            ...theme,
+            borderRadius: 0,
+            colors: {
+              ...theme.colors,
+              primary25: "lightgray",
+              primary: "black"
+            }
+          })}
           style={{ borderRadius: "0" }}
           isDisabled={this.props.store.lockSettings}
           onChange={this.onEnigmaTypeSelect}
@@ -108,6 +129,15 @@ export class Settings extends Component<IProps, {}> {
               label="Lock settings"
               onChange={this.onSettingsLock}
             />
+
+            {this.props.store.lockSettings === false ? (
+              <div
+                onClick={this.onResetSettingsClick}
+                className="resetSettings"
+              >
+                <a href="#">Reset settings</a>
+              </div>
+            ) : null}
           </div>
         </Form>
       </div>

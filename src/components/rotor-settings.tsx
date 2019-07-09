@@ -113,6 +113,15 @@ export class RotorSetting extends Component<IProps, IState> {
             <code className="info">{this.props.rotorInfo}</code>
           </small>
           <Select
+            theme={theme => ({
+              ...theme,
+              borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary25: "lightgray",
+                primary: "black"
+              }
+            })}
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
             defaultValue={
@@ -127,9 +136,28 @@ export class RotorSetting extends Component<IProps, IState> {
             <code className="info">Ringstellung</code>
           </small>
           <Select
+            theme={theme => ({
+              ...theme,
+              borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary25: "lightgray",
+                primary: "black"
+              }
+            })}
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
             defaultValue={[
+              {
+                value: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].ringSettings,
+                label: this.props.store.stackedRotors[
+                  this.state.rotorPositionFromRightToLeft
+                ].ringSettings
+              }
+            ]}
+            value={[
               {
                 value: this.props.store.stackedRotors[
                   this.state.rotorPositionFromRightToLeft
@@ -148,6 +176,15 @@ export class RotorSetting extends Component<IProps, IState> {
             <code className="info">Grundstellung</code>
           </small>
           <Select
+            theme={theme => ({
+              ...theme,
+              borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary25: "lightgray",
+                primary: "black"
+              }
+            })}
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
             defaultValue={[

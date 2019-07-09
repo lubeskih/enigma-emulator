@@ -102,6 +102,19 @@ export class Store {
     this.lastLamp = letter;
   }
 
+  resetSettings() {
+    for (let i = 0; i < this.stackedRotors.length; i++) {
+      this.stackedRotors[i].groundSettings = 1;
+      this.stackedRotors[i].ringSettings = 1;
+      this.stackedRotors[i].offset = 0;
+    }
+
+    this.stackedRotors = [this.R1, this.R2, this.R3];
+    this.lastLamp = "";
+    this.OUTPUT = "";
+    this.INPUT = "";
+  }
+
   /////////////////////////
   //   HELPER FUNCTIONS  //
   /////////////////////////
