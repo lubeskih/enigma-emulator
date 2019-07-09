@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 
 // Store
 import { Store } from "../store";
+import { Lamp } from "./lamp";
 
 // CONSTANTS
 import { ALPHABET } from "../constants";
@@ -23,9 +24,7 @@ export class Lamps extends Component<IProps, {}> {
       <div className="lamps">
         <span>Lamps</span> <hr />
         {ALPHABET.map(letter => (
-          <div key={letter} id="letter" className="circle noselect">
-            {letter}
-          </div>
+          <Lamp key={letter} store={this.props.store} letter={letter} />
         ))}
       </div>
     );

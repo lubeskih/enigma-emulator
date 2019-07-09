@@ -49,7 +49,6 @@ export class Plug extends Component<IProps, IState> {
         {" "}
         <span>{this.letter}</span>
         <div
-          title={"plug-" + this.letter}
           id={this.letter}
           onClick={this.onClick}
           className={

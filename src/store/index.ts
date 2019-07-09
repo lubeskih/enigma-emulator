@@ -14,6 +14,8 @@ export class Store {
   public plugboard = new Plugboard();
   public selectedLetter: string | null = null;
 
+  @observable lastLamp: string = "";
+
   @observable INPUT: string = "";
   @observable OUTPUT: string = "";
 
@@ -96,6 +98,8 @@ export class Store {
     } else {
       this.OUTPUT += letter;
     }
+
+    this.lastLamp = letter;
   }
 
   /////////////////////////

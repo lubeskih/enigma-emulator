@@ -23,7 +23,6 @@ export class CipherLog extends Component<IProps, {}> {
           <div id="cipher-log" className="row mt-3">
             <div className="col-md-6">
               <h5>Input</h5>
-              {/* <hr /> */}
               <div>
                 <div className="card card-body mb-5">
                   {this.props.store.INPUT}
@@ -32,7 +31,6 @@ export class CipherLog extends Component<IProps, {}> {
             </div>
             <div className="col-md-6">
               <h5>Output</h5>
-              {/* <hr /> */}
               <div>
                 <div className="card card-body mb-5 ">
                   {this.props.store.OUTPUT}

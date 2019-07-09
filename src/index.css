@@ -44,10 +44,6 @@ body {
   margin-top: 4px;
 }
 
-.lamps {
-  margin-top: 4px;
-}
-
 hr {
   margin-top: 10px !important;
 }
@@ -139,6 +135,12 @@ div.clicked {
 /* LAMPS */
 .lamps {
   margin-bottom: 3em;
+  margin-top: 4px;
+}
+
+.lamps .light {
+  color: #fff;
+  background-color: #333;
 }
 
 .circle {
