@@ -46,13 +46,11 @@ export class Store {
     ] = this.getRotorObjectByRotorType(rotorType);
   }
 
-  first: string = "";
-
   cipher(letter: string) {
+    let first: string = letter;
+
     letter = this.plugboard.getPlug(letter);
     let entryLetter = this.EW.getIndexOfLetterInWiring(letter);
-
-    this.first = c.ALPHABET[entryLetter];
 
     this.stackedRotors[0].step();
 
@@ -88,9 +86,9 @@ export class Store {
     letter = this.plugboard.getPlug(c.ALPHABET[entryLetter]);
 
     if (this.INPUT && this.INPUT.replace(/\s/g, "").length % 4 === 0) {
-      this.INPUT += " " + this.first;
+      this.INPUT += " " + first;
     } else {
-      this.INPUT += this.first;
+      this.INPUT += first;
     }
 
     if (this.OUTPUT && this.OUTPUT.replace(/\s/g, "").length % 4 === 0) {
@@ -109,6 +107,7 @@ export class Store {
       this.stackedRotors[i].offset = 0;
     }
 
+    this.plugboard.resetAll();
     this.stackedRotors = [this.R1, this.R2, this.R3];
     this.lastLamp = "";
     this.OUTPUT = "";

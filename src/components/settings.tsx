@@ -37,7 +37,10 @@ export class Settings extends Component<IProps, {}> {
 
   onSettingsLock = (_e: any) => {
     this.props.store.lockSettings = !this.props.store.lockSettings;
+
     this.props.store.lastLamp = "";
+    this.props.store.INPUT = "";
+    this.props.store.OUTPUT = "";
   };
 
   onResetSettingsClick = (_e: any) => {
@@ -47,7 +50,7 @@ export class Settings extends Component<IProps, {}> {
   render() {
     return (
       <div className="settings">
-        <span>Settings</span>
+        <span>Maschineneinstellungen</span>
         <hr />
         <div className="row mb-3">
           <div className="col-md-12 mb-3">
@@ -99,7 +102,7 @@ export class Settings extends Component<IProps, {}> {
           />
         ) : null}
         <small>
-          <code className="info">Umkerwalze</code>
+          <code className="info">Umkehrwalze</code>
         </small>
         <Select
           theme={theme => ({
@@ -126,7 +129,11 @@ export class Settings extends Component<IProps, {}> {
               checked={this.props.store.lockSettings}
               type="checkbox"
               id="custom-checkbox"
-              label="Lock settings"
+              label={
+                this.props.store.lockSettings
+                  ? "Unlock settings"
+                  : "Lock settings"
+              }
               onChange={this.onSettingsLock}
             />
 

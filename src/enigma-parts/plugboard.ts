@@ -43,7 +43,7 @@ export class Plugboard {
     this.excessPlug = null;
   }
 
-  private resetPlug(plug: string) {
+  public resetPlug(plug: string) {
     this.pb.set(plug, plug);
   }
 

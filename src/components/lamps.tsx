@@ -21,8 +21,8 @@ export class Lamps extends Component<IProps, {}> {
 
   render() {
     return (
-      <div className="lamps">
-        <span>Lamps</span> <hr />
+      <div className="lamps noselect">
+        <span>Lampen</span> <hr />
         {ALPHABET.map(letter => (
           <Lamp key={letter} store={this.props.store} letter={letter} />
         ))}

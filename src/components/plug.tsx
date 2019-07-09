@@ -56,7 +56,7 @@ export class Plug extends Component<IProps, IState> {
           }
         />
         <small>
-          <code className="info">{this.wiredWith(this.letter)}</code>
+          <code className="info">[{this.wiredWith(this.letter)}]</code>
         </small>
       </div>
     );
