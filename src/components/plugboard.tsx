@@ -19,6 +19,8 @@ interface IProps {
 export class Plugboard extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
+
+    ALPHABET.map(letter => this.props.store.plugs.set(letter, false));
   }
 
   render() {

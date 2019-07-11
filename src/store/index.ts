@@ -12,6 +12,9 @@ import { Rotor, Wheel, Reflector } from "../enigma-parts/wheel";
 export class Store {
   // Steckerbrett = Plugboard
   public plugboard = new Plugboard();
+
+  @observable plugs = new Map<string, boolean>();
+
   public selectedLetter: string | null = null;
 
   @observable lastLamp: string = "";
@@ -108,7 +111,7 @@ export class Store {
     }
 
     this.plugboard.resetAll();
-    this.stackedRotors = [this.R1, this.R2, this.R3];
+    c.ALPHABET.map(letter => this.plugs.set(letter, false));
     this.lastLamp = "";
     this.OUTPUT = "";
     this.INPUT = "";

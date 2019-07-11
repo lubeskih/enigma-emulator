@@ -2,6 +2,8 @@
 
 #cipher-log .card {
   border-radius: 0;
+  border-color: rgb(235, 235, 235);
+  background: rgb(235, 235, 235);
 }
 
 .info {
@@ -132,6 +134,11 @@ hr {
 .note {
   color: darkred;
   margin-left: 10px;
+}
+
+.gray {
+  color: #555;
+  text-decoration: underline;
 }
 
 div.oval {

@@ -10,19 +10,14 @@ interface IProps {
   store: Store;
 }
 
-interface IState {
-  clicked: boolean;
-}
-
 @observer
-export class Plug extends Component<IProps, IState> {
+export class Plug extends Component<IProps, {}> {
   private letter: string;
 
   constructor(props: IProps) {
     super(props);
 
     this.letter = this.props.letter;
-    this.state = { clicked: false };
   }
 
   wiredWith = (letter: string) => {
@@ -33,14 +28,14 @@ export class Plug extends Component<IProps, IState> {
     this.props.store.plugboard.flow(event.target.id);
 
     if (
-      this.state.clicked &&
+      this.props.store.plugs.get(this.letter) &&
       this.props.store.plugboard.getPlug(event.target.id) === event.target.id
     ) {
-      this.setState({ clicked: false });
+      this.props.store.plugs.set(this.letter, false);
       return null;
     }
 
-    this.setState({ clicked: true });
+    this.props.store.plugs.set(this.letter, true);
   };
 
   render() {
@@ -52,7 +47,9 @@ export class Plug extends Component<IProps, IState> {
           id={this.letter}
           onClick={this.onClick}
           className={
-            this.state.clicked ? "oval noselect clicked" : "oval noselect"
+            this.props.store.plugs.get(this.letter)
+              ? "oval noselect clicked"
+              : "oval noselect"
           }
         />
         <small>

@@ -24,7 +24,6 @@ export class Keyboard extends Component<IProps, {}> {
   }
 
   private handleClick = (e: any) => {
-    // console.log(e.target.name);
     this.props.store.cipher(e.target.name);
   };
 
@@ -40,6 +39,11 @@ export class Keyboard extends Component<IProps, {}> {
                 disabled.
               </code>
             ) : null}
+            {this.props.store.lockSettings ? null : (
+              <code className="note gray">
+                Configure and lock the settings before using the keyboard.
+              </code>
+            )}
           </span>
         </p>
         <hr />
@@ -52,7 +56,12 @@ export class Keyboard extends Component<IProps, {}> {
               variant="link"
               key={letter}
               name={letter}
-              disabled={this.props.store.plugboard.excessPlug ? true : false}
+              disabled={
+                this.props.store.plugboard.excessPlug ||
+                !this.props.store.lockSettings
+                  ? true
+                  : false
+              }
             >
               {" "}
               {letter}
@@ -67,7 +76,12 @@ export class Keyboard extends Component<IProps, {}> {
               variant="link"
               key={letter}
               name={letter}
-              disabled={this.props.store.plugboard.excessPlug ? true : false}
+              disabled={
+                this.props.store.plugboard.excessPlug ||
+                !this.props.store.lockSettings
+                  ? true
+                  : false
+              }
             >
               {" "}
               {letter}
@@ -83,7 +97,12 @@ export class Keyboard extends Component<IProps, {}> {
               key={letter}
               name={letter}
               className="button"
-              disabled={this.props.store.plugboard.excessPlug ? true : false}
+              disabled={
+                this.props.store.plugboard.excessPlug ||
+                !this.props.store.lockSettings
+                  ? true
+                  : false
+              }
             >
               {" "}
               {letter}

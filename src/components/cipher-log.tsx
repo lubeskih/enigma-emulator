@@ -22,7 +22,7 @@ export class CipherLog extends Component<IProps, {}> {
         <Collapse in={this.props.store.lockSettings}>
           <div id="cipher-log" className="row mt-3">
             <div className="col-md-6">
-              <h5>Input</h5>
+              <h5>Input Log</h5>
               <div>
                 <div className="card card-body mb-5">
                   {this.props.store.INPUT}
@@ -30,7 +30,7 @@ export class CipherLog extends Component<IProps, {}> {
               </div>
             </div>
             <div className="col-md-6">
-              <h5>Output</h5>
+              <h5>Output Log</h5>
               <div>
                 <div className="card card-body mb-5 ">
                   {this.props.store.OUTPUT}

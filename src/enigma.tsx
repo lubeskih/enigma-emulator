@@ -35,7 +35,6 @@ class Enigma extends Component {
         <div>
           <CipherLog store={store} />
         </div>
-
         {store.lockSettings === false ? (
           <div className="col-12 info-modal mt-3">
             <a href="#">What am I looking at?</a>
