@@ -26,7 +26,21 @@ export class Plugboard extends Component<IProps, {}> {
   render() {
     return (
       <div className="plugboard noselect">
-        <span>Steckerbrett</span> <hr />
+        <span
+          title="Plugboard. Used for swapping one letter with another."
+          className="title"
+        >
+          Steckerbrett
+        </span>{" "}
+        <span>
+          {this.props.store.plugboard.excessPlug ? (
+            <code className="note">
+              A plug is wired but does not point to other plug. Keyboard
+              disabled.
+            </code>
+          ) : null}
+        </span>
+        <hr />
         {ALPHABET.map(letter => (
           <Plug key={letter} store={this.props.store} letter={letter} />
         ))}

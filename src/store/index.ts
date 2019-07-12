@@ -111,6 +111,7 @@ export class Store {
     }
 
     this.plugboard.resetAll();
+    this.plugboard.excessPlug = null;
     c.ALPHABET.map(letter => this.plugs.set(letter, false));
     this.lastLamp = "";
     this.OUTPUT = "";

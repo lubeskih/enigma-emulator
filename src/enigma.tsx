@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { Modal } from "react-bootstrap";
 
 // Style
 import "./enigma.css";
@@ -12,6 +13,7 @@ import { Plugboard } from "./components/plugboard";
 import { Lamps } from "./components/lamps";
 import { Settings } from "./components/settings";
 import { CipherLog } from "./components/cipher-log";
+import { InfoPanel } from "./components/info-panel";
 
 // Store
 import { Store } from "./store";
@@ -37,7 +39,7 @@ class Enigma extends Component {
         </div>
         {store.lockSettings === false ? (
           <div className="col-12 info-modal mt-3">
-            <a href="#">What am I looking at?</a>
+            <InfoPanel />
           </div>
         ) : null}
       </div>

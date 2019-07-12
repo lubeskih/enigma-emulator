@@ -31,14 +31,13 @@ export class Keyboard extends Component<IProps, {}> {
     return (
       <div className="keyboard noselect">
         <p>
-          <span>Tastatur</span>{" "}
+          <span
+            title="Keyboard. Click the keys with your mouse or use your keyboard."
+            className="title"
+          >
+            Tastatur
+          </span>{" "}
           <span>
-            {this.props.store.plugboard.excessPlug ? (
-              <code className="note">
-                A plug is wired but does not point to other plug. Keyboard
-                disabled.
-              </code>
-            ) : null}
             {this.props.store.lockSettings ? null : (
               <code className="note gray">
                 Configure and lock the settings before using the keyboard.

@@ -31,7 +31,6 @@ export class Settings extends Component<IProps, {}> {
   }
 
   onEnigmaTypeSelect = (event: any) => {
-    console.log(event.value);
     this.props.store.enigmaType = event.value;
   };
 
@@ -50,7 +49,12 @@ export class Settings extends Component<IProps, {}> {
   render() {
     return (
       <div className="settings">
-        <span>Maschineneinstellungen</span>
+        <span
+          title="Machine Settings. Choose and setup an Enigma machine."
+          className="noselect"
+        >
+          Maschineneinstellungen
+        </span>
         <hr />
         <div className="row mb-3">
           <div className="col-md-12 mb-3">

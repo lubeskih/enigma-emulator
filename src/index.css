@@ -77,7 +77,6 @@ hr {
 
 .col-md-4 {
   background-color: #fafafa;
-  border-radius: 1%;
 }
 
 /* KEYBOARD */
@@ -134,6 +133,7 @@ hr {
 .note {
   color: darkred;
   margin-left: 10px;
+  text-decoration: underline;
 }
 
 .gray {
@@ -214,6 +214,14 @@ div.clicked {
 }
 
 h5 {
+  font-family: "Ubuntu Mono";
+  color: white;
+  background-color: #333;
+  padding: 3px;
+  display: inline-block;
+}
+
+.title {
   font-family: "Ubuntu Mono";
   color: white;
   background-color: #333;

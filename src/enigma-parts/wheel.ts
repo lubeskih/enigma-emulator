@@ -86,8 +86,6 @@ export class Rotor extends Wheel implements IRotor {
       this.turnoverLetterOnTop = true;
     } else {
       this.turnoverLetterOnTop = false;
-
-      console.log(this.groundSettings, this.turnover);
     }
 
     if (this.offset === 25) {

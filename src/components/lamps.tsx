@@ -22,7 +22,13 @@ export class Lamps extends Component<IProps, {}> {
   render() {
     return (
       <div className="lamps noselect">
-        <span>Lampen</span> <hr />
+        <span
+          title="Lamps. A lamp will light up depending on the ciphered output letter."
+          className="title"
+        >
+          Lampen
+        </span>{" "}
+        <hr />
         {ALPHABET.map(letter => (
           <Lamp key={letter} store={this.props.store} letter={letter} />
         ))}
