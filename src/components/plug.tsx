@@ -53,7 +53,15 @@ export class Plug extends Component<IProps, {}> {
           }
         />
         <small>
-          <code className="info">[{this.wiredWith(this.letter)}]</code>
+          <code
+            className={`info ${
+              this.props.store.plugboard.excessPlug === this.letter
+                ? "excess"
+                : null
+            }`}
+          >
+            [{this.wiredWith(this.letter)}]
+          </code>
         </small>
       </div>
     );
