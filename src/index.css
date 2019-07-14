@@ -58,7 +58,7 @@ body {
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #333;
+  background-color: #2b303b;
   box-shadow: none;
   border: none;
 }
@@ -72,7 +72,7 @@ hr {
 }
 
 .btn-primary {
-  background-color: black;
+  background-color: #2b303b;
 }
 
 .col-md-4 {
@@ -152,7 +152,7 @@ div.oval {
 }
 
 div.clicked {
-  background-color: #333;
+  background-color: #2b303b;
   border: none;
 }
 
@@ -170,7 +170,7 @@ div.clicked {
 
 .lamps .light {
   color: #fff;
-  background-color: #333;
+  background-color: #2b303b;
 }
 
 .circle {
@@ -180,7 +180,7 @@ div.clicked {
   font-size: 15px;
   line-height: 33px;
   text-align: center;
-  border: solid 2px #333;
+  border: solid 2px #2b303b;
   color: black;
   display: inline-block;
   margin: 0.6em;
@@ -210,13 +210,13 @@ div.clicked {
 .info-modal a {
   font-family: "Ubuntu Mono";
   text-decoration: underline;
-  color: #333;
+  color: #2b303b;
 }
 
 h5 {
   font-family: "Ubuntu Mono";
   color: white;
-  background-color: #333;
+  background-color: #2b303b;
   padding: 3px;
   display: inline-block;
 }
@@ -224,14 +224,23 @@ h5 {
 .title {
   font-family: "Ubuntu Mono";
   color: white;
-  background-color: #333;
+  background-color: #2b303b;
   padding: 3px;
   display: inline-block;
 }
 
 .excess {
   color: #fff;
-  background-color: #333;
+  background-color: #2b303b;
   /* padding: 0.5px; */
   display: inline-block;
+}
+
+.m4-note {
+  width: 100%;
+  background-color: #2b303b;
+  color: #fff;
+  padding: 10px;
+  font-family: "Ubuntu Mono";
+  text-align: center;
 }

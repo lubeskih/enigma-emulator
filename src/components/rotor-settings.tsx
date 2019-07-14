@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
-import { /** ALPHABET */ NUMBERS } from "../constants";
+import { /** ALPHABET */ NUMBERS, ALPHABET } from "../constants";
 
 // Store
 import { Store } from "../store";
@@ -22,12 +22,23 @@ interface IState {
   groundSetting: number;
 }
 
-const rotorOptions = [
+const fiveRotorOptions = [
   { value: "I", label: "Rotor I" },
   { value: "II", label: "Rotor II" },
   { value: "III", label: "Rotor III" },
   { value: "IV", label: "Rotor IV" },
   { value: "V", label: "Rotor V" }
+];
+
+const eightRotorOptions = [
+  { value: "I", label: "Rotor I" },
+  { value: "II", label: "Rotor II" },
+  { value: "III", label: "Rotor III" },
+  { value: "IV", label: "Rotor IV" },
+  { value: "V", label: "Rotor V" },
+  { value: "VI", label: "Rotor VI" },
+  { value: "VII", label: "Rotor VII" },
+  { value: "VIII", label: "Rotor VIII" }
 ];
 
 function convertRomanToRotorOption(roman: string): number {
@@ -55,7 +66,8 @@ function convertRomanToRotorOption(roman: string): number {
 
 @observer
 export class RotorSetting extends Component<IProps, IState> {
-  letterSettings = NUMBERS.map(letter => ({ value: letter, label: letter }));
+  letterSettings = ALPHABET.map(letter => ({ value: letter, label: letter }));
+  numberSettings = NUMBERS.map(letter => ({ value: letter, label: letter }));
 
   constructor(props: IProps) {
     super(props);
@@ -90,18 +102,34 @@ export class RotorSetting extends Component<IProps, IState> {
   };
 
   onGroundSettingChange = (e: any) => {
-    this.setState({ groundSetting: e.value }, () => {
+    let val: number = 0;
+
+    if (this.props.store.enigmaType === "I") {
+      val = e.value;
+    } else {
+      val = ALPHABET.indexOf(e.value) + 1;
+    }
+
+    this.setState({ groundSetting: val }, () => {
       this.props.store.stackedRotors[
         this.state.rotorPositionFromRightToLeft
-      ].setGroundSettings(e.value);
+      ].setGroundSettings(val);
     });
   };
 
   onRingSettingChange = (e: any) => {
-    this.setState({ ringSetting: e.value }, () => {
+    let val: number = 0;
+
+    if (this.props.store.enigmaType === "I") {
+      val = e.value;
+    } else {
+      val = ALPHABET.indexOf(e.value) + 1;
+    }
+
+    this.setState({ ringSetting: val }, () => {
       this.props.store.stackedRotors[
         this.state.rotorPositionFromRightToLeft
-      ].setRingSettings(e.value);
+      ].setRingSettings(val);
     });
   };
 
@@ -119,15 +147,25 @@ export class RotorSetting extends Component<IProps, IState> {
               colors: {
                 ...theme.colors,
                 primary25: "lightgray",
-                primary: "black"
+                primary: "#2b303b"
               }
             })}
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
             defaultValue={
-              rotorOptions[convertRomanToRotorOption(this.state.rotorType)]
+              this.props.store.enigmaType === "I"
+                ? fiveRotorOptions[
+                    convertRomanToRotorOption(this.state.rotorType)
+                  ]
+                : eightRotorOptions[
+                    convertRomanToRotorOption(this.state.rotorType)
+                  ]
             }
-            options={rotorOptions}
+            options={
+              this.props.store.enigmaType === "I"
+                ? fiveRotorOptions
+                : eightRotorOptions
+            }
             onChange={this.onRotorTypeChange}
           />
         </div>
@@ -142,32 +180,70 @@ export class RotorSetting extends Component<IProps, IState> {
               colors: {
                 ...theme.colors,
                 primary25: "lightgray",
-                primary: "black"
+                primary: "#2b303b"
               }
             })}
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
-            defaultValue={[
-              {
-                value: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].ringSettings,
-                label: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].ringSettings
-              }
-            ]}
-            value={[
-              {
-                value: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].ringSettings,
-                label: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].ringSettings
-              }
-            ]}
-            options={this.letterSettings}
+            defaultValue={
+              this.props.store.enigmaType === "I"
+                ? [
+                    {
+                      value: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].ringSettings
+                      ),
+                      label: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].ringSettings
+                      )
+                    }
+                  ]
+                : [
+                    {
+                      value: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].ringSettings,
+                      label: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].ringSettings
+                    }
+                  ]
+            }
+            value={
+              this.props.store.enigmaType === "I"
+                ? [
+                    {
+                      value: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].ringSettings,
+                      label: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].ringSettings
+                    }
+                  ]
+                : [
+                    {
+                      value: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].ringSettings
+                      ),
+                      label: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].ringSettings
+                      )
+                    }
+                  ]
+            }
+            options={
+              this.props.store.enigmaType === "I"
+                ? this.numberSettings
+                : this.letterSettings
+            }
             onChange={this.onRingSettingChange}
           />
         </div>
@@ -182,33 +258,71 @@ export class RotorSetting extends Component<IProps, IState> {
               colors: {
                 ...theme.colors,
                 primary25: "lightgray",
-                primary: "black"
+                primary: "#2b303b"
               }
             })}
             isDisabled={this.props.store.lockSettings}
             className="enigma-type"
-            defaultValue={[
-              {
-                value: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].groundSettings,
-                label: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].groundSettings
-              }
-            ]}
-            value={[
-              {
-                value: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].groundSettings,
-                label: this.props.store.stackedRotors[
-                  this.state.rotorPositionFromRightToLeft
-                ].groundSettings
-              }
-            ]}
+            defaultValue={
+              this.props.store.enigmaType === "I"
+                ? [
+                    {
+                      value: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].groundSettings,
+                      label: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].groundSettings
+                    }
+                  ]
+                : [
+                    {
+                      value: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].groundSettings
+                      ),
+                      label: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].groundSettings
+                      )
+                    }
+                  ]
+            }
+            value={
+              this.props.store.enigmaType === "I"
+                ? [
+                    {
+                      value: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].groundSettings,
+                      label: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].groundSettings
+                    }
+                  ]
+                : [
+                    {
+                      value: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].groundSettings
+                      ),
+                      label: this.props.store.getLetterByNumber(
+                        this.props.store.stackedRotors[
+                          this.state.rotorPositionFromRightToLeft
+                        ].groundSettings
+                      )
+                    }
+                  ]
+            }
             onChange={this.onGroundSettingChange}
-            options={this.letterSettings}
+            options={
+              this.props.store.enigmaType === "I"
+                ? this.numberSettings
+                : this.letterSettings
+            }
           />
         </div>
       </div>

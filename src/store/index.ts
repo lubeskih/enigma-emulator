@@ -23,7 +23,7 @@ export class Store {
   @observable OUTPUT: string = "";
 
   // Settings
-  @observable enigmaType: "I" | "M3" | "M4" | null = null;
+  @observable enigmaType: "I" | "M3" | "M4" | null = "I";
   @observable lockSettings: boolean = false;
 
   // Rotors / Reflectors / Entry Wheel
@@ -41,7 +41,7 @@ export class Store {
   UKW_B = new Reflector(c.EN_UKW_B);
 
   // Stacked Rotors
-  stackedRotors: Rotor[] = [this.R1, this.R2, this.R3];
+  stackedRotors: Rotor[] = [this.R1, this.R2, this.R3, this.R4];
 
   changeStackedRotor(rotorPositionFromRightToLeft: number, rotorType: string) {
     this.stackedRotors[
@@ -79,7 +79,9 @@ export class Store {
       }
     }
 
-    for (let i = 0; i <= 2; i++) {
+    let rtrNum = this.enigmaType === "I" ? 2 : 3;
+
+    for (let i = 0; i <= rtrNum; i++) {
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
 
       entryLetter = this.stackedRotors[i].calcRightToLeftExitContact(
@@ -89,7 +91,7 @@ export class Store {
 
     entryLetter = this.UKW_B.getReflectedEndpoint(entryLetter);
 
-    for (let i = 2; i >= 0; i--) {
+    for (let i = rtrNum; i >= 0; i--) {
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
 
       entryLetter = this.stackedRotors[i].calcLeftToRightExitContact(
@@ -154,5 +156,9 @@ export class Store {
       default:
         return this.R1;
     }
+  }
+
+  getLetterByNumber(num: number): string {
+    return c.ALPHABET[num - 1];
   }
 }

@@ -16,8 +16,8 @@ interface IProps {
 }
 
 const options = [
-  { value: "I", label: "Enigma I (Reichswehr / Wehrmacht)" },
-  { value: "M3", label: "Enigma M3 (Kriegsmarine / Wehrmacht / Luftwaffe)" },
+  { value: "I", label: "Enigma I (Heer / Luftwaffe)" },
+  { value: "M3", label: "Enigma M3 (Wehrmacht)" },
   { value: "M4", label: "Enigma M4 (Kriegsmarine)" }
 ];
 
@@ -72,7 +72,7 @@ export class Settings extends Component<IProps, {}> {
                 colors: {
                   ...theme.colors,
                   primary25: "lightgray",
-                  primary: "black"
+                  primary: "#2b303b"
                 }
               })}
               isDisabled={this.props.store.lockSettings}
@@ -119,7 +119,7 @@ export class Settings extends Component<IProps, {}> {
             colors: {
               ...theme.colors,
               primary25: "lightgray",
-              primary: "black"
+              primary: "#2b303b"
             }
           })}
           style={{ borderRadius: "0" }}

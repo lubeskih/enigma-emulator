@@ -1,7 +1,6 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import { Modal } from "react-bootstrap";
 
 // Style
 import "./enigma.css";
@@ -29,6 +28,17 @@ class Enigma extends Component {
             <Lamps store={store} />
             <Keyboard store={store} />
             <Plugboard store={store} />
+
+            {store.enigmaType === "M4" ? (
+              <div className="m4-note mt-5">
+                NOTE: You are using the{" "}
+                <span style={{ textDecoration: "underline" }}>
+                  Enigma model M4
+                </span>{" "}
+                which introduces a forth rotor which is{" "}
+                <span style={{ textDecoration: "underline" }}>static</span>.
+              </div>
+            ) : null}
           </div>
           <div className="col-md-4 mt-5">
             <Settings store={store} />
