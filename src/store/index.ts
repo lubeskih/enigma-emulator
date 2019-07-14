@@ -55,10 +55,21 @@ export class Store {
     letter = this.plugboard.getPlug(letter);
     let entryLetter = this.EW.getIndexOfLetterInWiring(letter);
 
-    this.stackedRotors[0].step();
+    if (
+      this.stackedRotors[0].turnover === this.stackedRotors[0].groundSettings
+    ) {
+      this.stackedRotors[0].step();
 
-    if (this.stackedRotors[0].turnoverLetterOnTop) {
-      this.stackedRotors[1].step();
+      if (
+        this.stackedRotors[1].groundSettings === this.stackedRotors[1].turnover
+      ) {
+        this.stackedRotors[1].step();
+        this.stackedRotors[2].step();
+      } else {
+        this.stackedRotors[1].step();
+      }
+    } else {
+      this.stackedRotors[0].step();
 
       if (
         this.stackedRotors[1].groundSettings === this.stackedRotors[1].turnover

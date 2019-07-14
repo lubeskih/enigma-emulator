@@ -38,6 +38,7 @@ export class Reflector extends Wheel {
     if (letter || letter === 0) {
       return letter;
     } else {
+      console.error("GRE ERROR.");
       return -1;
     }
   }
@@ -92,10 +93,12 @@ export class Rotor extends Wheel implements IRotor {
       this.offset = 0;
     } else {
       this.offset += 1;
-      this.groundSettings += 1;
     }
 
-    if (this.groundSettings > 25) {
+    this.groundSettings += 1;
+    console.log(this.groundSettings);
+
+    if (this.groundSettings > 26) {
       this.groundSettings = 1;
     }
   }
@@ -134,6 +137,7 @@ export class Rotor extends Wheel implements IRotor {
     if (letter || letter === 0) {
       return letter;
     } else {
+      console.error("RTLE ERROR.");
       return -1;
     }
   }
@@ -144,6 +148,7 @@ export class Rotor extends Wheel implements IRotor {
     if (letter || letter === 0) {
       return letter;
     } else {
+      console.error("LTRE ERROR.");
       return -1;
     }
   }

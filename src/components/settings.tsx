@@ -15,7 +15,11 @@ interface IProps {
   store: Store;
 }
 
-const options = [{ value: "I", label: "Enigma I (Reichswehr / Wehrmacht)" }];
+const options = [
+  { value: "I", label: "Enigma I (Reichswehr / Wehrmacht)" },
+  { value: "M3", label: "Enigma M3 (Kriegsmarine / Wehrmacht / Luftwaffe)" },
+  { value: "M4", label: "Enigma M4 (Kriegsmarine)" }
+];
 
 const UKWOptions = [
   { value: "UKW-B", label: "UKW-B" },
@@ -35,11 +39,11 @@ export class Settings extends Component<IProps, {}> {
   };
 
   onSettingsLock = (_e: any) => {
-    this.props.store.lockSettings = !this.props.store.lockSettings;
-
     this.props.store.lastLamp = "";
     this.props.store.INPUT = "";
     this.props.store.OUTPUT = "";
+
+    this.props.store.lockSettings = !this.props.store.lockSettings;
   };
 
   onResetSettingsClick = (_e: any) => {
