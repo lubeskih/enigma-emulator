@@ -7,6 +7,7 @@ import { Form } from "react-bootstrap";
 
 import { /** ALPHABET */ NUMBERS } from "../constants";
 import { RotorSetting } from "./rotor-settings";
+import { ExtraWheel } from "./extra-wheel";
 
 // Store
 import { Store } from "../store";
@@ -22,8 +23,14 @@ const options = [
 ];
 
 const UKWOptions = [
+  { value: "UKW-A", label: "UKW-A" },
   { value: "UKW-B", label: "UKW-B" },
   { value: "UKW-C", label: "UKW-C" }
+];
+
+const UKW_M4_Options = [
+  { value: "UKW-b", label: "UKW-B (THIN)" },
+  { value: "UKW-c", label: "UKW-C (THIN)" }
 ];
 
 @observer
@@ -48,6 +55,16 @@ export class Settings extends Component<IProps, {}> {
 
   onResetSettingsClick = (_e: any) => {
     this.props.store.resetSettings();
+  };
+
+  onEnigmaReflectorSelect = (event: any) => {
+    let reflector = this.props.store.getReflectorObjectByName(event.value);
+
+    if (reflector) {
+      this.props.store.REFLECTOR = reflector;
+    }
+
+    console.log(reflector);
   };
 
   render() {
@@ -102,12 +119,12 @@ export class Settings extends Component<IProps, {}> {
           store={this.props.store}
         />
         {this.props.store.enigmaType === "M4" ? (
-          <RotorSetting
-            rotorPositionFromRightToLeft={3} // FORTH ROTOR FROM RIGHT TO LEFT
-            rotorType="IV"
-            rotorInfo="FORTH ROTOR (STATIC)"
-            store={this.props.store}
-          />
+          <>
+            <ExtraWheel
+              rotorInfo="Extra Wheel (Zusatwalze)"
+              store={this.props.store}
+            />
+          </>
         ) : null}
         <small>
           <code className="info">Umkehrwalze</code>
@@ -124,10 +141,16 @@ export class Settings extends Component<IProps, {}> {
           })}
           style={{ borderRadius: "0" }}
           isDisabled={this.props.store.lockSettings}
-          onChange={this.onEnigmaTypeSelect}
+          onChange={this.onEnigmaReflectorSelect}
           className="enigma-type"
-          defaultValue={UKWOptions[0]}
-          options={UKWOptions}
+          defaultValue={
+            this.props.store.enigmaType === "M4"
+              ? UKW_M4_Options[0]
+              : UKWOptions[0]
+          }
+          options={
+            this.props.store.enigmaType === "M4" ? UKW_M4_Options : UKWOptions
+          }
         />
         <hr />
         <Form>

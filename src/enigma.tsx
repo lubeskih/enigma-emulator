@@ -35,7 +35,7 @@ class Enigma extends Component {
                 <span style={{ textDecoration: "underline" }}>
                   Enigma model M4
                 </span>{" "}
-                which introduces a forth rotor which is{" "}
+                which introduces an extra wheel which is{" "}
                 <span style={{ textDecoration: "underline" }}>static</span>.
               </div>
             ) : null}

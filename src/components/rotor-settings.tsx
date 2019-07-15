@@ -189,6 +189,16 @@ export class RotorSetting extends Component<IProps, IState> {
               this.props.store.enigmaType === "I"
                 ? [
                     {
+                      value: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].ringSettings,
+                      label: this.props.store.stackedRotors[
+                        this.state.rotorPositionFromRightToLeft
+                      ].ringSettings
+                    }
+                  ]
+                : [
+                    {
                       value: this.props.store.getLetterByNumber(
                         this.props.store.stackedRotors[
                           this.state.rotorPositionFromRightToLeft
@@ -199,16 +209,6 @@ export class RotorSetting extends Component<IProps, IState> {
                           this.state.rotorPositionFromRightToLeft
                         ].ringSettings
                       )
-                    }
-                  ]
-                : [
-                    {
-                      value: this.props.store.stackedRotors[
-                        this.state.rotorPositionFromRightToLeft
-                      ].ringSettings,
-                      label: this.props.store.stackedRotors[
-                        this.state.rotorPositionFromRightToLeft
-                      ].ringSettings
                     }
                   ]
             }

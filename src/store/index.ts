@@ -38,10 +38,24 @@ export class Store {
   R7 = new Rotor(c.EN_R7_W, c.EN_R7_N, c.EN_R7_T);
   R8 = new Rotor(c.EN_R8_W, c.EN_R8_N, c.EN_R8_T);
 
+  UKW_A = new Reflector(c.EN_UKW_A);
   UKW_B = new Reflector(c.EN_UKW_B);
+  UKW_C = new Reflector(c.EN_UKW_C);
+
+  /**
+   * MODEL M4 SPECIFICS
+   */
+
+  M4_EXTRA_WHEEL_BETA = new Rotor(c.M4_EXTRA_WHEEL_BETA, "NONE", "NONE");
+  M4_EXTRA_WHEEL_GAMMA = new Rotor(c.M4_EXTRA_WHEEL_GAMMA, "NONE", "NONE");
+  M4_EN_UKW_B_THIN = new Reflector(c.M4_EN_UKW_B_THIN);
+  M4_EN_UKW_C_THIN = new Reflector(c.M4_EN_UKW_C_THIN);
+
+  EXTRA_WHEEL: Rotor = this.M4_EXTRA_WHEEL_BETA;
+  REFLECTOR: Reflector = this.UKW_A;
 
   // Stacked Rotors
-  stackedRotors: Rotor[] = [this.R1, this.R2, this.R3, this.R4];
+  stackedRotors: Rotor[] = [this.R1, this.R2, this.R3];
 
   changeStackedRotor(rotorPositionFromRightToLeft: number, rotorType: string) {
     this.stackedRotors[
@@ -79,9 +93,7 @@ export class Store {
       }
     }
 
-    let rtrNum = this.enigmaType === "I" ? 2 : 3;
-
-    for (let i = 0; i <= rtrNum; i++) {
+    for (let i = 0; i <= 2; i++) {
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
 
       entryLetter = this.stackedRotors[i].calcRightToLeftExitContact(
@@ -89,9 +101,19 @@ export class Store {
       );
     }
 
-    entryLetter = this.UKW_B.getReflectedEndpoint(entryLetter);
+    if (this.enigmaType === "M4") {
+      entryLetter = this.EXTRA_WHEEL.calcEntryContact(entryLetter);
+      entryLetter = this.EXTRA_WHEEL.calcRightToLeftExitContact(entryLetter);
+    }
 
-    for (let i = rtrNum; i >= 0; i--) {
+    entryLetter = this.REFLECTOR.getReflectedEndpoint(entryLetter);
+
+    if (this.enigmaType === "M4") {
+      entryLetter = this.EXTRA_WHEEL.calcEntryContact(entryLetter);
+      entryLetter = this.EXTRA_WHEEL.calcLeftToRightExitContact(entryLetter);
+    }
+
+    for (let i = 2; i >= 0; i--) {
       entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
 
       entryLetter = this.stackedRotors[i].calcLeftToRightExitContact(
@@ -155,6 +177,34 @@ export class Store {
         return this.R8;
       default:
         return this.R1;
+    }
+  }
+
+  getExtraWheelObjectByName(exWheel: string) {
+    switch (exWheel) {
+      case "BETA":
+        return this.M4_EXTRA_WHEEL_BETA;
+      case "GAMMA":
+        return this.M4_EXTRA_WHEEL_GAMMA;
+      default:
+        return this.M4_EXTRA_WHEEL_BETA;
+    }
+  }
+
+  getReflectorObjectByName(reflector: string) {
+    switch (reflector) {
+      case "UKW-A":
+        return this.UKW_A;
+      case "UKW-B":
+        return this.UKW_B;
+      case "UKW-C":
+        return this.UKW_C;
+      case "UKW-b":
+        return this.M4_EN_UKW_B_THIN;
+      case "UKW-c":
+        return this.M4_EN_UKW_C_THIN;
+      default:
+        return this.UKW_A;
     }
   }
 
