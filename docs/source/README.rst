@@ -26,19 +26,19 @@ Indices and tables
 * Lamps
 * Operating, encrypting and decrypting
 
-What is the enigma-emulator?
+What is the enigma-simulator?
 ============================
 
-enigma-emulator is an Enigma I, M3 and M4 machine emulator for the Web. The emulator is written 
+enigma-simulator is an Enigma I, M3 and M4 machine simulator for the Web. The simulator is written 
 as a result of my curiosity towards history and cryptography. And also due to the 
 fact that I was bored, and wanted to build something.
 
-The emulator is written in TypeScript, accompanied by React, MobX and Bootstrap.
+The simulator is written in TypeScript, accompanied by React, MobX and Bootstrap.
 
 In this documentation, I cover some details about the inner working of the 
 Enigma I, M3 and M4, and explain the parts I found difficult to understand 
 as simple as I can. Also, I cover some details about how does the 
-emulator works.
+simulator works.
 
 .. toctree::
    :maxdepth: 2

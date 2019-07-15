@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'enigma-emulator'
+project = 'enigma-simulator'
 copyright = '2019, Hristijan Lubeski (lubeskih)'
 author = 'Hristijan Lubeski (lubeskih)'
 
