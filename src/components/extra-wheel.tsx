@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
-import { NUMBERS, ALPHABET } from "../constants";
+import { ALPHABET } from "../constants";
 
 // Store
 import { Store } from "../store";

@@ -148,6 +148,11 @@ export class Settings extends Component<IProps, {}> {
               ? UKW_M4_Options[0]
               : UKWOptions[0]
           }
+          value={
+            this.props.store.enigmaType === "M4"
+              ? UKW_M4_Options[0]
+              : UKWOptions[0]
+          }
           options={
             this.props.store.enigmaType === "M4" ? UKW_M4_Options : UKWOptions
           }
