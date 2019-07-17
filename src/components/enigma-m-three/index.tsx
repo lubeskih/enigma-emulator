@@ -1,12 +1,14 @@
 // Libraries
 import React, { Component } from "react";
-// import { observer } from "mobx-react";
 
 // Store
 import { Store } from "../../store";
 
 // Selects
-// import { EnigmaM3FastRotor } from "./fast-rotor";
+import { EnigmaM3FastRotor } from "./fast-rotor";
+import { EnigmaM3MiddleRotor } from "./middle-rotor";
+import { EnigmaM3SlowRotor } from "./slow-rotor";
+import { EnigmaM3Reflector } from "./reflector";
 
 interface IProps {
   store: Store;
@@ -20,6 +22,13 @@ export class EnigmaModelM3Settings extends Component<IProps, {}> {
   render() {
     let store = this.props.store;
 
-    return <>rotors</>;
+    return (
+      <>
+        <EnigmaM3FastRotor store={store} />
+        <EnigmaM3MiddleRotor store={store} />
+        <EnigmaM3SlowRotor store={store} />
+        <EnigmaM3Reflector store={store} />
+      </>
+    );
   }
 }

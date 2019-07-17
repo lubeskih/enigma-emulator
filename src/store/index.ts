@@ -1,10 +1,10 @@
 // Libraries
 import { observable } from "mobx";
-import { Plugboard } from "../enigma-parts/plugboard";
+import { Plugboard } from "../enigma-logic/plugboard";
 
 import * as c from "../constants";
 
-import { Rotor, Wheel, Reflector } from "../enigma-parts/wheel";
+import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
 
 /**
  * Store

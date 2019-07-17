@@ -192,3 +192,11 @@ export const ENIGMA_M4_REFLECTOR_OPTIONS = [
   { value: "UKW-b", label: "UKW-B (thin)" },
   { value: "UKW-c", label: "UKW-C (thin)" }
 ];
+
+/**
+ * ENIGMA M4 Extra Wheel
+ */
+export const ENIGMA_M4_EXTRA_WHEEL_OPTIONS = [
+  { value: "BETA", label: "Beta (β)" },
+  { value: "GAMMA", label: "Gamma (γ)" }
+];

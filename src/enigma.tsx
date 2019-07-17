@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 // Components
 import { Keyboard } from "./components/keyboard";
-import { Plugboard } from "./components/plugboard";
+import { Plugboard } from "./components/enigma-plugboard/plugboard";
 import { Lamps } from "./components/enigma-lamps/lamps";
 import { EnigmaSettings } from "./components/settings";
 import { CipherLog } from "./components/cipher-log";

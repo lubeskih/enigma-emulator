@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store } from "../store";
+import { Store } from "../../store";
 
 // CONSTANTS
-import { ALPHABET } from "../constants";
+import { ALPHABET } from "../../constants";
 
 // Components
 import { Plug } from "./plug";

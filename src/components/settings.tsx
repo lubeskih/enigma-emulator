@@ -7,6 +7,8 @@ import { Form } from "react-bootstrap";
 
 import { ENIGMA_MODEL_OPTIONS } from "../constants";
 import { EnigmaModelOneSettings } from "./enigma-one";
+import { EnigmaModelM3Settings } from "./enigma-m-three";
+import { EnigmaModelM4Settings } from "./enigma-m-four";
 
 // Store
 import { Store } from "../store";
@@ -26,8 +28,6 @@ export class EnigmaSettings extends Component<IProps, {}> {
   onEnigmaModelChange = (event: any) => {
     let store = this.props.store;
     store.enigmaModel = event.value;
-
-    console.log("New model:", store.enigmaModel);
   };
 
   render() {
@@ -85,6 +85,10 @@ class RenderEnigmaModel extends Component<IProps, {}> {
     switch (store.enigmaModel) {
       case "I":
         return <EnigmaModelOneSettings store={store} />;
+      case "M3":
+        return <EnigmaModelM3Settings store={store} />;
+      case "M4":
+        return <EnigmaModelM4Settings store={store} />;
       default:
         return null;
     }
