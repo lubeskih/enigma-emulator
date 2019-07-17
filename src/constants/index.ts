@@ -124,3 +124,71 @@ export const NUMBERS = [
 export const FIRST_ROW_LETTERS = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O"];
 export const SECOND_ROW_LETTERS = ["A", "S", "D", "F", "G", "H", "J", "K"];
 export const THIRD_ROW_LETTERS = ["P", "Y", "X", "C", "V", "B", "N", "M", "L"];
+
+/**
+ * ROTOR OPTIONS
+ *
+ * FIVE_ROTOR_OPTIONS: Used in Enigma I
+ * EIGHT_ROTOR_OPTIONS: Used in Enigma M3/M4
+ */
+export const FIVE_ROTOR_OPTIONS = [
+  { value: "I", label: "Rotor I" },
+  { value: "II", label: "Rotor II" },
+  { value: "III", label: "Rotor III" },
+  { value: "IV", label: "Rotor IV" },
+  { value: "V", label: "Rotor V" }
+];
+
+export const EIGHT_ROTOR_OPTIONS = [
+  { value: "I", label: "Rotor I" },
+  { value: "II", label: "Rotor II" },
+  { value: "III", label: "Rotor III" },
+  { value: "IV", label: "Rotor IV" },
+  { value: "V", label: "Rotor V" },
+  { value: "VI", label: "Rotor VI" },
+  { value: "VII", label: "Rotor VII" },
+  { value: "VIII", label: "Rotor VIII" }
+];
+
+/**
+ * Used in the ground settings / ring settings selects
+ *
+ * If using the Enigma I, then go with NUMBER_OPTIONS,
+ * if using M3/M4, go with the LETTER_OPTIONS
+ *
+ */
+export const LETTER_OPTIONS = ALPHABET.map(letter => ({
+  value: letter,
+  label: letter
+}));
+
+export const NUMBER_OPTIONS = NUMBERS.map(letter => ({
+  value: letter,
+  label: letter
+}));
+
+/** Enigma model options */
+export const ENIGMA_MODEL_OPTIONS = [
+  { value: "I", label: "Enigma I (Heer / Luftwaffe)" },
+  { value: "M3", label: "Enigma M3 (Wehrmacht)" },
+  { value: "M4", label: "Enigma M4 (Kriegsmarine)" }
+];
+
+/**
+ * Reflector options
+ */
+export const ENIGMA_I_REFLECTOR_OPTIONS = [
+  { value: "UKW-A", label: "UKW-A" },
+  { value: "UKW-B", label: "UKW-B" },
+  { value: "UKW-C", label: "UKW-C" }
+];
+
+export const ENIGMA_M3_REFLECTOR_OPTIONS = [
+  { value: "UKW-B", label: "UKW-B" },
+  { value: "UKW-C", label: "UKW-C" }
+];
+
+export const ENIGMA_M4_REFLECTOR_OPTIONS = [
+  { value: "UKW-b", label: "UKW-B (thin)" },
+  { value: "UKW-c", label: "UKW-C (thin)" }
+];

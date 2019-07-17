@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 // Store
-import { Store } from "../store";
+import { Store } from "../../store";
 import { Lamp } from "./lamp";
 
 // CONSTANTS
-import { ALPHABET } from "../constants";
+import { ALPHABET } from "../../constants";
 
 interface IProps {
   store: Store;

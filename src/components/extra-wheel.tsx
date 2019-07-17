@@ -31,8 +31,8 @@ export class ExtraWheel extends Component<IProps, IState> {
     super(props);
 
     this.state = {
-      ringSetting: this.props.store.EXTRA_WHEEL.ringSettings,
-      groundSetting: this.props.store.EXTRA_WHEEL.groundSettings
+      ringSetting: this.props.store.M4_EXTRA_WHEEL.ringSettings,
+      groundSetting: this.props.store.M4_EXTRA_WHEEL.groundSettings
     };
   }
 
@@ -40,35 +40,35 @@ export class ExtraWheel extends Component<IProps, IState> {
     let extraWheel = this.props.store.getExtraWheelObjectByName(e.value);
 
     if (extraWheel) {
-      this.props.store.EXTRA_WHEEL = extraWheel;
+      this.props.store.M4_EXTRA_WHEEL = extraWheel;
     }
   };
 
   onGroundSettingChange = (e: any) => {
     let val: number = 0;
 
-    if (this.props.store.enigmaType === "I") {
+    if (this.props.store.enigmaModel === "I") {
       val = e.value;
     } else {
       val = ALPHABET.indexOf(e.value) + 1;
     }
 
     this.setState({ groundSetting: val }, () => {
-      this.props.store.EXTRA_WHEEL.setGroundSettings(val);
+      this.props.store.M4_EXTRA_WHEEL.setGroundSettings(val);
     });
   };
 
   onRingSettingChange = (e: any) => {
     let val: number = 0;
 
-    if (this.props.store.enigmaType === "I") {
+    if (this.props.store.enigmaModel === "I") {
       val = e.value;
     } else {
       val = ALPHABET.indexOf(e.value) + 1;
     }
 
     this.setState({ ringSetting: val }, () => {
-      this.props.store.EXTRA_WHEEL.setRingSettings(val);
+      this.props.store.M4_EXTRA_WHEEL.setRingSettings(val);
     });
   };
 
@@ -89,7 +89,7 @@ export class ExtraWheel extends Component<IProps, IState> {
                 primary: "#2b303b"
               }
             })}
-            isDisabled={this.props.store.lockSettings}
+            isDisabled={this.props.store.settingsAreLocked}
             className="enigma-type"
             defaultValue={m4ExtraWheel[0]}
             options={m4ExtraWheel}
@@ -110,25 +110,25 @@ export class ExtraWheel extends Component<IProps, IState> {
                 primary: "#2b303b"
               }
             })}
-            isDisabled={this.props.store.lockSettings}
+            isDisabled={this.props.store.settingsAreLocked}
             className="enigma-type"
             defaultValue={[
               {
                 value: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.ringSettings
+                  this.props.store.M4_EXTRA_WHEEL.ringSettings
                 ),
                 label: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.ringSettings
+                  this.props.store.M4_EXTRA_WHEEL.ringSettings
                 )
               }
             ]}
             value={[
               {
                 value: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.ringSettings
+                  this.props.store.M4_EXTRA_WHEEL.ringSettings
                 ),
                 label: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.ringSettings
+                  this.props.store.M4_EXTRA_WHEEL.ringSettings
                 )
               }
             ]}
@@ -150,25 +150,25 @@ export class ExtraWheel extends Component<IProps, IState> {
                 primary: "#2b303b"
               }
             })}
-            isDisabled={this.props.store.lockSettings}
+            isDisabled={this.props.store.settingsAreLocked}
             className="enigma-type"
             defaultValue={[
               {
                 value: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.groundSettings
+                  this.props.store.M4_EXTRA_WHEEL.groundSettings
                 ),
                 label: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.groundSettings
+                  this.props.store.M4_EXTRA_WHEEL.groundSettings
                 )
               }
             ]}
             value={[
               {
                 value: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.groundSettings
+                  this.props.store.M4_EXTRA_WHEEL.groundSettings
                 ),
                 label: this.props.store.getLetterByNumber(
-                  this.props.store.EXTRA_WHEEL.groundSettings
+                  this.props.store.M4_EXTRA_WHEEL.groundSettings
                 )
               }
             ]}

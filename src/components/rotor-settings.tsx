@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { computed } from "mobx";
 import Select from "react-select";
 
 import { /** ALPHABET */ NUMBERS, ALPHABET } from "../constants";
@@ -21,25 +22,6 @@ interface IState {
   ringSetting: number;
   groundSetting: number;
 }
-
-const fiveRotorOptions = [
-  { value: "I", label: "Rotor I" },
-  { value: "II", label: "Rotor II" },
-  { value: "III", label: "Rotor III" },
-  { value: "IV", label: "Rotor IV" },
-  { value: "V", label: "Rotor V" }
-];
-
-const eightRotorOptions = [
-  { value: "I", label: "Rotor I" },
-  { value: "II", label: "Rotor II" },
-  { value: "III", label: "Rotor III" },
-  { value: "IV", label: "Rotor IV" },
-  { value: "V", label: "Rotor V" },
-  { value: "VI", label: "Rotor VI" },
-  { value: "VII", label: "Rotor VII" },
-  { value: "VIII", label: "Rotor VIII" }
-];
 
 function convertRomanToRotorOption(roman: string): number {
   switch (roman) {
@@ -88,6 +70,36 @@ export class RotorSetting extends Component<IProps, IState> {
     ].rotorPositionFromRightToLeft = this.state.rotorPositionFromRightToLeft;
   }
 
+  fiveRotorOptions = [
+    { value: "I", label: "Rotor I" },
+    { value: "II", label: "Rotor II" },
+    { value: "III", label: "Rotor III" },
+    { value: "IV", label: "Rotor IV" },
+    { value: "V", label: "Rotor V" }
+  ];
+
+  eightRotorOptions = [
+    { value: "I", label: "Rotor I" },
+    { value: "II", label: "Rotor II" },
+    { value: "III", label: "Rotor III" },
+    { value: "IV", label: "Rotor IV" },
+    { value: "V", label: "Rotor V" },
+    { value: "VI", label: "Rotor VI" },
+    { value: "VII", label: "Rotor VII" },
+    { value: "VIII", label: "Rotor VIII" }
+  ];
+
+  @computed
+  get rotorOptions() {
+    let type = this.state.rotorType;
+
+    if (this.props.store.enigmaModel === "I") {
+      return this.fiveRotorOptions.filter(rotor => rotor.value !== type);
+    } else {
+      return this.eightRotorOptions.filter(rotor => rotor.value !== type);
+    }
+  }
+
   onRotorTypeChange = (e: any) => {
     this.setState({ rotorType: e.value }, () => {
       this.props.store.changeStackedRotor(
@@ -104,7 +116,7 @@ export class RotorSetting extends Component<IProps, IState> {
   onGroundSettingChange = (e: any) => {
     let val: number = 0;
 
-    if (this.props.store.enigmaType === "I") {
+    if (this.props.store.enigmaModel === "I") {
       val = e.value;
     } else {
       val = ALPHABET.indexOf(e.value) + 1;
@@ -120,7 +132,7 @@ export class RotorSetting extends Component<IProps, IState> {
   onRingSettingChange = (e: any) => {
     let val: number = 0;
 
-    if (this.props.store.enigmaType === "I") {
+    if (this.props.store.enigmaModel === "I") {
       val = e.value;
     } else {
       val = ALPHABET.indexOf(e.value) + 1;
@@ -150,22 +162,18 @@ export class RotorSetting extends Component<IProps, IState> {
                 primary: "#2b303b"
               }
             })}
-            isDisabled={this.props.store.lockSettings}
+            isDisabled={this.props.store.settingsAreLocked}
             className="enigma-type"
             defaultValue={
-              this.props.store.enigmaType === "I"
-                ? fiveRotorOptions[
+              this.props.store.enigmaModel === "I"
+                ? this.fiveRotorOptions[
                     convertRomanToRotorOption(this.state.rotorType)
                   ]
-                : eightRotorOptions[
+                : this.eightRotorOptions[
                     convertRomanToRotorOption(this.state.rotorType)
                   ]
             }
-            options={
-              this.props.store.enigmaType === "I"
-                ? fiveRotorOptions
-                : eightRotorOptions
-            }
+            options={this.rotorOptions}
             onChange={this.onRotorTypeChange}
           />
         </div>
@@ -183,10 +191,10 @@ export class RotorSetting extends Component<IProps, IState> {
                 primary: "#2b303b"
               }
             })}
-            isDisabled={this.props.store.lockSettings}
+            isDisabled={this.props.store.settingsAreLocked}
             className="enigma-type"
             defaultValue={
-              this.props.store.enigmaType === "I"
+              this.props.store.enigmaModel === "I"
                 ? [
                     {
                       value: this.props.store.stackedRotors[
@@ -213,7 +221,7 @@ export class RotorSetting extends Component<IProps, IState> {
                   ]
             }
             value={
-              this.props.store.enigmaType === "I"
+              this.props.store.enigmaModel === "I"
                 ? [
                     {
                       value: this.props.store.stackedRotors[
@@ -240,7 +248,7 @@ export class RotorSetting extends Component<IProps, IState> {
                   ]
             }
             options={
-              this.props.store.enigmaType === "I"
+              this.props.store.enigmaModel === "I"
                 ? this.numberSettings
                 : this.letterSettings
             }
@@ -261,10 +269,10 @@ export class RotorSetting extends Component<IProps, IState> {
                 primary: "#2b303b"
               }
             })}
-            isDisabled={this.props.store.lockSettings}
+            isDisabled={this.props.store.settingsAreLocked}
             className="enigma-type"
             defaultValue={
-              this.props.store.enigmaType === "I"
+              this.props.store.enigmaModel === "I"
                 ? [
                     {
                       value: this.props.store.stackedRotors[
@@ -291,7 +299,7 @@ export class RotorSetting extends Component<IProps, IState> {
                   ]
             }
             value={
-              this.props.store.enigmaType === "I"
+              this.props.store.enigmaModel === "I"
                 ? [
                     {
                       value: this.props.store.stackedRotors[
@@ -319,7 +327,7 @@ export class RotorSetting extends Component<IProps, IState> {
             }
             onChange={this.onGroundSettingChange}
             options={
-              this.props.store.enigmaType === "I"
+              this.props.store.enigmaModel === "I"
                 ? this.numberSettings
                 : this.letterSettings
             }

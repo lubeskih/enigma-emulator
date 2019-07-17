@@ -23,8 +23,8 @@ export class Store {
   @observable OUTPUT: string = "";
 
   // Settings
-  @observable enigmaType: "I" | "M3" | "M4" | null = "I";
-  @observable lockSettings: boolean = false;
+  @observable enigmaModel: "I" | "M3" | "M4" | null = "I";
+  @observable settingsAreLocked: boolean = false;
 
   // Rotors / Reflectors / Entry Wheel
   EW = new Wheel(c.EN_ETW);
@@ -51,8 +51,13 @@ export class Store {
   M4_EN_UKW_B_THIN = new Reflector(c.M4_EN_UKW_B_THIN);
   M4_EN_UKW_C_THIN = new Reflector(c.M4_EN_UKW_C_THIN);
 
-  EXTRA_WHEEL: Rotor = this.M4_EXTRA_WHEEL_BETA;
-  REFLECTOR: Reflector = this.UKW_A;
+  @observable FAST_ROTOR: Rotor = this.R1;
+  @observable MIDDLE_ROTOR: Rotor = this.R2;
+  @observable SLOW_ROTOR: Rotor = this.R3;
+  @observable REFLECTOR: Reflector = this.UKW_A;
+
+  @observable M4_EXTRA_WHEEL: Rotor = this.M4_EXTRA_WHEEL_BETA;
+  @observable M4_REFLECTOR: Reflector = this.M4_EN_UKW_B_THIN;
 
   // Stacked Rotors
   stackedRotors: Rotor[] = [this.R1, this.R2, this.R3];
@@ -101,16 +106,16 @@ export class Store {
       );
     }
 
-    if (this.enigmaType === "M4") {
-      entryLetter = this.EXTRA_WHEEL.calcEntryContact(entryLetter);
-      entryLetter = this.EXTRA_WHEEL.calcRightToLeftExitContact(entryLetter);
+    if (this.enigmaModel === "M4") {
+      entryLetter = this.M4_EXTRA_WHEEL.calcEntryContact(entryLetter);
+      entryLetter = this.M4_EXTRA_WHEEL.calcRightToLeftExitContact(entryLetter);
     }
 
     entryLetter = this.REFLECTOR.getReflectedEndpoint(entryLetter);
 
-    if (this.enigmaType === "M4") {
-      entryLetter = this.EXTRA_WHEEL.calcEntryContact(entryLetter);
-      entryLetter = this.EXTRA_WHEEL.calcLeftToRightExitContact(entryLetter);
+    if (this.enigmaModel === "M4") {
+      entryLetter = this.M4_EXTRA_WHEEL.calcEntryContact(entryLetter);
+      entryLetter = this.M4_EXTRA_WHEEL.calcLeftToRightExitContact(entryLetter);
     }
 
     for (let i = 2; i >= 0; i--) {
@@ -139,18 +144,30 @@ export class Store {
   }
 
   resetSettings() {
+    // Reset all stacked rotors
     for (let i = 0; i < this.stackedRotors.length; i++) {
       this.stackedRotors[i].groundSettings = 1;
       this.stackedRotors[i].ringSettings = 1;
       this.stackedRotors[i].offset = 0;
     }
 
+    // Reset the plugboard settings
     this.plugboard.resetAll();
     this.plugboard.excessPlug = null;
     c.ALPHABET.map(letter => this.plugs.set(letter, false));
+
+    // Reset the lamps
     this.lastLamp = "";
+
+    // Reset the logs
     this.OUTPUT = "";
     this.INPUT = "";
+
+    // Reset the Extra Wheel
+    if (this.enigmaModel === "M4") {
+      this.M4_EXTRA_WHEEL.groundSettings = 1;
+      this.M4_EXTRA_WHEEL.ringSettings = 1;
+    }
   }
 
   /////////////////////////
