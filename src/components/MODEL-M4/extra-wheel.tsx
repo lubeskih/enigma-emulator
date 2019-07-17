@@ -24,7 +24,7 @@ export class EnigmaM4ExtraWheel extends Component<IProps, {}> {
 
   onExtraWheelChange = (event: any) => {
     let store = this.props.store;
-    store.M4_EXTRA_WHEEL = store.getExtraWheelObjectByName(event.value);
+    store.ENIGMA_M4_EW = store.getExtraWheelObjectByName(event.value);
   };
 
   render() {

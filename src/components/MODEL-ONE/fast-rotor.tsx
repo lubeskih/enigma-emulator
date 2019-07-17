@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
-import { EIGHT_ROTOR_OPTIONS, LETTER_OPTIONS, ALPHABET } from "../../constants";
+import { FIVE_ROTOR_OPTIONS, NUMBER_OPTIONS } from "../../constants";
 
 // Store
 import { Store } from "../../store";
@@ -14,15 +14,15 @@ interface IProps {
 }
 
 /**
- * EnigmaM3SlowRotor
+ * EnigmaOneFastRotor
  *
  * Specific select used for manipulating the
- * right-hand (also known as SLOW) rotor.
+ * right-hand (also known as FAST) rotor.
  *
- * This is rendered only when using the Enigma M3.
+ * This is rendered only when using the Enigma I.
  */
 @observer
-export class EnigmaM3SlowRotor extends Component<IProps, {}> {
+export class EnigmaOneFastRotor extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
@@ -30,19 +30,19 @@ export class EnigmaM3SlowRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.SLOW_ROTOR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_I_FR = store.getRotorObjectByRotorType(event.value);
   };
 
-  // Handle ring settings change
-  onRingSettingsChange = (event: any) => {
-    let store = this.props.store;
-    store.SLOW_ROTOR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
-  };
-
-  // Handle ground settings change
+  // Handle the change in the ground settings
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.SLOW_ROTOR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
+    store.ENIGMA_I_FR.setGroundSettings(event.value);
+  };
+
+  // Handle the change in the ring settings
+  onRingSettingsChange = (event: any) => {
+    let store = this.props.store;
+    store.ENIGMA_I_FR.setRingSettings(event.value);
   };
 
   render() {
@@ -53,7 +53,7 @@ export class EnigmaM3SlowRotor extends Component<IProps, {}> {
         <div className="row mb-4">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="info">SLOW ROTOR (left-hand)</code>
+              <code className="info">FAST ROTOR (right-hand)</code>
             </small>
             <Select
               theme={theme => ({
@@ -68,8 +68,8 @@ export class EnigmaM3SlowRotor extends Component<IProps, {}> {
               })}
               isDisabled={store.settingsAreLocked}
               className="enigma-type"
-              defaultValue={EIGHT_ROTOR_OPTIONS[2]}
-              options={EIGHT_ROTOR_OPTIONS}
+              defaultValue={FIVE_ROTOR_OPTIONS[0]}
+              options={FIVE_ROTOR_OPTIONS}
               onChange={this.onRotorOptionChange}
             />
           </div>
@@ -91,20 +91,20 @@ export class EnigmaM3SlowRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.getLetterByNumber(store.SLOW_ROTOR.ringSettings),
-                  label: store.getLetterByNumber(store.SLOW_ROTOR.ringSettings)
+                  value: store.ENIGMA_I_FR.ringSettings,
+                  label: store.ENIGMA_I_FR.ringSettings
                 }
               ]}
               value={[
                 {
-                  value: store.getLetterByNumber(store.SLOW_ROTOR.ringSettings),
-                  label: store.getLetterByNumber(store.SLOW_ROTOR.ringSettings)
+                  value: store.ENIGMA_I_FR.ringSettings,
+                  label: store.ENIGMA_I_FR.ringSettings
                 }
               ]}
-              options={LETTER_OPTIONS}
+              options={NUMBER_OPTIONS}
               onChange={this.onRingSettingsChange}
             />
-          </div>
+          </div>{" "}
           <div className="col-md-6">
             <small>
               <code className="info">Grundstellung</code>
@@ -123,25 +123,17 @@ export class EnigmaM3SlowRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.getLetterByNumber(
-                    store.SLOW_ROTOR.groundSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.SLOW_ROTOR.groundSettings
-                  )
+                  value: store.ENIGMA_I_FR.groundSettings,
+                  label: store.ENIGMA_I_FR.groundSettings
                 }
               ]}
               value={[
                 {
-                  value: store.getLetterByNumber(
-                    store.SLOW_ROTOR.groundSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.SLOW_ROTOR.groundSettings
-                  )
+                  value: store.ENIGMA_I_FR.groundSettings,
+                  label: store.ENIGMA_I_FR.groundSettings
                 }
               ]}
-              options={LETTER_OPTIONS}
+              options={NUMBER_OPTIONS}
               onChange={this.onGroundSettingsChange}
             />
           </div>

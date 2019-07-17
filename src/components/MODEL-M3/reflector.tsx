@@ -20,17 +20,12 @@ interface IProps {
 export class EnigmaM3Reflector extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
-
-    let store = this.props.store;
-    store.REFLECTOR = store.getReflectorObjectByName(
-      ENIGMA_M3_REFLECTOR_OPTIONS[0].value
-    );
   }
 
   // Handle Enigma reflector change
   onReflectorChange = (event: any) => {
     let store = this.props.store;
-    store.REFLECTOR = store.getReflectorObjectByName(event.value);
+    store.ENIGMA_M3_REFLECTOR = store.getReflectorObjectByName(event.value);
   };
 
   render() {

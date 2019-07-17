@@ -1,10 +1,9 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-// import { computed } from "mobx";
 import Select from "react-select";
 
-import { FIVE_ROTOR_OPTIONS, NUMBER_OPTIONS } from "../../constants";
+import { EIGHT_ROTOR_OPTIONS, LETTER_OPTIONS, ALPHABET } from "../../constants";
 
 // Store
 import { Store } from "../../store";
@@ -15,15 +14,15 @@ interface IProps {
 }
 
 /**
- * EnigmaOneMiddleRotor
+ * EnigmaM3SlowRotor
  *
  * Specific select used for manipulating the
- * middle rotor.
+ * right-hand (also known as SLOW) rotor.
  *
- * This is rendered only when using the Enigma I.
+ * This is rendered only when using the Enigma M3.
  */
 @observer
-export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
+export class EnigmaM3SlowRotor extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
@@ -31,20 +30,19 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-
-    store.MIDDLE_ROTOR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_M3_SR = store.getRotorObjectByRotorType(event.value);
   };
 
-  // Handle the change in the ground settings
-  onGroundSettingsChange = (event: any) => {
-    let store = this.props.store;
-    store.MIDDLE_ROTOR.setGroundSettings(event.value);
-  };
-
-  // Handle the change in the ring settings
+  // Handle ring settings change
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.MIDDLE_ROTOR.setRingSettings(event.value);
+    store.ENIGMA_M3_SR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
+  };
+
+  // Handle ground settings change
+  onGroundSettingsChange = (event: any) => {
+    let store = this.props.store;
+    store.ENIGMA_M3_SR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
   };
 
   render() {
@@ -55,9 +53,8 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
         <div className="row mb-4">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="info">MIDDLE ROTOR</code>
+              <code className="info">SLOW ROTOR (left-hand)</code>
             </small>
-
             <Select
               theme={theme => ({
                 // NOTE: HOW DO I NOT REPEAT THIS?
@@ -71,8 +68,8 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
               })}
               isDisabled={store.settingsAreLocked}
               className="enigma-type"
-              defaultValue={FIVE_ROTOR_OPTIONS[1]}
-              options={FIVE_ROTOR_OPTIONS}
+              defaultValue={EIGHT_ROTOR_OPTIONS[2]}
+              options={EIGHT_ROTOR_OPTIONS}
               onChange={this.onRotorOptionChange}
             />
           </div>
@@ -94,17 +91,25 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.MIDDLE_ROTOR.ringSettings,
-                  label: store.MIDDLE_ROTOR.ringSettings
+                  value: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.ringSettings
+                  ),
+                  label: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.ringSettings
+                  )
                 }
               ]}
               value={[
                 {
-                  value: store.MIDDLE_ROTOR.ringSettings,
-                  label: store.MIDDLE_ROTOR.ringSettings
+                  value: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.ringSettings
+                  ),
+                  label: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.ringSettings
+                  )
                 }
               ]}
-              options={NUMBER_OPTIONS}
+              options={LETTER_OPTIONS}
               onChange={this.onRingSettingsChange}
             />
           </div>
@@ -126,17 +131,25 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.MIDDLE_ROTOR.groundSettings,
-                  label: store.MIDDLE_ROTOR.groundSettings
+                  value: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.groundSettings
+                  ),
+                  label: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.groundSettings
+                  )
                 }
               ]}
               value={[
                 {
-                  value: store.MIDDLE_ROTOR.groundSettings,
-                  label: store.MIDDLE_ROTOR.groundSettings
+                  value: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.groundSettings
+                  ),
+                  label: store.getLetterByNumber(
+                    store.ENIGMA_M3_SR.groundSettings
+                  )
                 }
               ]}
-              options={NUMBER_OPTIONS}
+              options={LETTER_OPTIONS}
               onChange={this.onGroundSettingsChange}
             />
           </div>

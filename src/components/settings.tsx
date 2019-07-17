@@ -6,9 +6,9 @@ import Select from "react-select";
 import { Form } from "react-bootstrap";
 
 import { ENIGMA_MODEL_OPTIONS } from "../constants";
-import { EnigmaModelOneSettings } from "./enigma-one";
-import { EnigmaModelM3Settings } from "./enigma-m-three";
-import { EnigmaModelM4Settings } from "./enigma-m-four";
+import { EnigmaModelOneSettings } from "./MODEL-ONE";
+import { EnigmaModelM3Settings } from "./MODEL-M3";
+import { EnigmaModelM4Settings } from "./MODEL-M4";
 
 // Store
 import { Store } from "../store";
@@ -28,6 +28,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
   onEnigmaModelChange = (event: any) => {
     let store = this.props.store;
     store.enigmaModel = event.value;
+    store.resetEnigmaSettings();
   };
 
   render() {
@@ -115,7 +116,7 @@ class RenderLockCheckbox extends Component<IProps, {}> {
   // Handle resetting the Enigma settings
   onResetSettingsClick = (_e: any) => {
     let store = this.props.store;
-    store.resetSettings();
+    store.resetEnigmaSettings();
   };
 
   // Handle locking / unlocking the settings

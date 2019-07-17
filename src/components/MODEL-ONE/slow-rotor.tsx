@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+// import { computed } from "mobx";
 import Select from "react-select";
 
 import { FIVE_ROTOR_OPTIONS, NUMBER_OPTIONS } from "../../constants";
@@ -14,15 +15,15 @@ interface IProps {
 }
 
 /**
- * EnigmaOneFastRotor
+ * EnigmaOneSlowRotor
  *
  * Specific select used for manipulating the
- * right-hand (also known as FAST) rotor.
+ * left-hand (also known as SLOW) rotor.
  *
  * This is rendered only when using the Enigma I.
  */
 @observer
-export class EnigmaOneFastRotor extends Component<IProps, {}> {
+export class EnigmaOneSlowRotor extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
@@ -30,19 +31,19 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_I_SR = store.getRotorObjectByRotorType(event.value);
   };
 
   // Handle the change in the ground settings
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR.setGroundSettings(event.value);
+    store.ENIGMA_I_SR.setGroundSettings(event.value);
   };
 
   // Handle the change in the ring settings
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR.setRingSettings(event.value);
+    store.ENIGMA_I_SR.setRingSettings(event.value);
   };
 
   render() {
@@ -53,7 +54,7 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
         <div className="row mb-4">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="info">FAST ROTOR (right-hand)</code>
+              <code className="info">SLOW ROTOR (left-hand)</code>
             </small>
             <Select
               theme={theme => ({
@@ -68,7 +69,7 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
               })}
               isDisabled={store.settingsAreLocked}
               className="enigma-type"
-              defaultValue={FIVE_ROTOR_OPTIONS[0]}
+              defaultValue={FIVE_ROTOR_OPTIONS[2]}
               options={FIVE_ROTOR_OPTIONS}
               onChange={this.onRotorOptionChange}
             />
@@ -91,20 +92,20 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.FAST_ROTOR.ringSettings,
-                  label: store.FAST_ROTOR.ringSettings
+                  value: store.ENIGMA_I_SR.ringSettings,
+                  label: store.ENIGMA_I_SR.ringSettings
                 }
               ]}
               value={[
                 {
-                  value: store.FAST_ROTOR.ringSettings,
-                  label: store.FAST_ROTOR.ringSettings
+                  value: store.ENIGMA_I_SR.ringSettings,
+                  label: store.ENIGMA_I_SR.ringSettings
                 }
               ]}
               options={NUMBER_OPTIONS}
               onChange={this.onRingSettingsChange}
             />
-          </div>{" "}
+          </div>
           <div className="col-md-6">
             <small>
               <code className="info">Grundstellung</code>
@@ -123,14 +124,14 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.FAST_ROTOR.groundSettings,
-                  label: store.FAST_ROTOR.groundSettings
+                  value: store.ENIGMA_I_SR.groundSettings,
+                  label: store.ENIGMA_I_SR.groundSettings
                 }
               ]}
               value={[
                 {
-                  value: store.FAST_ROTOR.groundSettings,
-                  label: store.FAST_ROTOR.groundSettings
+                  value: store.ENIGMA_I_SR.groundSettings,
+                  label: store.ENIGMA_I_SR.groundSettings
                 }
               ]}
               options={NUMBER_OPTIONS}

@@ -1,9 +1,10 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+// import { computed } from "mobx";
 import Select from "react-select";
 
-import { ENIGMA_M4_REFLECTOR_OPTIONS } from "../../constants";
+import { ENIGMA_I_REFLECTOR_OPTIONS } from "../../constants";
 
 // Store
 import { Store } from "../../store";
@@ -14,23 +15,18 @@ interface IProps {
 }
 
 /**
- * EnigmaM4Reflector
+ * EnigmaOneReflector
  */
 @observer
-export class EnigmaM4Reflector extends Component<IProps, {}> {
+export class EnigmaOneReflector extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
-
-    let store = this.props.store;
-    store.REFLECTOR = store.getReflectorObjectByName(
-      ENIGMA_M4_REFLECTOR_OPTIONS[0].value
-    );
   }
 
   // Handle Enigma reflector change
   onReflectorChange = (event: any) => {
     let store = this.props.store;
-    store.REFLECTOR = store.getReflectorObjectByName(event.value);
+    store.ENIGMA_I_REFLECTOR = store.getReflectorObjectByName(event.value);
   };
 
   render() {
@@ -55,8 +51,8 @@ export class EnigmaM4Reflector extends Component<IProps, {}> {
               })}
               className="enigma-type"
               isDisabled={store.settingsAreLocked}
-              defaultValue={ENIGMA_M4_REFLECTOR_OPTIONS[0]}
-              options={ENIGMA_M4_REFLECTOR_OPTIONS}
+              defaultValue={ENIGMA_I_REFLECTOR_OPTIONS[0]}
+              options={ENIGMA_I_REFLECTOR_OPTIONS}
               onChange={this.onReflectorChange}
             />
           </div>

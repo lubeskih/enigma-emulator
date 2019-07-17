@@ -1,9 +1,10 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+// import { computed } from "mobx";
 import Select from "react-select";
 
-import { EIGHT_ROTOR_OPTIONS, LETTER_OPTIONS, ALPHABET } from "../../constants";
+import { FIVE_ROTOR_OPTIONS, NUMBER_OPTIONS } from "../../constants";
 
 // Store
 import { Store } from "../../store";
@@ -14,15 +15,15 @@ interface IProps {
 }
 
 /**
- * EnigmaM4FastRotor
+ * EnigmaOneMiddleRotor
  *
  * Specific select used for manipulating the
- * right-hand (also known as FAST) rotor.
+ * middle rotor.
  *
- * This is rendered only when using the Enigma M4.
+ * This is rendered only when using the Enigma I.
  */
 @observer
-export class EnigmaM4FastRotor extends Component<IProps, {}> {
+export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
@@ -30,19 +31,20 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR = store.getRotorObjectByRotorType(event.value);
+
+    store.ENIGMA_I_MR = store.getRotorObjectByRotorType(event.value);
   };
 
-  // Handle ground settings change
+  // Handle the change in the ground settings
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
+    store.ENIGMA_I_MR.setGroundSettings(event.value);
   };
 
-  // Handle ring settings change
+  // Handle the change in the ring settings
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
+    store.ENIGMA_I_MR.setRingSettings(event.value);
   };
 
   render() {
@@ -53,8 +55,9 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
         <div className="row mb-4">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="info">FAST ROTOR (right-hand)</code>
+              <code className="info">MIDDLE ROTOR</code>
             </small>
+
             <Select
               theme={theme => ({
                 // NOTE: HOW DO I NOT REPEAT THIS?
@@ -68,8 +71,8 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
               })}
               isDisabled={store.settingsAreLocked}
               className="enigma-type"
-              defaultValue={EIGHT_ROTOR_OPTIONS[0]}
-              options={EIGHT_ROTOR_OPTIONS}
+              defaultValue={FIVE_ROTOR_OPTIONS[1]}
+              options={FIVE_ROTOR_OPTIONS}
               onChange={this.onRotorOptionChange}
             />
           </div>
@@ -91,17 +94,17 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.getLetterByNumber(store.FAST_ROTOR.ringSettings),
-                  label: store.getLetterByNumber(store.FAST_ROTOR.ringSettings)
+                  value: store.ENIGMA_I_MR.ringSettings,
+                  label: store.ENIGMA_I_MR.ringSettings
                 }
               ]}
               value={[
                 {
-                  value: store.getLetterByNumber(store.FAST_ROTOR.ringSettings),
-                  label: store.getLetterByNumber(store.FAST_ROTOR.ringSettings)
+                  value: store.ENIGMA_I_MR.ringSettings,
+                  label: store.ENIGMA_I_MR.ringSettings
                 }
               ]}
-              options={LETTER_OPTIONS}
+              options={NUMBER_OPTIONS}
               onChange={this.onRingSettingsChange}
             />
           </div>
@@ -123,25 +126,17 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
-                  )
+                  value: store.ENIGMA_I_MR.groundSettings,
+                  label: store.ENIGMA_I_MR.groundSettings
                 }
               ]}
               value={[
                 {
-                  value: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
-                  )
+                  value: store.ENIGMA_I_MR.groundSettings,
+                  label: store.ENIGMA_I_MR.groundSettings
                 }
               ]}
-              options={LETTER_OPTIONS}
+              options={NUMBER_OPTIONS}
               onChange={this.onGroundSettingsChange}
             />
           </div>

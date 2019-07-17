@@ -14,15 +14,15 @@ interface IProps {
 }
 
 /**
- * EnigmaM4MiddleRotor
+ * EnigmaM4SlowRotor
  *
  * Specific select used for manipulating the
- * middle rotor.
+ * right-hand (also known as SLOW) rotor.
  *
  * This is rendered only when using the Enigma M4.
  */
 @observer
-export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
+export class EnigmaM4SlowRotor extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
@@ -30,19 +30,19 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.MIDDLE_ROTOR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_M4_SR = store.getRotorObjectByRotorType(event.value);
   };
 
   // Handle ring settings change
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.MIDDLE_ROTOR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
+    store.ENIGMA_M4_SR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
   };
 
   // Handle ground settings change
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.MIDDLE_ROTOR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
+    store.ENIGMA_M4_SR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
   };
 
   render() {
@@ -53,7 +53,7 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
         <div className="row mb-4">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="info">MIDDLE ROTOR</code>
+              <code className="info">SLOW ROTOR (left-hand)</code>
             </small>
             <Select
               theme={theme => ({
@@ -68,7 +68,7 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
               })}
               isDisabled={store.settingsAreLocked}
               className="enigma-type"
-              defaultValue={EIGHT_ROTOR_OPTIONS[1]}
+              defaultValue={EIGHT_ROTOR_OPTIONS[2]}
               options={EIGHT_ROTOR_OPTIONS}
               onChange={this.onRotorOptionChange}
             />
@@ -92,27 +92,27 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
               defaultValue={[
                 {
                   value: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.ringSettings
+                    store.ENIGMA_M4_SR.ringSettings
                   ),
                   label: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.ringSettings
+                    store.ENIGMA_M4_SR.ringSettings
                   )
                 }
               ]}
               value={[
                 {
                   value: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.ringSettings
+                    store.ENIGMA_M4_SR.ringSettings
                   ),
                   label: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.ringSettings
+                    store.ENIGMA_M4_SR.ringSettings
                   )
                 }
               ]}
               options={LETTER_OPTIONS}
               onChange={this.onRingSettingsChange}
             />
-          </div>{" "}
+          </div>
           <div className="col-md-6">
             <small>
               <code className="info">Grundstellung</code>
@@ -132,20 +132,20 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
               defaultValue={[
                 {
                   value: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.groundSettings
+                    store.ENIGMA_M4_SR.groundSettings
                   ),
                   label: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.groundSettings
+                    store.ENIGMA_M4_SR.groundSettings
                   )
                 }
               ]}
               value={[
                 {
                   value: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.groundSettings
+                    store.ENIGMA_M4_SR.groundSettings
                   ),
                   label: store.getLetterByNumber(
-                    store.MIDDLE_ROTOR.groundSettings
+                    store.ENIGMA_M4_SR.groundSettings
                   )
                 }
               ]}

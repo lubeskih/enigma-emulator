@@ -30,19 +30,19 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_M3_FR = store.getRotorObjectByRotorType(event.value);
   };
 
   // Handle ground settings change
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
+    store.ENIGMA_M3_FR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
   };
 
   // Handle ring settings change
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.FAST_ROTOR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
+    store.ENIGMA_M3_FR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
   };
 
   render() {
@@ -91,14 +91,22 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
               className="enigma-type"
               defaultValue={[
                 {
-                  value: store.getLetterByNumber(store.FAST_ROTOR.ringSettings),
-                  label: store.getLetterByNumber(store.FAST_ROTOR.ringSettings)
+                  value: store.getLetterByNumber(
+                    store.ENIGMA_M3_FR.ringSettings
+                  ),
+                  label: store.getLetterByNumber(
+                    store.ENIGMA_M3_FR.ringSettings
+                  )
                 }
               ]}
               value={[
                 {
-                  value: store.getLetterByNumber(store.FAST_ROTOR.ringSettings),
-                  label: store.getLetterByNumber(store.FAST_ROTOR.ringSettings)
+                  value: store.getLetterByNumber(
+                    store.ENIGMA_M3_FR.ringSettings
+                  ),
+                  label: store.getLetterByNumber(
+                    store.ENIGMA_M3_FR.ringSettings
+                  )
                 }
               ]}
               options={LETTER_OPTIONS}
@@ -124,20 +132,20 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
               defaultValue={[
                 {
                   value: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
+                    store.ENIGMA_M3_FR.groundSettings
                   ),
                   label: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
+                    store.ENIGMA_M3_FR.groundSettings
                   )
                 }
               ]}
               value={[
                 {
                   value: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
+                    store.ENIGMA_M3_FR.groundSettings
                   ),
                   label: store.getLetterByNumber(
-                    store.FAST_ROTOR.groundSettings
+                    store.ENIGMA_M3_FR.groundSettings
                   )
                 }
               ]}
