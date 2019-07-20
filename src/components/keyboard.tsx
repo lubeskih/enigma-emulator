@@ -38,7 +38,11 @@ export class Keyboard extends Component<IProps, {}> {
             Tastatur
           </span>{" "}
           <span>
-            {this.props.store.settingsAreLocked ? null : (
+            {this.props.store.settingsAreLocked ? (
+              <code className="note gray">
+                Hint: you can click the buttons or use your keyboard.
+              </code>
+            ) : (
               <code className="note gray">
                 Configure and lock the settings before using the keyboard.
               </code>
