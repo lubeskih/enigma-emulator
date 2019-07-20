@@ -129,8 +129,8 @@ export class Store {
         stackRotorsLen = 3;
         break;
       default:
-        stackRotors = [this.ENIGMA_I_FR, this.ENIGMA_I_MR, this.ENIGMA_I_SR];
-        break;
+        console.error("There was an error while resetting the settings.");
+        return null;
     }
 
     for (let i = 0; i <= stackRotorsLen; i++) {
@@ -153,10 +153,11 @@ export class Store {
   }
 
   stepRotorsFromEnigmaOne() {
-    if (this.ENIGMA_I_FR.turnover === this.ENIGMA_I_FR.groundSettings) {
+    // console.log(this.ENIGMA_I_FR.turnover);
+    if (this.ENIGMA_I_FR.turnover.includes(this.ENIGMA_I_FR.groundSettings)) {
       this.ENIGMA_I_FR.step();
 
-      if (this.ENIGMA_I_MR.groundSettings === this.ENIGMA_I_MR.turnover) {
+      if (this.ENIGMA_I_MR.turnover.includes(this.ENIGMA_I_MR.groundSettings)) {
         this.ENIGMA_I_MR.step();
         this.ENIGMA_I_SR.step();
       } else {
@@ -165,7 +166,7 @@ export class Store {
     } else {
       this.ENIGMA_I_FR.step();
 
-      if (this.ENIGMA_I_MR.groundSettings === this.ENIGMA_I_MR.turnover) {
+      if (this.ENIGMA_I_MR.turnover.includes(this.ENIGMA_I_MR.groundSettings)) {
         this.ENIGMA_I_MR.step();
         this.ENIGMA_I_SR.step();
       }
@@ -173,10 +174,12 @@ export class Store {
   }
 
   stepRotorsFromEnigmaM3() {
-    if (this.ENIGMA_M3_FR.turnover === this.ENIGMA_M3_FR.groundSettings) {
+    if (this.ENIGMA_M3_FR.turnover.includes(this.ENIGMA_M3_FR.groundSettings)) {
       this.ENIGMA_M3_FR.step();
 
-      if (this.ENIGMA_M3_MR.groundSettings === this.ENIGMA_M3_MR.turnover) {
+      if (
+        this.ENIGMA_M3_MR.turnover.includes(this.ENIGMA_M3_MR.groundSettings)
+      ) {
         this.ENIGMA_M3_MR.step();
         this.ENIGMA_M3_SR.step();
       } else {
@@ -185,7 +188,9 @@ export class Store {
     } else {
       this.ENIGMA_M3_FR.step();
 
-      if (this.ENIGMA_M3_MR.groundSettings === this.ENIGMA_M3_MR.turnover) {
+      if (
+        this.ENIGMA_M3_MR.turnover.includes(this.ENIGMA_M3_MR.groundSettings)
+      ) {
         this.ENIGMA_M3_MR.step();
         this.ENIGMA_M3_SR.step();
       }
@@ -193,10 +198,12 @@ export class Store {
   }
 
   stepRotorsFromEnigmaM4() {
-    if (this.ENIGMA_M4_FR.turnover === this.ENIGMA_M4_FR.groundSettings) {
+    if (this.ENIGMA_M4_FR.turnover.includes(this.ENIGMA_M4_FR.groundSettings)) {
       this.ENIGMA_M4_FR.step();
 
-      if (this.ENIGMA_M4_MR.groundSettings === this.ENIGMA_M4_MR.turnover) {
+      if (
+        this.ENIGMA_M4_MR.turnover.includes(this.ENIGMA_M4_MR.groundSettings)
+      ) {
         this.ENIGMA_M4_MR.step();
         this.ENIGMA_M4_SR.step();
       } else {
@@ -205,7 +212,9 @@ export class Store {
     } else {
       this.ENIGMA_M4_FR.step();
 
-      if (this.ENIGMA_M4_MR.groundSettings === this.ENIGMA_M4_MR.turnover) {
+      if (
+        this.ENIGMA_M4_MR.turnover.includes(this.ENIGMA_M4_MR.groundSettings)
+      ) {
         this.ENIGMA_M4_MR.step();
         this.ENIGMA_M4_SR.step();
       }

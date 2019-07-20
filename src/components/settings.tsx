@@ -44,7 +44,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
             Maschineneinstellungen
           </span>
           <hr />
-          <div className="row mb-3">
+          <div className="row mb-1">
             <div className="col-md-12 mb-3">
               <small>
                 <code className="info">Enigma model</code>

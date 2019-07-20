@@ -12,10 +12,27 @@ import { Plugboard } from "./components/enigma-plugboard/plugboard";
 import { Lamps } from "./components/enigma-lamps/lamps";
 import { EnigmaSettings } from "./components/settings";
 import { CipherLog } from "./components/cipher-log";
+import { ALPHABET } from "./constants";
 
 // Store
 import { Store } from "./store";
 const store = new Store();
+
+document.addEventListener("keypress", logKey);
+
+function logKey(e: any) {
+  let letter: string = e.key.toUpperCase();
+
+  if (
+    ALPHABET.includes(letter) &&
+    store.settingsAreLocked &&
+    !store.plugboard.excessPlug
+  ) {
+    store.cipher(letter);
+  } else {
+    return null;
+  }
+}
 
 @observer
 class Enigma extends Component {

@@ -1,6 +1,6 @@
 export interface IRotor {
   notch: number;
-  turnover: number;
+  turnover: number[];
 }
 
 export interface IWheel {
