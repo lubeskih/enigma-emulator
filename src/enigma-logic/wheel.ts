@@ -38,7 +38,6 @@ export class Reflector extends Wheel {
     if (letter || letter === 0) {
       return letter;
     } else {
-      console.error("GRE ERROR.");
       return -1;
     }
   }
@@ -57,7 +56,7 @@ export class Reflector extends Wheel {
  */
 export class Rotor extends Wheel implements IRotor {
   readonly notch: number;
-  readonly turnover: number;
+  readonly turnover: number[];
 
   @observable groundSettings: number = 1;
   @observable ringSettings: number = 1;
@@ -72,7 +71,9 @@ export class Rotor extends Wheel implements IRotor {
     super(wiring);
 
     this.notch = getLetterIndexInAlphabet(notch);
-    this.turnover = getLetterIndexInAlphabet(turnover) + 1;
+    this.turnover = turnover
+      .split("")
+      .map(v => getLetterIndexInAlphabet(v) + 1);
 
     [...Array<number>(26).keys()].forEach(key => {
       this._rightToLeftRW.set(key, getLetterIndexInAlphabet(wiring[key]));
@@ -129,7 +130,6 @@ export class Rotor extends Wheel implements IRotor {
     if (letter || letter === 0) {
       return letter;
     } else {
-      console.error("RTLE ERROR.");
       return -1;
     }
   }
@@ -140,7 +140,6 @@ export class Rotor extends Wheel implements IRotor {
     if (letter || letter === 0) {
       return letter;
     } else {
-      console.error("LTRE ERROR.");
       return -1;
     }
   }

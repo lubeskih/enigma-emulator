@@ -38,7 +38,11 @@ export class Keyboard extends Component<IProps, {}> {
             Tastatur
           </span>{" "}
           <span>
-            {this.props.store.lockSettings ? null : (
+            {this.props.store.settingsAreLocked ? (
+              <code className="note gray">
+                Hint: you can click the buttons or use your keyboard.
+              </code>
+            ) : (
               <code className="note gray">
                 Configure and lock the settings before using the keyboard.
               </code>
@@ -57,7 +61,7 @@ export class Keyboard extends Component<IProps, {}> {
               name={letter}
               disabled={
                 this.props.store.plugboard.excessPlug ||
-                !this.props.store.lockSettings
+                !this.props.store.settingsAreLocked
                   ? true
                   : false
               }
@@ -77,7 +81,7 @@ export class Keyboard extends Component<IProps, {}> {
               name={letter}
               disabled={
                 this.props.store.plugboard.excessPlug ||
-                !this.props.store.lockSettings
+                !this.props.store.settingsAreLocked
                   ? true
                   : false
               }
@@ -98,7 +102,7 @@ export class Keyboard extends Component<IProps, {}> {
               className="button"
               disabled={
                 this.props.store.plugboard.excessPlug ||
-                !this.props.store.lockSettings
+                !this.props.store.settingsAreLocked
                   ? true
                   : false
               }

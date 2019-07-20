@@ -1,10 +1,10 @@
 // Libraries
 import { observable } from "mobx";
-import { Plugboard } from "../enigma-parts/plugboard";
+import { Plugboard } from "../enigma-logic/plugboard";
 
 import * as c from "../constants";
 
-import { Rotor, Wheel, Reflector } from "../enigma-parts/wheel";
+import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
 
 /**
  * Store
@@ -23,8 +23,8 @@ export class Store {
   @observable OUTPUT: string = "";
 
   // Settings
-  @observable enigmaType: "I" | "M3" | "M4" | null = "I";
-  @observable lockSettings: boolean = false;
+  @observable enigmaModel: "I" | "M3" | "M4" | null = "I";
+  @observable settingsAreLocked: boolean = false;
 
   // Rotors / Reflectors / Entry Wheel
   EW = new Wheel(c.EN_ETW);
@@ -42,91 +42,60 @@ export class Store {
   UKW_B = new Reflector(c.EN_UKW_B);
   UKW_C = new Reflector(c.EN_UKW_C);
 
-  /**
-   * MODEL M4 SPECIFICS
-   */
-
   M4_EXTRA_WHEEL_BETA = new Rotor(c.M4_EXTRA_WHEEL_BETA, "NONE", "NONE");
   M4_EXTRA_WHEEL_GAMMA = new Rotor(c.M4_EXTRA_WHEEL_GAMMA, "NONE", "NONE");
   M4_EN_UKW_B_THIN = new Reflector(c.M4_EN_UKW_B_THIN);
   M4_EN_UKW_C_THIN = new Reflector(c.M4_EN_UKW_C_THIN);
 
-  EXTRA_WHEEL: Rotor = this.M4_EXTRA_WHEEL_BETA;
-  REFLECTOR: Reflector = this.UKW_A;
+  // Enigma I
+  @observable ENIGMA_I_FR: Rotor = this.R1;
+  @observable ENIGMA_I_MR: Rotor = this.R2;
+  @observable ENIGMA_I_SR: Rotor = this.R3;
+  @observable ENIGMA_I_REFLECTOR: Reflector = this.UKW_A;
+  // #########
 
-  // Stacked Rotors
-  stackedRotors: Rotor[] = [this.R1, this.R2, this.R3];
+  // Enigma M3
+  @observable ENIGMA_M3_FR: Rotor = this.R1;
+  @observable ENIGMA_M3_MR: Rotor = this.R2;
+  @observable ENIGMA_M3_SR: Rotor = this.R3;
+  @observable ENIGMA_M3_REFLECTOR: Reflector = this.UKW_B;
+  // #########
 
-  changeStackedRotor(rotorPositionFromRightToLeft: number, rotorType: string) {
-    this.stackedRotors[
-      rotorPositionFromRightToLeft
-    ] = this.getRotorObjectByRotorType(rotorType);
-  }
+  // Enigma M4
+  @observable ENIGMA_M4_FR: Rotor = this.R1;
+  @observable ENIGMA_M4_MR: Rotor = this.R2;
+  @observable ENIGMA_M4_SR: Rotor = this.R3;
+  @observable ENIGMA_M4_EW: Rotor = this.M4_EXTRA_WHEEL_BETA;
+  @observable ENIGMA_M4_REFLECTOR: Reflector = this.M4_EN_UKW_B_THIN;
+  // #########
 
   cipher(letter: string) {
-    let first: string = letter;
+    const enteringLetter: string = letter;
 
     letter = this.plugboard.getPlug(letter);
-    let entryLetter = this.EW.getIndexOfLetterInWiring(letter);
+    let toBeCipheredLetter = this.EW.getIndexOfLetterInWiring(letter);
 
-    if (
-      this.stackedRotors[0].turnover === this.stackedRotors[0].groundSettings
-    ) {
-      this.stackedRotors[0].step();
-
-      if (
-        this.stackedRotors[1].groundSettings === this.stackedRotors[1].turnover
-      ) {
-        this.stackedRotors[1].step();
-        this.stackedRotors[2].step();
-      } else {
-        this.stackedRotors[1].step();
-      }
-    } else {
-      this.stackedRotors[0].step();
-
-      if (
-        this.stackedRotors[1].groundSettings === this.stackedRotors[1].turnover
-      ) {
-        this.stackedRotors[1].step();
-        this.stackedRotors[2].step();
-      }
+    switch (this.enigmaModel) {
+      case "I":
+        this.stepRotorsFromEnigmaOne();
+        toBeCipheredLetter = this.cipherFromEnigmaOne(toBeCipheredLetter);
+        break;
+      case "M3":
+        this.stepRotorsFromEnigmaM3();
+        toBeCipheredLetter = this.cipherFromEnigmaM3(toBeCipheredLetter);
+        break;
+      case "M4":
+        this.stepRotorsFromEnigmaM4();
+        toBeCipheredLetter = this.cipherFromEnigmaM4(toBeCipheredLetter);
+        break;
     }
 
-    for (let i = 0; i <= 2; i++) {
-      entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
-
-      entryLetter = this.stackedRotors[i].calcRightToLeftExitContact(
-        entryLetter
-      );
-    }
-
-    if (this.enigmaType === "M4") {
-      entryLetter = this.EXTRA_WHEEL.calcEntryContact(entryLetter);
-      entryLetter = this.EXTRA_WHEEL.calcRightToLeftExitContact(entryLetter);
-    }
-
-    entryLetter = this.REFLECTOR.getReflectedEndpoint(entryLetter);
-
-    if (this.enigmaType === "M4") {
-      entryLetter = this.EXTRA_WHEEL.calcEntryContact(entryLetter);
-      entryLetter = this.EXTRA_WHEEL.calcLeftToRightExitContact(entryLetter);
-    }
-
-    for (let i = 2; i >= 0; i--) {
-      entryLetter = this.stackedRotors[i].calcEntryContact(entryLetter);
-
-      entryLetter = this.stackedRotors[i].calcLeftToRightExitContact(
-        entryLetter
-      );
-    }
-
-    letter = this.plugboard.getPlug(c.ALPHABET[entryLetter]);
+    letter = this.plugboard.getPlug(c.ALPHABET[toBeCipheredLetter]);
 
     if (this.INPUT && this.INPUT.replace(/\s/g, "").length % 4 === 0) {
-      this.INPUT += " " + first;
+      this.INPUT += " " + enteringLetter;
     } else {
-      this.INPUT += first;
+      this.INPUT += enteringLetter;
     }
 
     if (this.OUTPUT && this.OUTPUT.replace(/\s/g, "").length % 4 === 0) {
@@ -138,19 +107,212 @@ export class Store {
     this.lastLamp = letter;
   }
 
-  resetSettings() {
-    for (let i = 0; i < this.stackedRotors.length; i++) {
-      this.stackedRotors[i].groundSettings = 1;
-      this.stackedRotors[i].ringSettings = 1;
-      this.stackedRotors[i].offset = 0;
+  resetEnigmaSettings() {
+    let stackRotors: Rotor[];
+    let stackRotorsLen = 2; // stackRotors.length fails for some reason :/ gotta investigate this.
+
+    switch (this.enigmaModel) {
+      case "I":
+        stackRotors = [this.ENIGMA_I_FR, this.ENIGMA_I_MR, this.ENIGMA_I_SR];
+        break;
+      case "M3":
+        stackRotors = [this.ENIGMA_M3_FR, this.ENIGMA_M3_MR, this.ENIGMA_M3_SR];
+        break;
+      case "M4":
+        stackRotors = [
+          this.ENIGMA_M4_FR,
+          this.ENIGMA_M4_MR,
+          this.ENIGMA_M4_SR,
+          this.ENIGMA_M4_EW
+        ];
+
+        stackRotorsLen = 3;
+        break;
+      default:
+        console.error("There was an error while resetting the settings.");
+        return null;
     }
 
+    for (let i = 0; i <= stackRotorsLen; i++) {
+      stackRotors[i].groundSettings = 1;
+      stackRotors[i].ringSettings = 1;
+      stackRotors[i].offset = 0;
+    }
+
+    // Reset plugboard
     this.plugboard.resetAll();
     this.plugboard.excessPlug = null;
     c.ALPHABET.map(letter => this.plugs.set(letter, false));
+
+    // Reset lamps
     this.lastLamp = "";
+
+    // Reset the logs
     this.OUTPUT = "";
     this.INPUT = "";
+  }
+
+  stepRotorsFromEnigmaOne() {
+    // console.log(this.ENIGMA_I_FR.turnover);
+    if (this.ENIGMA_I_FR.turnover.includes(this.ENIGMA_I_FR.groundSettings)) {
+      this.ENIGMA_I_FR.step();
+
+      if (this.ENIGMA_I_MR.turnover.includes(this.ENIGMA_I_MR.groundSettings)) {
+        this.ENIGMA_I_MR.step();
+        this.ENIGMA_I_SR.step();
+      } else {
+        this.ENIGMA_I_MR.step();
+      }
+    } else {
+      this.ENIGMA_I_FR.step();
+
+      if (this.ENIGMA_I_MR.turnover.includes(this.ENIGMA_I_MR.groundSettings)) {
+        this.ENIGMA_I_MR.step();
+        this.ENIGMA_I_SR.step();
+      }
+    }
+  }
+
+  stepRotorsFromEnigmaM3() {
+    if (this.ENIGMA_M3_FR.turnover.includes(this.ENIGMA_M3_FR.groundSettings)) {
+      this.ENIGMA_M3_FR.step();
+
+      if (
+        this.ENIGMA_M3_MR.turnover.includes(this.ENIGMA_M3_MR.groundSettings)
+      ) {
+        this.ENIGMA_M3_MR.step();
+        this.ENIGMA_M3_SR.step();
+      } else {
+        this.ENIGMA_M3_MR.step();
+      }
+    } else {
+      this.ENIGMA_M3_FR.step();
+
+      if (
+        this.ENIGMA_M3_MR.turnover.includes(this.ENIGMA_M3_MR.groundSettings)
+      ) {
+        this.ENIGMA_M3_MR.step();
+        this.ENIGMA_M3_SR.step();
+      }
+    }
+  }
+
+  stepRotorsFromEnigmaM4() {
+    if (this.ENIGMA_M4_FR.turnover.includes(this.ENIGMA_M4_FR.groundSettings)) {
+      this.ENIGMA_M4_FR.step();
+
+      if (
+        this.ENIGMA_M4_MR.turnover.includes(this.ENIGMA_M4_MR.groundSettings)
+      ) {
+        this.ENIGMA_M4_MR.step();
+        this.ENIGMA_M4_SR.step();
+      } else {
+        this.ENIGMA_M4_MR.step();
+      }
+    } else {
+      this.ENIGMA_M4_FR.step();
+
+      if (
+        this.ENIGMA_M4_MR.turnover.includes(this.ENIGMA_M4_MR.groundSettings)
+      ) {
+        this.ENIGMA_M4_MR.step();
+        this.ENIGMA_M4_SR.step();
+      }
+    }
+  }
+
+  cipherFromEnigmaOne(toBeCipheredLetter: number): number {
+    let stackRotors: Rotor[] = [
+      this.ENIGMA_I_FR,
+      this.ENIGMA_I_MR,
+      this.ENIGMA_I_SR
+    ];
+
+    for (let i = 0; i <= 2; i++) {
+      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
+      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+        toBeCipheredLetter
+      );
+    }
+
+    toBeCipheredLetter = this.ENIGMA_I_REFLECTOR.getReflectedEndpoint(
+      toBeCipheredLetter
+    );
+
+    for (let i = 2; i >= 0; i--) {
+      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
+      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+        toBeCipheredLetter
+      );
+    }
+
+    return toBeCipheredLetter;
+  }
+
+  cipherFromEnigmaM3(toBeCipheredLetter: number): number {
+    let stackRotors: Rotor[] = [
+      this.ENIGMA_M3_FR,
+      this.ENIGMA_M3_MR,
+      this.ENIGMA_M3_SR
+    ];
+
+    for (let i = 0; i <= 2; i++) {
+      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
+      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+        toBeCipheredLetter
+      );
+    }
+
+    toBeCipheredLetter = this.ENIGMA_M3_REFLECTOR.getReflectedEndpoint(
+      toBeCipheredLetter
+    );
+
+    for (let i = 2; i >= 0; i--) {
+      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
+      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+        toBeCipheredLetter
+      );
+    }
+
+    return toBeCipheredLetter;
+  }
+
+  cipherFromEnigmaM4(toBeCipheredLetter: number): number {
+    let stackRotors: Rotor[] = [
+      this.ENIGMA_M4_FR,
+      this.ENIGMA_M4_MR,
+      this.ENIGMA_M4_SR
+    ];
+
+    for (let i = 0; i <= 2; i++) {
+      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
+      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+        toBeCipheredLetter
+      );
+    }
+
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calcEntryContact(toBeCipheredLetter);
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calcRightToLeftExitContact(
+      toBeCipheredLetter
+    );
+
+    toBeCipheredLetter = this.ENIGMA_M4_REFLECTOR.getReflectedEndpoint(
+      toBeCipheredLetter
+    );
+
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calcEntryContact(toBeCipheredLetter);
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calcLeftToRightExitContact(
+      toBeCipheredLetter
+    );
+
+    for (let i = 2; i >= 0; i--) {
+      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
+      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+        toBeCipheredLetter
+      );
+    }
+
+    return toBeCipheredLetter;
   }
 
   /////////////////////////

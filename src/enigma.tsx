@@ -8,15 +8,31 @@ import "bootstrap/dist/css/bootstrap.css";
 
 // Components
 import { Keyboard } from "./components/keyboard";
-import { Plugboard } from "./components/plugboard";
-import { Lamps } from "./components/lamps";
-import { Settings } from "./components/settings";
+import { Plugboard } from "./components/enigma-plugboard/plugboard";
+import { Lamps } from "./components/enigma-lamps/lamps";
+import { EnigmaSettings } from "./components/settings";
 import { CipherLog } from "./components/cipher-log";
-import { InfoPanel } from "./components/info-panel";
+import { ALPHABET } from "./constants";
 
 // Store
 import { Store } from "./store";
 const store = new Store();
+
+document.addEventListener("keypress", logKey);
+
+function logKey(e: any) {
+  let letter: string = e.key.toUpperCase();
+
+  if (
+    ALPHABET.includes(letter) &&
+    store.settingsAreLocked &&
+    !store.plugboard.excessPlug
+  ) {
+    store.cipher(letter);
+  } else {
+    return null;
+  }
+}
 
 @observer
 class Enigma extends Component {
@@ -29,7 +45,7 @@ class Enigma extends Component {
             <Keyboard store={store} />
             <Plugboard store={store} />
 
-            {store.enigmaType === "M4" ? (
+            {store.enigmaModel === "M4" ? (
               <div className="m4-note mt-5">
                 NOTE: You are using the{" "}
                 <span style={{ textDecoration: "underline" }}>
@@ -41,17 +57,12 @@ class Enigma extends Component {
             ) : null}
           </div>
           <div className="col-md-4 mt-5">
-            <Settings store={store} />
+            <EnigmaSettings store={store} />
           </div>
         </div>
         <div>
           <CipherLog store={store} />
         </div>
-        {store.lockSettings === false ? (
-          <div className="col-12 info-modal mt-3">
-            <InfoPanel />
-          </div>
-        ) : null}
       </div>
     );
   }

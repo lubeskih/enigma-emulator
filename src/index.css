@@ -25,7 +25,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.lockSettings {
+.settingsAreLocked {
   font-family: "Ubuntu Mono", monospace;
   color: #666;
   text-align: center;
@@ -52,7 +52,7 @@ body {
   border-radius: 0;
 }
 
-.lockSettings .custom-checkbox .custom-control-label::before {
+.settingsAreLocked .custom-checkbox .custom-control-label::before {
   box-shadow: none;
   border-radius: 0;
 }

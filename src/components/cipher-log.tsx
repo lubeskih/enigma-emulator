@@ -19,7 +19,7 @@ export class CipherLog extends Component<IProps, {}> {
   render() {
     return (
       <>
-        <Collapse in={this.props.store.lockSettings}>
+        <Collapse in={this.props.store.settingsAreLocked}>
           <div id="cipher-log" className="row mt-3">
             <div className="col-md-6">
               <h5>Input Log</h5>
