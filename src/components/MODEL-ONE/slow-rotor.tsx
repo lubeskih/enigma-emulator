@@ -1,13 +1,17 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-// import { computed } from "mobx";
 import Select from "react-select";
 
-import { FIVE_ROTOR_OPTIONS, NUMBER_OPTIONS } from "../../constants";
+// Internal
+import { NUMBER_OPTIONS } from "../../constants";
+import { IDraggableRotor } from "../../types";
 
 // Store
 import { Store } from "../../store";
+
+// Components
+import RotorPosition from "../droppable-position";
 
 // Component props
 interface IProps {
@@ -27,6 +31,11 @@ export class EnigmaOneSlowRotor extends Component<IProps, {}> {
   constructor(props: IProps) {
     super(props);
   }
+
+  // Handle rotor drop
+  onPositionThreeDrop = (item: IDraggableRotor) => {
+    this.props.store.updatePositionThree(item);
+  };
 
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
@@ -56,22 +65,11 @@ export class EnigmaOneSlowRotor extends Component<IProps, {}> {
             <small>
               <code className="info">SLOW ROTOR (left-hand)</code>
             </small>
-            <Select
-              theme={theme => ({
-                // NOTE: HOW DO I NOT REPEAT THIS?
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={FIVE_ROTOR_OPTIONS[2]}
-              options={FIVE_ROTOR_OPTIONS}
-              onChange={this.onRotorOptionChange}
+            <RotorPosition
+              droppedItem={store.positionThree}
+              onDrop={this.onPositionThreeDrop}
+              store={store}
+              position={3}
             />
           </div>
           <div className="col-md-6">

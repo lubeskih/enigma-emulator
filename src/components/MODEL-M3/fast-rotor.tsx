@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
-import { EIGHT_ROTOR_OPTIONS, LETTER_OPTIONS, ALPHABET } from "../../constants";
+import {
+  /**EIGHT_ROTOR_OPTIONS */ LETTER_OPTIONS,
+  ALPHABET
+} from "../../constants";
 
 // Store
 import { Store } from "../../store";
@@ -55,7 +58,7 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
             <small>
               <code className="info">FAST ROTOR (right-hand)</code>
             </small>
-            <Select
+            {/* <Select
               theme={theme => ({
                 // NOTE: HOW DO I NOT REPEAT THIS?
                 ...theme,
@@ -71,7 +74,7 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
               defaultValue={EIGHT_ROTOR_OPTIONS[0]}
               options={EIGHT_ROTOR_OPTIONS}
               onChange={this.onRotorOptionChange}
-            />
+            /> */}
           </div>
           <div className="col-md-6">
             <small>

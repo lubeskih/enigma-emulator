@@ -3,6 +3,7 @@ import { observable } from "mobx";
 import { Plugboard } from "../enigma-logic/plugboard";
 
 import * as c from "../constants";
+import { IDraggableRotor } from "../types";
 
 import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
 
@@ -10,6 +11,14 @@ import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
  * Store
  */
 export class Store {
+  constructor() {
+    this.enigmaM3Map.set("R1", true);
+    this.enigmaM3Map.set("R2", true);
+    this.enigmaM3Map.set("R3", true);
+    this.enigmaM3Map.set("R4", false);
+    this.enigmaM3Map.set("R5", false);
+  }
+
   // Steckerbrett = Plugboard
   public plugboard = new Plugboard();
 
@@ -372,5 +381,117 @@ export class Store {
 
   getLetterByNumber(num: number): string {
     return c.ALPHABET[num - 1];
+  }
+
+  ///////////////////
+  // DRAG AND DROP //
+  ///////////////////
+
+  @observable enigmaM3Map = new Map<string, boolean>();
+
+  @observable positionOne: IDraggableRotor | null = {
+    id: "R1",
+    name: "Rotor I"
+  };
+
+  @observable positionTwo: IDraggableRotor | null = {
+    id: "R2",
+    name: "Rotor II"
+  };
+
+  @observable positionThree: IDraggableRotor | null = {
+    id: "R3",
+    name: "Rotor III"
+  };
+
+  updatePositionOne(item: IDraggableRotor) {
+    if (this.positionOne) {
+      let getCurrentValue = this.enigmaM3Map.get(this.positionOne.id);
+
+      if (typeof getCurrentValue === "boolean") {
+        this.enigmaM3Map.set(this.positionOne.id, !getCurrentValue);
+      }
+    }
+
+    this.enigmaM3Map.set(item.id, true);
+    this.positionOne = item;
+  }
+
+  updatePositionTwo(item: IDraggableRotor) {
+    if (this.positionTwo) {
+      let getCurrentValue = this.enigmaM3Map.get(this.positionTwo.id);
+
+      if (typeof getCurrentValue === "boolean") {
+        this.enigmaM3Map.set(this.positionTwo.id, !getCurrentValue);
+      }
+    }
+
+    this.enigmaM3Map.set(item.id, true);
+    this.positionTwo = item;
+  }
+
+  updatePositionThree(item: IDraggableRotor) {
+    if (this.positionThree) {
+      let getCurrentValue = this.enigmaM3Map.get(this.positionThree.id);
+
+      if (typeof getCurrentValue === "boolean") {
+        this.enigmaM3Map.set(this.positionThree.id, !getCurrentValue);
+      }
+    }
+
+    this.enigmaM3Map.set(item.id, true);
+    this.positionThree = item;
+  }
+
+  checkIfAlreadyLoaded(id: string) {
+    let a = this.enigmaM3Map.get(id);
+
+    if (a) {
+      return a;
+    } else {
+      return false;
+    }
+  }
+
+  unloadRotorByPosition(position: number) {
+    switch (position) {
+      case 1:
+        if (this.positionOne) {
+          this.enigmaM3Map.set(this.positionOne.id, false);
+        }
+
+        this.positionOne = null;
+        break;
+      case 2:
+        if (this.positionTwo) {
+          this.enigmaM3Map.set(this.positionTwo.id, false);
+        }
+
+        this.positionTwo = null;
+
+        break;
+      case 3:
+        if (this.positionThree) {
+          this.enigmaM3Map.set(this.positionThree.id, false);
+        }
+
+        this.positionThree = null;
+        break;
+      default:
+        return null;
+    }
+  }
+
+  returnPositionByPositionNumber(position: number) {
+    switch (position) {
+      case 1:
+        return this.positionOne;
+      case 2:
+        return this.positionTwo;
+      case 3:
+        return this.positionThree;
+      default:
+        return this.positionOne;
+    }
   }
 }

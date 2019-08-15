@@ -243,3 +243,90 @@ h5 {
   font-family: "Ubuntu Mono";
   text-align: center;
 }
+
+/* DRAG AND DROP */
+
+.unloadButton {
+  color: #333;
+  padding: 0px 4px 0px 4px;
+  height: 100%;
+  text-align: center;
+  line-height: normal;
+  float: right;
+  font-family: monospace;
+  border: 0.5px solid gray;
+  background-color: #fff;
+}
+
+.unloadButton:hover {
+  background-color: lightgrey;
+}
+
+.position {
+  margin-top: 6px;
+  width: 100%;
+  margin-right: 5px;
+  color: #333;
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: normal;
+  float: left;
+  font-family: "Ubuntu Mono";
+  border: 1.5px dashed gray;
+}
+
+.positionLoaded {
+  margin-top: 6px;
+  width: 100%;
+  margin-right: 5px;
+  color: #333;
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: normal;
+  float: left;
+  font-family: "Ubuntu Mono";
+  border: 1.5px solid gray;
+}
+
+.rotorStyle {
+  border: 1px solid #333;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  cursor: move;
+  text-align: center;
+  display: block;
+}
+
+.rotorLoaded {
+  background-color: white;
+  padding: 0.5rem 1rem;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  cursor: default;
+  border: 0.5px solid #999;
+  color: rgb(92, 92, 92);
+  background-image: linear-gradient(
+    45deg,
+    #ffffff 25%,
+    #f2f2f2 25%,
+    #f2f2f2 50%,
+    #ffffff 50%,
+    #ffffff 75%,
+    #f2f2f2 75%,
+    #f2f2f2 100%
+  );
+  background-size: 11.63px 11.63px;
+  text-align: center;
+  display: block;
+}
+
+.rotors {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px;
+  justify-content: center;
+}

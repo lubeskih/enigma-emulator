@@ -6,3 +6,8 @@ export interface IRotor {
 export interface IWheel {
   wiring: string;
 }
+
+export interface IDraggableRotor {
+  id: string;
+  name: string;
+}

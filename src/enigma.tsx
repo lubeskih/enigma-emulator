@@ -1,6 +1,8 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { DndProvider } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 
 // Style
 import "./enigma.css";
@@ -57,7 +59,9 @@ class Enigma extends Component {
             ) : null}
           </div>
           <div className="col-md-4 mt-5">
-            <EnigmaSettings store={store} />
+            <DndProvider backend={HTML5Backend}>
+              <EnigmaSettings store={store} />
+            </DndProvider>
           </div>
         </div>
         <div>
