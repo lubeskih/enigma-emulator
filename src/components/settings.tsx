@@ -19,9 +19,6 @@ import { EnigmaModelM4Settings } from "./MODEL-M4";
 // Store
 import { Store } from "../store";
 
-// Types
-import { IDraggableRotor } from "../types";
-
 // Component properties
 interface IProps {
   store: Store;
@@ -53,10 +50,10 @@ export class EnigmaSettings extends Component<IProps, {}> {
             Maschineneinstellungen
           </span>
           <hr />
-          <div className="row mb-3">
-            <div className="col-md-12 mb-3">
+          <div className="row mb-2">
+            <div className="col-md-12 mb-2">
               <small>
-                <code className="info">Enigma model</code>
+                <code className="noInfo">ENIGMA MODEL</code>
               </small>
               <Select
                 theme={theme => ({
@@ -136,6 +133,7 @@ class RenderLockCheckbox extends Component<IProps, {}> {
     store.lastLamp = "";
     store.INPUT = "";
     store.OUTPUT = "";
+    store.FIRST_LETTER = "";
 
     store.settingsAreLocked = !this.props.store.settingsAreLocked;
   };
@@ -185,36 +183,38 @@ class RenderRotors extends React.Component<IRenderRotors, {}> {
     let store = this.props.store;
 
     return (
-      <>
-        <small>
-          <code className="info">Choose a rotor</code>
-        </small>
-        <div className="rotors">
-          {store.enigmaModel === "I" ? (
-            <>
-              {FIVE_ROTOR_OPTIONS.map(rotor => (
-                <DraggableRotor
-                  key={rotor.id}
-                  store={store}
-                  id={rotor.id}
-                  name={rotor.name}
-                />
-              ))}
-            </>
-          ) : (
-            <>
-              {EIGHT_ROTOR_OPTIONS.map(rotor => (
-                <DraggableRotor
-                  key={rotor.id}
-                  store={store}
-                  id={rotor.id}
-                  name={rotor.name}
-                />
-              ))}
-            </>
-          )}
+      <div className="row mb-2">
+        <div className="col-md-12 mb-2">
+          <small>
+            <code className="noInfo">Choose a rotor</code>
+          </small>
+          <div className="rotors">
+            {store.enigmaModel === "I" ? (
+              <>
+                {FIVE_ROTOR_OPTIONS.map(rotor => (
+                  <DraggableRotor
+                    key={rotor.id}
+                    store={store}
+                    id={rotor.id}
+                    name={rotor.name}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                {EIGHT_ROTOR_OPTIONS.map(rotor => (
+                  <DraggableRotor
+                    key={rotor.id}
+                    store={store}
+                    id={rotor.id}
+                    name={rotor.name}
+                  />
+                ))}
+              </>
+            )}
+          </div>
         </div>
-      </>
+      </div>
     );
   }
 }

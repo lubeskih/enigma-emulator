@@ -54,7 +54,7 @@ export class Plug extends Component<IProps, {}> {
         />
         <small>
           <code
-            className={`info ${
+            className={`plugPointer ${
               this.props.store.plugboard.excessPlug === this.letter
                 ? "excess"
                 : null

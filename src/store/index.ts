@@ -22,6 +22,9 @@ export class Store {
     this.enigmaM3Map.set("VIII", false);
   }
 
+  // Help
+  @observable helpVisible = false;
+
   // Steckerbrett = Plugboard
   public plugboard = new Plugboard();
 
@@ -33,6 +36,7 @@ export class Store {
 
   @observable INPUT: string = "";
   @observable OUTPUT: string = "";
+  @observable FIRST_LETTER: string = "";
 
   // Settings
   @observable enigmaModel: "I" | "M3" | "M4" | null = "I";
@@ -77,6 +81,7 @@ export class Store {
   // #########
 
   cipher(letter: string) {
+    this.FIRST_LETTER = letter;
     const enteringLetter: string = letter;
 
     letter = this.plugboard.getPlug(letter);
@@ -115,6 +120,32 @@ export class Store {
   }
 
   resetEnigmaSettings() {
+    // Reset plugboard
+    this.plugboard.resetAll();
+    this.plugboard.excessPlug = null;
+    c.ALPHABET.map(letter => this.plugs.set(letter, false));
+
+    // Reset lamps
+    this.lastLamp = "";
+
+    // Reset the logs
+    this.OUTPUT = "";
+    this.INPUT = "";
+
+    // Reset the positions
+    this.enigmaM3Map.set("I", false);
+    this.enigmaM3Map.set("II", false);
+    this.enigmaM3Map.set("III", false);
+    this.enigmaM3Map.set("IV", false);
+    this.enigmaM3Map.set("V", false);
+    this.enigmaM3Map.set("VI", false);
+    this.enigmaM3Map.set("VII", false);
+    this.enigmaM3Map.set("VIII", false);
+
+    this.positionOne = null;
+    this.positionTwo = null;
+    this.positionThree = null;
+
     if (
       !this.ENIGMA_ROTOR_POSITION_ONE ||
       !this.ENIGMA_ROTOR_POSITION_TWO ||
@@ -161,18 +192,6 @@ export class Store {
       stackRotors[i].ringSettings = 1;
       stackRotors[i].offset = 0;
     }
-
-    // Reset plugboard
-    this.plugboard.resetAll();
-    this.plugboard.excessPlug = null;
-    c.ALPHABET.map(letter => this.plugs.set(letter, false));
-
-    // Reset lamps
-    this.lastLamp = "";
-
-    // Reset the logs
-    this.OUTPUT = "";
-    this.INPUT = "";
   }
 
   stepRotors() {
@@ -181,13 +200,8 @@ export class Store {
       !this.ENIGMA_ROTOR_POSITION_TWO ||
       !this.ENIGMA_ROTOR_POSITION_THREE
     ) {
-      console.log("NULL");
       return null;
     }
-
-    console.log(this.ENIGMA_ROTOR_POSITION_ONE);
-    console.log(this.ENIGMA_ROTOR_POSITION_TWO);
-    console.log(this.ENIGMA_ROTOR_POSITION_THREE);
 
     if (
       this.ENIGMA_ROTOR_POSITION_ONE.turnover.includes(
@@ -410,8 +424,6 @@ export class Store {
   @observable positionThree: IDraggableRotor | null = null;
 
   updatePositionOne(item: IDraggableRotor) {
-    console.log("TRIGGERING POSITION ONE");
-    console.log(item);
     if (this.positionOne) {
       let getCurrentValue = this.enigmaM3Map.get(this.positionOne.id);
 
@@ -426,8 +438,6 @@ export class Store {
   }
 
   updatePositionTwo(item: IDraggableRotor) {
-    console.log("TRIGGERING POSITION TWO");
-    console.log(item);
     if (this.positionTwo) {
       let getCurrentValue = this.enigmaM3Map.get(this.positionTwo.id);
 
@@ -442,8 +452,6 @@ export class Store {
   }
 
   updatePositionThree(item: IDraggableRotor) {
-    console.log("TRIGGERING POSITION THREE");
-    console.log(item);
     if (this.positionThree) {
       let getCurrentValue = this.enigmaM3Map.get(this.positionThree.id);
 
@@ -454,7 +462,6 @@ export class Store {
 
     this.enigmaM3Map.set(item.id, true);
     this.positionThree = item;
-    console.log(this.getRotorObjectByRotorType(item.id));
     this.ENIGMA_ROTOR_POSITION_THREE = this.getRotorObjectByRotorType(item.id);
   }
 

@@ -69,7 +69,7 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
 
     return (
       <>
-        <div className="row mb-3">
+        <div className="row mb-3 encapsulate">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">MIDDLE ROTOR</code>
@@ -84,7 +84,7 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
           {store.positionTwo ? (
             <>
               {" "}
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <small>
                   <code className="info">Ringstellung</code>
                 </small>
@@ -124,7 +124,7 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
                   onChange={this.onRingSettingsChange}
                 />
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <small>
                   <code className="info">Grundstellung</code>
                 </small>

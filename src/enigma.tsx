@@ -15,6 +15,7 @@ import { Lamps } from "./components/enigma-lamps/lamps";
 import { EnigmaSettings } from "./components/settings";
 import { CipherLog } from "./components/cipher-log";
 import { ALPHABET } from "./constants";
+import { HelpModal } from "./components/info-modal";
 
 // Store
 import { Store } from "./store";
@@ -38,36 +39,52 @@ function logKey(e: any) {
 
 @observer
 class Enigma extends Component {
+  handleCloseHelp = () => {
+    store.helpVisible = false;
+  };
+
+  handleOpenHelp = () => {
+    store.helpVisible = true;
+  };
+
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 mt-5 enigma">
-            <Lamps store={store} />
-            <Keyboard store={store} />
-            <Plugboard store={store} />
+      <>
+        <HelpModal store={store} onClose={this.handleCloseHelp} />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 mt-5 enigma">
+              <Lamps store={store} />
+              <Keyboard store={store} />
+              <Plugboard store={store} />
 
-            {store.enigmaModel === "M4" ? (
-              <div className="m4-note mt-5">
-                NOTE: You are using the{" "}
-                <span style={{ textDecoration: "underline" }}>
-                  Enigma model M4
-                </span>{" "}
-                which introduces an extra wheel which is{" "}
-                <span style={{ textDecoration: "underline" }}>static</span>.
-              </div>
-            ) : null}
+              {store.enigmaModel === "M4" ? (
+                <div className="m4-note mt-5">
+                  NOTE: You are using the{" "}
+                  <span style={{ textDecoration: "underline" }}>
+                    Enigma model M4
+                  </span>{" "}
+                  which introduces an extra wheel which is{" "}
+                  <span style={{ textDecoration: "underline" }}>static</span>.
+                </div>
+              ) : null}
+            </div>
+            <div className="col-md-4 mt-5">
+              <DndProvider backend={HTML5Backend}>
+                <EnigmaSettings store={store} />
+              </DndProvider>
+            </div>
           </div>
-          <div className="col-md-4 mt-5">
-            <DndProvider backend={HTML5Backend}>
-              <EnigmaSettings store={store} />
-            </DndProvider>
+          <div>
+            <CipherLog store={store} />
+          </div>
+          <div>
+            <a href="#" onClick={this.handleOpenHelp}>
+              Open modal
+            </a>
           </div>
         </div>
-        <div>
-          <CipherLog store={store} />
-        </div>
-      </div>
+      </>
     );
   }
 }

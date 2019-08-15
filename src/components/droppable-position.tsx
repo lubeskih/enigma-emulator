@@ -61,7 +61,7 @@ class RotorPosition extends Component<IProps, {}> {
             ? "Release to drop"
             : droppedItem
             ? droppedItem.name
-            : "Drop a Rotor"}
+            : "Drop a rotor"}
           {isLoaded && !store.settingsAreLocked ? (
             <button className="unloadButton" onClick={this.onUnloadRotor}>
               &times;
