@@ -1,5 +1,5 @@
 // Libraries
-import { observable } from "mobx";
+import { observable, computed } from "mobx";
 import { Plugboard } from "../enigma-logic/plugboard";
 
 import * as c from "../constants";
@@ -12,9 +12,9 @@ import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
  */
 export class Store {
   constructor() {
-    this.enigmaM3Map.set("R1", true);
-    this.enigmaM3Map.set("R2", true);
-    this.enigmaM3Map.set("R3", true);
+    this.enigmaM3Map.set("R1", false);
+    this.enigmaM3Map.set("R2", false);
+    this.enigmaM3Map.set("R3", false);
     this.enigmaM3Map.set("R4", false);
     this.enigmaM3Map.set("R5", false);
   }
@@ -55,6 +55,10 @@ export class Store {
   M4_EXTRA_WHEEL_GAMMA = new Rotor(c.M4_EXTRA_WHEEL_GAMMA, "NONE", "NONE");
   M4_EN_UKW_B_THIN = new Reflector(c.M4_EN_UKW_B_THIN);
   M4_EN_UKW_C_THIN = new Reflector(c.M4_EN_UKW_C_THIN);
+
+  @observable ENIGMA_ROTOR_POSITION_ONE: Rotor | null = null;
+  @observable ENIGMA_ROTOR_POSITION_TWO: Rotor | null = null;
+  @observable ENIGMA_ROTOR_POSITION_THREE: Rotor | null = null;
 
   // Enigma I
   @observable ENIGMA_I_FR: Rotor = this.R1;
@@ -389,20 +393,11 @@ export class Store {
 
   @observable enigmaM3Map = new Map<string, boolean>();
 
-  @observable positionOne: IDraggableRotor | null = {
-    id: "R1",
-    name: "Rotor I"
-  };
+  @observable positionOne: IDraggableRotor | null = null;
 
-  @observable positionTwo: IDraggableRotor | null = {
-    id: "R2",
-    name: "Rotor II"
-  };
+  @observable positionTwo: IDraggableRotor | null = null;
 
-  @observable positionThree: IDraggableRotor | null = {
-    id: "R3",
-    name: "Rotor III"
-  };
+  @observable positionThree: IDraggableRotor | null = null;
 
   updatePositionOne(item: IDraggableRotor) {
     if (this.positionOne) {
@@ -415,6 +410,7 @@ export class Store {
 
     this.enigmaM3Map.set(item.id, true);
     this.positionOne = item;
+    this.ENIGMA_ROTOR_POSITION_ONE = this.getRotorObjectByRotorType(item.id);
   }
 
   updatePositionTwo(item: IDraggableRotor) {
@@ -428,6 +424,7 @@ export class Store {
 
     this.enigmaM3Map.set(item.id, true);
     this.positionTwo = item;
+    this.ENIGMA_ROTOR_POSITION_TWO = this.getRotorObjectByRotorType(item.id);
   }
 
   updatePositionThree(item: IDraggableRotor) {
@@ -441,13 +438,14 @@ export class Store {
 
     this.enigmaM3Map.set(item.id, true);
     this.positionThree = item;
+    this.ENIGMA_ROTOR_POSITION_THREE = this.getRotorObjectByRotorType(item.id);
   }
 
   checkIfAlreadyLoaded(id: string) {
-    let a = this.enigmaM3Map.get(id);
+    let loaded = this.enigmaM3Map.get(id);
 
-    if (a) {
-      return a;
+    if (loaded) {
+      return loaded;
     } else {
       return false;
     }

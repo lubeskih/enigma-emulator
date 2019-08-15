@@ -32,7 +32,7 @@ class DraggableRotor extends Component<IProps, {}> {
     let alreadyLoaded = store.checkIfAlreadyLoaded(id);
 
     return connectDragSource(
-      <div style={{ width: "100px" }}>
+      <div style={{ maxWidth: "150px" }}>
         {alreadyLoaded ? (
           <div
             className="rotorLoaded"

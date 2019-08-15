@@ -5,13 +5,22 @@ import { computed } from "mobx";
 import Select from "react-select";
 import { Form } from "react-bootstrap";
 
-import { ENIGMA_MODEL_OPTIONS } from "../constants";
+// Internal
+import DraggableRotor from "./draggable-rotor";
+import {
+  ENIGMA_MODEL_OPTIONS,
+  FIVE_ROTOR_OPTIONS,
+  EIGHT_ROTOR_OPTIONS
+} from "../constants";
 import { EnigmaModelOneSettings } from "./MODEL-ONE";
 import { EnigmaModelM3Settings } from "./MODEL-M3";
 import { EnigmaModelM4Settings } from "./MODEL-M4";
 
 // Store
 import { Store } from "../store";
+
+// Types
+import { IDraggableRotor } from "../types";
 
 // Component properties
 interface IProps {
@@ -44,7 +53,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
             Maschineneinstellungen
           </span>
           <hr />
-          <div className="row mb-1">
+          <div className="row mb-3">
             <div className="col-md-12 mb-3">
               <small>
                 <code className="info">Enigma model</code>
@@ -68,6 +77,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
             </div>
           </div>
         </div>
+        <RenderRotors store={store} />
         <RenderEnigmaModel store={store} />
       </>
     );
@@ -154,6 +164,44 @@ class RenderLockCheckbox extends Component<IProps, {}> {
           ) : null}
         </div>
       </Form>
+    );
+  }
+}
+
+interface IRenderRotors {
+  store: Store;
+}
+
+@observer
+class RenderRotors extends React.Component<IRenderRotors, {}> {
+  constructor(props: IRenderRotors) {
+    super(props);
+  }
+
+  render() {
+    let store = this.props.store;
+
+    return (
+      <>
+        <small>
+          <code className="info">Choose a rotor</code>
+        </small>
+        <div className="rotors">
+          {store.enigmaModel === "I" ? (
+            <>
+              {FIVE_ROTOR_OPTIONS.map(rotor => (
+                <DraggableRotor store={store} id={rotor.id} name={rotor.name} />
+              ))}
+            </>
+          ) : (
+            <>
+              {EIGHT_ROTOR_OPTIONS.map(rotor => (
+                <DraggableRotor store={store} id={rotor.id} name={rotor.name} />
+              ))}
+            </>
+          )}
+        </div>
+      </>
     );
   }
 }

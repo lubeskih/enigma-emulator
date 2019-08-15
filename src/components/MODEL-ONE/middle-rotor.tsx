@@ -61,7 +61,7 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
 
     return (
       <>
-        <div className="row mb-4">
+        <div className="row mb-3">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">MIDDLE ROTOR</code>
@@ -73,70 +73,75 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
               position={2}
             />
           </div>
-          <div className="col-md-6">
-            <small>
-              <code className="info">Ringstellung</code>
-            </small>
-            <Select
-              theme={theme => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={[
-                {
-                  value: store.ENIGMA_I_MR.ringSettings,
-                  label: store.ENIGMA_I_MR.ringSettings
-                }
-              ]}
-              value={[
-                {
-                  value: store.ENIGMA_I_MR.ringSettings,
-                  label: store.ENIGMA_I_MR.ringSettings
-                }
-              ]}
-              options={NUMBER_OPTIONS}
-              onChange={this.onRingSettingsChange}
-            />
-          </div>
-          <div className="col-md-6">
-            <small>
-              <code className="info">Grundstellung</code>
-            </small>
-            <Select
-              theme={theme => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={[
-                {
-                  value: store.ENIGMA_I_MR.groundSettings,
-                  label: store.ENIGMA_I_MR.groundSettings
-                }
-              ]}
-              value={[
-                {
-                  value: store.ENIGMA_I_MR.groundSettings,
-                  label: store.ENIGMA_I_MR.groundSettings
-                }
-              ]}
-              options={NUMBER_OPTIONS}
-              onChange={this.onGroundSettingsChange}
-            />
-          </div>
+          {store.positionTwo ? (
+            <>
+              {" "}
+              <div className="col-md-6">
+                <small>
+                  <code className="info">Ringstellung</code>
+                </small>
+                <Select
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: "lightgray",
+                      primary: "#2b303b"
+                    }
+                  })}
+                  isDisabled={store.settingsAreLocked}
+                  className="enigma-type"
+                  defaultValue={[
+                    {
+                      value: store.ENIGMA_I_MR.ringSettings,
+                      label: store.ENIGMA_I_MR.ringSettings
+                    }
+                  ]}
+                  value={[
+                    {
+                      value: store.ENIGMA_I_MR.ringSettings,
+                      label: store.ENIGMA_I_MR.ringSettings
+                    }
+                  ]}
+                  options={NUMBER_OPTIONS}
+                  onChange={this.onRingSettingsChange}
+                />
+              </div>
+              <div className="col-md-6">
+                <small>
+                  <code className="info">Grundstellung</code>
+                </small>
+                <Select
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: "lightgray",
+                      primary: "#2b303b"
+                    }
+                  })}
+                  isDisabled={store.settingsAreLocked}
+                  className="enigma-type"
+                  defaultValue={[
+                    {
+                      value: store.ENIGMA_I_MR.groundSettings,
+                      label: store.ENIGMA_I_MR.groundSettings
+                    }
+                  ]}
+                  value={[
+                    {
+                      value: store.ENIGMA_I_MR.groundSettings,
+                      label: store.ENIGMA_I_MR.groundSettings
+                    }
+                  ]}
+                  options={NUMBER_OPTIONS}
+                  onChange={this.onGroundSettingsChange}
+                />
+              </div>
+            </>
+          ) : null}
         </div>
       </>
     );

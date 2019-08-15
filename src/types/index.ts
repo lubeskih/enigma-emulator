@@ -8,6 +8,6 @@ export interface IWheel {
 }
 
 export interface IDraggableRotor {
-  id: string;
   name: string;
+  id: string;
 }

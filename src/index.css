@@ -254,7 +254,7 @@ h5 {
   line-height: normal;
   float: right;
   font-family: monospace;
-  border: 0.5px solid gray;
+  border: 0 solid gray;
   background-color: #fff;
 }
 
@@ -267,7 +267,7 @@ h5 {
   width: 100%;
   margin-right: 5px;
   color: #333;
-  padding: 0.4rem;
+  padding: 0.7rem;
   text-align: center;
   font-size: 1rem;
   line-height: normal;
@@ -329,4 +329,5 @@ h5 {
   flex-wrap: wrap;
   margin: 6px;
   justify-content: center;
+  margin-bottom: 16px;
 }

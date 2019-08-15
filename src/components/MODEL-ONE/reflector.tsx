@@ -34,7 +34,7 @@ export class EnigmaOneReflector extends Component<IProps, {}> {
 
     return (
       <>
-        <div className="row mb-4">
+        <div className="row mb-3">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">Reflector</code>
