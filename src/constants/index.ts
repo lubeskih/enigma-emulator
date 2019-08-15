@@ -132,22 +132,22 @@ export const THIRD_ROW_LETTERS = ["P", "Y", "X", "C", "V", "B", "N", "M", "L"];
  * EIGHT_ROTOR_OPTIONS: Used in Enigma M3/M4
  */
 export const FIVE_ROTOR_OPTIONS = [
-  { id: "R1", name: "Rotor I" },
-  { id: "R2", name: "Rotor II" },
-  { id: "R3", name: "Rotor III" },
-  { id: "R4", name: "Rotor IV" },
-  { id: "R5", name: "Rotor V" }
+  { id: "I", name: "Rotor I" },
+  { id: "II", name: "Rotor II" },
+  { id: "III", name: "Rotor III" },
+  { id: "IV", name: "Rotor IV" },
+  { id: "V", name: "Rotor V" }
 ];
 
 export const EIGHT_ROTOR_OPTIONS = [
-  { id: "R1", name: "Rotor I" },
-  { id: "R2", name: "Rotor II" },
-  { id: "R3", name: "Rotor III" },
-  { id: "R4", name: "Rotor IV" },
-  { id: "R5", name: "Rotor V" },
-  { id: "R6", name: "Rotor VI" },
-  { id: "R7", name: "Rotor VII" },
-  { id: "R8", name: "Rotor VIII" }
+  { id: "I", name: "Rotor I" },
+  { id: "II", name: "Rotor II" },
+  { id: "III", name: "Rotor III" },
+  { id: "IV", name: "Rotor IV" },
+  { id: "V", name: "Rotor V" },
+  { id: "VI", name: "Rotor VI" },
+  { id: "VII", name: "Rotor VII" },
+  { id: "VIII", name: "Rotor VIII" }
 ];
 
 /**

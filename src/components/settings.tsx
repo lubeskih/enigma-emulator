@@ -147,6 +147,9 @@ class RenderLockCheckbox extends Component<IProps, {}> {
       <Form>
         <div key="custom-checkbox" className="settingsAreLocked mb-3">
           <Form.Check
+            disabled={
+              !store.positionOne || !store.positionTwo || !store.positionThree
+            }
             custom
             checked={store.settingsAreLocked}
             type="checkbox"
@@ -190,13 +193,23 @@ class RenderRotors extends React.Component<IRenderRotors, {}> {
           {store.enigmaModel === "I" ? (
             <>
               {FIVE_ROTOR_OPTIONS.map(rotor => (
-                <DraggableRotor store={store} id={rotor.id} name={rotor.name} />
+                <DraggableRotor
+                  key={rotor.id}
+                  store={store}
+                  id={rotor.id}
+                  name={rotor.name}
+                />
               ))}
             </>
           ) : (
             <>
               {EIGHT_ROTOR_OPTIONS.map(rotor => (
-                <DraggableRotor store={store} id={rotor.id} name={rotor.name} />
+                <DraggableRotor
+                  key={rotor.id}
+                  store={store}
+                  id={rotor.id}
+                  name={rotor.name}
+                />
               ))}
             </>
           )}

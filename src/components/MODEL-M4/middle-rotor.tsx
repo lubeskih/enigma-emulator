@@ -3,7 +3,12 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
-import { EIGHT_ROTOR_OPTIONS, LETTER_OPTIONS, ALPHABET } from "../../constants";
+// Internal
+import { LETTER_OPTIONS, ALPHABET } from "../../constants";
+import { IDraggableRotor } from "../../types";
+
+// Components
+import RotorPosition from "../droppable-position";
 
 // Store
 import { Store } from "../../store";
@@ -27,22 +32,39 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
     super(props);
   }
 
+  // Handle rotor drop
+  onPositionTwoDrop = (item: IDraggableRotor) => {
+    this.props.store.updatePositionTwo(item);
+  };
+
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_M4_MR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_ROTOR_POSITION_TWO = store.getRotorObjectByRotorType(
+      event.value
+    );
   };
 
   // Handle ring settings change
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_M4_MR.setRingSettings(ALPHABET.indexOf(event.value) + 1);
+
+    if (store.ENIGMA_ROTOR_POSITION_TWO) {
+      store.ENIGMA_ROTOR_POSITION_TWO.setRingSettings(
+        ALPHABET.indexOf(event.value) + 1
+      );
+    }
   };
 
   // Handle ground settings change
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_M4_MR.setGroundSettings(ALPHABET.indexOf(event.value) + 1);
+
+    if (store.ENIGMA_ROTOR_POSITION_TWO) {
+      store.ENIGMA_ROTOR_POSITION_TWO.setGroundSettings(
+        ALPHABET.indexOf(event.value) + 1
+      );
+    }
   };
 
   render() {
@@ -55,104 +77,114 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
             <small>
               <code className="info">MIDDLE ROTOR</code>
             </small>
-            <Select
-              theme={theme => ({
-                // NOTE: HOW DO I NOT REPEAT THIS?
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={EIGHT_ROTOR_OPTIONS[1]}
-              options={EIGHT_ROTOR_OPTIONS}
-              onChange={this.onRotorOptionChange}
+            <RotorPosition
+              droppedItem={store.positionTwo}
+              onDrop={this.onPositionTwoDrop}
+              store={store}
+              position={2}
             />
           </div>
-          <div className="col-md-6">
-            <small>
-              <code className="info">Ringstellung</code>
-            </small>
-            <Select
-              theme={theme => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={[
-                {
-                  value: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.ringSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.ringSettings
-                  )
-                }
-              ]}
-              value={[
-                {
-                  value: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.ringSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.ringSettings
-                  )
-                }
-              ]}
-              options={LETTER_OPTIONS}
-              onChange={this.onRingSettingsChange}
-            />
-          </div>{" "}
-          <div className="col-md-6">
-            <small>
-              <code className="info">Grundstellung</code>
-            </small>
-            <Select
-              theme={theme => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={[
-                {
-                  value: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.groundSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.groundSettings
-                  )
-                }
-              ]}
-              value={[
-                {
-                  value: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.groundSettings
-                  ),
-                  label: store.getLetterByNumber(
-                    store.ENIGMA_M4_MR.groundSettings
-                  )
-                }
-              ]}
-              options={LETTER_OPTIONS}
-              onChange={this.onGroundSettingsChange}
-            />
-          </div>
+          {store.positionTwo ? (
+            <>
+              {" "}
+              <div className="col-md-6">
+                <small>
+                  <code className="info">Ringstellung</code>
+                </small>
+                <Select
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: "lightgray",
+                      primary: "#2b303b"
+                    }
+                  })}
+                  isDisabled={store.settingsAreLocked}
+                  className="enigma-type"
+                  defaultValue={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                          )
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                          )
+                        : null
+                    }
+                  ]}
+                  value={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                          )
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                          )
+                        : null
+                    }
+                  ]}
+                  options={LETTER_OPTIONS}
+                  onChange={this.onRingSettingsChange}
+                />
+              </div>{" "}
+              <div className="col-md-6">
+                <small>
+                  <code className="info">Grundstellung</code>
+                </small>
+                <Select
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: "lightgray",
+                      primary: "#2b303b"
+                    }
+                  })}
+                  isDisabled={store.settingsAreLocked}
+                  className="enigma-type"
+                  defaultValue={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                          )
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                          )
+                        : null
+                    }
+                  ]}
+                  value={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                          )
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.getLetterByNumber(
+                            store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                          )
+                        : null
+                    }
+                  ]}
+                  options={LETTER_OPTIONS}
+                  onChange={this.onGroundSettingsChange}
+                />
+              </div>
+            </>
+          ) : null}
         </div>
       </>
     );

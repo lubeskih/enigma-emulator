@@ -31,6 +31,8 @@ class DraggableRotor extends Component<IProps, {}> {
 
     let alreadyLoaded = store.checkIfAlreadyLoaded(id);
 
+    let backgroundColor = store.settingsAreLocked ? "#fafafa" : "#fff";
+
     return connectDragSource(
       <div style={{ maxWidth: "150px" }}>
         {alreadyLoaded ? (
@@ -43,7 +45,7 @@ class DraggableRotor extends Component<IProps, {}> {
             {name}
           </div>
         ) : (
-          <div className="rotorStyle" style={{ opacity }}>
+          <div className="rotorStyle" style={{ opacity, backgroundColor }}>
             {name}
           </div>
         )}
@@ -55,7 +57,8 @@ class DraggableRotor extends Component<IProps, {}> {
 export default DragSource(
   "DraggableRotor",
   {
-    canDrag: (props: IProps) => !props.store.enigmaM3Map.get(props.id),
+    canDrag: (props: IProps) =>
+      !props.store.enigmaM3Map.get(props.id) && !props.store.settingsAreLocked,
     beginDrag(props: any, monitor: DragSourceMonitor, component: any) {
       const item = { id: props.id, name: props.name };
       return item;

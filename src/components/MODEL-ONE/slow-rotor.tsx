@@ -40,19 +40,27 @@ export class EnigmaOneSlowRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_SR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_ROTOR_POSITION_THREE = store.getRotorObjectByRotorType(
+      event.value
+    );
   };
 
   // Handle the change in the ground settings
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_SR.setGroundSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_THREE) {
+      store.ENIGMA_ROTOR_POSITION_THREE.setGroundSettings(event.value);
+    }
   };
 
   // Handle the change in the ring settings
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_SR.setRingSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_THREE) {
+      store.ENIGMA_ROTOR_POSITION_THREE.setRingSettings(event.value);
+    }
   };
 
   render() {
@@ -93,14 +101,22 @@ export class EnigmaOneSlowRotor extends Component<IProps, {}> {
                   className="enigma-type"
                   defaultValue={[
                     {
-                      value: store.ENIGMA_I_SR.ringSettings,
-                      label: store.ENIGMA_I_SR.ringSettings
+                      value: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.ringSettings
+                        : null
                     }
                   ]}
                   value={[
                     {
-                      value: store.ENIGMA_I_SR.ringSettings,
-                      label: store.ENIGMA_I_SR.ringSettings
+                      value: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.ringSettings
+                        : null
                     }
                   ]}
                   options={NUMBER_OPTIONS}
@@ -125,14 +141,22 @@ export class EnigmaOneSlowRotor extends Component<IProps, {}> {
                   className="enigma-type"
                   defaultValue={[
                     {
-                      value: store.ENIGMA_I_SR.groundSettings,
-                      label: store.ENIGMA_I_SR.groundSettings
+                      value: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.groundSettings
+                        : null
                     }
                   ]}
                   value={[
                     {
-                      value: store.ENIGMA_I_SR.groundSettings,
-                      label: store.ENIGMA_I_SR.groundSettings
+                      value: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_THREE
+                        ? store.ENIGMA_ROTOR_POSITION_THREE.groundSettings
+                        : null
                     }
                   ]}
                   options={NUMBER_OPTIONS}

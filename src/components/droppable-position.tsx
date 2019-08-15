@@ -1,7 +1,7 @@
 // Libraries
 import React, { Component } from "react";
 import { DropTarget, DropTargetMonitor, DropTargetConnector } from "react-dnd";
-
+import { observer } from "mobx-react";
 import { IDraggableRotor } from "../types";
 
 // Store
@@ -20,6 +20,7 @@ interface IProps {
   onDrop: any;
 }
 
+@observer
 class RotorPosition extends Component<IProps, {}> {
   onUnloadRotor = () => {
     this.props.store.unloadRotorByPosition(this.props.position);
@@ -42,6 +43,8 @@ class RotorPosition extends Component<IProps, {}> {
       backgroundColor = "#e0e0e0";
     } else if (canDrop) {
       backgroundColor = "#fff";
+    } else if (store.settingsAreLocked) {
+      backgroundColor = "#fafafa";
     }
 
     let isLoaded = store.returnPositionByPositionNumber(position)
@@ -59,7 +62,7 @@ class RotorPosition extends Component<IProps, {}> {
             : droppedItem
             ? droppedItem.name
             : "Drop a Rotor"}
-          {isLoaded ? (
+          {isLoaded && !store.settingsAreLocked ? (
             <button className="unloadButton" onClick={this.onUnloadRotor}>
               &times;
             </button>

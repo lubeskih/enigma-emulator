@@ -40,19 +40,27 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_FR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_ROTOR_POSITION_ONE = store.getRotorObjectByRotorType(
+      event.value
+    );
   };
 
   // Handle the change in the ground settings
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_FR.setGroundSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_ONE) {
+      store.ENIGMA_ROTOR_POSITION_ONE.setGroundSettings(event.value);
+    }
   };
 
   // Handle the change in the ring settings
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_FR.setRingSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_ONE) {
+      store.ENIGMA_ROTOR_POSITION_ONE.setRingSettings(event.value);
+    }
   };
 
   render() {
@@ -93,14 +101,22 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
                   className="enigma-type"
                   defaultValue={[
                     {
-                      value: store.ENIGMA_I_FR.ringSettings,
-                      label: store.ENIGMA_I_FR.ringSettings
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null
                     }
                   ]}
                   value={[
                     {
-                      value: store.ENIGMA_I_FR.ringSettings,
-                      label: store.ENIGMA_I_FR.ringSettings
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null
                     }
                   ]}
                   options={NUMBER_OPTIONS}
@@ -125,14 +141,22 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
                   className="enigma-type"
                   defaultValue={[
                     {
-                      value: store.ENIGMA_I_FR.groundSettings,
-                      label: store.ENIGMA_I_FR.groundSettings
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null
                     }
                   ]}
                   value={[
                     {
-                      value: store.ENIGMA_I_FR.groundSettings,
-                      label: store.ENIGMA_I_FR.groundSettings
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null
                     }
                   ]}
                   options={NUMBER_OPTIONS}

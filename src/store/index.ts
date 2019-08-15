@@ -12,11 +12,14 @@ import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
  */
 export class Store {
   constructor() {
-    this.enigmaM3Map.set("R1", false);
-    this.enigmaM3Map.set("R2", false);
-    this.enigmaM3Map.set("R3", false);
-    this.enigmaM3Map.set("R4", false);
-    this.enigmaM3Map.set("R5", false);
+    this.enigmaM3Map.set("I", false);
+    this.enigmaM3Map.set("II", false);
+    this.enigmaM3Map.set("III", false);
+    this.enigmaM3Map.set("IV", false);
+    this.enigmaM3Map.set("V", false);
+    this.enigmaM3Map.set("VI", false);
+    this.enigmaM3Map.set("VII", false);
+    this.enigmaM3Map.set("VIII", false);
   }
 
   // Steckerbrett = Plugboard
@@ -61,23 +64,14 @@ export class Store {
   @observable ENIGMA_ROTOR_POSITION_THREE: Rotor | null = null;
 
   // Enigma I
-  @observable ENIGMA_I_FR: Rotor = this.R1;
-  @observable ENIGMA_I_MR: Rotor = this.R2;
-  @observable ENIGMA_I_SR: Rotor = this.R3;
   @observable ENIGMA_I_REFLECTOR: Reflector = this.UKW_A;
   // #########
 
   // Enigma M3
-  @observable ENIGMA_M3_FR: Rotor = this.R1;
-  @observable ENIGMA_M3_MR: Rotor = this.R2;
-  @observable ENIGMA_M3_SR: Rotor = this.R3;
   @observable ENIGMA_M3_REFLECTOR: Reflector = this.UKW_B;
   // #########
 
   // Enigma M4
-  @observable ENIGMA_M4_FR: Rotor = this.R1;
-  @observable ENIGMA_M4_MR: Rotor = this.R2;
-  @observable ENIGMA_M4_SR: Rotor = this.R3;
   @observable ENIGMA_M4_EW: Rotor = this.M4_EXTRA_WHEEL_BETA;
   @observable ENIGMA_M4_REFLECTOR: Reflector = this.M4_EN_UKW_B_THIN;
   // #########
@@ -90,15 +84,15 @@ export class Store {
 
     switch (this.enigmaModel) {
       case "I":
-        this.stepRotorsFromEnigmaOne();
+        this.stepRotors();
         toBeCipheredLetter = this.cipherFromEnigmaOne(toBeCipheredLetter);
         break;
       case "M3":
-        this.stepRotorsFromEnigmaM3();
+        this.stepRotors();
         toBeCipheredLetter = this.cipherFromEnigmaM3(toBeCipheredLetter);
         break;
       case "M4":
-        this.stepRotorsFromEnigmaM4();
+        this.stepRotors();
         toBeCipheredLetter = this.cipherFromEnigmaM4(toBeCipheredLetter);
         break;
     }
@@ -121,21 +115,37 @@ export class Store {
   }
 
   resetEnigmaSettings() {
-    let stackRotors: Rotor[];
+    if (
+      !this.ENIGMA_ROTOR_POSITION_ONE ||
+      !this.ENIGMA_ROTOR_POSITION_TWO ||
+      !this.ENIGMA_ROTOR_POSITION_THREE
+    ) {
+      return null;
+    }
+
+    let stackRotors: Rotor[] = [];
     let stackRotorsLen = 2; // stackRotors.length fails for some reason :/ gotta investigate this.
 
     switch (this.enigmaModel) {
       case "I":
-        stackRotors = [this.ENIGMA_I_FR, this.ENIGMA_I_MR, this.ENIGMA_I_SR];
+        stackRotors = [
+          this.ENIGMA_ROTOR_POSITION_ONE,
+          this.ENIGMA_ROTOR_POSITION_TWO,
+          this.ENIGMA_ROTOR_POSITION_THREE
+        ];
         break;
       case "M3":
-        stackRotors = [this.ENIGMA_M3_FR, this.ENIGMA_M3_MR, this.ENIGMA_M3_SR];
+        stackRotors = [
+          this.ENIGMA_ROTOR_POSITION_ONE,
+          this.ENIGMA_ROTOR_POSITION_TWO,
+          this.ENIGMA_ROTOR_POSITION_THREE
+        ];
         break;
       case "M4":
         stackRotors = [
-          this.ENIGMA_M4_FR,
-          this.ENIGMA_M4_MR,
-          this.ENIGMA_M4_SR,
+          this.ENIGMA_ROTOR_POSITION_THREE,
+          this.ENIGMA_ROTOR_POSITION_TWO,
+          this.ENIGMA_ROTOR_POSITION_THREE,
           this.ENIGMA_M4_EW
         ];
 
@@ -165,80 +175,64 @@ export class Store {
     this.INPUT = "";
   }
 
-  stepRotorsFromEnigmaOne() {
-    // console.log(this.ENIGMA_I_FR.turnover);
-    if (this.ENIGMA_I_FR.turnover.includes(this.ENIGMA_I_FR.groundSettings)) {
-      this.ENIGMA_I_FR.step();
-
-      if (this.ENIGMA_I_MR.turnover.includes(this.ENIGMA_I_MR.groundSettings)) {
-        this.ENIGMA_I_MR.step();
-        this.ENIGMA_I_SR.step();
-      } else {
-        this.ENIGMA_I_MR.step();
-      }
-    } else {
-      this.ENIGMA_I_FR.step();
-
-      if (this.ENIGMA_I_MR.turnover.includes(this.ENIGMA_I_MR.groundSettings)) {
-        this.ENIGMA_I_MR.step();
-        this.ENIGMA_I_SR.step();
-      }
+  stepRotors() {
+    if (
+      !this.ENIGMA_ROTOR_POSITION_ONE ||
+      !this.ENIGMA_ROTOR_POSITION_TWO ||
+      !this.ENIGMA_ROTOR_POSITION_THREE
+    ) {
+      console.log("NULL");
+      return null;
     }
-  }
 
-  stepRotorsFromEnigmaM3() {
-    if (this.ENIGMA_M3_FR.turnover.includes(this.ENIGMA_M3_FR.groundSettings)) {
-      this.ENIGMA_M3_FR.step();
+    console.log(this.ENIGMA_ROTOR_POSITION_ONE);
+    console.log(this.ENIGMA_ROTOR_POSITION_TWO);
+    console.log(this.ENIGMA_ROTOR_POSITION_THREE);
+
+    if (
+      this.ENIGMA_ROTOR_POSITION_ONE.turnover.includes(
+        this.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+      )
+    ) {
+      this.ENIGMA_ROTOR_POSITION_ONE.step();
 
       if (
-        this.ENIGMA_M3_MR.turnover.includes(this.ENIGMA_M3_MR.groundSettings)
+        this.ENIGMA_ROTOR_POSITION_TWO.turnover.includes(
+          this.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+        )
       ) {
-        this.ENIGMA_M3_MR.step();
-        this.ENIGMA_M3_SR.step();
+        this.ENIGMA_ROTOR_POSITION_TWO.step();
+        this.ENIGMA_ROTOR_POSITION_THREE.step();
       } else {
-        this.ENIGMA_M3_MR.step();
+        this.ENIGMA_ROTOR_POSITION_TWO.step();
       }
     } else {
-      this.ENIGMA_M3_FR.step();
+      this.ENIGMA_ROTOR_POSITION_ONE.step();
 
       if (
-        this.ENIGMA_M3_MR.turnover.includes(this.ENIGMA_M3_MR.groundSettings)
+        this.ENIGMA_ROTOR_POSITION_TWO.turnover.includes(
+          this.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+        )
       ) {
-        this.ENIGMA_M3_MR.step();
-        this.ENIGMA_M3_SR.step();
-      }
-    }
-  }
-
-  stepRotorsFromEnigmaM4() {
-    if (this.ENIGMA_M4_FR.turnover.includes(this.ENIGMA_M4_FR.groundSettings)) {
-      this.ENIGMA_M4_FR.step();
-
-      if (
-        this.ENIGMA_M4_MR.turnover.includes(this.ENIGMA_M4_MR.groundSettings)
-      ) {
-        this.ENIGMA_M4_MR.step();
-        this.ENIGMA_M4_SR.step();
-      } else {
-        this.ENIGMA_M4_MR.step();
-      }
-    } else {
-      this.ENIGMA_M4_FR.step();
-
-      if (
-        this.ENIGMA_M4_MR.turnover.includes(this.ENIGMA_M4_MR.groundSettings)
-      ) {
-        this.ENIGMA_M4_MR.step();
-        this.ENIGMA_M4_SR.step();
+        this.ENIGMA_ROTOR_POSITION_TWO.step();
+        this.ENIGMA_ROTOR_POSITION_THREE.step();
       }
     }
   }
 
   cipherFromEnigmaOne(toBeCipheredLetter: number): number {
+    if (
+      !this.ENIGMA_ROTOR_POSITION_ONE ||
+      !this.ENIGMA_ROTOR_POSITION_TWO ||
+      !this.ENIGMA_ROTOR_POSITION_THREE
+    ) {
+      return -1;
+    }
+
     let stackRotors: Rotor[] = [
-      this.ENIGMA_I_FR,
-      this.ENIGMA_I_MR,
-      this.ENIGMA_I_SR
+      this.ENIGMA_ROTOR_POSITION_ONE,
+      this.ENIGMA_ROTOR_POSITION_TWO,
+      this.ENIGMA_ROTOR_POSITION_THREE
     ];
 
     for (let i = 0; i <= 2; i++) {
@@ -263,10 +257,18 @@ export class Store {
   }
 
   cipherFromEnigmaM3(toBeCipheredLetter: number): number {
+    if (
+      !this.ENIGMA_ROTOR_POSITION_ONE ||
+      !this.ENIGMA_ROTOR_POSITION_TWO ||
+      !this.ENIGMA_ROTOR_POSITION_THREE
+    ) {
+      return -1;
+    }
+
     let stackRotors: Rotor[] = [
-      this.ENIGMA_M3_FR,
-      this.ENIGMA_M3_MR,
-      this.ENIGMA_M3_SR
+      this.ENIGMA_ROTOR_POSITION_ONE,
+      this.ENIGMA_ROTOR_POSITION_TWO,
+      this.ENIGMA_ROTOR_POSITION_THREE
     ];
 
     for (let i = 0; i <= 2; i++) {
@@ -291,10 +293,18 @@ export class Store {
   }
 
   cipherFromEnigmaM4(toBeCipheredLetter: number): number {
+    if (
+      !this.ENIGMA_ROTOR_POSITION_ONE ||
+      !this.ENIGMA_ROTOR_POSITION_TWO ||
+      !this.ENIGMA_ROTOR_POSITION_THREE
+    ) {
+      return -1;
+    }
+
     let stackRotors: Rotor[] = [
-      this.ENIGMA_M4_FR,
-      this.ENIGMA_M4_MR,
-      this.ENIGMA_M4_SR
+      this.ENIGMA_ROTOR_POSITION_ONE,
+      this.ENIGMA_ROTOR_POSITION_TWO,
+      this.ENIGMA_ROTOR_POSITION_THREE
     ];
 
     for (let i = 0; i <= 2; i++) {
@@ -400,6 +410,8 @@ export class Store {
   @observable positionThree: IDraggableRotor | null = null;
 
   updatePositionOne(item: IDraggableRotor) {
+    console.log("TRIGGERING POSITION ONE");
+    console.log(item);
     if (this.positionOne) {
       let getCurrentValue = this.enigmaM3Map.get(this.positionOne.id);
 
@@ -414,6 +426,8 @@ export class Store {
   }
 
   updatePositionTwo(item: IDraggableRotor) {
+    console.log("TRIGGERING POSITION TWO");
+    console.log(item);
     if (this.positionTwo) {
       let getCurrentValue = this.enigmaM3Map.get(this.positionTwo.id);
 
@@ -428,6 +442,8 @@ export class Store {
   }
 
   updatePositionThree(item: IDraggableRotor) {
+    console.log("TRIGGERING POSITION THREE");
+    console.log(item);
     if (this.positionThree) {
       let getCurrentValue = this.enigmaM3Map.get(this.positionThree.id);
 
@@ -438,6 +454,7 @@ export class Store {
 
     this.enigmaM3Map.set(item.id, true);
     this.positionThree = item;
+    console.log(this.getRotorObjectByRotorType(item.id));
     this.ENIGMA_ROTOR_POSITION_THREE = this.getRotorObjectByRotorType(item.id);
   }
 
@@ -459,6 +476,7 @@ export class Store {
         }
 
         this.positionOne = null;
+        this.ENIGMA_ROTOR_POSITION_ONE = null;
         break;
       case 2:
         if (this.positionTwo) {
@@ -466,7 +484,7 @@ export class Store {
         }
 
         this.positionTwo = null;
-
+        this.ENIGMA_ROTOR_POSITION_TWO = null;
         break;
       case 3:
         if (this.positionThree) {
@@ -474,6 +492,7 @@ export class Store {
         }
 
         this.positionThree = null;
+        this.ENIGMA_ROTOR_POSITION_THREE = null;
         break;
       default:
         return null;

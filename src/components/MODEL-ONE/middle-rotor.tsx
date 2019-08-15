@@ -41,19 +41,27 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
 
-    store.ENIGMA_I_MR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_ROTOR_POSITION_TWO = store.getRotorObjectByRotorType(
+      event.value
+    );
   };
 
   // Handle the change in the ground settings
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_MR.setGroundSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_TWO) {
+      store.ENIGMA_ROTOR_POSITION_TWO.setGroundSettings(event.value);
+    }
   };
 
   // Handle the change in the ring settings
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_MR.setRingSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_TWO) {
+      store.ENIGMA_ROTOR_POSITION_TWO.setRingSettings(event.value);
+    }
   };
 
   render() {
@@ -94,14 +102,22 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
                   className="enigma-type"
                   defaultValue={[
                     {
-                      value: store.ENIGMA_I_MR.ringSettings,
-                      label: store.ENIGMA_I_MR.ringSettings
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                        : null
                     }
                   ]}
                   value={[
                     {
-                      value: store.ENIGMA_I_MR.ringSettings,
-                      label: store.ENIGMA_I_MR.ringSettings
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.ringSettings
+                        : null
                     }
                   ]}
                   options={NUMBER_OPTIONS}
@@ -126,14 +142,22 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
                   className="enigma-type"
                   defaultValue={[
                     {
-                      value: store.ENIGMA_I_MR.groundSettings,
-                      label: store.ENIGMA_I_MR.groundSettings
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                        : null
                     }
                   ]}
                   value={[
                     {
-                      value: store.ENIGMA_I_MR.groundSettings,
-                      label: store.ENIGMA_I_MR.groundSettings
+                      value: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_TWO
+                        ? store.ENIGMA_ROTOR_POSITION_TWO.groundSettings
+                        : null
                     }
                   ]}
                   options={NUMBER_OPTIONS}
