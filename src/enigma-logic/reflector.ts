@@ -1,19 +1,19 @@
-import { Wheel, getLetterIndexInAlphabet } from "./wheel";
+import { getLetterIndexInAlphabet, Wheel } from "./wheel";
 
 export class Reflector extends Wheel {
-  private _reflectedMap = new Map<number, number>();
+  private reflectedMap = new Map<number, number>();
 
   constructor(wiring: string) {
     super(wiring);
 
     [...Array<number>(26).keys()].forEach(key => {
-      this._reflectedMap.set(key, getLetterIndexInAlphabet(wiring[key]));
-      this._reflectedMap.set(getLetterIndexInAlphabet(wiring[key]), key);
+      this.reflectedMap.set(key, getLetterIndexInAlphabet(wiring[key]));
+      this.reflectedMap.set(getLetterIndexInAlphabet(wiring[key]), key);
     });
   }
 
   public getReflectedEndpoint(index: number) {
-    let letter = this._reflectedMap.get(index);
+    const letter = this.reflectedMap.get(index);
 
     if (letter || letter === 0) {
       return letter;

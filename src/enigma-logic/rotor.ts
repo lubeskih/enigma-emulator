@@ -1,7 +1,7 @@
 import { observable } from "mobx";
 
 import { IRotor } from "../types";
-import { Wheel, getLetterIndexInAlphabet } from "./wheel";
+import { getLetterIndexInAlphabet, Wheel } from "./wheel";
 /**
  * A template/class that represents a Rotor
  *
@@ -14,17 +14,17 @@ import { Wheel, getLetterIndexInAlphabet } from "./wheel";
  * 3. Notch: The letter(s) that causes the next rotor to step
  */
 export class Rotor extends Wheel implements IRotor {
-  readonly notch: number;
-  readonly turnover: number[];
+  public readonly notch: number;
+  public readonly turnover: number[];
 
-  @observable groundSettings: number = 1;
-  @observable ringSettings: number = 1;
+  @observable public groundSettings: number = 1;
+  @observable public ringSettings: number = 1;
 
   public offset: number = 0;
   public rotorPositionFromRightToLeft: number = 0;
 
-  private _rightToLeftRW = new Map<number, number>();
-  private _leftToRightRW = new Map<number, number>();
+  private rightToLeftRW = new Map<number, number>();
+  private leftToRightRW = new Map<number, number>();
 
   constructor(wiring: string, notch: string, turnover: string) {
     super(wiring);
@@ -35,10 +35,10 @@ export class Rotor extends Wheel implements IRotor {
       .map(v => getLetterIndexInAlphabet(v) + 1);
 
     [...Array<number>(26).keys()].forEach(key => {
-      this._rightToLeftRW.set(key, getLetterIndexInAlphabet(wiring[key]));
+      this.rightToLeftRW.set(key, getLetterIndexInAlphabet(wiring[key]));
     });
 
-    this._leftToRightRW = this.invertMap(this._rightToLeftRW);
+    this.leftToRightRW = this.invertMap(this.rightToLeftRW);
   }
 
   public step() {
@@ -64,7 +64,7 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public calcRightToLeftExitContact(entryLetter: number) {
-    let calc = this.rightToLeftEndpoint(entryLetter) - this.offset;
+    const calc = this.rightToLeftEndpoint(entryLetter) - this.offset;
 
     if (calc < 0) {
       return calc + 26;
@@ -74,7 +74,7 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public calcLeftToRightExitContact(entryLetter: number) {
-    let calc = this.leftToRightEndpoint(entryLetter) - this.offset;
+    const calc = this.leftToRightEndpoint(entryLetter) - this.offset;
 
     if (calc < 0) {
       return 26 - Math.abs(this.leftToRightEndpoint(entryLetter) - this.offset);
@@ -84,7 +84,7 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public rightToLeftEndpoint(index: number) {
-    let letter = this._rightToLeftRW.get(index);
+    const letter = this.rightToLeftRW.get(index);
 
     if (letter || letter === 0) {
       return letter;
@@ -94,7 +94,7 @@ export class Rotor extends Wheel implements IRotor {
   }
 
   public leftToRightEndpoint(index: number) {
-    let letter = this._leftToRightRW.get(index);
+    const letter = this.leftToRightRW.get(index);
 
     if (letter || letter === 0) {
       return letter;
@@ -126,7 +126,7 @@ export class Rotor extends Wheel implements IRotor {
   //////////////////////////////
 
   private invertMap<K, V>(m: Map<K, V>): Map<V, K> {
-    let i = new Map<V, K>();
+    const i = new Map<V, K>();
     m.forEach((v, k) => i.set(v, k));
 
     return i;
