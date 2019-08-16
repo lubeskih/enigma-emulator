@@ -61,11 +61,13 @@ export class Keyboard extends Component<IProps, {}> {
               name={letter}
               style={{
                 backgroundColor:
-                  this.props.store.FIRST_LETTER === letter
+                  this.props.store.lastClickedLetter === letter
                     ? "#2b303b"
                     : "white",
                 color:
-                  this.props.store.FIRST_LETTER === letter ? "white" : "black"
+                  this.props.store.lastClickedLetter === letter
+                    ? "white"
+                    : "black"
               }}
               disabled={
                 this.props.store.plugboard.excessPlug ||
@@ -88,11 +90,13 @@ export class Keyboard extends Component<IProps, {}> {
               key={letter}
               style={{
                 backgroundColor:
-                  this.props.store.FIRST_LETTER === letter
+                  this.props.store.lastClickedLetter === letter
                     ? "#2b303b"
                     : "white",
                 color:
-                  this.props.store.FIRST_LETTER === letter ? "white" : "black"
+                  this.props.store.lastClickedLetter === letter
+                    ? "white"
+                    : "black"
               }}
               name={letter}
               disabled={
@@ -116,11 +120,13 @@ export class Keyboard extends Component<IProps, {}> {
               key={letter}
               style={{
                 backgroundColor:
-                  this.props.store.FIRST_LETTER === letter
+                  this.props.store.lastClickedLetter === letter
                     ? "#2b303b"
                     : "white",
                 color:
-                  this.props.store.FIRST_LETTER === letter ? "white" : "black"
+                  this.props.store.lastClickedLetter === letter
+                    ? "white"
+                    : "black"
               }}
               name={letter}
               className="button"

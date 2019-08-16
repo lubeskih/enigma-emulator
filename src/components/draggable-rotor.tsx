@@ -58,7 +58,8 @@ export default DragSource(
   "DraggableRotor",
   {
     canDrag: (props: IProps) =>
-      !props.store.enigmaM3Map.get(props.id) && !props.store.settingsAreLocked,
+      !props.store.draggableRotors.get(props.id) &&
+      !props.store.settingsAreLocked,
     beginDrag(props: any, monitor: DragSourceMonitor, component: any) {
       const item = { id: props.id, name: props.name };
       return item;

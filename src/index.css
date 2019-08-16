@@ -7,7 +7,7 @@
 }
 
 .info {
-  font-family: "Ubuntu Mono ", monospace;
+  font-family: "Ubuntu Mono", monospace;
   color: #555;
   font-size: 0.7rem;
   font-weight: bolder;
@@ -19,14 +19,14 @@
 }
 
 .noInfo {
-  font-family: "Ubuntu Mono ", monospace;
+  font-family: "Ubuntu Mono", monospace;
   color: #555;
   font-size: 0.7rem;
   font-weight: bolder;
 }
 
 .plugPointer {
-  font-family: "Ubuntu Mono ", monospace;
+  font-family: "Ubuntu Mono", monospace;
   color: #555;
   font-size: 0.7rem;
   font-weight: bolder;

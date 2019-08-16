@@ -47,9 +47,7 @@ class RotorPosition extends Component<IProps, {}> {
       backgroundColor = "#fafafa";
     }
 
-    let isLoaded = store.returnPositionByPositionNumber(position)
-      ? true
-      : false;
+    let isLoaded = store.getPositionByPositionNumber(position) ? true : false;
 
     return connectDropTarget(
       <div>

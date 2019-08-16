@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Enigma Simulator",
+  "name": "Enigma Simulator",
+  "description": "Enigma I, M3 and M4 machine simulator for the Web.",
   "icons": [
     {
       "src": "favicon.ico",

@@ -133,7 +133,7 @@ class RenderLockCheckbox extends Component<IProps, {}> {
     store.lastLamp = "";
     store.INPUT = "";
     store.OUTPUT = "";
-    store.FIRST_LETTER = "";
+    store.lastClickedLetter = "";
 
     store.settingsAreLocked = !this.props.store.settingsAreLocked;
   };
@@ -146,7 +146,9 @@ class RenderLockCheckbox extends Component<IProps, {}> {
         <div key="custom-checkbox" className="settingsAreLocked mb-3">
           <Form.Check
             disabled={
-              !store.positionOne || !store.positionTwo || !store.positionThree
+              !store.rotorDropPositionOne ||
+              !store.rotorDropPositionTwo ||
+              !store.rotorDropPositionThree
             }
             custom
             checked={store.settingsAreLocked}

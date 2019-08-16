@@ -33,8 +33,8 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onPositionOneDrop = (item: IDraggableRotor) => {
-    this.props.store.updatePositionOne(item);
+  onrotorDropPositionOneDrop = (item: IDraggableRotor) => {
+    this.props.store.updateRotorDropPositionOne(item);
   };
 
   // Handle changing the rotor type
@@ -78,13 +78,13 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
               <code className="info">FAST ROTOR (right-hand)</code>
             </small>
             <RotorPosition
-              droppedItem={store.positionOne}
-              onDrop={this.onPositionOneDrop}
+              droppedItem={store.rotorDropPositionOne}
+              onDrop={this.onrotorDropPositionOneDrop}
               store={store}
               position={1}
             />
           </div>
-          {store.positionOne ? (
+          {store.rotorDropPositionOne ? (
             <>
               {" "}
               <div className="col-md-6 mb-3 mt-2">

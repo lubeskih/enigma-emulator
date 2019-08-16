@@ -33,8 +33,8 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onPositionTwoDrop = (item: IDraggableRotor) => {
-    this.props.store.updatePositionTwo(item);
+  onrotorDropPositionTwoDrop = (item: IDraggableRotor) => {
+    this.props.store.updateRotorDropPositionTwo(item);
   };
 
   // Handle changing the rotor type
@@ -78,13 +78,13 @@ export class EnigmaM4MiddleRotor extends Component<IProps, {}> {
               <code className="info">MIDDLE ROTOR</code>
             </small>
             <RotorPosition
-              droppedItem={store.positionTwo}
-              onDrop={this.onPositionTwoDrop}
+              droppedItem={store.rotorDropPositionTwo}
+              onDrop={this.onrotorDropPositionTwoDrop}
               store={store}
               position={2}
             />
           </div>
-          {store.positionTwo ? (
+          {store.rotorDropPositionTwo ? (
             <>
               {" "}
               <div className="col-md-6 mb-3 mt-2">

@@ -33,8 +33,8 @@ export class EnigmaOneSlowRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onPositionThreeDrop = (item: IDraggableRotor) => {
-    this.props.store.updatePositionThree(item);
+  onrotorDropPositionThreeDrop = (item: IDraggableRotor) => {
+    this.props.store.updateRotorDropPositionThree(item);
   };
 
   // Handle changing the rotor type
@@ -74,13 +74,13 @@ export class EnigmaOneSlowRotor extends Component<IProps, {}> {
               <code className="info">SLOW ROTOR (left-hand)</code>
             </small>
             <RotorPosition
-              droppedItem={store.positionThree}
-              onDrop={this.onPositionThreeDrop}
+              droppedItem={store.rotorDropPositionThree}
+              onDrop={this.onrotorDropPositionThreeDrop}
               store={store}
               position={3}
             />
           </div>
-          {store.positionThree ? (
+          {store.rotorDropPositionThree ? (
             <>
               {" "}
               <div className="col-md-6 mb-3 mt-2">
