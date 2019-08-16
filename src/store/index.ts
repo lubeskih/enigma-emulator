@@ -5,7 +5,10 @@ import { Plugboard } from "../enigma-logic/plugboard";
 // Internal
 import * as c from "../constants";
 import { IDraggableRotor } from "../types";
-import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
+
+import { Wheel } from "../enigma-logic/wheel";
+import { Reflector } from "../enigma-logic/reflector";
+import { Rotor } from "../enigma-logic/rotor";
 
 /**
  * Application store

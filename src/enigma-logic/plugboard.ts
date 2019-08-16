@@ -19,30 +19,6 @@ export class Plugboard {
     ALPHABET.forEach(letter => this.pb.set(letter, letter));
   }
 
-  private plugWasSwapped(plug: string): boolean {
-    return !!this.pb.get(plug) && this.pb.get(plug) !== plug;
-  }
-
-  private anExcessPlug(): boolean {
-    return !!this.excessPlug;
-  }
-
-  private plugEqualsExcessPlug(plug: string): boolean {
-    return !!(this.excessPlug === plug);
-  }
-
-  private registerAsExcess(plug: string) {
-    this.pb.set(plug, plug);
-    this.excessPlug = plug;
-  }
-
-  private swapPlugs(plug: string) {
-    this.pb.set(plug, this.excessPlug);
-    this.pb.set(this.excessPlug, plug);
-
-    this.excessPlug = null;
-  }
-
   public resetPlug(plug: string) {
     this.pb.set(plug, plug);
   }
@@ -81,5 +57,29 @@ export class Plugboard {
     }
 
     return null;
+  }
+
+  private plugWasSwapped(plug: string): boolean {
+    return !!this.pb.get(plug) && this.pb.get(plug) !== plug;
+  }
+
+  private anExcessPlug(): boolean {
+    return !!this.excessPlug;
+  }
+
+  private plugEqualsExcessPlug(plug: string): boolean {
+    return !!(this.excessPlug === plug);
+  }
+
+  private registerAsExcess(plug: string) {
+    this.pb.set(plug, plug);
+    this.excessPlug = plug;
+  }
+
+  private swapPlugs(plug: string) {
+    this.pb.set(plug, this.excessPlug);
+    this.pb.set(this.excessPlug, plug);
+
+    this.excessPlug = null;
   }
 }

@@ -1,0 +1,4 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "no-unused-variable": [true, { "ignore-pattern": "^_" }]
+}
