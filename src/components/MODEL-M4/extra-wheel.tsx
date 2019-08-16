@@ -32,10 +32,10 @@ export class EnigmaM4ExtraWheel extends Component<IProps, {}> {
 
     return (
       <>
-        <div className="row">
+        <div className="row mt-2">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="info">EXTRA WHEEL (Zusatzwalze)</code>
+              <code className="noInfo">EXTRA WHEEL (Zusatzwalze)</code>
             </small>
             <Select
               theme={theme => ({

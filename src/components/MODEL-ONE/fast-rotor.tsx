@@ -3,10 +3,15 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Select from "react-select";
 
-import { FIVE_ROTOR_OPTIONS, NUMBER_OPTIONS } from "../../constants";
+// Internal
+import { NUMBER_OPTIONS } from "../../constants";
+import { IDraggableRotor } from "../../types";
 
 // Store
 import { Store } from "../../store";
+
+// Components
+import RotorPosition from "../droppable-position";
 
 // Component props
 interface IProps {
@@ -27,22 +32,35 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
     super(props);
   }
 
+  // Handle rotor drop
+  onPositionOneDrop = (item: IDraggableRotor) => {
+    this.props.store.updatePositionOne(item);
+  };
+
   // Handle changing the rotor type
   onRotorOptionChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_FR = store.getRotorObjectByRotorType(event.value);
+    store.ENIGMA_ROTOR_POSITION_ONE = store.getRotorObjectByRotorType(
+      event.value
+    );
   };
 
   // Handle the change in the ground settings
   onGroundSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_FR.setGroundSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_ONE) {
+      store.ENIGMA_ROTOR_POSITION_ONE.setGroundSettings(event.value);
+    }
   };
 
   // Handle the change in the ring settings
   onRingSettingsChange = (event: any) => {
     let store = this.props.store;
-    store.ENIGMA_I_FR.setRingSettings(event.value);
+
+    if (store.ENIGMA_ROTOR_POSITION_ONE) {
+      store.ENIGMA_ROTOR_POSITION_ONE.setRingSettings(event.value);
+    }
   };
 
   render() {
@@ -50,93 +68,103 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
 
     return (
       <>
-        <div className="row mb-4">
+        <div className="row mb-3 encapsulate">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">FAST ROTOR (right-hand)</code>
             </small>
-            <Select
-              theme={theme => ({
-                // NOTE: HOW DO I NOT REPEAT THIS?
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={FIVE_ROTOR_OPTIONS[0]}
-              options={FIVE_ROTOR_OPTIONS}
-              onChange={this.onRotorOptionChange}
+            <RotorPosition
+              droppedItem={store.positionOne}
+              onDrop={this.onPositionOneDrop}
+              store={store}
+              position={1}
             />
           </div>
-          <div className="col-md-6">
-            <small>
-              <code className="info">Ringstellung</code>
-            </small>
-            <Select
-              theme={theme => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={[
-                {
-                  value: store.ENIGMA_I_FR.ringSettings,
-                  label: store.ENIGMA_I_FR.ringSettings
-                }
-              ]}
-              value={[
-                {
-                  value: store.ENIGMA_I_FR.ringSettings,
-                  label: store.ENIGMA_I_FR.ringSettings
-                }
-              ]}
-              options={NUMBER_OPTIONS}
-              onChange={this.onRingSettingsChange}
-            />
-          </div>{" "}
-          <div className="col-md-6">
-            <small>
-              <code className="info">Grundstellung</code>
-            </small>
-            <Select
-              theme={theme => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: "lightgray",
-                  primary: "#2b303b"
-                }
-              })}
-              isDisabled={store.settingsAreLocked}
-              className="enigma-type"
-              defaultValue={[
-                {
-                  value: store.ENIGMA_I_FR.groundSettings,
-                  label: store.ENIGMA_I_FR.groundSettings
-                }
-              ]}
-              value={[
-                {
-                  value: store.ENIGMA_I_FR.groundSettings,
-                  label: store.ENIGMA_I_FR.groundSettings
-                }
-              ]}
-              options={NUMBER_OPTIONS}
-              onChange={this.onGroundSettingsChange}
-            />
-          </div>
+          {store.positionOne ? (
+            <>
+              {" "}
+              <div className="col-md-6 mb-3 mt-2">
+                <small>
+                  <code className="info">Ringstellung</code>
+                </small>
+                <Select
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: "lightgray",
+                      primary: "#2b303b"
+                    }
+                  })}
+                  isDisabled={store.settingsAreLocked}
+                  className="enigma-type"
+                  defaultValue={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null
+                    }
+                  ]}
+                  value={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.ringSettings
+                        : null
+                    }
+                  ]}
+                  options={NUMBER_OPTIONS}
+                  onChange={this.onRingSettingsChange}
+                />
+              </div>{" "}
+              <div className="col-md-6 mb-3 mt-2">
+                <small>
+                  <code className="info">Grundstellung</code>
+                </small>
+                <Select
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: "lightgray",
+                      primary: "#2b303b"
+                    }
+                  })}
+                  isDisabled={store.settingsAreLocked}
+                  className="enigma-type"
+                  defaultValue={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null
+                    }
+                  ]}
+                  value={[
+                    {
+                      value: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null,
+                      label: store.ENIGMA_ROTOR_POSITION_ONE
+                        ? store.ENIGMA_ROTOR_POSITION_ONE.groundSettings
+                        : null
+                    }
+                  ]}
+                  options={NUMBER_OPTIONS}
+                  onChange={this.onGroundSettingsChange}
+                />
+              </div>
+            </>
+          ) : null}
         </div>
       </>
     );

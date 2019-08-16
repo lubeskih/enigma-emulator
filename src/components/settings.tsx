@@ -5,7 +5,13 @@ import { computed } from "mobx";
 import Select from "react-select";
 import { Form } from "react-bootstrap";
 
-import { ENIGMA_MODEL_OPTIONS } from "../constants";
+// Internal
+import DraggableRotor from "./draggable-rotor";
+import {
+  ENIGMA_MODEL_OPTIONS,
+  FIVE_ROTOR_OPTIONS,
+  EIGHT_ROTOR_OPTIONS
+} from "../constants";
 import { EnigmaModelOneSettings } from "./MODEL-ONE";
 import { EnigmaModelM3Settings } from "./MODEL-M3";
 import { EnigmaModelM4Settings } from "./MODEL-M4";
@@ -44,10 +50,10 @@ export class EnigmaSettings extends Component<IProps, {}> {
             Maschineneinstellungen
           </span>
           <hr />
-          <div className="row mb-1">
-            <div className="col-md-12 mb-3">
+          <div className="row mb-2">
+            <div className="col-md-12 mb-2">
               <small>
-                <code className="info">Enigma model</code>
+                <code className="noInfo">ENIGMA MODEL</code>
               </small>
               <Select
                 theme={theme => ({
@@ -68,6 +74,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
             </div>
           </div>
         </div>
+        <RenderRotors store={store} />
         <RenderEnigmaModel store={store} />
       </>
     );
@@ -126,6 +133,7 @@ class RenderLockCheckbox extends Component<IProps, {}> {
     store.lastLamp = "";
     store.INPUT = "";
     store.OUTPUT = "";
+    store.FIRST_LETTER = "";
 
     store.settingsAreLocked = !this.props.store.settingsAreLocked;
   };
@@ -137,6 +145,9 @@ class RenderLockCheckbox extends Component<IProps, {}> {
       <Form>
         <div key="custom-checkbox" className="settingsAreLocked mb-3">
           <Form.Check
+            disabled={
+              !store.positionOne || !store.positionTwo || !store.positionThree
+            }
             custom
             checked={store.settingsAreLocked}
             type="checkbox"
@@ -154,6 +165,56 @@ class RenderLockCheckbox extends Component<IProps, {}> {
           ) : null}
         </div>
       </Form>
+    );
+  }
+}
+
+interface IRenderRotors {
+  store: Store;
+}
+
+@observer
+class RenderRotors extends React.Component<IRenderRotors, {}> {
+  constructor(props: IRenderRotors) {
+    super(props);
+  }
+
+  render() {
+    let store = this.props.store;
+
+    return (
+      <div className="row mb-2">
+        <div className="col-md-12 mb-2">
+          <small>
+            <code className="noInfo">AVAILABLE ROTORS</code>
+          </small>
+          <div className="rotors">
+            {store.enigmaModel === "I" ? (
+              <>
+                {FIVE_ROTOR_OPTIONS.map(rotor => (
+                  <DraggableRotor
+                    key={rotor.id}
+                    store={store}
+                    id={rotor.id}
+                    name={rotor.name}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                {EIGHT_ROTOR_OPTIONS.map(rotor => (
+                  <DraggableRotor
+                    key={rotor.id}
+                    store={store}
+                    id={rotor.id}
+                    name={rotor.name}
+                  />
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     );
   }
 }

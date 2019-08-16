@@ -59,6 +59,14 @@ export class Keyboard extends Component<IProps, {}> {
               variant="link"
               key={letter}
               name={letter}
+              style={{
+                backgroundColor:
+                  this.props.store.FIRST_LETTER === letter
+                    ? "#2b303b"
+                    : "white",
+                color:
+                  this.props.store.FIRST_LETTER === letter ? "white" : "black"
+              }}
               disabled={
                 this.props.store.plugboard.excessPlug ||
                 !this.props.store.settingsAreLocked
@@ -78,6 +86,14 @@ export class Keyboard extends Component<IProps, {}> {
               onClick={(e: any) => this.handleClick(e)}
               variant="link"
               key={letter}
+              style={{
+                backgroundColor:
+                  this.props.store.FIRST_LETTER === letter
+                    ? "#2b303b"
+                    : "white",
+                color:
+                  this.props.store.FIRST_LETTER === letter ? "white" : "black"
+              }}
               name={letter}
               disabled={
                 this.props.store.plugboard.excessPlug ||
@@ -98,6 +114,14 @@ export class Keyboard extends Component<IProps, {}> {
               onClick={(e: any) => this.handleClick(e)}
               variant="link"
               key={letter}
+              style={{
+                backgroundColor:
+                  this.props.store.FIRST_LETTER === letter
+                    ? "#2b303b"
+                    : "white",
+                color:
+                  this.props.store.FIRST_LETTER === letter ? "white" : "black"
+              }}
               name={letter}
               className="button"
               disabled={

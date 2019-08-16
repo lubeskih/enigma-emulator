@@ -11,6 +11,25 @@
   color: #555;
   font-size: 0.7rem;
   font-weight: bolder;
+  position: absolute;
+  top: -13px;
+  margin-bottom: 10px !important;
+  background-color: #fafafa;
+  padding: 0px 5px 0px 5px;
+}
+
+.noInfo {
+  font-family: "Ubuntu Mono ", monospace;
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: bolder;
+}
+
+.plugPointer {
+  font-family: "Ubuntu Mono ", monospace;
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: bolder;
 }
 
 span {
@@ -61,6 +80,13 @@ body {
   background-color: #2b303b;
   box-shadow: none;
   border: none;
+}
+
+.settingsAreLocked
+  .custom-checkbox
+  .custom-control-input
+  ~ .custom-control-indicator {
+  background-color: grey !important;
 }
 
 .settings {
@@ -225,8 +251,11 @@ h5 {
   font-family: "Ubuntu Mono";
   color: white;
   background-color: #2b303b;
-  padding: 3px;
+  padding: 0px 3px 0px 3px;
   display: inline-block;
+  width: 120px;
+  text-align: center;
+  max-width: 150px;
 }
 
 .excess {
@@ -242,4 +271,100 @@ h5 {
   padding: 10px;
   font-family: "Ubuntu Mono";
   text-align: center;
+}
+
+/* DRAG AND DROP */
+
+.unloadButton {
+  color: #333;
+  padding: 0px 4px 0px 4px;
+  height: 100%;
+  text-align: center;
+  line-height: normal;
+  float: right;
+  font-family: monospace;
+  border: 0 solid gray;
+  background-color: #fff;
+}
+
+.unloadButton:hover {
+  background-color: lightgrey;
+}
+
+.position {
+  margin-top: 10px;
+  width: 100%;
+  margin-right: 5px;
+  color: #333;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: normal;
+  float: left;
+  font-family: "Ubuntu Mono";
+  border: 1.5px dashed gray;
+}
+
+.positionLoaded {
+  margin-top: 10px;
+  width: 100%;
+  margin-right: 5px;
+  color: #333;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: normal;
+  float: left;
+  font-family: "Ubuntu Mono";
+  border: 1.5px solid gray;
+}
+
+.rotorStyle {
+  border: 1px solid #333;
+  background-color: white;
+  padding: 5px 12px 5px 12px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  cursor: move;
+  text-align: center;
+  font-family: "Ubuntu Mono";
+  display: block;
+}
+
+.rotorLoaded {
+  background-color: white;
+  font-family: "Ubuntu Mono";
+  padding: 5px 12px 5px 12px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  cursor: default;
+  border: 0.5px solid #999;
+  color: rgb(92, 92, 92);
+  background-image: linear-gradient(
+    45deg,
+    #ffffff 25%,
+    #f2f2f2 25%,
+    #f2f2f2 50%,
+    #ffffff 50%,
+    #ffffff 75%,
+    #f2f2f2 75%,
+    #f2f2f2 100%
+  );
+  background-size: 11.63px 11.63px;
+  text-align: center;
+  display: block;
+}
+
+.rotors {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.encapsulate {
+  border: 0.5px solid rgb(212, 212, 212);
+  margin: 0 auto !important;
+  padding: 5px 0px 0px 0px;
 }

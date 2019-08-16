@@ -1,6 +1,8 @@
 // Libraries
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { DndProvider } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 
 // Style
 import "./enigma.css";
@@ -38,32 +40,59 @@ function logKey(e: any) {
 class Enigma extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 mt-5 enigma">
-            <Lamps store={store} />
-            <Keyboard store={store} />
-            <Plugboard store={store} />
+      <>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 mt-5 enigma">
+              <Lamps store={store} />
+              <Keyboard store={store} />
+              <Plugboard store={store} />
 
-            {store.enigmaModel === "M4" ? (
-              <div className="m4-note mt-5">
-                NOTE: You are using the{" "}
-                <span style={{ textDecoration: "underline" }}>
-                  Enigma model M4
-                </span>{" "}
-                which introduces an extra wheel which is{" "}
-                <span style={{ textDecoration: "underline" }}>static</span>.
-              </div>
-            ) : null}
+              {store.enigmaModel === "M4" ? (
+                <div className="m4-note mt-5">
+                  NOTE: You are using the{" "}
+                  <span style={{ textDecoration: "underline" }}>
+                    Enigma model M4
+                  </span>{" "}
+                  which introduces an extra wheel which is{" "}
+                  <span style={{ textDecoration: "underline" }}>static</span>.
+                </div>
+              ) : null}
+            </div>
+            <div className="col-md-4 mt-5">
+              <DndProvider backend={HTML5Backend}>
+                <EnigmaSettings store={store} />
+              </DndProvider>
+            </div>
           </div>
-          <div className="col-md-4 mt-5">
-            <EnigmaSettings store={store} />
+          <hr className="mt-5"></hr>
+          <div className="row">
+            <div className="col-md-12">
+              <CipherLog store={store} />
+            </div>
+          </div>
+          <div
+            className="row mt-5 mb-4"
+            style={{ fontFamily: "monospace", textAlign: "center" }}
+          >
+            <div className="col-md-12">
+              {"{{"}{" "}
+              <a target="_blank" href="#">
+                Operator's Manual
+              </a>
+              ,{" "}
+              <a target="_blank" href="#">
+                About
+              </a>
+              ,{" "}
+              <a target="_blank" href="https://who.lh.mk">
+                who.lh.mk
+              </a>{" "}
+              {"}}"}
+            </div>
           </div>
         </div>
-        <div>
-          <CipherLog store={store} />
-        </div>
-      </div>
+      </>
     );
   }
 }
