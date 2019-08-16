@@ -15,7 +15,6 @@ import { Lamps } from "./components/enigma-lamps/lamps";
 import { EnigmaSettings } from "./components/settings";
 import { CipherLog } from "./components/cipher-log";
 import { ALPHABET } from "./constants";
-import { HelpModal } from "./components/info-modal";
 
 // Store
 import { Store } from "./store";
@@ -39,18 +38,9 @@ function logKey(e: any) {
 
 @observer
 class Enigma extends Component {
-  handleCloseHelp = () => {
-    store.helpVisible = false;
-  };
-
-  handleOpenHelp = () => {
-    store.helpVisible = true;
-  };
-
   render() {
     return (
       <>
-        <HelpModal store={store} onClose={this.handleCloseHelp} />
         <div className="container">
           <div className="row">
             <div className="col-md-8 mt-5 enigma">
@@ -75,13 +65,31 @@ class Enigma extends Component {
               </DndProvider>
             </div>
           </div>
-          <div>
-            <CipherLog store={store} />
+          <hr className="mt-5"></hr>
+          <div className="row">
+            <div className="col-md-12">
+              <CipherLog store={store} />
+            </div>
           </div>
-          <div>
-            <a href="#" onClick={this.handleOpenHelp}>
-              Open modal
-            </a>
+          <div
+            className="row mt-5 mb-4"
+            style={{ fontFamily: "monospace", textAlign: "center" }}
+          >
+            <div className="col-md-12">
+              {"{{"}{" "}
+              <a target="_blank" href="#">
+                Operator's Manual
+              </a>
+              ,{" "}
+              <a target="_blank" href="#">
+                About
+              </a>
+              ,{" "}
+              <a target="_blank" href="https://who.lh.mk">
+                who.lh.mk
+              </a>{" "}
+              {"}}"}
+            </div>
           </div>
         </div>
       </>

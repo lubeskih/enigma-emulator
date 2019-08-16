@@ -86,7 +86,7 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
           </div>
           {store.positionOne ? (
             <>
-              <div className="col-md-6 mb-3">
+              <div className="col-md-6 mb-3 mt-2">
                 <small>
                   <code className="info">Ringstellung</code>
                 </small>
@@ -134,7 +134,7 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
                   onChange={this.onRingSettingsChange}
                 />
               </div>
-              <div className="col-md-6 mb-3">
+              <div className="col-md-6 mb-3 mt-2">
                 <small>
                   <code className="info">Grundstellung</code>
                 </small>

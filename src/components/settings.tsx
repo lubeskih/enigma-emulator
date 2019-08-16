@@ -186,7 +186,7 @@ class RenderRotors extends React.Component<IRenderRotors, {}> {
       <div className="row mb-2">
         <div className="col-md-12 mb-2">
           <small>
-            <code className="noInfo">Choose a rotor</code>
+            <code className="noInfo">AVAILABLE ROTORS</code>
           </small>
           <div className="rotors">
             {store.enigmaModel === "I" ? (

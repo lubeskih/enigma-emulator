@@ -22,9 +22,6 @@ export class Store {
     this.enigmaM3Map.set("VIII", false);
   }
 
-  // Help
-  @observable helpVisible = false;
-
   // Steckerbrett = Plugboard
   public plugboard = new Plugboard();
 
