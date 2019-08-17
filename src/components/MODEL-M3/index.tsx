@@ -20,7 +20,7 @@ export class EnigmaModelM3Settings extends Component<IProps, {}> {
   }
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>

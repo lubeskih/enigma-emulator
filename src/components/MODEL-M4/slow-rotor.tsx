@@ -68,11 +68,11 @@ export class EnigmaM4SlowRotor extends Component<IProps, {}> {
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
-        <div className="row mb-3 encapsulate">
+        <div className="row mb-3 line-on-side">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">SLOW ROTOR (left-hand)</code>

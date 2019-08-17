@@ -6,6 +6,9 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Store } from "../store";
 
+// Internal
+import "./keyboard.css";
+
 // CONSTANTS
 import {
   FIRST_ROW_LETTERS,

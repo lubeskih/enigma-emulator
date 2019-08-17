@@ -68,7 +68,7 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
 
     return (
       <>
-        <div className="row mb-3 encapsulate">
+        <div className="row mb-3 line-on-side">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">FAST ROTOR (right-hand)</code>

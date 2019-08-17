@@ -52,7 +52,7 @@ class RotorPosition extends Component<IProps, {}> {
     return connectDropTarget(
       <div>
         <div
-          className={isLoaded ? "positionLoaded" : "position"}
+          className={isLoaded ? "position-loaded" : "position"}
           style={{ backgroundColor }}
         >
           {isActive
@@ -61,7 +61,7 @@ class RotorPosition extends Component<IProps, {}> {
             ? droppedItem.name
             : "Drop a rotor"}
           {isLoaded && !store.settingsAreLocked ? (
-            <button className="unloadButton" onClick={this.onUnloadRotor}>
+            <button className="unload-button" onClick={this.onUnloadRotor}>
               &times;
             </button>
           ) : null}

@@ -11,6 +11,9 @@ import { ALPHABET } from "../../constants";
 // Components
 import { Plug } from "./plug";
 
+// Internal
+import "./plugboard.css";
+
 interface IProps {
   store: Store;
 }

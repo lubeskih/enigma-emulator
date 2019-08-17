@@ -23,19 +23,19 @@ export class EnigmaM4ExtraWheel extends Component<IProps, {}> {
   }
 
   onExtraWheelChange = (event: any) => {
-    let store = this.props.store;
+    const store = this.props.store;
     store.ENIGMA_M4_EW = store.getExtraWheelObjectByName(event.value);
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
         <div className="row mt-2">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="noInfo">EXTRA WHEEL (Zusatzwalze)</code>
+              <code className="setting-title">EXTRA WHEEL (Zusatzwalze)</code>
             </small>
             <Select
               theme={theme => ({

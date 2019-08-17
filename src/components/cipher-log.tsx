@@ -6,6 +6,9 @@ import React, { Component } from "react";
 import { Collapse } from "react-bootstrap";
 import { Store } from "../store";
 
+// Internal
+import "./cipher-log.css";
+
 interface IProps {
   store: Store;
 }

@@ -35,7 +35,7 @@ class DraggableRotor extends Component<IProps, {}> {
       <div style={{ maxWidth: "150px" }}>
         {alreadyLoaded ? (
           <div
-            className="rotorLoaded"
+            className="rotor-loaded"
             style={{
               opacity
             }}
@@ -43,7 +43,7 @@ class DraggableRotor extends Component<IProps, {}> {
             {name}
           </div>
         ) : (
-          <div className="rotorStyle" style={{ opacity, backgroundColor }}>
+          <div className="draggable-rotor" style={{ opacity, backgroundColor }}>
             {name}
           </div>
         )}

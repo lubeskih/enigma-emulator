@@ -17,6 +17,8 @@ import { EnigmaModelM3Settings } from "./MODEL-M3";
 import { EnigmaModelM4Settings } from "./MODEL-M4";
 import { EnigmaModelOneSettings } from "./MODEL-ONE";
 
+import "./settings.css";
+
 // Store
 import { Store } from "../store";
 
@@ -39,7 +41,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
@@ -54,7 +56,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
           <div className="row mb-2">
             <div className="col-md-12 mb-2">
               <small>
-                <code className="noInfo">ENIGMA MODEL</code>
+                <code className="setting-title">ENIGMA MODEL</code>
               </small>
               <Select
                 theme={theme => ({
@@ -74,9 +76,9 @@ export class EnigmaSettings extends Component<IProps, {}> {
               />
             </div>
           </div>
+          <RenderRotors store={store} />
+          <RenderEnigmaModel store={store} />
         </div>
-        <RenderRotors store={store} />
-        <RenderEnigmaModel store={store} />
       </>
     );
   }
@@ -89,7 +91,7 @@ class RenderEnigmaModel extends Component<IProps, {}> {
   }
 
   @computed get WhichEnigmaModel() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     switch (store.enigmaModel) {
       case "I":
@@ -104,7 +106,7 @@ class RenderEnigmaModel extends Component<IProps, {}> {
   }
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
@@ -123,13 +125,13 @@ class RenderLockCheckbox extends Component<IProps, {}> {
 
   // Handle resetting the Enigma settings
   onResetSettingsClick = (_e: any) => {
-    let store = this.props.store;
+    const store = this.props.store;
     store.resetEnigmaSettings();
   };
 
   // Handle locking / unlocking the settings
   onSettingsLock = (_e: any) => {
-    let store = this.props.store;
+    const store = this.props.store;
 
     store.lastLamp = "";
     store.INPUT = "";
@@ -140,11 +142,11 @@ class RenderLockCheckbox extends Component<IProps, {}> {
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <Form>
-        <div key="custom-checkbox" className="settingsAreLocked mb-3">
+        <div key="custom-checkbox" className="settings-are-locked mb-3">
           <Form.Check
             disabled={
               !store.rotorDropPositionOne ||
@@ -162,7 +164,7 @@ class RenderLockCheckbox extends Component<IProps, {}> {
           />
 
           {store.settingsAreLocked === false ? (
-            <div onClick={this.onResetSettingsClick} className="resetSettings">
+            <div onClick={this.onResetSettingsClick} className="reset-settings">
               <a href="#">Reset settings</a>
             </div>
           ) : null}
@@ -183,15 +185,15 @@ class RenderRotors extends React.Component<IRenderRotors, {}> {
   }
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <div className="row mb-2">
         <div className="col-md-12 mb-2">
           <small>
-            <code className="noInfo">AVAILABLE ROTORS</code>
+            <code className="setting-title">AVAILABLE ROTORS</code>
           </small>
-          <div className="rotors">
+          <div className="available-rotors">
             {store.enigmaModel === "I" ? (
               <>
                 {FIVE_ROTOR_OPTIONS.map(rotor => (

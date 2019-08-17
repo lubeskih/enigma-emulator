@@ -20,7 +20,7 @@ export class EnigmaModelOneSettings extends Component<IProps, {}> {
   }
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>

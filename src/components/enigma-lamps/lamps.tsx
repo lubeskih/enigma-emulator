@@ -9,6 +9,9 @@ import { Lamp } from "./lamp";
 // CONSTANTS
 import { ALPHABET } from "../../constants";
 
+// Internal
+import "./lamps.css";
+
 interface IProps {
   store: Store;
 }

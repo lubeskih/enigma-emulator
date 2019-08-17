@@ -1,4 +1,5 @@
 {
   "extends": ["tslint:latest", "tslint-config-prettier"],
-  "no-unused-variable": [true, { "ignore-pattern": "^_" }]
+  "no-unused-variable": [true, { "ignore-pattern": "^_" }],
+  "max-classes-per-file": [true, 5, "exclude-class-expressions"]
 }
