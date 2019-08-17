@@ -35,14 +35,14 @@ export class Store {
   // --------------------
   public EW = new Wheel(c.EN_ETW);
 
-  public R1 = new Rotor(c.EN_R1_W, c.EN_R1_N, c.EN_R1_T);
-  public R2 = new Rotor(c.EN_R2_W, c.EN_R2_N, c.EN_R2_T);
-  public R3 = new Rotor(c.EN_R3_W, c.EN_R3_N, c.EN_R3_T);
-  public R4 = new Rotor(c.EN_R4_W, c.EN_R4_N, c.EN_R4_T);
-  public R5 = new Rotor(c.EN_R5_W, c.EN_R5_N, c.EN_R5_T);
-  public R6 = new Rotor(c.EN_R6_W, c.EN_R6_N, c.EN_R6_T);
-  public R7 = new Rotor(c.EN_R7_W, c.EN_R7_N, c.EN_R7_T);
-  public R8 = new Rotor(c.EN_R8_W, c.EN_R8_N, c.EN_R8_T);
+  public R1 = new Rotor(c.EN_R1_W, c.EN_R1_T);
+  public R2 = new Rotor(c.EN_R2_W, c.EN_R2_T);
+  public R3 = new Rotor(c.EN_R3_W, c.EN_R3_T);
+  public R4 = new Rotor(c.EN_R4_W, c.EN_R4_T);
+  public R5 = new Rotor(c.EN_R5_W, c.EN_R5_T);
+  public R6 = new Rotor(c.EN_R6_W, c.EN_R6_T);
+  public R7 = new Rotor(c.EN_R7_W, c.EN_R7_T);
+  public R8 = new Rotor(c.EN_R8_W, c.EN_R8_T);
 
   // --------------------
   // REFLECTORS
@@ -65,12 +65,8 @@ export class Store {
   // ------------------------------------
   // M4 SPECIFICS (ROTORS AND REFLECTORS)
   // ------------------------------------
-  public M4_EXTRA_WHEEL_BETA = new Rotor(c.M4_EXTRA_WHEEL_BETA, "NONE", "NONE");
-  public M4_EXTRA_WHEEL_GAMMA = new Rotor(
-    c.M4_EXTRA_WHEEL_GAMMA,
-    "NONE",
-    "NONE"
-  );
+  public M4_EXTRA_WHEEL_BETA = new Rotor(c.M4_EXTRA_WHEEL_BETA, "NONE");
+  public M4_EXTRA_WHEEL_GAMMA = new Rotor(c.M4_EXTRA_WHEEL_GAMMA, "NONE");
   public M4_EN_UKW_B_THIN = new Reflector(c.M4_EN_UKW_B_THIN);
   public M4_EN_UKW_C_THIN = new Reflector(c.M4_EN_UKW_C_THIN);
 

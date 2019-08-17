@@ -1,5 +1,4 @@
 export interface IRotor {
-  notch: number;
   turnover: number[];
 }
 

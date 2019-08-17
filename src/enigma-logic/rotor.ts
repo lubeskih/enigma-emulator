@@ -4,33 +4,24 @@ import { IRotor } from "../types";
 import { getLetterIndexInAlphabet, Wheel } from "./wheel";
 
 /**
- * A template/class that represents a Rotor
- *
- * A Rotor must have:
- * 1. Wiring:
- * ABCDEFGHIJKLMNOPQRSTUVWXYZ <- rotor wiring
- * EKMFLGDQVZNTOWYHXUSPAIBRCJ <- rotor wiring
- *
- * 2. Turnover: The letter that would be on top of the rotor at the point in time when the notch engaged.
- * 3. Notch: The letter(s) that causes the next rotor to step
+ * A class representing a Rotor
  */
 export class Rotor extends Wheel implements IRotor {
-  public readonly notch: number;
+  // turnover is the letter (or number) visible in the window before
+  // a rotor triggers the rotor next to it to step
   public readonly turnover: number[];
 
   @observable public groundSettings: number = 1;
   @observable public ringSettings: number = 1;
-
   public offset: number = 0;
-  public rotorPositionFromRightToLeft: number = 0;
 
+  // These maps keep track of the internal wires of the rotor
+  // right to left and left to right wiring
   private rightToLeftRW = new Map<number, number>();
   private leftToRightRW = new Map<number, number>();
 
-  constructor(wiring: string, notch: string, turnover: string) {
+  constructor(wiring: string, turnover: string) {
     super(wiring);
-
-    this.notch = getLetterIndexInAlphabet(notch);
     this.turnover = turnover
       .split("")
       .map(v => getLetterIndexInAlphabet(v) + 1);
@@ -42,7 +33,13 @@ export class Rotor extends Wheel implements IRotor {
     this.leftToRightRW = this.invertMap(this.rightToLeftRW);
   }
 
-  public step() {
+  /**
+   * Steps the rotor
+   *
+   * @param none
+   * @returns void
+   */
+  public step(): void {
     if (this.offset === 25) {
       this.offset = 0;
     } else {
@@ -56,15 +53,22 @@ export class Rotor extends Wheel implements IRotor {
     }
   }
 
-  public calcEntryContact(entryLetter: number) {
+  /**
+   *
+   * @param entryLetter the letter coming from the EW
+   * @returns number - the entry contact position
+   */
+  public calcEntryContact(entryLetter: number): number {
     if (entryLetter + this.offset > 25) {
       return entryLetter + this.offset - 26;
     } else {
+      console.log("TUJE", entryLetter + this.offset);
+      // return null;
       return entryLetter + this.offset;
     }
   }
 
-  public calcRightToLeftExitContact(entryLetter: number) {
+  public calcRightToLeftExitContact(entryLetter: number): number {
     const calc = this.rightToLeftEndpoint(entryLetter) - this.offset;
 
     if (calc < 0) {
@@ -74,7 +78,7 @@ export class Rotor extends Wheel implements IRotor {
     }
   }
 
-  public calcLeftToRightExitContact(entryLetter: number) {
+  public calcLeftToRightExitContact(entryLetter: number): number {
     const calc = this.leftToRightEndpoint(entryLetter) - this.offset;
 
     if (calc < 0) {
@@ -84,7 +88,7 @@ export class Rotor extends Wheel implements IRotor {
     }
   }
 
-  public rightToLeftEndpoint(index: number) {
+  public rightToLeftEndpoint(index: number): number {
     const letter = this.rightToLeftRW.get(index);
 
     if (letter || letter === 0) {
@@ -94,7 +98,7 @@ export class Rotor extends Wheel implements IRotor {
     }
   }
 
-  public leftToRightEndpoint(index: number) {
+  public leftToRightEndpoint(index: number): number {
     const letter = this.leftToRightRW.get(index);
 
     if (letter || letter === 0) {
@@ -104,7 +108,13 @@ export class Rotor extends Wheel implements IRotor {
     }
   }
 
-  public setGroundSettings(setting: number) {
+  /**
+   * Updates the ground setting of the rotor
+   *
+   * @param setting new ground setting
+   * @returns void
+   */
+  public setGroundSettings(setting: number): void {
     this.groundSettings = setting;
     this.offset = this.groundSettings - this.ringSettings;
 
@@ -113,7 +123,13 @@ export class Rotor extends Wheel implements IRotor {
     }
   }
 
-  public setRingSettings(setting: number) {
+  /**
+   * Updates the ring setting of the rotor
+   *
+   * @param setting new ring setting
+   * @returns void
+   */
+  public setRingSettings(setting: number): void {
     this.ringSettings = setting;
     this.offset = this.groundSettings - this.ringSettings;
 
@@ -126,6 +142,12 @@ export class Rotor extends Wheel implements IRotor {
   //     PRIVATE FUNCTIONS    //
   //////////////////////////////
 
+  /**
+   * Invert a map
+   *
+   * @param m map
+   * @returns inverted map
+   */
   private invertMap<K, V>(m: Map<K, V>): Map<V, K> {
     const i = new Map<V, K>();
     m.forEach((v, k) => i.set(v, k));
