@@ -158,13 +158,13 @@ export const EIGHT_ROTOR_OPTIONS = [
  *
  */
 export const LETTER_OPTIONS = ALPHABET.map(letter => ({
-  value: letter,
-  label: letter
+  label: letter,
+  value: letter
 }));
 
 export const NUMBER_OPTIONS = NUMBERS.map(letter => ({
-  value: letter,
-  label: letter
+  label: letter,
+  value: letter
 }));
 
 /** Enigma model options */

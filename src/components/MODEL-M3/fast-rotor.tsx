@@ -1,10 +1,10 @@
 // Libraries
-import React, { Component } from "react";
 import { observer } from "mobx-react";
+import React, { Component } from "react";
 import Select from "react-select";
 
 // Internal
-import { LETTER_OPTIONS, ALPHABET } from "../../constants";
+import { ALPHABET, LETTER_OPTIONS } from "../../constants";
 import { IDraggableRotor } from "../../types";
 
 // Components
@@ -33,21 +33,21 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onrotorDropPositionOneDrop = (item: IDraggableRotor) => {
+  public onrotorDropPositionOneDrop = (item: IDraggableRotor) => {
     this.props.store.updateRotorDropPositionOne(item);
   };
 
   // Handle changing the rotor type
-  onRotorOptionChange = (event: any) => {
-    let store = this.props.store;
+  public onRotorOptionChange = (event: any) => {
+    const store = this.props.store;
     store.ENIGMA_ROTOR_POSITION_ONE = store.getRotorObjectByRotorType(
       event.value
     );
   };
 
   // Handle ground settings change
-  onGroundSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onGroundSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setGroundSettings(
@@ -57,8 +57,8 @@ export class EnigmaM3FastRotor extends Component<IProps, {}> {
   };
 
   // Handle ring settings change
-  onRingSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onRingSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setRingSettings(

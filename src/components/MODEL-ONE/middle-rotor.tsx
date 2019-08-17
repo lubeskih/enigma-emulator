@@ -33,13 +33,13 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onrotorDropPositionTwoDrop = (item: IDraggableRotor) => {
+  public onrotorDropPositionTwoDrop = (item: IDraggableRotor) => {
     this.props.store.updateRotorDropPositionTwo(item);
   };
 
   // Handle changing the rotor type
-  onRotorOptionChange = (event: any) => {
-    let store = this.props.store;
+  public onRotorOptionChange = (event: any) => {
+    const store = this.props.store;
 
     store.ENIGMA_ROTOR_POSITION_TWO = store.getRotorObjectByRotorType(
       event.value
@@ -47,8 +47,8 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
   };
 
   // Handle the change in the ground settings
-  onGroundSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onGroundSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_TWO) {
       store.ENIGMA_ROTOR_POSITION_TWO.setGroundSettings(event.value);
@@ -56,8 +56,8 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
   };
 
   // Handle the change in the ring settings
-  onRingSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onRingSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_TWO) {
       store.ENIGMA_ROTOR_POSITION_TWO.setRingSettings(event.value);
@@ -65,7 +65,7 @@ export class EnigmaOneMiddleRotor extends Component<IProps, {}> {
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>

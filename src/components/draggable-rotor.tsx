@@ -1,12 +1,12 @@
 // Libraries
+import { observer } from "mobx-react";
 import React, { Component } from "react";
 import {
   ConnectDragSource,
+  DragSource,
   DragSourceConnector,
-  DragSourceMonitor,
-  DragSource
+  DragSourceMonitor
 } from "react-dnd";
-import { observer } from "mobx-react";
 
 // Store
 import { Store } from "../store";
@@ -28,10 +28,8 @@ class DraggableRotor extends Component<IProps, {}> {
   render() {
     const { name, connectDragSource, isDragging, store, id } = this.props;
     const opacity = isDragging ? 0.5 : 1;
-
-    let alreadyLoaded = store.checkIfAlreadyLoaded(id);
-
-    let backgroundColor = store.settingsAreLocked ? "#fafafa" : "#fff";
+    const alreadyLoaded = store.checkIfAlreadyLoaded(id);
+    const backgroundColor = store.settingsAreLocked ? "#fafafa" : "#fff";
 
     return connectDragSource(
       <div style={{ maxWidth: "150px" }}>

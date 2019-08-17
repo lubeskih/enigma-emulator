@@ -2,6 +2,7 @@ import { observable } from "mobx";
 
 import { IRotor } from "../types";
 import { getLetterIndexInAlphabet, Wheel } from "./wheel";
+
 /**
  * A template/class that represents a Rotor
  *

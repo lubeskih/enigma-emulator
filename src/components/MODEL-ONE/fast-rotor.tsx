@@ -33,21 +33,21 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onrotorDropPositionOneDrop = (item: IDraggableRotor) => {
+  public onrotorDropPositionOneDrop = (item: IDraggableRotor) => {
     this.props.store.updateRotorDropPositionOne(item);
   };
 
   // Handle changing the rotor type
-  onRotorOptionChange = (event: any) => {
-    let store = this.props.store;
+  public onRotorOptionChange = (event: any) => {
+    const store = this.props.store;
     store.ENIGMA_ROTOR_POSITION_ONE = store.getRotorObjectByRotorType(
       event.value
     );
   };
 
   // Handle the change in the ground settings
-  onGroundSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onGroundSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setGroundSettings(event.value);
@@ -55,8 +55,8 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   };
 
   // Handle the change in the ring settings
-  onRingSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onRingSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setRingSettings(event.value);
@@ -64,7 +64,7 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>

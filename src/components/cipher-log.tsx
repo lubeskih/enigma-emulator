@@ -1,10 +1,10 @@
 // Libraries
-import React, { Component } from "react";
 import { observer } from "mobx-react";
+import React, { Component } from "react";
 
 // Store
-import { Store } from "../store";
 import { Collapse } from "react-bootstrap";
+import { Store } from "../store";
 
 interface IProps {
   store: Store;

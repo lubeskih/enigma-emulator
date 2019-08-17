@@ -218,6 +218,13 @@ export class Store {
         }
 
         this.rotorDropPositionOne = null;
+
+        if (this.ENIGMA_ROTOR_POSITION_ONE) {
+          this.ENIGMA_ROTOR_POSITION_ONE.groundSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_ONE.ringSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_ONE.offset = 0;
+        }
+
         this.ENIGMA_ROTOR_POSITION_ONE = null;
         break;
       case 2:
@@ -226,7 +233,15 @@ export class Store {
         }
 
         this.rotorDropPositionTwo = null;
+
+        if (this.ENIGMA_ROTOR_POSITION_TWO) {
+          this.ENIGMA_ROTOR_POSITION_TWO.groundSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_TWO.ringSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_TWO.offset = 0;
+        }
+
         this.ENIGMA_ROTOR_POSITION_TWO = null;
+
         break;
       case 3:
         if (this.rotorDropPositionThree) {
@@ -234,7 +249,15 @@ export class Store {
         }
 
         this.rotorDropPositionThree = null;
+
+        if (this.ENIGMA_ROTOR_POSITION_THREE) {
+          this.ENIGMA_ROTOR_POSITION_THREE.groundSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_THREE.ringSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_THREE.offset = 0;
+        }
+
         this.ENIGMA_ROTOR_POSITION_THREE = null;
+
         break;
       default:
         return null;
@@ -334,7 +357,7 @@ export class Store {
    * Resets all settings
    * @returns void
    */
-  public resetEnigmaSettings(): void | null {
+  public resetEnigmaSettings(): boolean {
     // Reset plugboard
     this.plugboard.resetAll();
     this.plugboard.excessPlug = null;
@@ -362,7 +385,7 @@ export class Store {
       !this.ENIGMA_ROTOR_POSITION_TWO ||
       !this.ENIGMA_ROTOR_POSITION_THREE
     ) {
-      return null;
+      return false;
     }
 
     let stackRotors: Rotor[] = [];
@@ -395,7 +418,7 @@ export class Store {
         break;
       default:
         console.error("There was an error while resetting the settings.");
-        return null;
+        return false;
     }
 
     for (let i = 0; i <= stackRotorsLen; i++) {
@@ -403,6 +426,8 @@ export class Store {
       stackRotors[i].ringSettings = 1;
       stackRotors[i].offset = 0;
     }
+
+    return true;
   }
 
   /**

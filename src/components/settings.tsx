@@ -1,20 +1,21 @@
 // Libraries
-import React, { Component } from "react";
-import { observer } from "mobx-react";
 import { computed } from "mobx";
-import Select from "react-select";
+import { observer } from "mobx-react";
+import React, { Component } from "react";
 import { Form } from "react-bootstrap";
+import Select from "react-select";
 
 // Internal
-import DraggableRotor from "./draggable-rotor";
 import {
+  EIGHT_ROTOR_OPTIONS,
   ENIGMA_MODEL_OPTIONS,
-  FIVE_ROTOR_OPTIONS,
-  EIGHT_ROTOR_OPTIONS
+  FIVE_ROTOR_OPTIONS
 } from "../constants";
-import { EnigmaModelOneSettings } from "./MODEL-ONE";
+import DraggableRotor from "./draggable-rotor";
+
 import { EnigmaModelM3Settings } from "./MODEL-M3";
 import { EnigmaModelM4Settings } from "./MODEL-M4";
+import { EnigmaModelOneSettings } from "./MODEL-ONE";
 
 // Store
 import { Store } from "../store";
@@ -31,8 +32,8 @@ export class EnigmaSettings extends Component<IProps, {}> {
   }
 
   // Handle change of the enigma model in use
-  onEnigmaModelChange = (event: any) => {
-    let store = this.props.store;
+  public onEnigmaModelChange = (event: any) => {
+    const store = this.props.store;
     store.enigmaModel = event.value;
     store.resetEnigmaSettings();
   };
