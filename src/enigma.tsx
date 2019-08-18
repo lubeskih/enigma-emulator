@@ -4,8 +4,10 @@ import { observer } from "mobx-react";
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
-// Style
+// Internal
 import "./enigma.css";
+
+// Style
 import "bootstrap/dist/css/bootstrap.css";
 
 // Components
@@ -23,7 +25,7 @@ const store = new Store();
 document.addEventListener("keypress", logKey);
 
 function logKey(e: any) {
-  let letter: string = e.key.toUpperCase();
+  const letter: string = e.key.toUpperCase();
 
   if (
     ALPHABET.includes(letter) &&

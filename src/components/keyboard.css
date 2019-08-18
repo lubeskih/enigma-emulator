@@ -1,0 +1,46 @@
+.keyboard {
+  margin-bottom: 3em;
+}
+
+.keyboard button {
+  border-radius: 0;
+}
+
+.keyboard button {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  background-color: #fff;
+  color: black;
+  border: solid black;
+  margin-bottom: 5px;
+}
+
+.keyboard button:hover {
+  border: solid black;
+  background-color: rgb(235, 235, 235);
+  color: black;
+}
+
+.first-row-letters {
+  margin: 0 auto;
+  width: 70%;
+  margin-bottom: 10px;
+  margin-top: 1.9rem;
+}
+
+.second-row-letters {
+  margin: auto;
+  width: 65%;
+  margin-bottom: 10px;
+}
+
+.third-row-letters {
+  margin: auto;
+  width: 70%;
+}
+
+.gray {
+  color: #555;
+  text-decoration: underline;
+}

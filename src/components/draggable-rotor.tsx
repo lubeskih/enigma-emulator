@@ -1,12 +1,12 @@
 // Libraries
+import { observer } from "mobx-react";
 import React, { Component } from "react";
 import {
   ConnectDragSource,
+  DragSource,
   DragSourceConnector,
-  DragSourceMonitor,
-  DragSource
+  DragSourceMonitor
 } from "react-dnd";
-import { observer } from "mobx-react";
 
 // Store
 import { Store } from "../store";
@@ -28,16 +28,14 @@ class DraggableRotor extends Component<IProps, {}> {
   render() {
     const { name, connectDragSource, isDragging, store, id } = this.props;
     const opacity = isDragging ? 0.5 : 1;
-
-    let alreadyLoaded = store.checkIfAlreadyLoaded(id);
-
-    let backgroundColor = store.settingsAreLocked ? "#fafafa" : "#fff";
+    const alreadyLoaded = store.checkIfAlreadyLoaded(id);
+    const backgroundColor = store.settingsAreLocked ? "#fafafa" : "#fff";
 
     return connectDragSource(
       <div style={{ maxWidth: "150px" }}>
         {alreadyLoaded ? (
           <div
-            className="rotorLoaded"
+            className="rotor-loaded"
             style={{
               opacity
             }}
@@ -45,7 +43,7 @@ class DraggableRotor extends Component<IProps, {}> {
             {name}
           </div>
         ) : (
-          <div className="rotorStyle" style={{ opacity, backgroundColor }}>
+          <div className="draggable-rotor" style={{ opacity, backgroundColor }}>
             {name}
           </div>
         )}
@@ -58,7 +56,8 @@ export default DragSource(
   "DraggableRotor",
   {
     canDrag: (props: IProps) =>
-      !props.store.enigmaM3Map.get(props.id) && !props.store.settingsAreLocked,
+      !props.store.draggableRotors.get(props.id) &&
+      !props.store.settingsAreLocked,
     beginDrag(props: any, monitor: DragSourceMonitor, component: any) {
       const item = { id: props.id, name: props.name };
       return item;

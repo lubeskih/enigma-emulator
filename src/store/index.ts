@@ -1,110 +1,342 @@
 // Libraries
-import { observable, computed } from "mobx";
+import { observable } from "mobx";
 import { Plugboard } from "../enigma-logic/plugboard";
 
+// Internal
 import * as c from "../constants";
 import { IDraggableRotor } from "../types";
 
-import { Rotor, Wheel, Reflector } from "../enigma-logic/wheel";
+import { Reflector } from "../enigma-logic/reflector";
+import { Rotor } from "../enigma-logic/rotor";
+import { Wheel } from "../enigma-logic/wheel";
 
 /**
- * Store
+ * Application store
  */
 export class Store {
-  constructor() {
-    this.enigmaM3Map.set("I", false);
-    this.enigmaM3Map.set("II", false);
-    this.enigmaM3Map.set("III", false);
-    this.enigmaM3Map.set("IV", false);
-    this.enigmaM3Map.set("V", false);
-    this.enigmaM3Map.set("VI", false);
-    this.enigmaM3Map.set("VII", false);
-    this.enigmaM3Map.set("VIII", false);
-  }
+  ///////////////
+  // PLUGBOARD //
+  ///////////////
 
-  // Steckerbrett = Plugboard
   public plugboard = new Plugboard();
 
-  @observable plugs = new Map<string, boolean>();
+  // A map for keeping track which plugs are wired/free
+  @observable public plugs = new Map<string, boolean>();
 
-  public selectedLetter: string | null = null;
+  ///////////
+  // LAMPS //
+  ///////////
 
-  @observable lastLamp: string = "";
+  // Used for storing the last ciphered letter
+  @observable public lastLamp: string = "";
 
-  @observable INPUT: string = "";
-  @observable OUTPUT: string = "";
-  @observable FIRST_LETTER: string = "";
+  // --------------------
+  // ROTORS
+  // --------------------
+  public EW = new Wheel(c.EN_ETW);
 
-  // Settings
-  @observable enigmaModel: "I" | "M3" | "M4" | null = "I";
-  @observable settingsAreLocked: boolean = false;
+  public R1 = new Rotor(c.EN_R1_W, c.EN_R1_T);
+  public R2 = new Rotor(c.EN_R2_W, c.EN_R2_T);
+  public R3 = new Rotor(c.EN_R3_W, c.EN_R3_T);
+  public R4 = new Rotor(c.EN_R4_W, c.EN_R4_T);
+  public R5 = new Rotor(c.EN_R5_W, c.EN_R5_T);
+  public R6 = new Rotor(c.EN_R6_W, c.EN_R6_T);
+  public R7 = new Rotor(c.EN_R7_W, c.EN_R7_T);
+  public R8 = new Rotor(c.EN_R8_W, c.EN_R8_T);
 
-  // Rotors / Reflectors / Entry Wheel
-  EW = new Wheel(c.EN_ETW);
+  // --------------------
+  // REFLECTORS
+  // --------------------
 
-  R1 = new Rotor(c.EN_R1_W, c.EN_R1_N, c.EN_R1_T);
-  R2 = new Rotor(c.EN_R2_W, c.EN_R2_N, c.EN_R2_T);
-  R3 = new Rotor(c.EN_R3_W, c.EN_R3_N, c.EN_R3_T);
-  R4 = new Rotor(c.EN_R4_W, c.EN_R4_N, c.EN_R4_T);
-  R5 = new Rotor(c.EN_R5_W, c.EN_R5_N, c.EN_R5_T);
-  R6 = new Rotor(c.EN_R6_W, c.EN_R6_N, c.EN_R6_T);
-  R7 = new Rotor(c.EN_R7_W, c.EN_R7_N, c.EN_R7_T);
-  R8 = new Rotor(c.EN_R8_W, c.EN_R8_N, c.EN_R8_T);
+  public UKW_A = new Reflector(c.EN_UKW_A);
+  public UKW_B = new Reflector(c.EN_UKW_B);
+  public UKW_C = new Reflector(c.EN_UKW_C);
 
-  UKW_A = new Reflector(c.EN_UKW_A);
-  UKW_B = new Reflector(c.EN_UKW_B);
-  UKW_C = new Reflector(c.EN_UKW_C);
+  // ------------------------------------
+  // I SPECIFICS (ROTORS AND REFLECTORS)
+  // ------------------------------------
+  @observable public ENIGMA_I_REFLECTOR: Reflector = this.UKW_A;
 
-  M4_EXTRA_WHEEL_BETA = new Rotor(c.M4_EXTRA_WHEEL_BETA, "NONE", "NONE");
-  M4_EXTRA_WHEEL_GAMMA = new Rotor(c.M4_EXTRA_WHEEL_GAMMA, "NONE", "NONE");
-  M4_EN_UKW_B_THIN = new Reflector(c.M4_EN_UKW_B_THIN);
-  M4_EN_UKW_C_THIN = new Reflector(c.M4_EN_UKW_C_THIN);
+  // ------------------------------------
+  // M3 SPECIFICS (ROTORS AND REFLECTORS)
+  // ------------------------------------
+  @observable public ENIGMA_M3_REFLECTOR: Reflector = this.UKW_B;
 
-  @observable ENIGMA_ROTOR_POSITION_ONE: Rotor | null = null;
-  @observable ENIGMA_ROTOR_POSITION_TWO: Rotor | null = null;
-  @observable ENIGMA_ROTOR_POSITION_THREE: Rotor | null = null;
+  // ------------------------------------
+  // M4 SPECIFICS (ROTORS AND REFLECTORS)
+  // ------------------------------------
+  public M4_EXTRA_WHEEL_BETA = new Rotor(c.M4_EXTRA_WHEEL_BETA, "NONE");
+  public M4_EXTRA_WHEEL_GAMMA = new Rotor(c.M4_EXTRA_WHEEL_GAMMA, "NONE");
+  public M4_EN_UKW_B_THIN = new Reflector(c.M4_EN_UKW_B_THIN);
+  public M4_EN_UKW_C_THIN = new Reflector(c.M4_EN_UKW_C_THIN);
 
-  // Enigma I
-  @observable ENIGMA_I_REFLECTOR: Reflector = this.UKW_A;
-  // #########
+  @observable public ENIGMA_M4_EW: Rotor = this.M4_EXTRA_WHEEL_BETA;
+  @observable public ENIGMA_M4_REFLECTOR: Reflector = this.M4_EN_UKW_B_THIN;
 
-  // Enigma M3
-  @observable ENIGMA_M3_REFLECTOR: Reflector = this.UKW_B;
-  // #########
+  //////////////////////
+  // GENERAL SETTINGS //
+  //////////////////////
 
-  // Enigma M4
-  @observable ENIGMA_M4_EW: Rotor = this.M4_EXTRA_WHEEL_BETA;
-  @observable ENIGMA_M4_REFLECTOR: Reflector = this.M4_EN_UKW_B_THIN;
-  // #########
+  // Keep track of the model in use
+  @observable public enigmaModel: "I" | "M3" | "M4" = "I";
 
-  cipher(letter: string) {
-    this.FIRST_LETTER = letter;
-    const enteringLetter: string = letter;
+  // Keep track if the settings are locked or unlocked
+  @observable public settingsAreLocked: boolean = false;
+
+  // Keep track of the droppable rotor positions
+  @observable public ENIGMA_ROTOR_POSITION_ONE: Rotor | null = null;
+  @observable public ENIGMA_ROTOR_POSITION_TWO: Rotor | null = null;
+  @observable public ENIGMA_ROTOR_POSITION_THREE: Rotor | null = null;
+
+  // Store the INPUT for the keyboard
+  @observable public INPUT: string = "";
+
+  // Store the ciphered OUTPUT
+  @observable public OUTPUT: string = "";
+
+  // Store the last keyboard button press
+  @observable public lastClickedLetter: string = "";
+
+  ////////////////////////////////////////////////
+  // ROTORS / POSITIONS DRAG AND DROP SPECIFICS //
+  ////////////////////////////////////////////////
+
+  // Keep track of which rotors are dropped and which are not
+  @observable public draggableRotors = new Map<string, boolean>();
+
+  // Store dropped rotors
+  @observable public rotorDropPositionOne: IDraggableRotor | null = null;
+  @observable public rotorDropPositionTwo: IDraggableRotor | null = null;
+  @observable public rotorDropPositionThree: IDraggableRotor | null = null;
+
+  /**
+   *
+   * Updates a droppable rotor position number one
+   * @param item IDraggableRotor object
+   * @returns void
+   */
+  public updateRotorDropPositionOne(item: IDraggableRotor): void {
+    if (this.rotorDropPositionOne) {
+      const getCurrentValue = this.draggableRotors.get(
+        this.rotorDropPositionOne.id
+      );
+
+      if (typeof getCurrentValue === "boolean") {
+        this.draggableRotors.set(
+          this.rotorDropPositionOne.id,
+          !getCurrentValue
+        );
+      }
+    }
+
+    this.draggableRotors.set(item.id, true);
+    this.rotorDropPositionOne = item;
+    this.ENIGMA_ROTOR_POSITION_ONE = this.getRotorObjectByRotorType(item.id);
+  }
+
+  /**
+   *
+   * Updates a droppable rotor position number two
+   * @param item IDraggableRotor object
+   * @returns void
+   */
+  public updateRotorDropPositionTwo(item: IDraggableRotor): void {
+    if (this.rotorDropPositionTwo) {
+      const getCurrentValue = this.draggableRotors.get(
+        this.rotorDropPositionTwo.id
+      );
+
+      if (typeof getCurrentValue === "boolean") {
+        this.draggableRotors.set(
+          this.rotorDropPositionTwo.id,
+          !getCurrentValue
+        );
+      }
+    }
+
+    this.draggableRotors.set(item.id, true);
+    this.rotorDropPositionTwo = item;
+    this.ENIGMA_ROTOR_POSITION_TWO = this.getRotorObjectByRotorType(item.id);
+  }
+
+  /**
+   *
+   * Updates a droppable rotor position number three
+   * @param item IDraggableRotor object
+   * @returns void
+   */
+  public updateRotorDropPositionThree(item: IDraggableRotor): void {
+    if (this.rotorDropPositionThree) {
+      const getCurrentValue = this.draggableRotors.get(
+        this.rotorDropPositionThree.id
+      );
+
+      if (typeof getCurrentValue === "boolean") {
+        this.draggableRotors.set(
+          this.rotorDropPositionThree.id,
+          !getCurrentValue
+        );
+      }
+    }
+
+    this.draggableRotors.set(item.id, true);
+    this.rotorDropPositionThree = item;
+    this.ENIGMA_ROTOR_POSITION_THREE = this.getRotorObjectByRotorType(item.id);
+  }
+
+  /**
+   *
+   * Updates a droppable rotor position number one
+   * @param item IDraggableRotor object
+   * @returns void
+   */
+  public checkIfAlreadyLoaded(id: string): boolean {
+    const loaded = this.draggableRotors.get(id);
+
+    if (loaded) {
+      return loaded;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   *
+   * Unloads a rotor from a position
+   * @param position position number
+   * @returns void or null
+   */
+  public unloadRotorByPosition(position: number): void | null {
+    switch (position) {
+      case 1:
+        if (this.rotorDropPositionOne) {
+          this.draggableRotors.set(this.rotorDropPositionOne.id, false);
+        }
+
+        this.rotorDropPositionOne = null;
+
+        if (this.ENIGMA_ROTOR_POSITION_ONE) {
+          this.ENIGMA_ROTOR_POSITION_ONE.groundSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_ONE.ringSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_ONE.offset = 0;
+        }
+
+        this.ENIGMA_ROTOR_POSITION_ONE = null;
+        break;
+      case 2:
+        if (this.rotorDropPositionTwo) {
+          this.draggableRotors.set(this.rotorDropPositionTwo.id, false);
+        }
+
+        this.rotorDropPositionTwo = null;
+
+        if (this.ENIGMA_ROTOR_POSITION_TWO) {
+          this.ENIGMA_ROTOR_POSITION_TWO.groundSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_TWO.ringSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_TWO.offset = 0;
+        }
+
+        this.ENIGMA_ROTOR_POSITION_TWO = null;
+
+        break;
+      case 3:
+        if (this.rotorDropPositionThree) {
+          this.draggableRotors.set(this.rotorDropPositionThree.id, false);
+        }
+
+        this.rotorDropPositionThree = null;
+
+        if (this.ENIGMA_ROTOR_POSITION_THREE) {
+          this.ENIGMA_ROTOR_POSITION_THREE.groundSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_THREE.ringSettings = 1;
+          this.ENIGMA_ROTOR_POSITION_THREE.offset = 0;
+        }
+
+        this.ENIGMA_ROTOR_POSITION_THREE = null;
+
+        break;
+      default:
+        return null;
+    }
+  }
+
+  /**
+   *
+   * returns a IDraggableRotor object
+   * according the position it is dropped
+   * @param position position number
+   * @returns void or null
+   */
+  public getPositionByPositionNumber(position: number): IDraggableRotor | null {
+    switch (position) {
+      case 1:
+        return this.rotorDropPositionOne;
+      case 2:
+        return this.rotorDropPositionTwo;
+      case 3:
+        return this.rotorDropPositionThree;
+      default:
+        return this.rotorDropPositionOne;
+    }
+  }
+
+  constructor() {
+    // Make all draggable rotors "unloaded" on create.
+    c.EIGHT_ROTOR_OPTIONS.map(rotor =>
+      this.draggableRotors.set(rotor.id, false)
+    );
+  }
+
+  ///////////////
+  // FUNCTIONS //
+  ///////////////
+
+  /**
+   *
+   * Gets script version
+   * @param letter
+   * @returns void
+   */
+  public cipher(letter: string): void {
+    this.lastClickedLetter = letter;
 
     letter = this.plugboard.getPlug(letter);
     let toBeCipheredLetter = this.EW.getIndexOfLetterInWiring(letter);
 
+    // Step the rotors
+    this.stepRotors();
+
     switch (this.enigmaModel) {
       case "I":
-        this.stepRotors();
         toBeCipheredLetter = this.cipherFromEnigmaOne(toBeCipheredLetter);
         break;
       case "M3":
-        this.stepRotors();
         toBeCipheredLetter = this.cipherFromEnigmaM3(toBeCipheredLetter);
         break;
       case "M4":
-        this.stepRotors();
         toBeCipheredLetter = this.cipherFromEnigmaM4(toBeCipheredLetter);
         break;
     }
 
     letter = this.plugboard.getPlug(c.ALPHABET[toBeCipheredLetter]);
 
+    // Update INPUT/OUTPUT, lamps and clicks
+    this.update(letter);
+  }
+
+  /**
+   *
+   * Updates INPUT/OUTPUT logs
+   * lamps and last clicked key
+   *
+   * @param letter
+   * @returns void
+   */
+  public update(letter: string): void {
     if (this.INPUT && this.INPUT.replace(/\s/g, "").length % 4 === 0) {
-      this.INPUT += " " + enteringLetter;
+      this.INPUT += " " + this.lastClickedLetter;
     } else {
-      this.INPUT += enteringLetter;
+      this.INPUT += this.lastClickedLetter;
     }
 
     if (this.OUTPUT && this.OUTPUT.replace(/\s/g, "").length % 4 === 0) {
@@ -116,7 +348,12 @@ export class Store {
     this.lastLamp = letter;
   }
 
-  resetEnigmaSettings() {
+  /**
+   *
+   * Resets all settings
+   * @returns void
+   */
+  public resetEnigmaSettings(): boolean {
     // Reset plugboard
     this.plugboard.resetAll();
     this.plugboard.excessPlug = null;
@@ -130,25 +367,21 @@ export class Store {
     this.INPUT = "";
 
     // Reset the positions
-    this.enigmaM3Map.set("I", false);
-    this.enigmaM3Map.set("II", false);
-    this.enigmaM3Map.set("III", false);
-    this.enigmaM3Map.set("IV", false);
-    this.enigmaM3Map.set("V", false);
-    this.enigmaM3Map.set("VI", false);
-    this.enigmaM3Map.set("VII", false);
-    this.enigmaM3Map.set("VIII", false);
+    c.EIGHT_ROTOR_OPTIONS.map(rotor =>
+      this.draggableRotors.set(rotor.id, false)
+    );
 
-    this.positionOne = null;
-    this.positionTwo = null;
-    this.positionThree = null;
+    // Remove the rotors from their positions
+    this.rotorDropPositionOne = null;
+    this.rotorDropPositionTwo = null;
+    this.rotorDropPositionThree = null;
 
     if (
       !this.ENIGMA_ROTOR_POSITION_ONE ||
       !this.ENIGMA_ROTOR_POSITION_TWO ||
       !this.ENIGMA_ROTOR_POSITION_THREE
     ) {
-      return null;
+      return false;
     }
 
     let stackRotors: Rotor[] = [];
@@ -181,7 +414,7 @@ export class Store {
         break;
       default:
         console.error("There was an error while resetting the settings.");
-        return null;
+        return false;
     }
 
     for (let i = 0; i <= stackRotorsLen; i++) {
@@ -189,9 +422,16 @@ export class Store {
       stackRotors[i].ringSettings = 1;
       stackRotors[i].offset = 0;
     }
+
+    return true;
   }
 
-  stepRotors() {
+  /**
+   *
+   * Handles the rotor stepping
+   * @returns void
+   */
+  public stepRotors(): void | null {
     if (
       !this.ENIGMA_ROTOR_POSITION_ONE ||
       !this.ENIGMA_ROTOR_POSITION_TWO ||
@@ -231,7 +471,16 @@ export class Store {
     }
   }
 
-  cipherFromEnigmaOne(toBeCipheredLetter: number): number {
+  ///////////////////////
+  // CIPHERING LETTERS //
+  ///////////////////////
+
+  /**
+   *
+   * Ciphers letter specifically for Enigma I
+   * @param toBeCipheredLetter letter -> number bijection
+   */
+  public cipherFromEnigmaOne(toBeCipheredLetter: number): number {
     if (
       !this.ENIGMA_ROTOR_POSITION_ONE ||
       !this.ENIGMA_ROTOR_POSITION_TWO ||
@@ -240,15 +489,17 @@ export class Store {
       return -1;
     }
 
-    let stackRotors: Rotor[] = [
+    const stackRotors: Rotor[] = [
       this.ENIGMA_ROTOR_POSITION_ONE,
       this.ENIGMA_ROTOR_POSITION_TWO,
       this.ENIGMA_ROTOR_POSITION_THREE
     ];
 
     for (let i = 0; i <= 2; i++) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateRTLContact(
         toBeCipheredLetter
       );
     }
@@ -258,8 +509,10 @@ export class Store {
     );
 
     for (let i = 2; i >= 0; i--) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateLTRContact(
         toBeCipheredLetter
       );
     }
@@ -267,7 +520,12 @@ export class Store {
     return toBeCipheredLetter;
   }
 
-  cipherFromEnigmaM3(toBeCipheredLetter: number): number {
+  /**
+   *
+   * Ciphers letter specifically for Enigma M3
+   * @param toBeCipheredLetter letter -> number bijection
+   */
+  public cipherFromEnigmaM3(toBeCipheredLetter: number): number {
     if (
       !this.ENIGMA_ROTOR_POSITION_ONE ||
       !this.ENIGMA_ROTOR_POSITION_TWO ||
@@ -276,15 +534,17 @@ export class Store {
       return -1;
     }
 
-    let stackRotors: Rotor[] = [
+    const stackRotors: Rotor[] = [
       this.ENIGMA_ROTOR_POSITION_ONE,
       this.ENIGMA_ROTOR_POSITION_TWO,
       this.ENIGMA_ROTOR_POSITION_THREE
     ];
 
     for (let i = 0; i <= 2; i++) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateRTLContact(
         toBeCipheredLetter
       );
     }
@@ -294,8 +554,10 @@ export class Store {
     );
 
     for (let i = 2; i >= 0; i--) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateLTRContact(
         toBeCipheredLetter
       );
     }
@@ -303,7 +565,12 @@ export class Store {
     return toBeCipheredLetter;
   }
 
-  cipherFromEnigmaM4(toBeCipheredLetter: number): number {
+  /**
+   *
+   * Ciphers letter specifically for Enigma M4
+   * @param toBeCipheredLetter letter -> number bijection
+   */
+  public cipherFromEnigmaM4(toBeCipheredLetter: number): number {
     if (
       !this.ENIGMA_ROTOR_POSITION_ONE ||
       !this.ENIGMA_ROTOR_POSITION_TWO ||
@@ -312,21 +579,25 @@ export class Store {
       return -1;
     }
 
-    let stackRotors: Rotor[] = [
+    const stackRotors: Rotor[] = [
       this.ENIGMA_ROTOR_POSITION_ONE,
       this.ENIGMA_ROTOR_POSITION_TWO,
       this.ENIGMA_ROTOR_POSITION_THREE
     ];
 
     for (let i = 0; i <= 2; i++) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateRTLContact(
         toBeCipheredLetter
       );
     }
 
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcEntryContact(toBeCipheredLetter);
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcRightToLeftExitContact(
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateEntryContact(
+      toBeCipheredLetter
+    );
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateRTLContact(
       toBeCipheredLetter
     );
 
@@ -334,14 +605,18 @@ export class Store {
       toBeCipheredLetter
     );
 
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcEntryContact(toBeCipheredLetter);
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcLeftToRightExitContact(
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateEntryContact(
+      toBeCipheredLetter
+    );
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateLTRContact(
       toBeCipheredLetter
     );
 
     for (let i = 2; i >= 0; i--) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateLTRContact(
         toBeCipheredLetter
       );
     }
@@ -353,7 +628,14 @@ export class Store {
   //   HELPER FUNCTIONS  //
   /////////////////////////
 
-  getRotorObjectByRotorType(rotorType: string) {
+  /**
+   *
+   * Returns a Rotor object depending on its
+   * Roman numeral representation
+   * @param rotorType letter
+   * @returns Rotor object
+   */
+  public getRotorObjectByRotorType(rotorType: string): Rotor {
     switch (rotorType) {
       case "I":
         return this.R1;
@@ -376,8 +658,15 @@ export class Store {
     }
   }
 
-  getExtraWheelObjectByName(exWheel: string) {
-    switch (exWheel) {
+  /**
+   *
+   * Returns an extra wheel (Rotor) object
+   * depending on its Roman numeral representation
+   * @param exWheelType letter
+   * @returns Rotor object
+   */
+  public getExtraWheelObjectByName(exWheelType: string): Rotor {
+    switch (exWheelType) {
       case "BETA":
         return this.M4_EXTRA_WHEEL_BETA;
       case "GAMMA":
@@ -387,7 +676,14 @@ export class Store {
     }
   }
 
-  getReflectorObjectByName(reflector: string) {
+  /**
+   *
+   * Returns a reflector object
+   * depending on its Roman numeral representation
+   * @param exWheelType letter
+   * @returns Reflector object
+   */
+  public getReflectorObjectByName(reflector: string): Reflector {
     switch (reflector) {
       case "UKW-A":
         return this.UKW_A;
@@ -404,115 +700,13 @@ export class Store {
     }
   }
 
-  getLetterByNumber(num: number): string {
+  /**
+   *
+   * Returns the letter from its number bijection
+   * @param num number
+   * @returns letter string
+   */
+  public getLetterByNumber(num: number): string {
     return c.ALPHABET[num - 1];
-  }
-
-  ///////////////////
-  // DRAG AND DROP //
-  ///////////////////
-
-  @observable enigmaM3Map = new Map<string, boolean>();
-
-  @observable positionOne: IDraggableRotor | null = null;
-
-  @observable positionTwo: IDraggableRotor | null = null;
-
-  @observable positionThree: IDraggableRotor | null = null;
-
-  updatePositionOne(item: IDraggableRotor) {
-    if (this.positionOne) {
-      let getCurrentValue = this.enigmaM3Map.get(this.positionOne.id);
-
-      if (typeof getCurrentValue === "boolean") {
-        this.enigmaM3Map.set(this.positionOne.id, !getCurrentValue);
-      }
-    }
-
-    this.enigmaM3Map.set(item.id, true);
-    this.positionOne = item;
-    this.ENIGMA_ROTOR_POSITION_ONE = this.getRotorObjectByRotorType(item.id);
-  }
-
-  updatePositionTwo(item: IDraggableRotor) {
-    if (this.positionTwo) {
-      let getCurrentValue = this.enigmaM3Map.get(this.positionTwo.id);
-
-      if (typeof getCurrentValue === "boolean") {
-        this.enigmaM3Map.set(this.positionTwo.id, !getCurrentValue);
-      }
-    }
-
-    this.enigmaM3Map.set(item.id, true);
-    this.positionTwo = item;
-    this.ENIGMA_ROTOR_POSITION_TWO = this.getRotorObjectByRotorType(item.id);
-  }
-
-  updatePositionThree(item: IDraggableRotor) {
-    if (this.positionThree) {
-      let getCurrentValue = this.enigmaM3Map.get(this.positionThree.id);
-
-      if (typeof getCurrentValue === "boolean") {
-        this.enigmaM3Map.set(this.positionThree.id, !getCurrentValue);
-      }
-    }
-
-    this.enigmaM3Map.set(item.id, true);
-    this.positionThree = item;
-    this.ENIGMA_ROTOR_POSITION_THREE = this.getRotorObjectByRotorType(item.id);
-  }
-
-  checkIfAlreadyLoaded(id: string) {
-    let loaded = this.enigmaM3Map.get(id);
-
-    if (loaded) {
-      return loaded;
-    } else {
-      return false;
-    }
-  }
-
-  unloadRotorByPosition(position: number) {
-    switch (position) {
-      case 1:
-        if (this.positionOne) {
-          this.enigmaM3Map.set(this.positionOne.id, false);
-        }
-
-        this.positionOne = null;
-        this.ENIGMA_ROTOR_POSITION_ONE = null;
-        break;
-      case 2:
-        if (this.positionTwo) {
-          this.enigmaM3Map.set(this.positionTwo.id, false);
-        }
-
-        this.positionTwo = null;
-        this.ENIGMA_ROTOR_POSITION_TWO = null;
-        break;
-      case 3:
-        if (this.positionThree) {
-          this.enigmaM3Map.set(this.positionThree.id, false);
-        }
-
-        this.positionThree = null;
-        this.ENIGMA_ROTOR_POSITION_THREE = null;
-        break;
-      default:
-        return null;
-    }
-  }
-
-  returnPositionByPositionNumber(position: number) {
-    switch (position) {
-      case 1:
-        return this.positionOne;
-      case 2:
-        return this.positionTwo;
-      case 3:
-        return this.positionThree;
-      default:
-        return this.positionOne;
-    }
   }
 }

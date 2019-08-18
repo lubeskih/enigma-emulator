@@ -12,35 +12,27 @@
 export const EN_ETW = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // ENTRY WHEEL
 
 export const EN_R1_W = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"; // ROTOR 1 WIRING
-export const EN_R1_N = "Y"; // ROTOR 1 NOTCH
 export const EN_R1_T = "Q"; // ROTOR 1 TURNOVER
 
 export const EN_R2_W = "AJDKSIRUXBLHWTMCQGZNPYFVOE"; // ROTOR 2 WIRING
-export const EN_R2_N = "M"; // ROTOR 2 NOTCH
 export const EN_R2_T = "E"; // ROTOR 2 TURNOVER
 
 export const EN_R3_W = "BDFHJLCPRTXVZNYEIWGAKMUSQO"; // ROTOR 3 WIRING
-export const EN_R3_N = "D"; // ROTOR 3 NOTCH
 export const EN_R3_T = "V"; // ROTOR 3 TURNOVER
 
 export const EN_R4_W = "ESOVPZJAYQUIRHXLNFTGKDCMWB"; // ROTOR 4 WIRING
-export const EN_R4_N = "R"; // ROTOR 4 NOTCH
 export const EN_R4_T = "J"; // ROTOR 4 TURNOVER
 
 export const EN_R5_W = "VZBRGITYUPSDNHLXAWMJQOFECK"; // ROTOR 5 WIRING
-export const EN_R5_N = "H"; // ROTOR 5 NOTCH
 export const EN_R5_T = "Z"; // ROTOR 5 TURNOVER
 
 export const EN_R6_W = "JPGVOUMFYQBENHZRDKASXLICTW"; // ROTOR 6 WIRING
-export const EN_R6_N = "HU"; // ROTOR 6 NOTCH
 export const EN_R6_T = "ZM"; // ROTOR 6 TURNOVER
 
 export const EN_R7_W = "NZJHGRCXMYSWBOUFAIVLPEKQDT"; // ROTOR 7 WIRING
-export const EN_R7_N = "HU"; // ROTOR 7 NOTCH
 export const EN_R7_T = "ZM"; // ROTOR 7 TURNOVER
 
 export const EN_R8_W = "FKQHTLXOCBJSPDZRAMEWNIUYGV"; // ROTOR 8 WIRING
-export const EN_R8_N = "HU"; // ROTOR 8 NOTCH
 export const EN_R8_T = "ZM"; // ROTOR 8 TURNOVER
 
 export const EN_UKW_A = "EJMZALYXVBWFCRQUONTSPIKHGD"; // REFLECTOR TYPE A
@@ -158,13 +150,13 @@ export const EIGHT_ROTOR_OPTIONS = [
  *
  */
 export const LETTER_OPTIONS = ALPHABET.map(letter => ({
-  value: letter,
-  label: letter
+  label: letter,
+  value: letter
 }));
 
 export const NUMBER_OPTIONS = NUMBERS.map(letter => ({
-  value: letter,
-  label: letter
+  label: letter,
+  value: letter
 }));
 
 /** Enigma model options */

@@ -1,10 +1,13 @@
 // Libraries
-import React, { Component } from "react";
 import { observer } from "mobx-react";
+import React, { Component } from "react";
 
 // Store
-import { Store } from "../store";
 import { Collapse } from "react-bootstrap";
+import { Store } from "../store";
+
+// Internal
+import "./cipher-log.css";
 
 interface IProps {
   store: Store;

@@ -25,19 +25,19 @@ export class EnigmaOneReflector extends Component<IProps, {}> {
 
   // Handle Enigma reflector change
   onReflectorChange = (event: any) => {
-    let store = this.props.store;
+    const store = this.props.store;
     store.ENIGMA_I_REFLECTOR = store.getReflectorObjectByName(event.value);
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
         <div className="row mb-3">
           <div className="col-md-12 mb-3">
             <small>
-              <code className="noInfo">REFLECTOR</code>
+              <code className="setting-title">REFLECTOR</code>
             </small>
             <Select
               theme={theme => ({

@@ -1,6 +1,6 @@
 // Libraries
-import React, { Component } from "react";
 import { observer } from "mobx-react";
+import React, { Component } from "react";
 
 // Store
 import { Store } from "../../store";
@@ -8,6 +8,9 @@ import { Lamp } from "./lamp";
 
 // CONSTANTS
 import { ALPHABET } from "../../constants";
+
+// Internal
+import "./lamps.css";
 
 interface IProps {
   store: Store;

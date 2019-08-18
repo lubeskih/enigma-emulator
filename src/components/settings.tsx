@@ -1,20 +1,23 @@
 // Libraries
-import React, { Component } from "react";
-import { observer } from "mobx-react";
 import { computed } from "mobx";
-import Select from "react-select";
+import { observer } from "mobx-react";
+import React, { Component } from "react";
 import { Form } from "react-bootstrap";
+import Select from "react-select";
 
 // Internal
-import DraggableRotor from "./draggable-rotor";
 import {
+  EIGHT_ROTOR_OPTIONS,
   ENIGMA_MODEL_OPTIONS,
-  FIVE_ROTOR_OPTIONS,
-  EIGHT_ROTOR_OPTIONS
+  FIVE_ROTOR_OPTIONS
 } from "../constants";
-import { EnigmaModelOneSettings } from "./MODEL-ONE";
+import DraggableRotor from "./draggable-rotor";
+
 import { EnigmaModelM3Settings } from "./MODEL-M3";
 import { EnigmaModelM4Settings } from "./MODEL-M4";
+import { EnigmaModelOneSettings } from "./MODEL-ONE";
+
+import "./settings.css";
 
 // Store
 import { Store } from "../store";
@@ -31,14 +34,14 @@ export class EnigmaSettings extends Component<IProps, {}> {
   }
 
   // Handle change of the enigma model in use
-  onEnigmaModelChange = (event: any) => {
-    let store = this.props.store;
+  public onEnigmaModelChange = (event: any) => {
+    const store = this.props.store;
     store.enigmaModel = event.value;
     store.resetEnigmaSettings();
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
@@ -53,7 +56,7 @@ export class EnigmaSettings extends Component<IProps, {}> {
           <div className="row mb-2">
             <div className="col-md-12 mb-2">
               <small>
-                <code className="noInfo">ENIGMA MODEL</code>
+                <code className="setting-title">ENIGMA MODEL</code>
               </small>
               <Select
                 theme={theme => ({
@@ -73,9 +76,9 @@ export class EnigmaSettings extends Component<IProps, {}> {
               />
             </div>
           </div>
+          <RenderRotors store={store} />
+          <RenderEnigmaModel store={store} />
         </div>
-        <RenderRotors store={store} />
-        <RenderEnigmaModel store={store} />
       </>
     );
   }
@@ -88,7 +91,7 @@ class RenderEnigmaModel extends Component<IProps, {}> {
   }
 
   @computed get WhichEnigmaModel() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     switch (store.enigmaModel) {
       case "I":
@@ -103,7 +106,7 @@ class RenderEnigmaModel extends Component<IProps, {}> {
   }
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
@@ -122,31 +125,33 @@ class RenderLockCheckbox extends Component<IProps, {}> {
 
   // Handle resetting the Enigma settings
   onResetSettingsClick = (_e: any) => {
-    let store = this.props.store;
+    const store = this.props.store;
     store.resetEnigmaSettings();
   };
 
   // Handle locking / unlocking the settings
   onSettingsLock = (_e: any) => {
-    let store = this.props.store;
+    const store = this.props.store;
 
     store.lastLamp = "";
     store.INPUT = "";
     store.OUTPUT = "";
-    store.FIRST_LETTER = "";
+    store.lastClickedLetter = "";
 
     store.settingsAreLocked = !this.props.store.settingsAreLocked;
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <Form>
-        <div key="custom-checkbox" className="settingsAreLocked mb-3">
+        <div key="custom-checkbox" className="settings-are-locked mb-3">
           <Form.Check
             disabled={
-              !store.positionOne || !store.positionTwo || !store.positionThree
+              !store.rotorDropPositionOne ||
+              !store.rotorDropPositionTwo ||
+              !store.rotorDropPositionThree
             }
             custom
             checked={store.settingsAreLocked}
@@ -159,7 +164,7 @@ class RenderLockCheckbox extends Component<IProps, {}> {
           />
 
           {store.settingsAreLocked === false ? (
-            <div onClick={this.onResetSettingsClick} className="resetSettings">
+            <div onClick={this.onResetSettingsClick} className="reset-settings">
               <a href="#">Reset settings</a>
             </div>
           ) : null}
@@ -180,15 +185,15 @@ class RenderRotors extends React.Component<IRenderRotors, {}> {
   }
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <div className="row mb-2">
         <div className="col-md-12 mb-2">
           <small>
-            <code className="noInfo">AVAILABLE ROTORS</code>
+            <code className="setting-title">AVAILABLE ROTORS</code>
           </small>
-          <div className="rotors">
+          <div className="available-rotors">
             {store.enigmaModel === "I" ? (
               <>
                 {FIVE_ROTOR_OPTIONS.map(rotor => (

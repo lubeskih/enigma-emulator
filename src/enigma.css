@@ -1,4 +1,81 @@
-html,
+@import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap");
+
+.info {
+  font-family: "Ubuntu Mono", monospace;
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: bolder;
+  position: absolute;
+  top: -13px;
+  margin-bottom: 10px !important;
+  background-color: #fafafa;
+  padding: 0px 5px 0px 5px;
+}
+
+span {
+  font-family: "Ubuntu Mono", monospace;
+}
+
 body {
-  /* background-color: #282c34; */
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+hr {
+  margin-top: 10px !important;
+}
+
+.btn-primary {
+  background-color: #2b303b;
+}
+
+.col-md-4 {
+  background-color: #fafafa;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+h5 {
+  font-family: "Ubuntu Mono";
+  color: white;
+  background-color: #2b303b;
+  padding: 3px;
+  display: inline-block;
+}
+
+.title {
+  font-family: "Ubuntu Mono";
+  color: white;
+  background-color: #2b303b;
+  padding: 0px 3px 0px 3px;
+  display: inline-block;
+  width: 120px;
+  text-align: center;
+  max-width: 150px;
+}
+
+.m4-note {
+  width: 100%;
+  background-color: #2b303b;
+  color: #fff;
+  padding: 10px;
+  font-family: "Ubuntu Mono";
+  text-align: center;
+}
+
+.note {
+  color: darkred;
+  margin-left: 10px;
+  text-decoration: underline;
 }

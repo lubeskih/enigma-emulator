@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import Select from "react-select";
 
 // Internal
-import { LETTER_OPTIONS, ALPHABET } from "../../constants";
+import { ALPHABET, LETTER_OPTIONS } from "../../constants";
 import { IDraggableRotor } from "../../types";
 
 // Components
@@ -33,21 +33,21 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onPositionOneDrop = (item: IDraggableRotor) => {
-    this.props.store.updatePositionOne(item);
+  public onrotorDropPositionOneDrop = (item: IDraggableRotor) => {
+    this.props.store.updateRotorDropPositionOne(item);
   };
 
   // Handle changing the rotor type
-  onRotorOptionChange = (event: any) => {
-    let store = this.props.store;
+  public onRotorOptionChange = (event: any) => {
+    const store = this.props.store;
     store.ENIGMA_ROTOR_POSITION_ONE = store.getRotorObjectByRotorType(
       event.value
     );
   };
 
   // Handle ground settings change
-  onGroundSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onGroundSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setGroundSettings(
@@ -57,8 +57,8 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
   };
 
   // Handle ring settings change
-  onRingSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onRingSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setRingSettings(
@@ -68,23 +68,23 @@ export class EnigmaM4FastRotor extends Component<IProps, {}> {
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
-        <div className="row mb-3 encapsulate">
+        <div className="row mb-3 line-on-side">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">FAST ROTOR (right-hand)</code>
             </small>
             <RotorPosition
-              droppedItem={store.positionOne}
-              onDrop={this.onPositionOneDrop}
+              droppedItem={store.rotorDropPositionOne}
+              onDrop={this.onrotorDropPositionOneDrop}
               store={store}
               position={1}
             />
           </div>
-          {store.positionOne ? (
+          {store.rotorDropPositionOne ? (
             <>
               {" "}
               <div className="col-md-6 mb-3 mt-2">

@@ -1,0 +1,35 @@
+/* PLUGBOARD */
+
+div.oval {
+  -moz-border-radius: 50px/50px;
+  -webkit-border-radius: 50px 50px;
+  border-radius: 50px/50px;
+  border: solid 2px black;
+  width: 15px;
+  height: 35px;
+  margin: auto;
+}
+
+div.clicked {
+  background-color: #2b303b;
+  border: none;
+}
+
+.plug {
+  display: inline-block;
+  margin: 20px 18px 20px 18px;
+  text-align: center;
+}
+
+.plugPointer {
+  font-family: "Ubuntu Mono", monospace;
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: bolder;
+}
+
+.excess {
+  color: #fff;
+  background-color: #2b303b;
+  display: inline-block;
+}

@@ -1,0 +1,24 @@
+/* LAMPS */
+
+.lamps {
+  margin-bottom: 3em;
+  margin-top: 4px;
+}
+
+.lamps .light {
+  color: #fff;
+  background-color: #2b303b;
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 33px;
+  text-align: center;
+  border: solid 2px #2b303b;
+  color: black;
+  display: inline-block;
+  margin: 0.6em;
+}

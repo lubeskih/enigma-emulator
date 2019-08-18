@@ -33,21 +33,21 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   }
 
   // Handle rotor drop
-  onPositionOneDrop = (item: IDraggableRotor) => {
-    this.props.store.updatePositionOne(item);
+  public onrotorDropPositionOneDrop = (item: IDraggableRotor) => {
+    this.props.store.updateRotorDropPositionOne(item);
   };
 
   // Handle changing the rotor type
-  onRotorOptionChange = (event: any) => {
-    let store = this.props.store;
+  public onRotorOptionChange = (event: any) => {
+    const store = this.props.store;
     store.ENIGMA_ROTOR_POSITION_ONE = store.getRotorObjectByRotorType(
       event.value
     );
   };
 
   // Handle the change in the ground settings
-  onGroundSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onGroundSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setGroundSettings(event.value);
@@ -55,8 +55,8 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   };
 
   // Handle the change in the ring settings
-  onRingSettingsChange = (event: any) => {
-    let store = this.props.store;
+  public onRingSettingsChange = (event: any) => {
+    const store = this.props.store;
 
     if (store.ENIGMA_ROTOR_POSITION_ONE) {
       store.ENIGMA_ROTOR_POSITION_ONE.setRingSettings(event.value);
@@ -64,23 +64,23 @@ export class EnigmaOneFastRotor extends Component<IProps, {}> {
   };
 
   render() {
-    let store = this.props.store;
+    const store = this.props.store;
 
     return (
       <>
-        <div className="row mb-3 encapsulate">
+        <div className="row mb-3 line-on-side">
           <div className="col-md-12 mb-3">
             <small>
               <code className="info">FAST ROTOR (right-hand)</code>
             </small>
             <RotorPosition
-              droppedItem={store.positionOne}
-              onDrop={this.onPositionOneDrop}
+              droppedItem={store.rotorDropPositionOne}
+              onDrop={this.onrotorDropPositionOneDrop}
               store={store}
               position={1}
             />
           </div>
-          {store.positionOne ? (
+          {store.rotorDropPositionOne ? (
             <>
               {" "}
               <div className="col-md-6 mb-3 mt-2">

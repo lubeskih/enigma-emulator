@@ -1,6 +1,6 @@
 // Libraries
-import React, { Component } from "react";
 import { observer } from "mobx-react";
+import React, { Component } from "react";
 
 // Store
 import { Store } from "../../store";
@@ -20,11 +20,11 @@ export class Plug extends Component<IProps, {}> {
     this.letter = this.props.letter;
   }
 
-  wiredWith = (letter: string) => {
+  public wiredWith = (letter: string) => {
     return this.props.store.plugboard.getPlug(letter);
   };
 
-  onClick = (event: any) => {
+  public onClick = (event: any) => {
     this.props.store.plugboard.flow(event.target.id);
 
     if (
