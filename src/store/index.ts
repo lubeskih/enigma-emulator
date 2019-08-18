@@ -496,8 +496,10 @@ export class Store {
     ];
 
     for (let i = 0; i <= 2; i++) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateRTLContact(
         toBeCipheredLetter
       );
     }
@@ -507,8 +509,10 @@ export class Store {
     );
 
     for (let i = 2; i >= 0; i--) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateLTRContact(
         toBeCipheredLetter
       );
     }
@@ -537,8 +541,10 @@ export class Store {
     ];
 
     for (let i = 0; i <= 2; i++) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateRTLContact(
         toBeCipheredLetter
       );
     }
@@ -548,8 +554,10 @@ export class Store {
     );
 
     for (let i = 2; i >= 0; i--) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateLTRContact(
         toBeCipheredLetter
       );
     }
@@ -578,14 +586,18 @@ export class Store {
     ];
 
     for (let i = 0; i <= 2; i++) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcRightToLeftExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateRTLContact(
         toBeCipheredLetter
       );
     }
 
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcEntryContact(toBeCipheredLetter);
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcRightToLeftExitContact(
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateEntryContact(
+      toBeCipheredLetter
+    );
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateRTLContact(
       toBeCipheredLetter
     );
 
@@ -593,14 +605,18 @@ export class Store {
       toBeCipheredLetter
     );
 
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcEntryContact(toBeCipheredLetter);
-    toBeCipheredLetter = this.ENIGMA_M4_EW.calcLeftToRightExitContact(
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateEntryContact(
+      toBeCipheredLetter
+    );
+    toBeCipheredLetter = this.ENIGMA_M4_EW.calculateLTRContact(
       toBeCipheredLetter
     );
 
     for (let i = 2; i >= 0; i--) {
-      toBeCipheredLetter = stackRotors[i].calcEntryContact(toBeCipheredLetter);
-      toBeCipheredLetter = stackRotors[i].calcLeftToRightExitContact(
+      toBeCipheredLetter = stackRotors[i].calculateEntryContact(
+        toBeCipheredLetter
+      );
+      toBeCipheredLetter = stackRotors[i].calculateLTRContact(
         toBeCipheredLetter
       );
     }

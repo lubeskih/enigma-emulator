@@ -55,40 +55,46 @@ export class Rotor extends Wheel implements IRotor {
 
   /**
    *
+   * Calculates the entry contact when a letter is pressed
+   *
    * @param entryLetter the letter coming from the EW
    * @returns number - the entry contact position
    */
-  public calcEntryContact(entryLetter: number): number {
+  public calculateEntryContact(entryLetter: number): number {
     if (entryLetter + this.offset > 25) {
       return entryLetter + this.offset - 26;
     } else {
-      console.log("TUJE", entryLetter + this.offset);
-      // return null;
       return entryLetter + this.offset;
     }
   }
 
-  public calcRightToLeftExitContact(entryLetter: number): number {
-    const calc = this.rightToLeftEndpoint(entryLetter) - this.offset;
+  ///////////////////////////
+  // RIGHT TO LEFT CURRENT //
+  ///////////////////////////
+
+  /**
+   *
+   * Calculates the left exit contact when current arrives on the right side
+   *
+   * @param entryLetter number - entered letter represented in its number bijection
+   */
+  public calculateRTLContact(entryLetter: number): number {
+    const calc = this.findRTLEndpoint(entryLetter) - this.offset;
 
     if (calc < 0) {
       return calc + 26;
     } else {
-      return this.rightToLeftEndpoint(entryLetter) - this.offset;
+      return calc;
     }
   }
 
-  public calcLeftToRightExitContact(entryLetter: number): number {
-    const calc = this.leftToRightEndpoint(entryLetter) - this.offset;
-
-    if (calc < 0) {
-      return 26 - Math.abs(this.leftToRightEndpoint(entryLetter) - this.offset);
-    } else {
-      return this.leftToRightEndpoint(entryLetter) - this.offset;
-    }
-  }
-
-  public rightToLeftEndpoint(index: number): number {
+  /**
+   *
+   * Returns the left endpoint of the right endpoint
+   *
+   * @param index number - enetered letter represented in its number bijection
+   */
+  public findRTLEndpoint(index: number): number {
     const letter = this.rightToLeftRW.get(index);
 
     if (letter || letter === 0) {
@@ -98,7 +104,33 @@ export class Rotor extends Wheel implements IRotor {
     }
   }
 
-  public leftToRightEndpoint(index: number): number {
+  ///////////////////////////
+  // LEFT TO RIGHT CURRENT //
+  ///////////////////////////
+
+  /**
+   *
+   * Calculates the right exit contact when current arrives on the left side
+   *
+   * @param entryLetter number - entered letter represented in its number bijection
+   */
+  public calculateLTRContact(entryLetter: number): number {
+    const calc = this.findLTREndpoint(entryLetter) - this.offset;
+
+    if (calc < 0) {
+      return 26 - Math.abs(this.findLTREndpoint(entryLetter) - this.offset);
+    } else {
+      return calc;
+    }
+  }
+
+  /**
+   *
+   * Returns the right endpoint of the left endpoint
+   *
+   * @param index number - enetered letter represented in its number bijection
+   */
+  public findLTREndpoint(index: number): number {
     const letter = this.leftToRightRW.get(index);
 
     if (letter || letter === 0) {
