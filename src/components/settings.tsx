@@ -134,8 +134,6 @@ class RenderLockCheckbox extends Component<IProps, {}> {
     const store = this.props.store;
 
     store.lastLamp = "";
-    store.INPUT = "";
-    store.OUTPUT = "";
     store.lastClickedLetter = "";
 
     store.settingsAreLocked = !this.props.store.settingsAreLocked;

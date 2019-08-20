@@ -1,6 +1,10 @@
 ## Enigma Operator's Field Manual
 
-Welcome to the **Enigma Operator's Field Manual**. This manual will teach you the basics of operating and handling an Enigma machine.
+Welcome to the **Enigma Operator's Field Manual**. This manual will teach you the basics of operating and working of an Enigma machine.
+
+##### Table of Contents
+
+### Demistifying the Enigma <a name="introduction"></a>
 
 Before diving into the details, keep in mind that the Enigma is a family of machines. This manual will cover the following models:
 
@@ -8,9 +12,9 @@ Before diving into the details, keep in mind that the Enigma is a family of mach
 - `Enigma M3` - used by the Wehrmacht (unified armed forces of Nazi Germany).
 - `Enigma M4` - used by the Kriegsmarine (navy).
 
-**NOTE**: `The manual is covers details about these machines, as well as how can you operate them.`
+**NOTE**: `The manual covers details about these machines, as well as how can you operate them.`
 
-Terminology:
+##### Glossary of Technical Terms:
 
 - `Tastatur` - Keyboard
 - `Steckerbrett` - Plugboard
@@ -18,7 +22,9 @@ Terminology:
 - `Ringstellung` - Ring settings
 - `Maschineneinstellung` - Machine settings
 - `Lampen` - Lamps
-- `UKW - Umkehrwalze` - Reversing drum / Reflector
+- `Walzenlage` - Wheel Order
+- `Umkehrwalze (UKW)` - Reversing drum / Reflector Wheel
+- `Stator / Entrittswalze (ETW)` - Static Wheel
 
 ### Enigma I
 

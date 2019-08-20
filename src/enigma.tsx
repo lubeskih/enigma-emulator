@@ -78,19 +78,30 @@ class Enigma extends Component {
             style={{ fontFamily: "monospace", textAlign: "center" }}
           >
             <div className="col-md-12">
-              {"{{"}{" "}
-              <a target="_blank" href="#">
-                Operator's Manual
+              <a
+                target="_blank"
+                href="https://github.com/lubeskih/enigma-simulator/blob/master/docs/EOFM.md"
+              >
+                Enigma Operator's Field Manual
               </a>
-              ,{" "}
-              <a target="_blank" href="#">
-                About
-              </a>
-              ,{" "}
-              <a target="_blank" href="https://who.lh.mk">
-                who.lh.mk
+              <br></br>
+              <a
+                target="_blank"
+                href="https://github.com/lubeskih/enigma-simulator"
+              >
+                REPOSITORY
               </a>{" "}
-              {"}}"}
+              <a
+                style={{
+                  backgroundColor: "#2b303b",
+                  color: "white",
+                  padding: "1px 5px 1px 5px"
+                }}
+                target="_blank"
+                href="https://lh.mk"
+              >
+                lh.mk
+              </a>{" "}
             </div>
           </div>
         </div>
