@@ -6,9 +6,15 @@
 - [Demystifying the Enigma](#demystifying-the-enigma)
   - [Basic Enigma](#basic-enigma)
   - [A Current's Path](#current-path)
-  - [How hard is it to break Enigma?](#breaking-enigma)
-- [Enigma Models](#models)
-  - []()
+- [Operating the Enigma](#operating)
+  - [Enigma Models](#models)
+  - [Selecting a Model](#selecting-model)
+  - [Configuring the Settings](#configuring)
+  - [Enciphering Characters](#characters)
+  - [Enciphering Numbers](#numbers)
+  - [Deciphering Message](#decipher)
+- [Glossary of Tehnical Terms](#glossary)
+- [References](#refereces)
 
 ### Introduction
 
