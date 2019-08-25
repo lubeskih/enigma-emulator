@@ -5,16 +5,25 @@
 - [Introduction](#introduction)
 - [Demystifying the Enigma](#demystifying-the-enigma)
   - [Basic Enigma](#basic-enigma)
-  - [A Current's Path](#current-path)
-- [Operating the Enigma](#operating)
-  - [Enigma Models](#models)
-  - [Selecting a Model](#selecting-model)
-  - [Configuring the Settings](#configuring)
-  - [Enciphering Characters](#characters)
-  - [Enciphering Numbers](#numbers)
-  - [Deciphering Message](#decipher)
+  - ~~[A Current's Path](#current-path)~~
+    - ~~[Keyboard](#keyboard)~~
+    - ~~[Plugboard](#plugboard)~~
+    - ~~[Static Wheel](#static-wheel)~~
+    - ~~[Rotors](#rotors)~~
+    - ~~[Reflector](#reflector)~~
+    - ~~[Reverse path](#reverse-path)~~
+    - ~~[Lamps](#lamps)~~
+- ~~[Operating the Enigma](#operating)~~
+  - ~~[Enigma Models](#models)~~
+    - ~~[Enigma I](#enigma-one)~~
+    - ~~[Enigma M3](#enigma-m3)~~
+    - ~~[Enigma M4](#enigma-m4)~~
+  - ~~[Selecting a Model](#selecting-model)~~
+  - ~~[Configuring the Settings](#configuring)~~
+  - ~~[Enciphering Characters and Numbers](#characters)~~
+  - ~~[Deciphering Message](#decipher)~~
 - [Glossary of Tehnical Terms](#glossary)
-- [References](#refereces)
+- ~~[References](#refereces)~~
 
 ### Introduction
 
@@ -30,7 +39,7 @@ The simulator is faithful to the workings of the following Enigma models:
 
 The Enigma machine is an electro-mechanical encryption device used by the Germans during World War II to transmit coded messages.
 
-Ciphering was the necessary consequence of radio communications, which had to be used for aerial, naval, and mobile land warfare, and a radio message to one was a message to all. Virtually every German official radio communication was enciphered on the Enigma machine.
+Ciphering was the necessary consequence of radio communications, which had to be used for aerial, naval, and mobile land warfare, where a radio message to one was a message to all. Virtually every German official radio communication was enciphered on the Enigma machine.
 
 The basic Enigma machine had been exhibited in 1923, soon after its invention, at the congress of the International Postal Union. Originally, it was sold commercially and used by banks.
 
@@ -63,3 +72,14 @@ A simple switch system at the input has the effect that if a key (say the B keys
 |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | <small>*Current passing from the EKW, throughout the first rotor who's path just change, throughout the rest of the rotors, reflecting itself at the UKW and back to a different path which ends up again, at the EKW.*<br><br> *Found in [Andrew Hodges'](https://www.synth.co.uk/) book **Alan Turing: The Enigma**, digitalized by [Hristijan Lubeski](https://who.lh.mk)*.</small> |
 
+##### Glossary of Technical Terms:
+
+- `Tastatur` - Keyboard
+- `Steckerbrett` - Plugboard
+- `Grundstellung` - Ground / Initial settings
+- `Ringstellung` - Ring settings
+- `Maschineneinstellung` - Machine settings
+- `Lampen` - Lamps
+- `Walzenlage` - Wheel Order
+- `Umkehrwalze (UKW)` - Reversing drum / Reflector Wheel
+- `Stator / Entrittswalze (ETW)` - Static Wheel

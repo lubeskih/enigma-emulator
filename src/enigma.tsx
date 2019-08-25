@@ -74,7 +74,7 @@ class Enigma extends Component {
             </div>
           </div>
           <div
-            className="row mt-5 mb-4"
+            className={store.settingsAreLocked ? "row mt-5 mb-2" : "row mb-2"}
             style={{ fontFamily: "monospace", textAlign: "center" }}
           >
             <div className="col-md-12">
@@ -102,6 +102,15 @@ class Enigma extends Component {
               >
                 lh.mk
               </a>{" "}
+              <br></br>
+              <span
+                style={{
+                  padding: "3px 3px 3px 3px",
+                  color: "#555"
+                }}
+              >
+                Royal Flags Wave Kings Above
+              </span>
             </div>
           </div>
         </div>
