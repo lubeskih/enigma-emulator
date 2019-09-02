@@ -79,11 +79,15 @@ The current entry wheel connects the plugboard to the rotor assembly. If the plu
 
 #### Rotors
 
-The rotors are the heart of the Enigma machine. TBD
+The rotors are the heart of the Enigma machine... TBD
 
 ###### Ring-settings (Ringstellung):
 
 The rotors had to be marked in some way on the outside so that the different positions could be identified. However, here entered yet another element of complexity. Each rotor was encircled by a ring bearing the 26 letters, so that with the ring fixed in position, each letter would label a rotor position. (In fact, the letter would show through a window at the top of the machine.). However, the position of the ring, relative to the wirings, would be changed each day. The wirings might be thought of as labelled by numbers from 1 to 26, and the position of the ring by the letters A to Z appearing in the window. So a ring-setting would determine where the ring was to sit on the rotor, with perhaps the letter G on position 1, H on position 2, and so forth.
+
+###### Ground-settings (Grundstellung):
+
+######
 
 #### Reflector
 
