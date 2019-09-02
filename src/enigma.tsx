@@ -110,6 +110,15 @@ class Enigma extends Component {
                 }}
               >
                 Royal Flags Wave Kings Above
+              </span>{" "}
+              <br></br>
+              <span
+                style={{
+                  padding: "3px 3px 3px 3px",
+                  color: "#555"
+                }}
+              >
+                build: 978a504
               </span>
             </div>
           </div>
