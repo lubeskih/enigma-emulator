@@ -8,10 +8,9 @@
   - [Keyboard](#keyboard)
   - [Plugboard](#plugboard)
   - [Entry Wheel](#entry-wheel)
-  - ~~[Rotors](#rotors)~~
-  - ~~[Reflector](#reflector)~~
-  - ~~[Reverse path](#reverse-path)~~
-  - ~~[Lamps](#lamps)~~
+  - [Rotors](#rotors)
+  - [Reflector](#reflector)
+  - [Reverse path](#reverse-path)
 - ~~[Operating the Enigma](#operating)~~
   - ~~[Enigma Models](#models)~~
     - ~~[Enigma I](#enigma-one)~~
@@ -21,8 +20,10 @@
   - ~~[Configuring the Settings](#configuring)~~
   - ~~[Enciphering Characters and Numbers](#characters)~~
   - ~~[Deciphering Message](#decipher)~~
-- [Glossary of Tehnical Terms](#glossary)
-- ~~[References](#refereces)~~
+- [Glossary of Technical Terms](#glossary)
+- [Other Enigma Simulators](#other-enigmas)
+- [References](#references)
+- [Dedications](#dedications)
 
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Introduction</h3>
 
@@ -42,7 +43,7 @@ Ciphering was the necessary consequence of radio communications, which had to be
 
 The basic Enigma machine had been exhibited in 1923, soon after its invention, at the congress of the International Postal Union. Originally, it was sold commercially and used by banks.
 
-The German cryptographic authorities had modified it in a different way to create the machine which, though bearing the original name of Enigma, was much more effective than the comercially available device.
+The German cryptographic authorities had modified it in a different way to create the machine which, though bearing the original name of Enigma, was much more effective than the commercially available device.
 
 The underlying principle of an Enigma machine cipher is that of letter substitution, meaning that each letter of our plaintext (undeciphered message) is substituted by another letter.
 
@@ -52,7 +53,7 @@ For any Enigma, in any state, it would be true if `A` were enciphered into `E`, 
 
 The receiver of the message had only to set up the machine in exactly the same way as the sender, and feed in the cipher-text, to recover the plain-text.
 
-That being said, the machine had only mechanised the basic operations of substitution and adding on, in such a way that a more complex system came within practical grasp. The Enigma did nothing that could not have been done by the looking up of tables in books, but enabled the work to be done more quickly and accurately.
+That being said, the machine had only mechanized the basic operations of substitution and adding on, in such a way that a more complex system came within practical grasp. The Enigma did nothing that could not have been done by the looking up of tables in books, but enabled the work to be done more quickly and accurately.
 
 In all cipher systems one assumes that the message has been intercepted. The objective is then to make it impossible, or at any rate very difficult and time-consuming, for the interceptor to decrypt the message. The ciphers it produced were supposed to be unbreakable even by someone in possession of the machine.
 
@@ -75,55 +76,101 @@ The plugboard is similar to an old-fashioned telephone switch board that has ten
 
 #### Entry Wheel
 
-The current entry wheel connects the plugboard to the rotor assembly. If the plugboard is not present, the entry wheel instead connects the keyboard and lampboard to the rotor assembly. The military Enigma connects the keys in straigh alphabetical order: A -> A, B -> B and so on. The static rotor simply turns wires into contacts.
+The current entry wheel connects the plugboard to the rotor assembly. If the plugboard is not present, the entry wheel instead connects the keyboard and lampboard to the rotor assembly. The military Enigma connects the keys in straight alphabetical order: A -> A, B -> B and so on. The static rotor simply turns wires into contacts.
 
 #### Rotors
 
-The rotors are the heart of the Enigma machine... TBD
+The rotors are the heart of the Enigma machine. Each rotor is a disc, which has an electrical contact pins arranged in a circle on one face; and circular plates (electrical contacts) on the other (the pins and contacts represent the alphabet — typically the 26 letters A–Z).
 
-###### Ring-settings (Ringstellung):
+When the rotors are mounted side-by-side on the spindle, the pins of one rotor rested against the plate contacts of the neighboring rotor, forming an electrical connection.
 
-The rotors had to be marked in some way on the outside so that the different positions could be identified. However, here entered yet another element of complexity. Each rotor was encircled by a ring bearing the 26 letters, so that with the ring fixed in position, each letter would label a rotor position. (In fact, the letter would show through a window at the top of the machine.). However, the position of the ring, relative to the wirings, would be changed each day. The wirings might be thought of as labelled by numbers from 1 to 26, and the position of the ring by the letters A to Z appearing in the window. So a ring-setting would determine where the ring was to sit on the rotor, with perhaps the letter G on position 1, H on position 2, and so forth.
+Inside the body of the rotor, 26 wires are randomly connected each pin on one side to a contact on the other. This is where the 'magic' happens, which is why the rotors are also called 'scramblers'.
 
-###### Ground-settings (Grundstellung):
+As this ring rotated with its rotor, a notch machined into it would eventually align itself with the pawl, allowing it to engage with the ratchet, and advance the rotor on its left.
 
-######
+The advancement of a rotor other than the left-hand one is called a turnover. This was achieved by a ratchet and pawl mechanism.
 
-#### Reflector
-
-TBD.
-
-#### Reverse Path
-
-TBD.
-
-#### Lamps
-
-TBD.
+##### Basic Enigma:
 
 For the sake of simplicity, the diagram has been drawn for an alphabet of only eight letters, although in fact the Enigma worked on the ordinary 26-letter alphabet.
 
 It shows the state of the machine at some particular moment in its use. The lines marked correspond to current-carrying wires.
 
+A simple switch system at the input has the effect that if a key (say the B keys) is depressed, a current flows (as shown in the diagram by bold) lines and lights up a bulb in the output display panel (in this case, under the letter D). For the hypothetical 8-letter Enigma, the next state of the machine would be:
+
 <figure>
     <img src="img/Enigma-1.jpg"></img>
     <center>
-    <small><i>Current passing from the EKW, throughout the Rotors, reflecting itself at the UKW and back to a different path which ends up again, at the EKW.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://who.lh.mk">lh.mk</a></i>.</small>
+    <small><i>Current passing from the EKW, throughout the Rotors, reflecting itself at the UKW and back to a different path which ends up again, at the EKW.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
     <center>
     <br>
 </figure>
-
-A simple switch system at the input has the effect that if a key (say the B keys) is depressed, a current flows (as shown in the diagram by bold) lines and lights up a bulb in the output display panel (in this case, under the letter D). For the hypothetical 8-letter Enigma, the next state of the machine would be:
 
 <figure>
     <img src="img/Enigma-2.jpg"></img>
     <center>
-    <small><i>Current passing from the EKW, throughout the first rotor who's path just change, throughout the rest of the rotors, reflecting itself at the UKW and back to a different path which ends up again, at the EKW.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://who.lh.mk">lh.mk</a></i>.</small>
+    <small><i>Current passing from the EKW, throughout the first rotor who's path just change, throughout the rest of the rotors, reflecting itself at the UKW and back to a different path which ends up again, at the EKW.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
     <center>
     <br>
 </figure>
 
-####
+##### Ring-settings (Ringstellung):
+
+The rotors had to be marked in some way on the outside so that the different positions could be identified. However, here entered yet another element of complexity. Each rotor was encircled by a ring bearing the 26 letters, so that with the ring fixed in position, each letter would label a rotor position (In fact, the letter would show through a window at the top of the machine).
+
+However, the position of the ring, relative to the wirings, would be changed each day. The wirings might be thought of as labelled by numbers from 1 to 26, and the position of the ring by the letters A to Z appearing in the window. So a ring-setting would determine where the ring was to sit on the rotor, with perhaps the letter G on position 1, H on position 2, and so forth.
+
+It is important to keep in mind that the ring setting only affects the
+wiring, it doesn't affect the turnover which still happens at the same
+letters.
+
+##### Ground-settings (Grundstellung):
+
+The ground-settings tells the operator of the machine what position the rotors should be in when setting up the machine (the letters you see in the little windows). So, for example, if the ground-setting for the left-hand rotor is `A`, you will see the letter `A` through the little window of the machine.
+
+#### Reflector
+
+The reflector is the disc that stands next to the left-most rotor. As it's name says, it reflects back the received electrical current. It basically connects outputs of the last rotor in pairs redirecting current back through the rotors by a different route.
+
+The reflector ensured that Enigma would be **self-reciprocal**; thus, with two identically configured machines, a message could be encrypted on one and decrypted on the other. The reflector also gave Enigma the property that no letter ever encrypted to itself.
+
+#### Reverse Path
+
+After the reflector reflects the electrical current, the current goes back into the rotors (but now takes a different path), back into the entry wheel and ends up lighting one of the lamps.
+
+<h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Operating the Enigma</h3>
+
+#### Enigma Models
+
+TBD
+
+##### Enigma I
+
+TBD
+
+##### Enigma M3
+
+TBD
+
+##### Enigma M4
+
+TBD
+
+#### Selecting a Model
+
+TBD
+
+#### Configuring the Settings
+
+TBD
+
+#### Enciphering a Message
+
+TBD
+
+#### Deciphering a Message
+
+TBD
 
 ##### Glossary of Technical Terms:
 
@@ -137,10 +184,29 @@ A simple switch system at the input has the effect that if a key (say the B keys
 - `Umkehrwalze (UKW)` - Reversing drum / Reflector Wheel
 - `Stator / Entrittswalze (ETW)` - Static Wheel
 
+##### Other Enigma Simulators
+
+- [Louise Dade's Enigma Emulator](http://enigma.louisedade.co.uk/)
+- [Tom MacWright's Enigma Simulator](https://observablehq.com/@tmcw/enigma-machine)
+
 ##### References
 
-- https://brilliant.org/wiki/enigma-machine/
-- Alan Turing: The Enigma
-- Enigma machine @ Wikipedia
-- https://www.codesandciphers.org.uk/enigma/enigma2.htm
-- https://www.codesandciphers.org.uk/enigma/enigma1.htm
+This manual is a collection of already published explanations of the machine.
+
+- **Alan Turing: The Enigma** by [Andrew Hodges](https://www.synth.co.uk/).
+- [Enigma machine - Brilliant](https://brilliant.org/wiki/enigma-machine/)
+- [Enigma machine - Wikipedia](https://en.wikipedia.org/wiki/Enigma_machine)
+- [Enigma machine - Codes and Ciphers](https://www.codesandciphers.org.uk/enigma/enigma1.htm)
+- [Ellsbury - The Enigma machine - Its Construction, Operation and Complexity](http://www.ellsbury.com/enigma3.htm)
+
+##### Dedications
+
+I dedicate this software to the Internet. Have fun using it as I had fun writing it!
+
+Also, a big **THANK YOU!** to:
+
+- Simon (who actually built his own 3D printed Enigma machine -- check out his YouTube channel [here](https://www.youtube.com/channel/UCJqzEbh1UOpZJj3Hrv2mPZA)) from [asciimation.net](http://www.asciimation.co.nz/), for clearing up my confusion between the Grundstellung and the Ringstellung of the Enigma machine.
+
+- My friend [Andrej Trajchevski](https://andrejt.com/), who actually gave me Andrew Hodge's book **Alan Turing: The Enigma** as a gift, which I later used for writing some parts of this manual.
+
+- My friend [Nikola Demerdziev](), he knows why.
