@@ -92,9 +92,7 @@ The rotors had to be marked in some way on the outside so that the different pos
 
 However, the position of the ring, relative to the wirings, would be changed each day. The wirings might be thought of as labelled by numbers from 1 to 26, and the position of the ring by the letters A to Z appearing in the window. So a ring-setting would determine where the ring was to sit on the rotor, with perhaps the letter G on position 1, H on position 2, and so forth (see the illustrations bellow).
 
-It is important to keep in mind that the ring setting only affects the
-wiring, it doesn't affect the turnover which still happens at the same
-letters.
+It is important to keep in mind that the ring setting only affects the wiring, it doesn't affect the turnover which still happens at the same letters.
 
 Since the rotation is triggered by a ratchet and pawl mechanism, every time a key is depressed, one or more rotors rotate by one place.
 
@@ -108,15 +106,21 @@ The ground-settings tells the operator of the machine what position the rotors s
 
 ###### BONUS: calculating the offset from the Ring/Ground settings
 
-This is a basic illustration of the ground settings and ring settings of a Rotor. In the first illustration, the `Ring-setting` is set to `0`, and the `Ground-setting` is set to `A`, keep in mind that you actually see the `Ground-setting` through the little window.
+When you put the Rotor on the spindle, in any position, you create an `OFFSET`. The `OFFSET` is important so you would know how to calculate the entry/exit point of the current that flows through the Rotor.
 
-So, when we have `RS` as `0` and `GS` and `A` (which also can be represented as `0`), the `OFFSET` of the Rotor would be `GS - RS`, in this case: `0`.
+When the Rotor's `Ring-setting` is set to `1` (which also can be represented as: `A`), and the `Ground-setting` is set to `A` (which also can be represented as : `1`), the `OFFSET` is `0`, since the `Ring-setting` and the `Ground-setting` are aligned.
+
+You can find a basic illustration of the `Ground-settings` and `Ring-settings` of a Rotor below. Keep in mind that the illustrations represent `A` as `0`, `B` as `1` ... `Z` as `25`, and **NOT** `A` as `1`, `B` as `2` ... `Z` as `26`.
+
+In the first illustration, the `Ring-setting` is set to `0`, and the `Ground-setting` is set to `A`, keep in mind that you actually see the **`Ground-setting`** through the little window, in this case the dark rectangle.
 
 <img src="img/ring1.jpg">
 
-On the second illustration, the `Rotor` has it's `Ring-setting` set to `1` (`B`), but the `Ground-setting` is on `A` (`0`), so you basically see `A` through the little window, but now the offset is not `0`!
+So, when we have set the `Ring-setting` to `0` and the `Ground-setting` to `A` (which also can be represented as `0`), the `OFFSET` of the Rotor would be `Ground-setting - Ring-setting`, in this case: `0`. Meaning that, if we depress a button (and for the sake of this argument, let's say that the Rotor/s would **NOT** step after depressing a button), the current would flow throughout the Rotors that have **NO OFFSET**, so if I press `A`, it will enter the Rotor in the `0th` position, and exit at whatever wire might be connected to the `0th` position on the other side. But we know that when we depress a button, the right-most Rotor steps once **BEFORE** current starts flowing, so it creates an `OFFSET`, meaning: this time when we press `A`, it will enter the Rotor at position `current-position + 1 = 1`.
 
-We can still calculate the offset as: `OFFSET = GS - RS = -1`, and IF `OFFSET < 0`, `OFFSET = 26 - | OFFSET | = 25`.
+On the second illustration, the `Rotor` has it's `Ring-setting` set to `1` (`B`), but the `Ground-setting` is on `A` (`0`), so you basically see `A` through the little window, but now the offset is **NOT** `0`!
+
+We can still calculate the offset as: `OFFSET = Ground-setting - Ring-setting = -1`, and IF `OFFSET < 0`, `OFFSET = 26 - | OFFSET | = 25`.
 
 <img src="img/ring2.jpg">
 
@@ -133,17 +137,17 @@ It shows the state of the machine at some particular moment in its use. The line
 <figure>
     <img src="img/Enigma-1.jpg"></img>
     <center>
-    <small><i>Current passing from the EKW, throughout the Rotors, reflecting itself at the UKW and back to a different path which ends up again, at the EKW.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
+    <small><i>Current passing from the Entry-wheel, throughout the Rotors, reflecting itself at the Reflector and then going back to a different path which ends up again, at the Entry-wheel.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
     <center>
     <br>
 </figure>
 
-A simple switch system at the input has the effect that if a key (say the B keys) is depressed, a current flows (as shown in the diagram by bold) lines and lights up a bulb in the output display panel (in this case, under the letter D). For the hypothetical 8-letter Enigma, the next state of the machine would be:
+A simple switch system at the input has the effect that if a key (say the B key) is depressed, a current flows (as shown in the diagram by bold) lines and lights up a bulb in the output display panel (in this case, under the letter D). For the hypothetical 8-letter Enigma, the next state of the machine would be:
 
 <figure>
     <img src="img/Enigma-2.jpg"></img>
     <center>
-    <small><i>Current passing from the EKW, throughout the first rotor who's path just change, throughout the rest of the rotors, reflecting itself at the UKW and back to a different path which ends up again, at the EKW.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
+    <small><i>Current passing from the Entry-wheel, throughout the first rotor who's path just change, throughout the rest of the rotors, reflecting itself at the Reflector and then going back to a different path which ends up again, at the Entry-wheel.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
     <center>
     <br>
 </figure>
