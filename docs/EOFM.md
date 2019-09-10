@@ -11,10 +11,10 @@
   - [Rotors](#rotors)
   - [Reflector](#reflector)
   - [Reverse path](#reverse-path)
-- ~~[Operating the Enigma](#operating)~~
-  - ~~[Enigma Models](#models)~~
-    - ~~[Enigma I](#enigma-one)~~
-    - ~~[Enigma M3](#enigma-m3)~~
+- [Operating the Enigma](#operating)
+  - [Enigma Models](#models)
+    - [Enigma I](#enigma-one)
+    - [Enigma M3](#enigma-m3)
     - ~~[Enigma M4](#enigma-m4)~~
   - ~~[Selecting a Model](#selecting-model)~~
   - ~~[Configuring the Settings](#configuring)~~
@@ -24,6 +24,8 @@
 - [Other Enigma Simulators](#other-enigmas)
 - [References](#references)
 - [Dedications](#dedications)
+
+> NOTE: If you are confused from some parts of this manual, please write me an email at: lubeskih@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-simulator). I will do everything I can to improve the manual and clear up any confusions regarding the covered parts.
 
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Introduction</h3>
 
@@ -98,7 +100,7 @@ Since the rotation is triggered by a ratchet and pawl mechanism, every time a ke
 
 As this ring rotated with its rotor, a notch machined into it would eventually align itself with the pawl, allowing it to engage with the ratchet, and advance the rotor on its left.
 
-The advancement of a rotor other than the left-hand one is called a turnover.
+The advancement of a rotor other than the left-hand one is called a _turnover_.
 
 ##### Ground-settings (Grundstellung):
 
@@ -108,19 +110,23 @@ The ground-settings tells the operator of the machine what position the rotors s
 
 When you put the Rotor on the spindle, in any position, you create an `OFFSET`. The `OFFSET` is important so you would know how to calculate the entry/exit point of the current that flows through the Rotor.
 
-When the Rotor's `Ring-setting` is set to `1` (which also can be represented as: `A`), and the `Ground-setting` is set to `A` (which also can be represented as : `1`), the `OFFSET` is `0`, since the `Ring-setting` and the `Ground-setting` are aligned.
+When the Rotor's `Ring-setting` is set to `1` (which also can be represented as: `A`), and the `Ground-setting` is set to `A` (which also can be represented as: `1`), the `OFFSET` is `0`, since the `Ring-setting` and the `Ground-setting` are aligned.
 
-You can find a basic illustration of the `Ground-settings` and `Ring-settings` of a Rotor below. Keep in mind that the illustrations represent `A` as `0`, `B` as `1` ... `Z` as `25`, and **NOT** `A` as `1`, `B` as `2` ... `Z` as `26`.
+Here's a basic illustration of the `Ground-setting` and the `Ring-setting` of a Rotor below. Keep in mind that the illustrations represent`A` as `0`, `B` as `1`... `Z` as `25`, and **NOT** `A` as `1`, `B` as `2` ... `Z` as `26`.
 
-In the first illustration, the `Ring-setting` is set to `0`, and the `Ground-setting` is set to `A`, keep in mind that you actually see the **`Ground-setting`** through the little window, in this case the dark rectangle.
+In the first illustration, the `Ring-setting` is set to `0`, and the `Ground-setting` is set to `A`.
+
+**NOTE**: You actually see the **`Ground-setting`** through the little window, in this case the rectangle with dark background.
 
 <img src="img/ring1.jpg">
 
-So, when we have set the `Ring-setting` to `0` and the `Ground-setting` to `A` (which also can be represented as `0`), the `OFFSET` of the Rotor would be `Ground-setting - Ring-setting`, in this case: `0`. Meaning that, if we depress a button (and for the sake of this argument, let's say that the Rotor/s would **NOT** step after depressing a button), the current would flow throughout the Rotors that have **NO OFFSET**, so if I press `A`, it will enter the Rotor in the `0th` position, and exit at whatever wire might be connected to the `0th` position on the other side. But we know that when we depress a button, the right-most Rotor steps once **BEFORE** current starts flowing, so it creates an `OFFSET`, meaning: this time when we press `A`, it will enter the Rotor at position `current-position + 1 = 1`.
+When we have set the `Ring-setting` to `0` and the `Ground-setting` to `A` (which also can be represented as `0`), the `OFFSET` of the Rotor would be `groundSetting - ringSetting`, in this case: `0`.
+
+This means, if we depress a button (and for the sake of this argument, let's say that the Rotor/s would **NOT** step after depressing a button), the current would flow throughout the Rotors that have **NO OFFSET**, so if I press `A`, it will enter the Rotor in the `0th` position, and exit at whatever wire might be connected to the `0th` position on the other side. But we know that when we depress a button, the right-most Rotor steps **BEFORE** current starts flowing, so it creates an `OFFSET`, meaning: this time when we press `A`, it will enter the Rotor at position `currentRotorPosition + 1 = 1`.
 
 On the second illustration, the `Rotor` has it's `Ring-setting` set to `1` (`B`), but the `Ground-setting` is on `A` (`0`), so you basically see `A` through the little window, but now the offset is **NOT** `0`!
 
-We can still calculate the offset as: `OFFSET = Ground-setting - Ring-setting = -1`, and IF `OFFSET < 0`, `OFFSET = 26 - | OFFSET | = 25`.
+We can still calculate the offset as: `OFFSET = groundSetting - ringSetting = -1`, and IF `OFFSET < 0`, `OFFSET = 26 - | OFFSET | = 25`.
 
 <img src="img/ring2.jpg">
 
@@ -137,7 +143,7 @@ It shows the state of the machine at some particular moment in its use. The line
 <figure>
     <img src="img/Enigma-1.jpg"></img>
     <center>
-    <small><i>Current passing from the Entry-wheel, throughout the Rotors, reflecting itself at the Reflector and then going back to a different path which ends up again, at the Entry-wheel.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
+    <small><i>Current passing from the Entry-wheel, throughout the Rotors, reflecting itself at the Reflector and then going back to a different path which ends up again, at the Entry-wheel.</i><br><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
     <center>
     <br>
 </figure>
@@ -147,7 +153,7 @@ A simple switch system at the input has the effect that if a key (say the B key)
 <figure>
     <img src="img/Enigma-2.jpg"></img>
     <center>
-    <small><i>Current passing from the Entry-wheel, throughout the first rotor who's path just change, throughout the rest of the rotors, reflecting itself at the Reflector and then going back to a different path which ends up again, at the Entry-wheel.</i><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
+    <small><i>Current passing from the Entry-wheel, throughout the first rotor who's path just change, throughout the rest of the rotors, reflecting itself at the Reflector and then going back to a different path which ends up again, at the Entry-wheel.</i><br><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
     <center>
     <br>
 </figure>
@@ -162,31 +168,98 @@ The reflector ensured that Enigma would be **self-reciprocal**; thus, with two i
 
 After the reflector reflects the electrical current, the current goes back into the rotors (but now takes a different path), back into the entry wheel and ends up lighting one of the lamps.
 
-<h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Operating the Enigma</h3>
+<h3 id="operating" style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Operating the Enigma</h3>
 
 #### Enigma Models
 
-TBD
+It is important to know that the Enigma was a family of electro-mechanical encryption machines and not just one device.
+
+This manual covers the Enigma I, Enigma M3 and Enigma M4.
 
 ##### Enigma I
 
-TBD
+The Enigma I was used by both the Heer (Army) and the Luftwaffe (Air Force). It was later also adopted by the Kriegsmarine (German Navy) where it became known as the M1, M2 and finally the M3.
+
+The only obvious difference between the Army version and the Navy version is that the wheels of the latter have letters (A-Z) rather than numbers.
+
+Slightly before the beginning of the WWII, the machine was supplied with five coding wheels, that could be inserted in any of 60 possible orders (5 x 4 x 3).
+
+More details about the Enigma I can be found [here](https://www.cryptomuseum.com/crypto/enigma/i/).
 
 ##### Enigma M3
 
-TBD
+Enigma M3 was a 3-wheel electromechanical cipher machine, during WWII by the German Wehrmacht.
+
+The M3 machine uses three wheels (out of a selection of eight) and a reflector (a choice of two, "B" or "C").
+
+Initially, the M3 was supplied with five cipher wheels that were wired identically to the five wheels of the Wehrmacht's Enigma I. This way, they were able to exchange messages with the Heer and Luftwaffe. In 1939 however, three more wheels were added — VI, VII and VIII — which were used exclusively by the Kriegsmarine. They were not supplied to the rest of the German Army.
+
+The M3 is functionally identical to the compatible Enigma I that was used by the Heer and Luftwaffe. Nevertheless there are a couple of manufacturing differences that are unique to the Kriegsmarine machines. So far, the following differences have been recorded:
+
+- Letters on the wheels rather than numbers
+- Different ring setting mechanism
+- Separate lamp panel (hinged on the M2)
+- Lockable wheel cover with two locks
+- Removable top lid (of the wooden case)
+- Plugs with longer pins (incompatible with Enigma I plugboard)
+- Lock in top lid of wooden case rather than in the flap at the front
+- Two grips at the sides (for pulling the machine out of a bay)
+- 6V circular power socket (M1, M2), or two sockets for 4V and 220V (M3)
+
+More details about the Enigma M3 can be found [here](https://www.cryptomuseum.com/crypto/enigma/m3/index.htm).
 
 ##### Enigma M4
 
-TBD
+The Enigma M4 was developed during the WWII, for use by certain divisions of the Kriegsmarine (German Navy) — in particular for the U-Boats. It was intended as a more secure version of the Enigma M3. It was supplied with 8 different coding wheels, (marked I to VIII), three of which were in the machine at any given time.
 
-#### Selecting a Model
+Besides 3 more wheels to choose from, an extra wheel – or Zusatzwalze – was added to the M4, to the left of the three regular wheels. This extra wheel adds an additional stage to the encryption algorithm. The extra wheel does not move when entering a message and is not interchangeable with the other wheels. When the extra wheel is placed at position A, the machine is backwards compatible with the 3-wheel Enigma I and the Enigma M3.
 
-TBD
+Two different versions of the extra wheel are known: Beta and Gamma.
 
-#### Configuring the Settings
+**Note**: The three extra wheels (VI, VII and VIII) have two notches each, which causes a more frequent wheel turnover and less regular stepping.
 
-TBD
+More details about the Enigma M4 can be found [here](https://www.cryptomuseum.com/crypto/enigma/m4/index.htm).
+
+#### Understanding the Simulator
+
+The simulator can be divided in two parts:
+
+- Machine Operating
+- Machine Settings
+
+<img src="img/parts.png">
+
+##### Machine Settings
+
+Every Enigma operator was provided with a code book which he consulted at midnight which was when the new key for that day came into effect.
+
+The code book listed the five parameters for setting up the Enigma:
+
+1. The `Datum` or date.
+2. The `Walzenlage` or rotor order for that date. For example: `IV, I, V`.
+3. The `Ringstellung`, or ring setting for that date. For example: `23 02 17`.
+4. The `Steckerverbindungen` or plugging for that date. For example: `AR KT MW LC XD EJ ZB UY PS HN`.
+5. The `Kenngruppen`, or discriminant for that date. For example: TXM.
+
+Don't worry if you don't have a code-book. You can choose your own settings.
+
+Configuring the machine:
+
+1. Choose an Enigma machine model. The simulator defaults to the `Enigma I`. Selecting an Enigma machine model can be done through the select field on the right side, under the `Maschineneinstellungen` (Machine settings) section. You can choose between the `Enigma I`, `Enigma M3` or `Enigma M4`.
+
+2. Under the `Enigma Model` section, you can see the `Available Rotors` section, which lists the available rotors for that particular model. In the picture above, you can see that the `Enigma M3` is selected, meaning that there are 8 different available rotors to choose from.
+
+3. Once you choose which rotors you would want to use, drag-and-drop them one by one and into the three possible droppable positions. The first droppable position is for the `FAST ROTOR (right-hand)`, the second is for the `MIDDLE ROTOR` and the third of the `SLOW ROTOR (left-hand)`.
+
+4. According to this example, the operator would take `rotor IV` and set its `Ringstellung` to `23 (W)`. He would repeat this process with `rotor I` setting its ring in the `02 (B)` position and with `rotor V` setting its ring in the `17 (Q)` position.
+
+5. After setting up the rotors, you will need to choose a reflector, which also, depends on the model.
+
+6. Next, set the steckerboard (plugboard) by plugging A to R, then K to T, then M to W, and so on.
+
+7. The operator would then think of three letters at random, say RNF, for the Grundstellung or indicator-setting. He would then manually rotate the left rotor until it had R uppermost, the middle rotor until it had N uppermost and the right rotor until it had F uppermost.
+
+8. Next, the operator would think of another three letters at random, say JRM, for the message-setting. He would then press the J key, and B, say, would light up, he would then press R, and K, say, would light up, next he would press M, and T, say, would light up. The operator's assistant would make a note of the enciphered message-setting (BKT in this example). The operator then set the rotors to JRM.
 
 #### Enciphering a Message
 
@@ -207,6 +280,8 @@ TBD
 - `Walzenlage` - Wheel Order
 - `Umkehrwalze (UKW)` - Reversing drum / Reflector Wheel
 - `Stator / Entrittswalze (ETW)` - Static Wheel
+- `Zusatzwalze` - Extra Wheel
+- `Datum` - Date
 
 ##### Other Enigma Simulators
 
@@ -218,6 +293,7 @@ TBD
 This manual is a collection of already published explanations of the machine.
 
 - **Alan Turing: The Enigma** by [Andrew Hodges](https://www.synth.co.uk/).
+- [Enigma Cipher Machines - Crypto Museum](https://www.cryptomuseum.com/crypto/enigma/)
 - [Enigma machine - Brilliant](https://brilliant.org/wiki/enigma-machine/)
 - [Enigma machine - Wikipedia](https://en.wikipedia.org/wiki/Enigma_machine)
 - [Enigma machine - Codes and Ciphers](https://www.codesandciphers.org.uk/enigma/enigma1.htm)
@@ -229,8 +305,8 @@ I dedicate this software to the Internet. Have fun using it as I had fun writing
 
 Also, a big **THANK YOU!** to:
 
-- Simon (who actually built his own 3D printed Enigma machine -- check out his YouTube channel [here](https://www.youtube.com/channel/UCJqzEbh1UOpZJj3Hrv2mPZA)) from [asciimation.net](http://www.asciimation.co.nz/), for clearing up my confusion between the Grundstellung and the Ringstellung of the Enigma machine.
+- Simon (who actually built his own 3D printed Enigma machine -- check out his YouTube channel [here](https://www.youtube.com/channel/UCJqzEbh1UOpZJj3Hrv2mPZA)) from [asciimation.net](http://www.asciimation.co.nz/), for clearing up my confusion between the `Grundstellung` and the `Ringstellung`.
 
-- My friend [Andrej Trajchevski](https://andrejt.com/), who actually bought me Andrew Hodge's book **Alan Turing: The Enigma** as a gift, which I later used for writing some parts of this manual.
+- My friend [Andrej Trajchevski](https://andrejt.com/), who actually bought me Andrew Hodge's book **Alan Turing: The Enigma**, which I later used for writing some parts of this manual.
 
-- My friend [Nikola Demerdziev](), he knows why.
+- My friend [Nikola Demerdziev](https://github.com/newkdukem), he knows why. :)
