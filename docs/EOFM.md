@@ -282,9 +282,13 @@ The Enigma is now set for enciphering or deciphering.
 
 To encipher a message, you need to key-in the plaintext of the message, which will result in a cipher-text output.
 
-##### Space / Stop characters
+##### Space / Stop / Comma ...
 
-To add a stop between words or sentences you can use an `X` character.
+- KLAM = Parenthesis
+- ZZ = Comma
+- X = Full stop (end of sentence)
+- YY = Point or dot
+- X`*****`X = Inverted commas
 
 ##### Encoding numbers
 
@@ -293,6 +297,8 @@ Encoding numbers was solved with using a number code, with the top row of letter
 To include numbers in your message, you first need to indicate that you are about to use a number by entering the letter `Y` before each number. So, to encode the number 5 in your message you would type in `YT`, the number 6 would be `YZ`, and 42 would be `YRW`.
 
 When you are receiving a message, if your decoded text has a series of seemingly indecipherable characters, like `YQRT X YYE` you know that the `Y` indicates the start of a number and the proceeding letters correspond to those numbers. The `X` is the stop character.
+
+Sometimes, numbers were written out as `NULL EINZ ZWO DREI VIER FUNF SEQS SIEBEN AQT NEUN`.
 
 ###### Notes
 
