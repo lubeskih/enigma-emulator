@@ -1,7 +1,7 @@
 {
-  "short_name": "Enigma Simulator",
-  "name": "Enigma Simulator",
-  "description": "Enigma I, M3 and M4 machine simulator for the Web.",
+  "short_name": "Enigma Emulator",
+  "name": "Enigma Emulator",
+  "description": "Enigma I, M3 and M4 machine emulator for the Web.",
   "icons": [
     {
       "src": "favicon.ico",

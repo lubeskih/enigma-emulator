@@ -80,14 +80,14 @@ class Enigma extends Component {
             <div className="col-md-12">
               <a
                 target="_blank"
-                href="https://github.com/lubeskih/enigma-simulator/blob/master/docs/EOFM.md"
+                href="https://github.com/lubeskih/enigma-emulator/blob/master/docs/EOFM.md"
               >
                 Enigma Operator's Field Manual
               </a>
               <br></br>
               <a
                 target="_blank"
-                href="https://github.com/lubeskih/enigma-simulator"
+                href="https://github.com/lubeskih/enigma-emulator"
               >
                 REPOSITORY
               </a>{" "}

@@ -17,7 +17,7 @@ function detectmob() {
   ) {
     if (
       !window.confirm(
-        "My poor script has detected that you may be using a mobile device (sorry if not) to view this page. Keep in mind that the simulator does not work on mobile devices.\n\n'CANCEL' - will redirect you to https://google.com\n\n'OK' - will dismiss this message"
+        "My poor script has detected that you may be using a mobile device (sorry if not) to view this page. Keep in mind that the emulator does not work on mobile devices.\n\n'CANCEL' - will redirect you to https://google.com\n\n'OK' - will dismiss this message"
       )
     ) {
       window.location.href = "https://www.google.com/";

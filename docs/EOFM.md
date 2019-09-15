@@ -16,7 +16,7 @@
     - [Enigma I](#enigma-one)
     - [Enigma M3](#enigma-m3)
     - [Enigma M4](#enigma-m4)
-  - [Understanding the Simulator](#understanding-the-sim)
+  - [Understanding the Emulator](#understanding-the-sim)
   - [Configuring the Settings](#configuring)
   - [Enciphering Characters and Numbers](#characters)
   - [Deciphering Message](#decipher)
@@ -25,13 +25,15 @@
 - [References](#references)
 - [Dedications](#dedications)
 
-> NOTE: If you are confused by some parts of this manual, please write me an email at: hristijan.lubeski@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-simulator). I will do everything I can to improve the manual and clear up any confusions regarding the manual.
+> NOTE: If you are confused by some parts of this manual, please write me an email at: hristijan.lubeski@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-emulator). I will do everything I can to improve the manual and clear up any confusions regarding the manual.
+
+> This manual is a collection of already published explanations of the machine (check the References section), however, I drew the illustrations using Adobe XD.
 
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Introduction</h3>
 
-Welcome to the **Enigma Operator's Field Manual**. This manual's purpose is to demystify the Enigma machine, uncover the inner working of the device, as well as provide clear instructions for operating it on a [computer simulator](https://enigma.lh.mk).
+Welcome to the **Enigma Operator's Field Manual**. This manual's purpose is to demystify the Enigma machine, uncover the inner working of the device, as well as provide clear instructions for operating it on a [computer emulator](https://enigma.lh.mk).
 
-The simulator is faithful to the workings of the following Enigma models:
+The emulator is faithful to the workings of the following Enigma models:
 
 - `Enigma I` - used by the Heer (army) and the Luftwaffe (air-force).
 - `Enigma M3` - used by the Wehrmacht (unified armed forces of Nazi Germany).
@@ -228,9 +230,9 @@ Two different versions of the extra wheel are known: Beta and Gamma.
 
 More details about the Enigma M4 can be found [here](https://www.cryptomuseum.com/crypto/enigma/m4/index.htm).
 
-#### Understanding the Simulator
+#### Understanding the Emulator
 
-The simulator can be divided in two parts:
+The emulator can be divided in two parts:
 
 - Machine Operating
 - Machine Settings
@@ -249,11 +251,11 @@ The code book listed the five parameters for setting up the Enigma:
 4. The `Steckerverbindungen` or plugging for that date. For example: `AR KT MW LC XD EJ ZB UY PS HN`.
 5. The `Kenngruppen`, or discriminant for that date. For example: TXM.
 
-Don't worry if you don't have a code-book. You can think of some random settings, but don't forget to write them down.
+Don't worry if you don't have a code-book. You can think of some random settings, but don't forget to write them down. Read more about the code-book [here](http://users.telenet.be/d.rijmenants/en/enigmaproc.htm).
 
 Configuring the machine:
 
-1. Choose an Enigma machine model. The simulator defaults to the `Enigma I`. Selecting an Enigma machine model can be done through the select field on the right side, under the `Maschineneinstellungen` (Machine settings) section. You can choose between the `Enigma I`, `Enigma M3` or `Enigma M4`.
+1. Choose an Enigma machine model. The emulator defaults to the `Enigma I`. Selecting an Enigma machine model can be done through the select field on the right side, under the `Maschineneinstellungen` (Machine settings) section. You can choose between the `Enigma I`, `Enigma M3` or `Enigma M4`.
 
 2. After choosing an Enigma model, under the `Enigma Model` section you can see the `Available Rotors` section, which lists the available rotors for that particular model. In the picture above, you can see that the `Enigma M3` is selected, meaning that there are 8 different available rotors to choose from.
 
@@ -267,9 +269,9 @@ Configuring the machine:
 
 7. Now you need to think of three letters at random, say RNF, for the Grundstellung or indicator-setting. After that, manually rotate the left rotor (set the ground-settings) until it shows R, the middle rotor until it shows N and the right rotor until it shows F uppermost.
 
-8. Next, chose an reflector you want to use, and then proceed to locking the settings by checking the "lock-settings" checkbox.
+8. Next, chose a reflector you want to use, and then proceed to locking the settings by checking the 'lock-settings' checkbox.
 
-9. Next, think of another three letters at random, say JRM, for the message-setting. He would then press the J key, and B, say, would light up, he would then press R, and K, say, would light up, next he would press M, and T, say, would light up. Normally, the operator's assistant would make a note of the enciphered message-setting (BKT in this example). But there are cipher logs on the bottom of the simulator which does this for you. After this, unlock the settings, set the rotors to JRM and then lock them again.
+9. Next, think of another three letters at random, say JRM, for the message-setting. He would then press the J key, and Q, say, would light up, then press R, and F, say, would light up, next he would press M, and L, say, would light up. Normally, your assistant would make a note of the enciphered message-setting (QFL in this example). But, to spare you some time, there are cipher logs on the bottom of the emulator which does this for you. After this, unlock the settings, set the rotors to JRM and then lock them again.
 
 The Enigma is now set for enciphering or deciphering.
 
@@ -291,15 +293,15 @@ When you are receiving a message, if your decoded text has a series of seemingly
 
 ###### Notes
 
-- Typically, a complete transmision would include the sender's and receiver's call-signs, frequency, signal strength, readability, intercept station number, time of origin, urgency, number of parts in the signal, number of current part, number of letters in current part, Kenngruppe discriminant (to state which key was being used - TXM in this example) and Grundstellung (RNF in this example). This was all transmitted en clair and followed by the enciphered message-setting (BKT in this example), the enciphered message and finally the end of message signal.
+- Typically, a complete transmission would include the sender's and receiver's call-signs, frequency, signal strength, readability, intercept station number, time of origin, urgency, number of parts in the signal, number of current part, number of letters in current part, Kenngruppe discriminant (to state which key was being used - TXM in this example) and Grundstellung (RNF in this example). This was all transmitted en clair and followed by the enciphered message-setting (QFL in this example), the enciphered message and finally the end of message signal.
 
 - To improve security it was an operational rule that no message should exceed 250 letters.
 
-- Prior to 1st May 1940, in order to reduce errors, the procedure was to repeat the encipherment of the message setting, so in this example, JRMJRM yields, say, BKTRFQ. This repeated encipherment of the message-setting was both foolish and unnecessary. The Poles' exploitation of it by analytically comparing the first triplet BKT to the second triplet RFQ, enabled them to break Enigma. On 1st May 1940 the Germans abandoned repeated message-settings after which the Poles' techniques were useless.
+- Prior to 1st May 1940, in order to reduce errors, the procedure was to repeat the encipherment of the message setting, so in this example, JRMJRM yields, say, BKTRFQ. This repeated encipherment of the message-setting was both foolish and unnecessary. The Poles' exploitation of it by analytically comparing the first triplet QFL to the second triplet RFQ, enabled them to break Enigma. On 1st May 1940 the Germans abandoned repeated message-settings after which the Poles' techniques were useless.
 
 #### Deciphering a Message
 
-To decipher a message, the receiver should set up his Enigma in accordance with the key for the day, turn his rotors to the Grundstellung (RNF in this example) and key-in the enciphered message-setting (BKT in this example). Keying-in BKT would yield JRM so the operator would reset the rotors on his Enigma to JRM and then key in the cipher-text, his assistant would read off and record the plaintext as each letter was illuminated.
+To decipher a message, the receiver should set up his Enigma in accordance with the key for the day, turn his rotors to the Grundstellung (RNF in this example) and key-in the enciphered message-setting (QFL in this example). Keying-in QFL would yield JRM so the operator would reset the rotors on his Enigma to JRM and then key in the cipher-text, his assistant would read off and record the plaintext as each letter was illuminated.
 
 ###### Notes
 
@@ -322,11 +324,9 @@ To decipher a message, the receiver should set up his Enigma in accordance with 
 ##### Other Enigma Simulators
 
 - [Louise Dade's Enigma Emulator](http://enigma.louisedade.co.uk/)
-- [Tom MacWright's Enigma Simulator](https://observablehq.com/@tmcw/enigma-machine)
+- [Tom MacWright's Enigma Emulator](https://observablehq.com/@tmcw/enigma-machine)
 
 ##### References
-
-This manual is a collection of already published explanations of the machine, however, I draw the illustration using Adobe XD.
 
 - **Alan Turing: The Enigma** by [Andrew Hodges](https://www.synth.co.uk/).
 - [Louise Dade's Enigma Emulator Help](http://enigma.louisedade.co.uk/help.html)

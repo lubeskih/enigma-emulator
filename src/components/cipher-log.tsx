@@ -19,6 +19,13 @@ export class CipherLog extends Component<IProps, {}> {
     super(props);
   }
 
+  // Clears Output/Input cipher logs
+  public onClearLogs = (_event: any) => {
+    const store = this.props.store;
+    store.INPUT = "";
+    store.OUTPUT = "";
+  };
+
   render() {
     return (
       <>
@@ -39,6 +46,9 @@ export class CipherLog extends Component<IProps, {}> {
                   {this.props.store.OUTPUT}
                 </div>
               </div>
+            </div>{" "}
+            <div onClick={this.onClearLogs} className="clear-logs">
+              <a href="#">Clear Logs</a>
             </div>
           </div>
         </Collapse>
