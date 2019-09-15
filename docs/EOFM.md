@@ -45,6 +45,10 @@ The emulator is faithful to the workings of the following Enigma models:
 
 The Enigma machine is an electro-mechanical encryption device used by the Germans during World War II to transmit coded messages.
 
+![Enigma](img/enigmamachinelabeled.jpg)
+
+> Picture of an Enigma machine stolen from the Internet.
+
 Ciphering was the necessary consequence of radio communications, which had to be used for aerial, naval, and mobile land warfare, where a radio message to one was a message to all. Virtually every German official radio communication was enciphered on the Enigma machine.
 
 The basic Enigma machine had been exhibited in 1923, soon after its invention, at the congress of the International Postal Union. Originally, it was sold commercially and used by banks.
@@ -94,6 +98,10 @@ The current entry wheel connects the plugboard to the rotor assembly. If the plu
 
 #### Rotors
 
+![Rotors](img/enigma_rotor_simple_single_rotor_wiring.jpg)
+
+> Illustration of an Rotor, also, stolen from the Internet.
+
 The rotors are the heart of the Enigma machine. Each rotor is a disc, which has an electrical contact pins arranged in a circle on one face; and circular plates (electrical contacts) on the other (the pins and contacts represent the alphabet — typically the 26 letters A–Z).
 
 When the rotors are mounted side-by-side on the spindle, the pins of one rotor rest against the plate contacts of the neighboring rotor, forming an electrical connection.
@@ -101,6 +109,10 @@ When the rotors are mounted side-by-side on the spindle, the pins of one rotor r
 Inside the body of the rotor, 26 wires are randomly connected each pin on one side to a contact on the other. This is where the 'magic' happens, which is why the rotors are also called 'scramblers'.
 
 ##### Ring-settings (Ringstellung):
+
+![Rings](img/946px-enigma_rotors_with_alphabet_rings.jpg)
+
+> Enigma rotors with Alphabetical rings. Picture stolen from the Internet.
 
 The rotors had to be marked in some way on the outside so that the different positions could be identified. However, here entered yet another element of complexity. Each rotor was encircled by a ring bearing the 26 letters, so that with the ring fixed in position, each letter would label a rotor position (In fact, the letter would show through a window at the top of the machine).
 
@@ -254,6 +266,10 @@ The code book listed the five parameters for setting up the Enigma:
 4. The `Steckerverbindungen` or plugging for that date. For example: `AR KT MW LC XD EJ ZB UY PS HN`.
 5. The `Kenngruppen`, or discriminant for that date. For example: TXM.
 
+![Book](img/enigma_keylist_3_rotor_cr.jpg)
+
+> German Air Force Enigma key list with reconfigurable reflector. Picture stolen from the Internet.
+
 Don't worry if you don't have a code-book. You can think of some random settings, but don't forget to write them down. Read more about the code-book [here](http://users.telenet.be/d.rijmenants/en/enigmaproc.htm).
 
 Configuring the machine:
@@ -344,6 +360,7 @@ To decipher a message, the receiver should set up his Enigma in accordance with 
 - [Enigma machine - Wikipedia](https://en.wikipedia.org/wiki/Enigma_machine)
 - [Enigma machine - Codes and Ciphers](https://www.codesandciphers.org.uk/enigma/enigma1.htm)
 - [Ellsbury - The Enigma machine - Its Construction, Operation and Complexity](http://www.ellsbury.com/enigma3.htm)
+- [THE ENIGMA ENIGMA: HOW THE ENIGMA MACHINE WORKED](https://hackaday.com/2017/08/22/the-enigma-enigma-how-the-enigma-machine-worked/)
 
 ##### Dedications
 
