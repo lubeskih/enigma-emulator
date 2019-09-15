@@ -158,6 +158,7 @@ It shows the state of the machine at some particular moment in its use. The line
     <small><i>Current passing from the Entry-wheel, throughout the Rotors, reflecting itself at the Reflector and then going back to a different path which ends up again, at the Entry-wheel.</i><br><br> <i>Found in <a href="">Andrew Hodges'</a> book <strong>Alan Turing: The Enigma</strong>, digitalized by <a href="https://lh.mk">lh.mk</a></i>.</small>
     <center>
     <br>
+    <br>
 </figure>
 
 A simple switch system at the input has the effect that if a key (say the B key) is depressed, a current flows (as shown in the diagram by bold) lines and lights up a bulb in the output display panel (in this case, under the letter D). For the hypothetical 8-letter Enigma, the next state of the machine would be:
