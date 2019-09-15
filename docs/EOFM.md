@@ -271,7 +271,7 @@ Configuring the machine:
 
 8. Next, chose a reflector you want to use, and then proceed to locking the settings by checking the 'lock-settings' checkbox.
 
-9. Next, think of another three letters at random, say JRM, for the message-setting. He would then press the J key, and Q, say, would light up, then press R, and F, say, would light up, next he would press M, and L, say, would light up. Normally, your assistant would make a note of the enciphered message-setting (QFL in this example). But, to spare you some time, there are cipher logs on the bottom of the emulator which does this for you. After this, unlock the settings, set the rotors to JRM and then lock them again.
+9. Next, think of another three letters at random, say JRM, for the message-setting. Then, press the J key, and Q, say, would light up, then press R, and F, say, would light up, next you should press M, and L, say, would light up. Normally, your assistant would make a note of the enciphered message-setting (QFL in this example). But, to spare you some time, there are cipher logs on the bottom of the emulator which does this for you. After this, unlock the settings, set the rotors to JRM and then lock them again.
 
 The Enigma is now set for enciphering or deciphering.
 
