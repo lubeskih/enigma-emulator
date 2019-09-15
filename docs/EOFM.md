@@ -27,6 +27,10 @@
 - [References](#references)
 - [Dedications](#dedications)
 
+> NOTE: If you are confused by some parts of this manual, please write me an email at: hristijan.lubeski@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-emulator). I will do everything I can to improve the manual and clear up any confusions regarding the manual.
+
+> This manual is a collection of already published explanations of the machine (check the References section), however, I drew the illustrations using Adobe XD.
+
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Introduction</h3>
 
 Welcome to the **Enigma Operator's Field Manual**. This manual's purpose is to demystify the Enigma machine, uncover the inner working of the device, as well as provide clear instructions for operating it on a [computer emulator](https://enigma.lh.mk).
