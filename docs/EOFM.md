@@ -272,7 +272,7 @@ Configuring the machine:
 
 7. Now you need to think of three letters at random, say RNF, for the Grundstellung or indicator-setting. After that, manually rotate the left rotor (set the ground-settings) until it shows R, the middle rotor until it shows N and the right rotor until it shows F uppermost.
 
-8. Next, chose a reflector you want to use, and then proceed to locking the settings by checking the 'lock-settings' checkbox.
+8. Proceed with locking the settings by checking the `lock settings` checkbox.
 
 9. Next, think of another three letters at random, say JRM, for the message-setting. Then, press the J key, and Q, say, would light up, then press R, and F, say, would light up, next you should press M, and L, say, would light up. Normally, your assistant would make a note of the enciphered message-setting (QFL in this example). But, to spare you some time, there are cipher logs on the bottom of the emulator which does this for you. After this, unlock the settings, set the rotors to JRM and then lock them again.
 
