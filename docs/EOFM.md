@@ -16,18 +16,16 @@
     - [Enigma I](#enigma-one)
     - [Enigma M3](#enigma-m3)
     - [Enigma M4](#enigma-m4)
-  - [Understanding the Emulator](#understanding-the-sim)
-  - [Configuring the Settings](#configuring)
-  - [Enciphering Characters and Numbers](#characters)
+  - [Understanding the Emulator](#understanding-the-simulator)
+    - [Machine Settings](#machine-settings)
+  - [Enciphering a Message](#eniphering)
+    - [Space / Stop characters](#space-stop-chars)
+    - [Encoding numbers](#encode-numbers)
   - [Deciphering Message](#decipher)
 - [Glossary of Technical Terms](#glossary)
 - [Other Enigma Simulators](#other-enigmas)
 - [References](#references)
 - [Dedications](#dedications)
-
-> NOTE: If you are confused by some parts of this manual, please write me an email at: hristijan.lubeski@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-emulator). I will do everything I can to improve the manual and clear up any confusions regarding the manual.
-
-> This manual is a collection of already published explanations of the machine (check the References section), however, I drew the illustrations using Adobe XD.
 
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Introduction</h3>
 
