@@ -1,4 +1,4 @@
-## enigma-emulator
+# enigma-emulator
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hfour/envaridator/blob/master/LICENSE.md)
@@ -7,11 +7,11 @@ Enigma machine emulator for the Web. The emulator is faithful to the workings of
 
 I highly recommend checking out the [Enigma Operator's Field Manual](https://github.com/lubeskih/enigma-simulator/blob/master/docs/EOFM.md) before using the emulator.
 
-##### Screenshot
+### Screenshot
 
 ![Enigma](src/misc/ss.png)
 
-##### Starting the emulator
+### Starting the emulator
 
 Clone the repository:
 
@@ -25,7 +25,7 @@ Starting the emulator can be done with:
 
 `yarn start`
 
-##### Navigating around the repository
+### Navigating around the repository
 
 - `src` - Main source directory
 - `src/components` - React components
@@ -35,16 +35,16 @@ Starting the emulator can be done with:
 - `store` - MobX store files used in the project
 - `types` - Interfaces/Types used in the project
 
-##### Reporting an issue
+### Reporting an issue
 
-Use GitHub's issue system to report an issue (emulator logic error, manual typo etc...)
+Use GitHub's issue system to report an issue (emulator logic error, manual typo etc...).
 
-##### Contributing
+### Contributing
 
 Contributions are more than welcome.
 
 If you want to contribute, start with opening an issue before writing the code so we can first discuss the idea. If everything goes well, you are free to open a PR, but please don't forget to include details about your changes.
 
-##### License
+### License
 
 This Enigma machine emulator is [MIT licensed](https://github.com/lubeskih/enigma-emulator/blob/master/LICENSE.md).
