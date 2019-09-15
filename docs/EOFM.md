@@ -201,7 +201,7 @@ More details about the Enigma I can be found [here](https://www.cryptomuseum.com
 
 ##### Enigma M3
 
-Enigma M3 was a 3-wheel electromechanical cipher machine, during WWII by the German Wehrmacht.
+Enigma M3 was a 3-wheel electro-mechanical cipher machine, used during WWII by the German Wehrmacht.
 
 The M3 machine uses three wheels (out of a selection of eight) and a reflector (a choice of two, "B" or "C").
 
