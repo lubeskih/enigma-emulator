@@ -29,7 +29,7 @@
 
 > NOTE: If you are confused by some parts of this manual, please write me an email at: hristijan.lubeski@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-emulator). I will do everything I can to improve the manual and clear up any confusions.
 
-> This manual is a collection of already published explanations of the machine (check the References section), however, I drew the illustrations using Adobe XD.
+> This manual is a collection of my attempts to explain the machine, alongside already published ones (check the References section), however, I drew the illustrations using Adobe XD.
 
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Introduction</h3>
 
