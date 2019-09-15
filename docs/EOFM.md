@@ -15,17 +15,17 @@
   - [Enigma Models](#models)
     - [Enigma I](#enigma-one)
     - [Enigma M3](#enigma-m3)
-    - ~~[Enigma M4](#enigma-m4)~~
-  - ~~[Selecting a Model](#selecting-model)~~
-  - ~~[Configuring the Settings](#configuring)~~
-  - ~~[Enciphering Characters and Numbers](#characters)~~
-  - ~~[Deciphering Message](#decipher)~~
+    - [Enigma M4](#enigma-m4)
+  - [Understanding the Simulator](#understanding-the-sim)
+  - [Configuring the Settings](#configuring)
+  - [Enciphering Characters and Numbers](#characters)
+  - [Deciphering Message](#decipher)
 - [Glossary of Technical Terms](#glossary)
 - [Other Enigma Simulators](#other-enigmas)
 - [References](#references)
 - [Dedications](#dedications)
 
-> NOTE: If you are confused from some parts of this manual, please write me an email at: lubeskih@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-simulator). I will do everything I can to improve the manual and clear up any confusions regarding the covered parts.
+> NOTE: If you are confused by some parts of this manual, please write me an email at: hristijan.lubeski@gmail.com, or open an issue at the [repository on GitHub](https://github.com/lubeskih/enigma-simulator). I will do everything I can to improve the manual and clear up any confusions regarding the manual.
 
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">Introduction</h3>
 
@@ -61,12 +61,20 @@ In all cipher systems one assumes that the message has been intercepted. The obj
 
 <h3 style="background-color: #2b303b; color: white; padding: 3px 5px 3px 5px; display: inline-block">A Current's Path</h3>
 
-When a button is depressed on the Enigma, a current, typically from a battery, starts its journey throughout the mechanical parts of the encryption device. The following paragraphs represent the current's path in order. The first stop is at the Keyboard. Take a moment to look at this circuit diagram before moving on.
+When a button is depressed on the Enigma, a current, typically from a battery, starts its journey throughout the mechanical parts of the encryption device. The following paragraphs and illustrations represent/illustrate the current's path in order. The first stop is at the Keyboard. Take a moment to look at this circuit diagram before moving on.
 
 <figure>
     <img src="img/curcuit-diagram.jpg"></img>
     <br>
 </figure>
+
+```
+RE - Reflector
+L - Left-hand rotor
+M - Middle rotor
+R - Right-hand rotor
+E - Entry-wheel / Stator
+```
 
 #### Keyboard
 
@@ -94,19 +102,19 @@ The rotors had to be marked in some way on the outside so that the different pos
 
 However, the position of the ring, relative to the wirings, would be changed each day. The wirings might be thought of as labelled by numbers from 1 to 26, and the position of the ring by the letters A to Z appearing in the window. So a ring-setting would determine where the ring was to sit on the rotor, with perhaps the letter G on position 1, H on position 2, and so forth (see the illustrations bellow).
 
-It is important to keep in mind that the ring setting only affects the wiring, it doesn't affect the turnover which still happens at the same letters.
-
-Since the rotation is triggered by a ratchet and pawl mechanism, every time a key is depressed, one or more rotors rotate by one place.
+Since the rotation of a rotor is triggered by a ratchet and pawl mechanism, every time a key is depressed, one or more rotors rotate by one place.
 
 As this ring rotated with its rotor, a notch machined into it would eventually align itself with the pawl, allowing it to engage with the ratchet, and advance the rotor on its left.
 
 The advancement of a rotor other than the left-hand one is called a _turnover_.
 
+It is important to keep in mind that the ring setting only affects the wiring, it doesn't affect the turnover which still happens at the same letters.
+
 ##### Ground-settings (Grundstellung):
 
-The ground-settings tells the operator of the machine what position the rotors should be in when setting up the machine (the letters you see in the little windows). So, for example, if the ground-setting for the left-hand rotor is `A`, you should see the letter `A` through the left-hand little window of the machine.
+The ground-settings tells the operator of the machine what position the rotors should be in when setting up the machine (the letters you see in the little windows). So, for example, if the ground-setting for the left-hand rotor is `A`, you should see the letter `A` at the left-hand little window of the machine.
 
-###### BONUS: calculating the offset from the Ring/Ground settings
+###### Calculating the offset from the Ring/Ground settings
 
 When you put the Rotor on the spindle, in any position, you create an `OFFSET`. The `OFFSET` is important so you would know how to calculate the entry/exit point of the current that flows through the Rotor.
 
@@ -241,33 +249,61 @@ The code book listed the five parameters for setting up the Enigma:
 4. The `Steckerverbindungen` or plugging for that date. For example: `AR KT MW LC XD EJ ZB UY PS HN`.
 5. The `Kenngruppen`, or discriminant for that date. For example: TXM.
 
-Don't worry if you don't have a code-book. You can choose your own settings.
+Don't worry if you don't have a code-book. You can think of some random settings, but don't forget to write them down.
 
 Configuring the machine:
 
 1. Choose an Enigma machine model. The simulator defaults to the `Enigma I`. Selecting an Enigma machine model can be done through the select field on the right side, under the `Maschineneinstellungen` (Machine settings) section. You can choose between the `Enigma I`, `Enigma M3` or `Enigma M4`.
 
-2. Under the `Enigma Model` section, you can see the `Available Rotors` section, which lists the available rotors for that particular model. In the picture above, you can see that the `Enigma M3` is selected, meaning that there are 8 different available rotors to choose from.
+2. After choosing an Enigma model, under the `Enigma Model` section you can see the `Available Rotors` section, which lists the available rotors for that particular model. In the picture above, you can see that the `Enigma M3` is selected, meaning that there are 8 different available rotors to choose from.
 
-3. Once you choose which rotors you would want to use, drag-and-drop them one by one and into the three possible droppable positions. The first droppable position is for the `FAST ROTOR (right-hand)`, the second is for the `MIDDLE ROTOR` and the third of the `SLOW ROTOR (left-hand)`.
+3. Once you choose which rotors you would want to use, drag-and-drop them one by one into the three possible droppable positions. The first droppable position is for the `FAST ROTOR (right-hand)`, the second is for the `MIDDLE ROTOR` and the third of the `SLOW ROTOR (left-hand)`.
 
-4. According to this example, the operator would take `rotor IV` and set its `Ringstellung` to `23 (W)`. He would repeat this process with `rotor I` setting its ring in the `02 (B)` position and with `rotor V` setting its ring in the `17 (Q)` position.
+4. Next, according to this example, you would take `rotor IV` and set its `Ringstellung` to `23 (W)`. Repeat this process with `rotor I`, setting its ring in the `02 (B)` position and with `rotor V`, setting its ring in the `17 (Q)` position.
 
 5. After setting up the rotors, you will need to choose a reflector, which also, depends on the model.
 
 6. Next, set the steckerboard (plugboard) by plugging A to R, then K to T, then M to W, and so on.
 
-7. The operator would then think of three letters at random, say RNF, for the Grundstellung or indicator-setting. He would then manually rotate the left rotor until it had R uppermost, the middle rotor until it had N uppermost and the right rotor until it had F uppermost.
+7. Now you need to think of three letters at random, say RNF, for the Grundstellung or indicator-setting. After that, manually rotate the left rotor (set the ground-settings) until it shows R, the middle rotor until it shows N and the right rotor until it shows F uppermost.
 
-8. Next, the operator would think of another three letters at random, say JRM, for the message-setting. He would then press the J key, and B, say, would light up, he would then press R, and K, say, would light up, next he would press M, and T, say, would light up. The operator's assistant would make a note of the enciphered message-setting (BKT in this example). The operator then set the rotors to JRM.
+8. Next, chose an reflector you want to use, and then proceed to locking the settings by checking the "lock-settings" checkbox.
+
+9. Next, think of another three letters at random, say JRM, for the message-setting. He would then press the J key, and B, say, would light up, he would then press R, and K, say, would light up, next he would press M, and T, say, would light up. Normally, the operator's assistant would make a note of the enciphered message-setting (BKT in this example). But there are cipher logs on the bottom of the simulator which does this for you. After this, unlock the settings, set the rotors to JRM and then lock them again.
+
+The Enigma is now set for enciphering or deciphering.
 
 #### Enciphering a Message
 
-TBD
+To encipher a message, you need to key-in the plaintext of the message, which will result in a cipher-text output.
+
+##### Space / Stop characters
+
+To add a stop between words or sentences you can use an `X` character.
+
+##### Encoding numbers
+
+Encoding numbers was solved with using a number code, with the top row of letters representing the numbers from one to nine, and the letter `P` representing zero.
+
+To include numbers in your message, you first need to indicate that you are about to use a number by entering the letter `Y` before each number. So, to encode the number 5 in your message you would type in `YT`, the number 6 would be `YZ`, and 42 would be `YRW`.
+
+When you are receiving a message, if your decoded text has a series of seemingly indecipherable characters, like `YQRT X YYE` you know that the `Y` indicates the start of a number and the proceeding letters correspond to those numbers. The `X` is the stop character.
+
+###### Notes
+
+- Typically, a complete transmision would include the sender's and receiver's call-signs, frequency, signal strength, readability, intercept station number, time of origin, urgency, number of parts in the signal, number of current part, number of letters in current part, Kenngruppe discriminant (to state which key was being used - TXM in this example) and Grundstellung (RNF in this example). This was all transmitted en clair and followed by the enciphered message-setting (BKT in this example), the enciphered message and finally the end of message signal.
+
+- To improve security it was an operational rule that no message should exceed 250 letters.
+
+- Prior to 1st May 1940, in order to reduce errors, the procedure was to repeat the encipherment of the message setting, so in this example, JRMJRM yields, say, BKTRFQ. This repeated encipherment of the message-setting was both foolish and unnecessary. The Poles' exploitation of it by analytically comparing the first triplet BKT to the second triplet RFQ, enabled them to break Enigma. On 1st May 1940 the Germans abandoned repeated message-settings after which the Poles' techniques were useless.
 
 #### Deciphering a Message
 
-TBD
+To decipher a message, the receiver should set up his Enigma in accordance with the key for the day, turn his rotors to the Grundstellung (RNF in this example) and key-in the enciphered message-setting (BKT in this example). Keying-in BKT would yield JRM so the operator would reset the rotors on his Enigma to JRM and then key in the cipher-text, his assistant would read off and record the plaintext as each letter was illuminated.
+
+###### Notes
+
+- Prior to 1st May 1940 the operator would key-in the first six letters of the ciphertext, to yield, in this example, JRMJRM. He would then reset the rotors to JRM and key in the remainder of the cipher-text as above.
 
 ##### Glossary of Technical Terms:
 
@@ -290,9 +326,10 @@ TBD
 
 ##### References
 
-This manual is a collection of already published explanations of the machine.
+This manual is a collection of already published explanations of the machine, however, I draw the illustration using Adobe XD.
 
 - **Alan Turing: The Enigma** by [Andrew Hodges](https://www.synth.co.uk/).
+- [Louise Dade's Enigma Emulator Help](http://enigma.louisedade.co.uk/help.html)
 - [Enigma Cipher Machines - Crypto Museum](https://www.cryptomuseum.com/crypto/enigma/)
 - [Enigma machine - Brilliant](https://brilliant.org/wiki/enigma-machine/)
 - [Enigma machine - Wikipedia](https://en.wikipedia.org/wiki/Enigma_machine)
@@ -307,6 +344,6 @@ Also, a big **THANK YOU!** to:
 
 - Simon (who actually built his own 3D printed Enigma machine -- check out his YouTube channel [here](https://www.youtube.com/channel/UCJqzEbh1UOpZJj3Hrv2mPZA)) from [asciimation.net](http://www.asciimation.co.nz/), for clearing up my confusion between the `Grundstellung` and the `Ringstellung`.
 
-- My friend [Andrej Trajchevski](https://andrejt.com/), who actually bought me Andrew Hodge's book **Alan Turing: The Enigma**, which I later used for writing some parts of this manual.
+- My friend [Andrej Trajchevski](https://andrejt.com/), who actually bought me Andrew Hodge's book **Alan Turing: The Enigma**, which I really enjoyed and later used it for writing some parts of this manual.
 
 - My friend [Nikola Demerdziev](https://github.com/newkdukem), he knows why. :)
