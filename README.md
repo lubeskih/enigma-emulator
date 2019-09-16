@@ -1,3 +1,5 @@
+Making an edit just to be able to make a PR; DON'T MERGE.
+
 # enigma-emulator
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)]()
