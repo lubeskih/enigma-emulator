@@ -3,7 +3,7 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hfour/envaridator/blob/master/LICENSE.md)
 
-Enigma machine emulator for the Web. The emulator is faithful to the workings of the Enigma I, M3 and M4.
+Enigma machine emulator (https://enigma.lh.mk) for the Web. The emulator is faithful to the workings of the Enigma I, M3 and M4.
 
 I highly recommend checking out the [Enigma Operator's Field Manual](https://github.com/lubeskih/enigma-simulator/blob/master/docs/EOFM.md) before using the emulator.
 
