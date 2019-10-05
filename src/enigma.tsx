@@ -115,7 +115,7 @@ class Enigma extends Component {
                   color: "#555"
                 }}
               >
-                build: 1023c5a
+                build: b6d2376
               </span>
             </div>
           </div>
