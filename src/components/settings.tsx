@@ -52,6 +52,38 @@ export class EnigmaSettings extends Component<IProps, {}> {
           >
             Maschineneinstellungen
           </span>
+          <div className="info-panel">
+            {store.checkIfRotorsAreLoaded && store.settingsAreLocked ? (
+              <code className="gray">
+                All good! You can start enciphering letters. Be sure to check
+                out the manual on the bottom of the page to learn about
+                configuration and operating.
+              </code>
+            ) : (
+              <>
+                <code className="gray">Before start ciphering:</code>
+                <br></br>
+              </>
+            )}
+
+            {store.ENIGMA_ROTOR_POSITION_ONE &&
+            store.ENIGMA_ROTOR_POSITION_TWO &&
+            store.ENIGMA_ROTOR_POSITION_THREE ? null : (
+              <>
+                <code className="gray">
+                  - Drag and drop available rotors into the available positions
+                </code>
+                <br />
+              </>
+            )}
+
+            {store.settingsAreLocked ? null : (
+              <code className="gray">
+                - Lock the settings by clicking on the checkbox below the rotor
+                positions
+              </code>
+            )}
+          </div>
           <hr />
           <div className="row mb-2">
             <div className="col-md-12 mb-2">

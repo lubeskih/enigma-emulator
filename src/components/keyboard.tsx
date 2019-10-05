@@ -45,11 +45,7 @@ export class Keyboard extends Component<IProps, {}> {
               <code className="note gray">
                 Hint: you can click the buttons or use your keyboard.
               </code>
-            ) : (
-              <code className="note gray">
-                Configure and lock the settings before using the keyboard.
-              </code>
-            )}
+            ) : null}
           </span>
         </p>
         <hr />

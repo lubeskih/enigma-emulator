@@ -45,10 +45,16 @@ class Enigma extends Component {
       <>
         <div className="container">
           <div className="row">
+            <div className="col-md-4 mt-5">
+              <DndProvider backend={HTML5Backend}>
+                <EnigmaSettings store={store} />
+              </DndProvider>
+            </div>
             <div className="col-md-8 mt-5 enigma">
               <Lamps store={store} />
               <Keyboard store={store} />
               <Plugboard store={store} />
+              <CipherLog store={store} />
 
               {store.enigmaModel === "M4" ? (
                 <div className="m4-note mt-5">
@@ -61,18 +67,9 @@ class Enigma extends Component {
                 </div>
               ) : null}
             </div>
-            <div className="col-md-4 mt-5">
-              <DndProvider backend={HTML5Backend}>
-                <EnigmaSettings store={store} />
-              </DndProvider>
-            </div>
           </div>
           <hr className="mt-5"></hr>
-          <div className="row">
-            <div className="col-md-12">
-              <CipherLog store={store} />
-            </div>
-          </div>
+          <div className="row"></div>
           <div
             className={store.settingsAreLocked ? "row mt-5 mb-2" : "row mb-2"}
             style={{ fontFamily: "monospace", textAlign: "center" }}

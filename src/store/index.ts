@@ -201,6 +201,17 @@ export class Store {
   }
 
   /**
+   * Checks if all three rotors are loaded
+   */
+  public checkIfRotorsAreLoaded(): boolean {
+    return !!(
+      this.ENIGMA_ROTOR_POSITION_ONE &&
+      this.ENIGMA_ROTOR_POSITION_TWO &&
+      this.ENIGMA_ROTOR_POSITION_THREE
+    );
+  }
+
+  /**
    *
    * Unloads a rotor from a position
    * @param position position number

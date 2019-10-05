@@ -17,10 +17,10 @@ function detectmob() {
   ) {
     if (
       !window.confirm(
-        "My poor script has detected that you may be using a mobile device (sorry if not) to view this page. Keep in mind that the emulator does not work on mobile devices.\n\n'CANCEL' - will redirect you to https://google.com\n\n'OK' - will dismiss this message"
+        "My poor script has detected that you may be using a mobile device (sorry if not) to view this page. Keep in mind that the emulator does not work on mobile devices.\n\nCANCEL - will redirect you to to your previous visited page\nOK - will dismiss this message and let you view the site"
       )
     ) {
-      window.location.href = "https://www.google.com/";
+      history.back();
     }
   }
 }

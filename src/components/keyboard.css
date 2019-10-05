@@ -41,6 +41,18 @@
 }
 
 .gray {
-  color: #555;
-  text-decoration: underline;
+  color: #000;
+  padding: 2px;
+}
+
+.note {
+  color: #474747;
+}
+
+.info-panel {
+  background-color: #eeeeee;
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 1%;
 }

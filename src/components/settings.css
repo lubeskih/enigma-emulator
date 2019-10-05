@@ -45,15 +45,16 @@
 
 .clear-logs {
   margin-top: 0.6rem;
-  text-align: center;
   font-family: "Ubuntu Mono";
   font-size: 14px;
   width: 100%;
+  display: inline;
 }
 
 .clear-logs a {
   color: #999;
   text-decoration: underline;
+  float: right;
 }
 
 .reset-settings a {

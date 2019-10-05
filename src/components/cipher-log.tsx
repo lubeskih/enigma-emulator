@@ -30,25 +30,29 @@ export class CipherLog extends Component<IProps, {}> {
     return (
       <>
         <Collapse in={this.props.store.settingsAreLocked}>
-          <div id="cipher-log" className="row mt-3">
-            <div className="col-md-6">
-              <h5>Input Log</h5>
-              <div>
-                <div className="card card-body mb-2">
-                  {this.props.store.INPUT}
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <h5>Output Log</h5>
-              <div>
-                <div className="card card-body mb-2">
-                  {this.props.store.OUTPUT}
-                </div>
-              </div>
-            </div>{" "}
+          <div className="mt-3">
+            <span title="Cipher Log." className="title">
+              Cipher Log
+            </span>{" "}
             <div onClick={this.onClearLogs} className="clear-logs">
               <a href="#">Clear Logs</a>
+            </div>
+            <hr></hr>
+            <div id="cipher-log" className="row mt-3">
+              <div className="col-md-6">
+                <span className="gray">Input Log:</span>
+                <div>
+                  <div className="card card-body">{this.props.store.INPUT}</div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <span className="gray">Output Log</span>
+                <div>
+                  <div className="card card-body">
+                    {this.props.store.OUTPUT}
+                  </div>
+                </div>
+              </div>{" "}
             </div>
           </div>
         </Collapse>
