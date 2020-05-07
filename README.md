@@ -7,7 +7,7 @@ Enigma machine emulator (https://enigma.lh.mk) for the Web. The emulator is fait
 
 I highly recommend checking out the [Enigma Operator's Field Manual](https://github.com/lubeskih/enigma-simulator/blob/master/docs/EOFM.md) before using the emulator.
 
-![Enigma](src/misc/enigma.gif)
+![Enigma](src/misc/enigma-gif.gif)
 
 ### Starting the emulator
 
